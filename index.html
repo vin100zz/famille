@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Famille</title>
+  <link rel="stylesheet" href="src/ui/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-title" href="#" onclick="goHome(); return false;">Généalogie</a>
+      <div class="search-wrapper">
+        <input
+          type="text"
+          id="search-input"
+          class="search-input"
+          placeholder="Rechercher un ancêtre (nom, prénom…)"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Rechercher un ancêtre"
+          aria-autocomplete="list"
+          aria-controls="search-dropdown"
+        >
+        <div id="search-dropdown" class="search-dropdown" role="listbox" hidden></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div id="welcome" class="welcome">
+      <p>Saisissez un nom ou un prénom pour commencer.</p>
+    </div>
+    <div id="person-view"></div>
+  </main>
+
+  <script src="src/ui/js/api.js"></script>
+  <script src="src/ui/js/components.js"></script>
+  <script src="src/ui/js/app.js"></script>
+</body>
+</html>
+

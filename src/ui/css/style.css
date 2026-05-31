@@ -1,0 +1,472 @@
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sex-M:     #ADE6F4;
+  --sex-F:     #FFC1F6;
+  --gray:      #4b5563;
+  --gray-light:#f1f5f9;
+  --border:    #e2e8f0;
+  --text:      #1e293b;
+  --muted:     #64748b;
+  --radius:    8px;
+  --shadow:    0 2px 12px rgba(0,0,0,.08);
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--gray-light);
+  min-height: 100vh;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--text);
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+
+.site-header__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.site-title {
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
+
+/* ── Search ───────────────────────────────────────────────────────────────── */
+
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: .95rem;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+  transition: box-shadow .15s;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(37,99,235,.35);
+}
+
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 28px rgba(0,0,0,.18);
+  overflow: hidden;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.search-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--gray-light);
+  transition: background .1s;
+}
+
+.search-result:last-child { border-bottom: none; }
+.search-result:hover,
+.search-result--active { background: var(--gray-light); }
+
+.search-result--empty {
+  color: var(--muted);
+  cursor: default;
+  font-style: italic;
+}
+.search-result--empty:hover { background: none; }
+
+.result-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.result-dot--M { background: var(--sex-M); }
+.result-dot--F { background: var(--sex-F); }
+.result-dot--U { background: var(--gray); }
+
+.result-info { line-height: 1.3; flex: 1; min-width: 0; }
+.result-name  { font-weight: 600; font-size: .9rem; }
+.result-years { font-size: .78rem; color: var(--muted); }
+
+.result-sosa {
+  margin-left: auto;
+  padding-left: 10px;
+  font-size: .72rem;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+mark.hl {
+  background: #fef08a;
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* ── Main content ─────────────────────────────────────────────────────────── */
+
+.main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 48px;
+}
+
+.welcome {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 80px;
+  font-size: 1.05rem;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 48px;
+  color: var(--muted);
+}
+
+.error { color: #dc2626; }
+
+/* ── Couple card ──────────────────────────────────────────────────────────── */
+
+.couple-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+}
+
+.union-separator {
+  text-align: center;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  padding: 0 0 12px;
+}
+
+.other-union-sep {
+  border-top: 1px dashed var(--border);
+  margin: 8px 0;
+}
+
+/* ── Card rows ────────────────────────────────────────────────────────────── */
+
+/* Two-column row */
+.couple-row {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+.couple-row:last-child { border-bottom: none; }
+
+/* Full-width row */
+.couple-row--full {
+  display: block;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: #fafbfc;
+}
+.couple-row--full:last-child { border-bottom: none; }
+
+/* ── Person headers (titles) ──────────────────────────────────────────────── */
+
+.couple-row--headers {
+  border-bottom: none;
+}
+
+.person-header {
+  flex: 1;
+  padding: 18px 20px 14px;
+  color: #fff;
+  min-width: 0;
+  position: relative;
+}
+
+.person-header + .person-header {
+  border-left: 3px solid rgba(255,255,255,.25);
+}
+
+.person-header--M    { background: var(--text); }
+.person-header--F    { background: var(--text); }
+.person-header--U,
+.person-header--empty { background: var(--text); }
+
+.person-header__nom {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.2;
+}
+
+.person-header__prenom {
+  font-size: .95rem;
+  font-weight: 400;
+  opacity: .9;
+  margin-top: 2px;
+}
+
+.person-header__years {
+  font-size: .78rem;
+  opacity: .75;
+  margin-top: 6px;
+}
+
+.sosa-badge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  padding: 2px 8px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ── Person columns ───────────────────────────────────────────────────────── */
+
+.person-col {
+  flex: 1;
+  padding: 16px 20px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.person-col + .person-col {
+  border-left: 1px solid var(--border);
+}
+
+.person-col--empty {
+  background: #f8fafc;
+  opacity: .5;
+}
+
+/* ── Barre de titre de section (pleine largeur) ───────────────────────────── */
+
+.section-bar {
+  padding: 6px 20px;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #334155;
+  background: #d8e2ef;
+  border-top: 1px solid #c8d3e0;
+  border-bottom: 1px solid #c8d3e0;
+}
+
+/* Variante pour les lignes full-width (Mariage, Enfants) : le label est
+   intégré dans la row, pas besoin de bordure top supplémentaire */
+.section-bar--full {
+  margin: -16px -20px 10px;  /* déborde sur le padding du couple-row--full */
+  border-top: none;
+}
+
+.section-sublabel {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 6px 0 -8px;
+}
+
+/* ── Event info (date + lieu) ─────────────────────────────────────────────── */
+
+.event-block { line-height: 1.5; }
+
+.event-date {
+  display: block;
+  font-weight: 600;
+  font-size: .88rem;
+}
+
+.event-place {
+  display: block;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+/* ── Person boxes (parents / children) ───────────────────────────────────── */
+
+.box-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.person-box {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 7px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  font-size: .78rem;
+  min-width: 100px;
+  max-width: 200px;
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  transition: transform .12s ease, box-shadow .12s ease;
+  text-align: left;
+  background: none; /* reset button */
+  font-family: inherit;
+  position: relative;
+}
+
+.person-box--has-sosa { padding-right: 40px; }
+
+.person-box__sosa {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: .6rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 20px;
+  padding: 1px 6px;
+}
+
+.person-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0,0,0,.22);
+}
+
+.person-box--M { background: #fff; color: var(--text); border-left-color: var(--sex-M); }
+.person-box--F { background: #fff; color: var(--text); border-left-color: var(--sex-F); }
+.person-box--U { background: #fff; color: var(--text); border-left-color: var(--gray); }
+
+.person-box__name {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.person-box__years {
+  font-size: .72rem;
+  opacity: .82;
+  margin-top: 2px;
+}
+
+/* ── Lists ────────────────────────────────────────────────────────────────── */
+
+.simple-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.simple-list li::before {
+  content: "• ";
+  color: var(--muted);
+}
+
+/* ── Comments ─────────────────────────────────────────────────────────────── */
+
+.comment-collapsible {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.comment-collapsible:not(:first-child) {
+  margin-top: 6px;
+}
+
+.comment-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fcd34d;
+  color: #92400e;
+  font-weight: 900;
+  font-size: .8rem;
+  font-style: italic;
+  font-family: Georgia, serif;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .15s, transform .15s;
+}
+
+.comment-toggle:hover    { background: #fbbf24; }
+.comment-toggle--open    { background: #f59e0b; transform: scale(1.1); }
+
+.comment-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.comment-body[hidden] { display: none; }
+
+.comment-text {
+  font-size: .83rem;
+  color: #374151;
+  line-height: 1.6;
+  background: #fffbeb;
+  border-left: 3px solid #fcd34d;
+  padding: 8px 10px;
+  border-radius: 0 4px 4px 0;
+  white-space: pre-wrap;
+}
+
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .site-header__inner { flex-direction: column; align-items: stretch; gap: 10px; }
+  .search-wrapper { max-width: none; }
+
+  .couple-row { flex-direction: column; }
+  .person-col + .person-col { border-left: none; border-top: 1px solid var(--border); }
+  .person-header + .person-header { border-left: none; border-top: 3px solid rgba(255,255,255,.25); }
+  .couple-row--headers { flex-direction: column; }
+}
