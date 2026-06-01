@@ -86,7 +86,9 @@ function formatPlace(lieu) {
 
 function yearsLabel(birthY, deathY) {
   if (!birthY && !deathY) return null;
-  return (birthY || '?') + ' – ' + (deathY || '?');
+  const deathPart = deathY || (birthY && birthY >= 1900 ? '' : '?');
+  if (!deathPart) return String(birthY);
+  return (birthY || '?') + ' – ' + deathPart;
 }
 
 // ── Boîte personne (parents / enfants) ────────────────────────────────────
@@ -322,7 +324,6 @@ function personToSummary(p) {
 function renderTreePersonBox(summary, onSelect) {
   if (summary) return renderPersonBox(summary, onSelect);
   const box = el('div', 'person-box person-box--U tree-box--ghost');
-  box.appendChild(txt('span', 'person-box__name', '(inconnu)'));
   return box;
 }
 
@@ -453,7 +454,7 @@ function renderSosaTree(treeData, onSelect) {
 
   // Rang 3 : couple
   const maleBox = renderTreePersonBox(couple.male, onSelect);
-  if (couple.male && couple.male.sosa === sosa) maleBox.classList.add('tree-box--selected');
+  if (couple.male) maleBox.classList.add('tree-box--selected');
   const maleCell = el('div', 'tree-ugrid-cell');
   maleCell.style.gridColumn = '1 / 3';
   maleCell.style.gridRow    = '3';
@@ -462,7 +463,7 @@ function renderSosaTree(treeData, onSelect) {
   upper.appendChild(maleCell);
 
   const femaleBox = renderTreePersonBox(couple.female, onSelect);
-  if (couple.female && couple.female.sosa === sosa) femaleBox.classList.add('tree-box--selected');
+  if (couple.female) femaleBox.classList.add('tree-box--selected');
   const femaleCell = el('div', 'tree-ugrid-cell');
   femaleCell.style.gridColumn = '3 / 5';
   femaleCell.style.gridRow    = '3';

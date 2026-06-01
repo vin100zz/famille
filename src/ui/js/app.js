@@ -150,27 +150,77 @@ async function loadPerson(id) {
   }
 }
 
+// ── Arbre local (personnes sans numéro Sosa) ───────────────────────────────
+
+/**
+ * Répartit un tableau de résumés de parents en [père|null, mère|null].
+ */
+function summariesToParents(summaries) {
+  let father = null, mother = null;
+  for (const s of summaries) {
+    if (s.sexe === 'M' && !father)      father = s;
+    else if (s.sexe === 'F' && !mother) mother = s;
+  }
+  return [father, mother];
+}
+
+/**
+ * Construit les données d'arbre à partir des données déjà disponibles
+ * (pas d'appel API supplémentaire). Pas de chaîne d'ancêtres.
+ */
+function buildLocalTree(data, union) {
+  const person          = data.person;
+  const conjoint        = union ? union.conjoint        : null;
+  const personSummary   = personToSummary(person);
+  const conjointSummary = conjoint ? personToSummary(conjoint) : null;
+
+  const personParents   = summariesToParents(data.parents || []);
+  const conjointParents = summariesToParents(union ? (union.conjoint_parents || []) : []);
+
+  const personMale   = person.sexe === 'M';
+  const conjointMale = conjoint && conjoint.sexe === 'M';
+
+  let male, female, maleParents, femaleParents;
+  if (!conjoint || personMale || (!personMale && !conjointMale)) {
+    male = personSummary;   maleParents   = personParents;
+    female = conjointSummary; femaleParents = conjointParents;
+  } else {
+    male = conjointSummary; maleParents   = conjointParents;
+    female = personSummary; femaleParents = personParents;
+  }
+
+  return {
+    sosa:           null,
+    couple:         { male, female },
+    male_parents:   maleParents,
+    female_parents: femaleParents,
+    children:       union ? (union.enfants || []) : [],
+    ancestors:      [],
+  };
+}
+
+// ── Rendu de la page personne ───────────────────────────────────────────────
+
 async function renderPersonPage(data, seq) {
   personView.innerHTML = '';
   const onSelect = id => selectPerson(id);
   const unions   = data.unions || [];
 
-  // Chargement de l'arbre avant le rendu pour l'insérer avant "Naissance"
+  const sosaIdx    = unions.findIndex(u => u.conjoint && u.conjoint.sosa != null);
+  const primaryIdx = sosaIdx >= 0 ? sosaIdx : 0;
+  const primary    = unions.length ? unions[primaryIdx] : null;
+  const others     = unions.filter((_, i) => i !== primaryIdx);
+
+  // Sosa ≥ 2 : arbre depuis l'API (avec chaîne d'ancêtres jusqu'au Sosa 1)
+  // Sinon    : arbre local (couple + grands-parents + enfants, sans chaîne)
   let treeData = null;
   if (data.person.sosa != null && data.person.sosa >= 2) {
     try { treeData = await api.getSosaTree(data.person.sosa); } catch (e) {}
+  } else {
+    treeData = buildLocalTree(data, primary);
   }
 
-  if (!unions.length) {
-    personView.appendChild(renderCoupleCard(data.person, data.parents, null, [], onSelect, treeData));
-  } else {
-    // Priorité à l'union dont le conjoint a un numéro Sosa
-    const sosaIdx    = unions.findIndex(u => u.conjoint && u.conjoint.sosa != null);
-    const primaryIdx = sosaIdx >= 0 ? sosaIdx : 0;
-    const primary    = unions[primaryIdx];
-    const others     = unions.filter((_, i) => i !== primaryIdx);
-    personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData));
-  }
+  personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData));
 }
 
 // ── Navigation navigateur (back / forward) ─────────────────────────────────
