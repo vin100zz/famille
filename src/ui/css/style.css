@@ -1,4 +1,4 @@
-/* ── Reset & base ─────────────────────────────────────────────────────────── */
+﻿/* ── Reset & base ─────────────────────────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -268,7 +268,7 @@ mark.hl {
 
 .person-col {
   flex: 1;
-  padding: 16px 20px;
+  padding: 10px 20px;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -459,6 +459,107 @@ mark.hl {
 }
 
 
+/* ── Arbre généalogique Sosa ──────────────────────────────────────────────── */
+
+.sosa-tree {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 24px 20px 28px;
+  margin-top: 16px;
+  position: relative;   /* ancre pour l'overlay de connecteurs */
+}
+
+.sosa-tree--card {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin-top: 8px;
+  background: transparent;
+}
+
+.sosa-tree__title {
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #334155;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* ── Grille supérieure : 4 colonnes, rangs alternés contenu/espace ── */
+.tree-upper-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto 28px auto 28px;
+  column-gap: 6px;
+}
+
+/* ── Grille inférieure : N colonnes ── */
+.tree-lower-grid {
+  display: grid;
+  column-gap: 6px;
+}
+
+/* Cellule contenu (GP, conjoint, enfant, ancêtre) */
+.tree-ugrid-cell,
+.tree-lgrid-cell {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Espace entre rangées (lieu de passage des traits verticaux) */
+.tree-spacer {
+  height: 28px;
+}
+
+/* Boîte fantôme (personne inconnue) */
+.tree-box--ghost {
+  opacity: .35;
+  cursor: default;
+  pointer-events: none;
+  border-style: dashed;
+}
+
+/* Sosa sélectionné — outline pour ne pas écraser la couleur border-left bleue/rose */
+.tree-box--selected {
+  outline: 2px solid var(--text);
+}
+
+/* ── Overlay des connecteurs (position:absolute, tracé par JS) ── */
+.tree-conn-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;   /* sous les boîtes */
+}
+
+.tree-conn-h {
+  position: absolute;
+  height: 2px;
+  background: var(--border);
+}
+
+.tree-conn-v {
+  position: absolute;
+  width: 2px;
+  background: var(--border);
+}
+
+/* Les cellules avec boîtes s'affichent au-dessus de l'overlay */
+.tree-ugrid-cell,
+.tree-lgrid-cell {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fallback */
+.tree-level { display: flex; align-items: center; justify-content: center; }
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 
 @media (max-width: 640px) {

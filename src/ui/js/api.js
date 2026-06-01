@@ -13,6 +13,10 @@ class ApiClient {
     return this._get('person.php', { id });
   }
 
+  async getSosaTree(sosa) {
+    return this._get('sosa-tree.php', { sosa });
+  }
+
   async _get(endpoint, params) {
     const qs = Object.keys(params)
       .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))

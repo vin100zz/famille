@@ -30,4 +30,18 @@ interface IPersonRepository
      *                        + conjoint_parents + enfants (résumés)
      */
     public function getPerson($id);
+
+    /**
+     * Retourne les données nécessaires à l'affichage de l'arbre Sosa.
+     *
+     * @param  int        $sosa  Numéro Sosa (>= 2)
+     * @return array|null  Structure :
+     *   - sosa           : numéro sélectionné
+     *   - couple         : { male: résumé|null, female: résumé|null }
+     *   - male_parents   : [père|null, mère|null] du conjoint mâle
+     *   - female_parents : [père|null, mère|null] du conjoint femelle
+     *   - children       : résumés des enfants du couple
+     *   - ancestors      : résumés de floor(sosa/2) → 1
+     */
+    public function getSosaTree($sosa);
 }

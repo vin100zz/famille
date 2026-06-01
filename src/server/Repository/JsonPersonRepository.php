@@ -188,7 +188,105 @@ class JsonPersonRepository implements IPersonRepository
         return $result;
     }
 
+    public function getSosaTree($sosa)
+    {
+        $sosa = (int) $sosa;
+        if ($sosa < 2) {
+            return null;
+        }
+
+        // Couple Sosa : pair = mâle, impair = femelle
+        $sEven = ($sosa % 2 === 0) ? $sosa : $sosa - 1;
+        $sOdd  = $sEven + 1;
+
+        $maleEntry   = $this->findBySosa($sEven);
+        $femaleEntry = $this->findBySosa($sOdd);
+
+        if (!$maleEntry && !$femaleEntry) {
+            return null;
+        }
+
+        $maleSummary   = $maleEntry   ? $this->buildSummary($maleEntry['id'],   $maleEntry['raw'])   : null;
+        $femaleSummary = $femaleEntry ? $this->buildSummary($femaleEntry['id'], $femaleEntry['raw']) : null;
+
+        $maleParents   = $maleEntry   ? $this->getParentsSorted($maleEntry['id'])   : array(null, null);
+        $femaleParents = $femaleEntry ? $this->getParentsSorted($femaleEntry['id']) : array(null, null);
+
+        $children = $this->findChildrenOfCouple(
+            $maleEntry   ? $maleEntry['id']   : null,
+            $femaleEntry ? $femaleEntry['id'] : null
+        );
+
+        // Chaîne d'ancêtres de floor(sosa/2) jusqu'à 1
+        $ancestors = array();
+        $cur = (int) floor($sosa / 2);
+        while ($cur >= 1) {
+            $entry       = $this->findBySosa($cur);
+            $ancestors[] = $entry ? $this->buildSummary($entry['id'], $entry['raw']) : null;
+            if ($cur === 1) {
+                break;
+            }
+            $cur = (int) floor($cur / 2);
+        }
+
+        return array(
+            'sosa'           => $sosa,
+            'couple'         => array('male' => $maleSummary, 'female' => $femaleSummary),
+            'male_parents'   => $maleParents,
+            'female_parents' => $femaleParents,
+            'children'       => $children,
+            'ancestors'      => $ancestors,
+        );
+    }
+
     // ── Utilitaires ────────────────────────────────────────────────────────
+
+    private function findBySosa($sosa)
+    {
+        foreach ($this->data['individus'] as $id => $p) {
+            if (isset($p['sosa']) && (int) $p['sosa'] === $sosa) {
+                return array('id' => $id, 'raw' => $p);
+            }
+        }
+        return null;
+    }
+
+    private function getParentsSorted($id)
+    {
+        $summaries = $this->getParentSummaries($id);
+        $father    = null;
+        $mother    = null;
+        foreach ($summaries as $s) {
+            if ($s['sexe'] === 'M' && $father === null) {
+                $father = $s;
+            } elseif ($s['sexe'] === 'F' && $mother === null) {
+                $mother = $s;
+            }
+        }
+        return array($father, $mother);
+    }
+
+    private function findChildrenOfCouple($maleId, $femaleId)
+    {
+        foreach ($this->data['familles'] as $fam) {
+            $mari   = isset($fam['mari'])   ? $fam['mari']   : null;
+            $epouse = isset($fam['epouse']) ? $fam['epouse'] : null;
+            if ($mari !== $maleId || $epouse !== $femaleId) {
+                continue;
+            }
+            $children = array();
+            if (!empty($fam['enfants'])) {
+                foreach ($fam['enfants'] as $childId) {
+                    $s = $this->buildSummaryById($childId);
+                    if ($s !== null) {
+                        $children[] = $s;
+                    }
+                }
+            }
+            return $children;
+        }
+        return array();
+    }
 
     /**
      * Extrait la première année trouvée dans une chaîne de date GEDCOM.

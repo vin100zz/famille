@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 // ── Utilitaires DOM ────────────────────────────────────────────────────────
 
@@ -163,13 +163,12 @@ function renderPersonHeader(person) {
 
 // ── Colonne naissance ──────────────────────────────────────────────────────
 
-function renderNaissanceCol(person, parents, onSelect) {
+function renderNaissanceCol(person, onSelect) {
   const col = el('div', 'person-col' + (person ? '' : ' person-col--empty'));
   if (!person) return col;
 
-  const hasNaiss   = person.naissance || person.bapteme;
-  const hasParents = parents && parents.length > 0;
-  if (!hasNaiss && !hasParents) return col;
+  const hasNaiss = person.naissance || person.bapteme;
+  if (!hasNaiss) return col;
 
   if (person.naissance) {
     const ev = renderEventBlock(person.naissance);
@@ -182,15 +181,6 @@ function renderNaissanceCol(person, parents, onSelect) {
     if (ev) col.appendChild(ev);
   }
 
-  if (hasParents) {
-    col.appendChild(txt('div', 'section-sublabel', 'Parents'));
-    const row = el('div', 'box-row');
-    parents.forEach(p => {
-      const box = renderPersonBox(p, onSelect);
-      if (box) row.appendChild(box);
-    });
-    col.appendChild(row);
-  }
 
   return col;
 }
@@ -327,6 +317,218 @@ function personToSummary(p) {
   };
 }
 
+// ── Arbre généalogique Sosa ────────────────────────────────────────────────
+
+function renderTreePersonBox(summary, onSelect) {
+  if (summary) return renderPersonBox(summary, onSelect);
+  const box = el('div', 'person-box person-box--U tree-box--ghost');
+  box.appendChild(txt('span', 'person-box__name', '(inconnu)'));
+  return box;
+}
+
+// ── Dessin des connecteurs (appelé après rendu DOM) ────────────────────────
+
+function drawTreeConnectors(treeEl) {
+  const overlay = treeEl.querySelector('.tree-conn-overlay');
+  if (!overlay) return;
+  overlay.innerHTML = '';
+
+  const cr = treeEl.getBoundingClientRect();
+
+  // Position du centre d'un élément repéré par [data-tree~=key]
+  function C(key) {
+    const el = treeEl.querySelector('[data-tree~="' + key + '"]');
+    if (!el) return null;
+    // On prend le premier .person-box ou .tree-box--ghost à l'intérieur
+    const box = el.querySelector('.person-box, .tree-box--ghost') || el;
+    const r   = box.getBoundingClientRect();
+    return { x: r.left + r.width / 2 - cr.left,
+             y: r.top  + r.height / 2 - cr.top  };
+  }
+
+  // Tous les éléments commençant par un préfixe
+  function Clist(prefix) {
+    return Array.from(treeEl.querySelectorAll('[data-tree^="' + prefix + '"]'))
+      .map(function(e) {
+        const b = e.querySelector('.person-box, .tree-box--ghost') || e;
+        const r = b.getBoundingClientRect();
+        return { x: r.left + r.width / 2 - cr.left,
+                 y: r.top  + r.height / 2 - cr.top  };
+      });
+  }
+
+  function hLine(x1, x2, y) {
+    const d = document.createElement('div');
+    d.className = 'tree-conn-h';
+    d.style.left   = Math.round(Math.min(x1, x2)) + 'px';
+    d.style.top    = Math.round(y - 1) + 'px';
+    d.style.width  = Math.round(Math.abs(x2 - x1)) + 'px';
+    overlay.appendChild(d);
+  }
+
+  function vLine(x, y1, y2) {
+    const d = document.createElement('div');
+    d.className = 'tree-conn-v';
+    d.style.left   = Math.round(x - 1) + 'px';
+    d.style.top    = Math.round(Math.min(y1, y2)) + 'px';
+    d.style.height = Math.round(Math.abs(y2 - y1)) + 'px';
+    overlay.appendChild(d);
+  }
+
+  const gp0 = C('gp0'), gp1 = C('gp1'), gp2 = C('gp2'), gp3 = C('gp3');
+  const male = C('male'), female = C('female');
+  const kids = Clist('child-');
+  const ancs = Clist('anc-');
+  const dc   = C('direct-child');
+
+  // 1. Horizontal GP1-GP2 + vertical vers le mari
+  if (gp0 && gp1) {
+    const y = (gp0.y + gp1.y) / 2;
+    hLine(gp0.x, gp1.x, y);
+    if (male) vLine((gp0.x + gp1.x) / 2, y, male.y);
+  }
+
+  // 2. Horizontal GP3-GP4 + vertical vers l'épouse
+  if (gp2 && gp3) {
+    const y = (gp2.y + gp3.y) / 2;
+    hLine(gp2.x, gp3.x, y);
+    if (female) vLine((gp2.x + gp3.x) / 2, y, female.y);
+  }
+
+  // 3. Horizontal mari-épouse
+  if (male && female) {
+    const y = (male.y + female.y) / 2;
+    hLine(male.x, female.x, y);
+
+    // 4. Vertical couple → enfants
+    if (kids.length) {
+      const childY = kids.reduce(function(s,c) { return s+c.y; }, 0) / kids.length;
+      vLine((male.x + female.x) / 2, y, childY);
+    }
+  }
+
+  // 5. Horizontal entre les enfants (premier → dernier)
+  if (kids.length > 1) {
+    const y = kids.reduce(function(s,c) { return s+c.y; }, 0) / kids.length;
+    hLine(kids[0].x, kids[kids.length - 1].x, y);
+  }
+
+  // 6. Traits verticaux vers les ancêtres (dans la colonne de l'enfant direct)
+  let prev = dc || (kids.length ? kids[Math.floor((kids.length - 1) / 2)] : null);
+  ancs.forEach(function(anc) {
+    if (prev && anc) { vLine(prev.x, prev.y, anc.y); prev = anc; }
+  });
+}
+
+// ── Arbre Sosa ─────────────────────────────────────────────────────────────
+
+function renderSosaTree(treeData, onSelect) {
+  const sosa          = treeData.sosa;
+  const couple        = treeData.couple;
+  const maleParents   = treeData.male_parents;
+  const femaleParents = treeData.female_parents;
+  const children      = treeData.children  || [];
+  const ancestors     = treeData.ancestors || [];
+
+  const wrap = el('div', 'sosa-tree');
+
+  // ── Grille supérieure : 4 colonnes, alternance contenu / espace ───────────
+  const upper = el('div', 'tree-upper-grid');
+
+  // Rang 1 : grands-parents
+  [maleParents[0], maleParents[1], femaleParents[0], femaleParents[1]].forEach(function(gp, i) {
+    const cell = el('div', 'tree-ugrid-cell');
+    cell.style.gridColumn = (i + 1) + '';
+    cell.style.gridRow    = '1';
+    cell.dataset.tree     = 'gp' + i;
+    cell.appendChild(renderTreePersonBox(gp, onSelect));
+    upper.appendChild(cell);
+  });
+
+  // Rang 2 : espace (pour les traits verticaux GP→couple)
+  const sp1 = el('div', 'tree-spacer');
+  sp1.style.gridColumn = '1 / 5';
+  sp1.style.gridRow    = '2';
+  upper.appendChild(sp1);
+
+  // Rang 3 : couple
+  const maleBox = renderTreePersonBox(couple.male, onSelect);
+  if (couple.male && couple.male.sosa === sosa) maleBox.classList.add('tree-box--selected');
+  const maleCell = el('div', 'tree-ugrid-cell');
+  maleCell.style.gridColumn = '1 / 3';
+  maleCell.style.gridRow    = '3';
+  maleCell.dataset.tree     = 'male';
+  maleCell.appendChild(maleBox);
+  upper.appendChild(maleCell);
+
+  const femaleBox = renderTreePersonBox(couple.female, onSelect);
+  if (couple.female && couple.female.sosa === sosa) femaleBox.classList.add('tree-box--selected');
+  const femaleCell = el('div', 'tree-ugrid-cell');
+  femaleCell.style.gridColumn = '3 / 5';
+  femaleCell.style.gridRow    = '3';
+  femaleCell.dataset.tree     = 'female';
+  femaleCell.appendChild(femaleBox);
+  upper.appendChild(femaleCell);
+
+  // Rang 4 : espace (pour le trait vertical couple→enfants)
+  const sp2 = el('div', 'tree-spacer');
+  sp2.style.gridColumn = '1 / 5';
+  sp2.style.gridRow    = '4';
+  upper.appendChild(sp2);
+
+  wrap.appendChild(upper);
+
+  // ── Grille inférieure : N colonnes (enfants + ancêtres) ───────────────────
+  const n = children.length || 1;
+  const directSosa = Math.floor(sosa / 2);
+  let directCol = 1;
+
+  const lower = el('div', 'tree-lower-grid');
+  lower.style.gridTemplateColumns = 'repeat(' + n + ', 1fr)';
+
+  if (children.length) {
+    children.forEach(function(child, i) {
+      const cell = el('div', 'tree-lgrid-cell');
+      cell.style.gridColumn = (i + 1) + '';
+      cell.style.gridRow    = '1';
+      if (child.sosa === directSosa) { directCol = i + 1; cell.dataset.tree = 'child-' + i + ' direct-child'; }
+      else                           { cell.dataset.tree = 'child-' + i; }
+      const box = renderPersonBox(child, onSelect);
+      if (box) cell.appendChild(box);
+      lower.appendChild(cell);
+    });
+  }
+
+  const ancestorsToShow = children.length ? ancestors.slice(1) : ancestors;
+  ancestorsToShow.forEach(function(anc, i) {
+    const spRow  = (children.length ? 1 : 0) + i * 2 + 2;
+    const boxRow = spRow + 1;
+
+    const sp = el('div', 'tree-spacer');
+    sp.style.gridColumn = directCol + '';
+    sp.style.gridRow    = spRow + '';
+    lower.appendChild(sp);
+
+    const cell = el('div', 'tree-lgrid-cell');
+    cell.style.gridColumn = directCol + '';
+    cell.style.gridRow    = boxRow + '';
+    cell.dataset.tree     = 'anc-' + i;
+    cell.appendChild(renderTreePersonBox(anc, onSelect));
+    lower.appendChild(cell);
+  });
+
+  wrap.appendChild(lower);
+
+  // ── Overlay connecteurs (position:absolute, tracé après rendu) ────────────
+  wrap.appendChild(el('div', 'tree-conn-overlay'));
+
+  // Double rAF : garantit que le DOM est rendu avant la mesure
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() { drawTreeConnectors(wrap); });
+  });
+
+  return wrap;
+}
 // ── Carte couple principale ────────────────────────────────────────────────
 
 /**
@@ -338,34 +540,30 @@ function personToSummary(p) {
  * @param {Array}    otherUnions Unions secondaires à afficher dans la colonne de la personne
  * @param {Function} onSelect    callback(id) pour la navigation
  */
-function renderCoupleCard(person, parents, union, otherUnions, onSelect) {
+function renderCoupleCard(person, parents, union, otherUnions, onSelect, treeData) {
   const conjoint        = union ? union.conjoint        : null;
   const conjointParents = union ? (union.conjoint_parents || []) : [];
   const mariage         = union ? union.mariage         : null;
   const mariageNotes    = union ? (union.commentaires   || []) : [];
-  const enfants         = union ? (union.enfants        || []) : [];
 
   // ── Disposition homme à gauche, femme à droite ──
-  let left, leftParents, right, rightParents;
+  let left, right;
 
   if (!conjoint) {
-    // Personne seule
     if (person.sexe === 'F') {
-      left = null; leftParents = [];
-      right = person; rightParents = parents;
+      left = null;
+      right = person;
     } else {
-      left = person; leftParents = parents;
-      right = null; rightParents = [];
+      left = person;
+      right = null;
     }
   } else {
     const personMale   = person.sexe === 'M';
     const conjointMale = conjoint.sexe === 'M';
     if (personMale || (!personMale && !conjointMale)) {
-      left = person;   leftParents = parents;
-      right = conjoint; rightParents = conjointParents;
+      left = person;    right = conjoint;
     } else {
-      left = conjoint; leftParents = conjointParents;
-      right = person;  rightParents = parents;
+      left = conjoint;  right = person;
     }
   }
 
@@ -377,14 +575,24 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect) {
   headerRow.appendChild(renderPersonHeader(right));
   card.appendChild(headerRow);
 
-  // ── 2. Naissance ─────────────────────────────────────────────────────────
+  // ── 2. Arbre généalogique ─────────────────────────────────────────────────
+  if (treeData) {
+    const row = el('div', 'couple-row--full');
+    row.appendChild(txt('div', 'section-bar section-bar--full', 'Arbre généalogique'));
+    const tree = renderSosaTree(treeData, onSelect);
+    tree.classList.add('sosa-tree--card');
+    row.appendChild(tree);
+    card.appendChild(row);
+  }
+
+  // ── 3. Naissance ─────────────────────────────────────────────────────────
   const naissSection = makeSection('Naissance',
-    renderNaissanceCol(left,  leftParents,  onSelect),
-    renderNaissanceCol(right, rightParents, onSelect)
+    renderNaissanceCol(left,  onSelect),
+    renderNaissanceCol(right, onSelect)
   );
   if (naissSection) card.appendChild(naissSection);
 
-  // ── 3. Mariage (pleine largeur) ───────────────────────────────────────────
+  // ── 4. Mariage (pleine largeur) ───────────────────────────────────────────
   if (mariage || mariageNotes.length) {
     const row = el('div', 'couple-row--full');
     row.appendChild(txt('div', 'section-bar section-bar--full', 'Mariage'));
@@ -397,19 +605,6 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect) {
     card.appendChild(row);
   }
 
-  // ── 4. Enfants (pleine largeur) ───────────────────────────────────────────
-  if (enfants.length) {
-    const row = el('div', 'couple-row--full');
-    row.appendChild(txt('div', 'section-bar section-bar--full', 'Enfants (' + enfants.length + ')'));
-    const boxRow = el('div', 'box-row');
-    enfants.forEach(child => {
-      const box = renderPersonBox(child, onSelect);
-      if (box) boxRow.appendChild(box);
-    });
-    row.appendChild(boxRow);
-    card.appendChild(row);
-  }
-
   // ── 5. Autres mariages (dans la colonne de la personne) ───────────────────
   if (otherUnions && otherUnions.length) {
     const personIsLeft = (left === person);
@@ -418,19 +613,13 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect) {
 
     otherUnions.forEach((u, i) => {
       if (i > 0) autreCol.appendChild(el('div', 'other-union-sep'));
-
-      // Date/lieu du mariage
       const ev = renderEventBlock(u.mariage);
       if (ev) autreCol.appendChild(ev);
-
-      // Conjoint cliquable
       if (u.conjoint) {
         autreCol.appendChild(txt('div', 'section-sublabel', 'Conjoint'));
         const box = renderPersonBox(personToSummary(u.conjoint), onSelect);
         if (box) autreCol.appendChild(box);
       }
-
-      // Enfants de cette union
       const uEnfants = u.enfants || [];
       if (uEnfants.length) {
         autreCol.appendChild(txt('div', 'section-sublabel', 'Enfants (' + uEnfants.length + ')'));
@@ -441,8 +630,6 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect) {
         });
         autreCol.appendChild(boxRow);
       }
-
-      // Notes
       if (u.commentaires && u.commentaires.length) {
         const block = renderCollapsibleComments(u.commentaires);
         if (block) autreCol.appendChild(block);

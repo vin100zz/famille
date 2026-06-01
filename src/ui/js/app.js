@@ -131,37 +131,46 @@ async function selectPerson(id) {
   await loadPerson(id);
 }
 
+let _loadSeq = 0;  // séquence de chargement pour annuler les requêtes périmées
+
 async function loadPerson(id) {
+  const seq = ++_loadSeq;
   welcomeEl.hidden = true;
   personView.innerHTML = '';
   personView.appendChild(txt('div', 'loading', 'Chargement…'));
 
   try {
     const data = await api.getPerson(id);
-    renderPersonPage(data);
+    if (seq !== _loadSeq) return;   // une navigation plus récente a pris le relais
+    renderPersonPage(data, seq);
   } catch (err) {
+    if (seq !== _loadSeq) return;
     personView.innerHTML = '';
     personView.appendChild(txt('div', 'error', 'Erreur : ' + err.message));
   }
 }
 
-function renderPersonPage(data) {
+async function renderPersonPage(data, seq) {
   personView.innerHTML = '';
   const onSelect = id => selectPerson(id);
   const unions   = data.unions || [];
 
-  if (!unions.length) {
-    personView.appendChild(renderCoupleCard(data.person, data.parents, null, [], onSelect));
-    return;
+  // Chargement de l'arbre avant le rendu pour l'insérer avant "Naissance"
+  let treeData = null;
+  if (data.person.sosa != null && data.person.sosa >= 2) {
+    try { treeData = await api.getSosaTree(data.person.sosa); } catch (e) {}
   }
 
-  // Priorité à l'union dont le conjoint a un numéro Sosa
-  const sosaIdx    = unions.findIndex(u => u.conjoint && u.conjoint.sosa != null);
-  const primaryIdx = sosaIdx >= 0 ? sosaIdx : 0;
-  const primary    = unions[primaryIdx];
-  const others     = unions.filter((_, i) => i !== primaryIdx);
-
-  personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect));
+  if (!unions.length) {
+    personView.appendChild(renderCoupleCard(data.person, data.parents, null, [], onSelect, treeData));
+  } else {
+    // Priorité à l'union dont le conjoint a un numéro Sosa
+    const sosaIdx    = unions.findIndex(u => u.conjoint && u.conjoint.sosa != null);
+    const primaryIdx = sosaIdx >= 0 ? sosaIdx : 0;
+    const primary    = unions[primaryIdx];
+    const others     = unions.filter((_, i) => i !== primaryIdx);
+    personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData));
+  }
 }
 
 // ── Navigation navigateur (back / forward) ─────────────────────────────────

@@ -273,6 +273,11 @@ def get_all_child_nodes(node: dict, tag: str) -> list[dict]:
     return [c for c in node.get("children", []) if c["tag"] == tag]
 
 
+def clean_id(xref: str) -> str:
+    """Supprime les arobase des identifiants GEDCOM : @I4@ → I4."""
+    return xref.strip("@") if xref else xref
+
+
 def parse_place(plac_value: str) -> dict | None:
     """Analyse un lieu GEDCOM en dict structuré."""
     if not plac_value:
@@ -468,8 +473,8 @@ def parse_individual(indi_node: dict, records: dict) -> dict:
         person["commentaires"] = notes_text
 
     # --- Famille (liens) remplis plus tard ---
-    person["_fams"] = get_all_child_values(indi_node, "FAMS")  # familles comme époux
-    person["_famc"] = get_all_child_values(indi_node, "FAMC")  # familles comme enfant
+    person["_fams"] = [clean_id(r) for r in get_all_child_values(indi_node, "FAMS")]
+    person["_famc"] = [clean_id(r) for r in get_all_child_values(indi_node, "FAMC")]
 
     return person
 
@@ -480,13 +485,13 @@ def parse_family(fam_node: dict, records: dict) -> dict:
 
     husb = get_child_value(fam_node, "HUSB")
     if husb:
-        fam["mari"] = husb
+        fam["mari"] = clean_id(husb)
     wife = get_child_value(fam_node, "WIFE")
     if wife:
-        fam["epouse"] = wife
+        fam["epouse"] = clean_id(wife)
     children = get_all_child_values(fam_node, "CHIL")
     if children:
-        fam["enfants"] = children
+        fam["enfants"] = [clean_id(c) for c in children]
 
     # Mariage
     marr = get_child_node(fam_node, "MARR")
@@ -519,10 +524,11 @@ def build_json(records: dict) -> dict:
     # Séparer individus et familles
     for xref, node in records.items():
         tag = node.get("tag", "")
+        cid = clean_id(xref)
         if tag == "INDI":
-            individus[xref] = parse_individual(node, records)
+            individus[cid] = parse_individual(node, records)
         elif tag == "FAM":
-            familles[xref] = parse_family(node, records)
+            familles[cid] = parse_family(node, records)
 
     # Résolution des liens : parents et unions (les enfants sont accessibles
     # via familles[union.famille] et ne sont pas dupliqués ici).
