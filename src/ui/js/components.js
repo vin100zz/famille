@@ -347,9 +347,13 @@ function drawTreeConnectors(treeEl) {
              y: r.top  + r.height / 2 - cr.top  };
   }
 
-  // Tous les éléments commençant par un préfixe
+  // Tous les éléments commençant par un préfixe (éléments visibles uniquement)
   function Clist(prefix) {
     return Array.from(treeEl.querySelectorAll('[data-tree^="' + prefix + '"]'))
+      .filter(function(e) {
+        const b = e.querySelector('.person-box, .tree-box--ghost') || e;
+        return b.offsetWidth > 0;
+      })
       .map(function(e) {
         const b = e.querySelector('.person-box, .tree-box--ghost') || e;
         const r = b.getBoundingClientRect();
@@ -505,12 +509,12 @@ function renderSosaTree(treeData, onSelect) {
     const spRow  = (children.length ? 1 : 0) + i * 2 + 2;
     const boxRow = spRow + 1;
 
-    const sp = el('div', 'tree-spacer');
+    const sp = el('div', 'tree-spacer tree-anc-item');
     sp.style.gridColumn = directCol + '';
     sp.style.gridRow    = spRow + '';
     lower.appendChild(sp);
 
-    const cell = el('div', 'tree-lgrid-cell');
+    const cell = el('div', 'tree-lgrid-cell tree-anc-item');
     cell.style.gridColumn = directCol + '';
     cell.style.gridRow    = boxRow + '';
     cell.dataset.tree     = 'anc-' + i;
@@ -519,6 +523,24 @@ function renderSosaTree(treeData, onSelect) {
   });
 
   wrap.appendChild(lower);
+
+  // ── Bouton déplier / replier la chaîne d'ancêtres ────────────────────────
+  if (ancestorsToShow.length > 0) {
+    const toggleRow = el('div', 'tree-anc-toggle');
+    const btn = el('button', 'tree-anc-btn');
+    btn.type = 'button';
+    const arrow = txt('span', 'tree-anc-btn__arrow', '▼');
+    btn.appendChild(arrow);
+    toggleRow.appendChild(btn);
+    wrap.appendChild(toggleRow);
+
+    btn.addEventListener('click', function() {
+      wrap.classList.toggle('sosa-tree--anc-expanded');
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() { drawTreeConnectors(wrap); });
+      });
+    });
+  }
 
   // ── Overlay connecteurs (position:absolute, tracé après rendu) ────────────
   wrap.appendChild(el('div', 'tree-conn-overlay'));

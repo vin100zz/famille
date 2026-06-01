@@ -356,7 +356,7 @@ mark.hl {
   position: relative;
 }
 
-.person-box--has-sosa { padding-right: 40px; }
+.person-box--has-sosa { padding-right: 48px; }
 
 .person-box__sosa {
   position: absolute;
@@ -502,6 +502,53 @@ mark.hl {
 .tree-lower-grid {
   display: grid;
   column-gap: 6px;
+}
+
+/* Chaîne d'ancêtres : repliée par défaut */
+.tree-anc-item {
+  display: none !important;
+}
+.sosa-tree--anc-expanded .tree-anc-item.tree-lgrid-cell {
+  display: flex !important;
+}
+.sosa-tree--anc-expanded .tree-anc-item.tree-spacer {
+  display: block !important;
+}
+
+/* Bouton déplier / replier */
+.tree-anc-toggle {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 0;
+}
+
+.tree-anc-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: .75rem;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  transition: background .12s, color .12s;
+}
+
+.tree-anc-btn:hover {
+  background: var(--gray-light);
+  color: var(--text);
+}
+
+.tree-anc-btn__arrow {
+  display: inline-block;
+  transition: transform .2s;
+}
+
+.sosa-tree--anc-expanded .tree-anc-btn__arrow {
+  transform: rotate(180deg);
 }
 
 /* Cellule contenu (GP, conjoint, enfant, ancêtre) */
