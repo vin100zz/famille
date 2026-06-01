@@ -3,15 +3,19 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --sex-M:     #ADE6F4;
-  --sex-F:     #FFC1F6;
-  --gray:      #4b5563;
-  --gray-light:#f1f5f9;
-  --border:    #e2e8f0;
-  --text:      #1e293b;
-  --muted:     #64748b;
-  --radius:    8px;
-  --shadow:    0 2px 12px rgba(0,0,0,.08);
+  --sex-M:          #ADE6F4;
+  --sex-F:          #FFC1F6;
+  --gray:           #4b5563;
+  --gray-light:     #f1f5f9;
+  --border:         #e2e8f0;
+  --text:           #1e293b;
+  --muted:          #64748b;
+  --radius:         8px;
+  --shadow:         0 2px 12px rgba(0,0,0,.08);
+  --title-bg:       #d0e4ff;  /* bleu ciel doux pour les titres de documents */
+  --title-bg-dark:  #b8d4f8;
+  --section-bg:     #edf0f3;  /* gris léger pour les barres de section de la fiche */
+  --section-bg-dark:#d4d9e0;
 }
 
 body {
@@ -293,9 +297,9 @@ mark.hl {
   text-transform: uppercase;
   letter-spacing: .1em;
   color: #334155;
-  background: #d8e2ef;
-  border-top: 1px solid #c8d3e0;
-  border-bottom: 1px solid #c8d3e0;
+  background: var(--section-bg);
+  border-top: 1px solid var(--section-bg-dark);
+  border-bottom: 1px solid var(--section-bg-dark);
 }
 
 /* Variante pour les lignes full-width (Mariage, Enfants) : le label est
@@ -609,7 +613,150 @@ mark.hl {
 
 /* Fallback */
 .tree-level { display: flex; align-items: center; justify-content: center; }
-/* ── Responsive ───────────────────────────────────────────────────────────── */
+/* ── Documents riches ─────────────────────────────────────────────────────── */
+
+.doc-section {
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+}
+
+/* Pleine largeur : sort du max-width du conteneur parent */
+.doc-section--fullwidth {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f8fafc;
+  border-top: 2px solid var(--border);
+  margin-top: 12px;
+  margin-bottom: 32px;
+}
+
+.doc-section--fullwidth .doc-titre,
+.doc-section--fullwidth .doc-content {
+  max-width: 100%;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.doc-card + .doc-card {
+  margin-top: 36px;
+}
+
+.doc-titre {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 32px 12px;
+  background: var(--title-bg);
+  border-bottom: 1px solid var(--title-bg-dark);
+}
+
+.doc-titre__annee {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.doc-titre__label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.doc-content {
+  display: flex;
+  gap: 24px;
+  padding: 24px 32px;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.doc-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  min-width: 200px;
+  align-items: center;   /* centre les blocs horizontalement dans la colonne */
+}
+
+.doc-block--image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.doc-block--image img {
+  display: block;
+  max-width: 100%;
+  max-height: 480px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  cursor: zoom-in;
+  transition: opacity .15s, box-shadow .15s;
+}
+.doc-block--image img:hover {
+  opacity: .92;
+  box-shadow: 0 4px 18px rgba(0,0,0,.22);
+}
+
+.doc-block--texte {
+  width: 100%;
+  font-size: 1.1rem;
+  color: #1e293b;
+  line-height: 1.75;
+  background: #c4dbff;
+  border: 1px solid var(--title-bg-dark);
+  border-radius: 6px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  text-align: center;
+}
+
+/* ── Lightbox ─────────────────────────────────────────────────────────────── */
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox--open { display: flex; }
+
+.lightbox__img {
+  max-width: 92vw;
+  max-height: 92vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.6);
+  object-fit: contain;
+}
+
+.lightbox__close {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+}
+.lightbox__close:hover { background: rgba(255,255,255,.3); }
 
 @media (max-width: 640px) {
   .site-header__inner { flex-direction: column; align-items: stretch; gap: 10px; }

@@ -7,6 +7,27 @@ const searchDrop   = document.getElementById('search-dropdown');
 const personView   = document.getElementById('person-view');
 const welcomeEl    = document.getElementById('welcome');
 
+// ── Lightbox ────────────────────────────────────────────────────────────────
+
+(function initLightbox() {
+  const lb    = document.getElementById('lightbox');
+  const close = document.getElementById('lightbox-close');
+  if (!lb || !close) return;
+
+  function closeLb() {
+    lb.classList.remove('lightbox--open');
+    document.getElementById('lightbox-img').src = '';
+  }
+
+  close.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb) closeLb();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLb();
+  });
+})();
+
 // ── Recherche / autocomplete ───────────────────────────────────────────────
 
 let searchTimer    = null;
@@ -221,6 +242,14 @@ async function renderPersonPage(data, seq) {
   }
 
   personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData));
+
+  // Documents riches : rendu pleine largeur, en dehors de la carte
+  const docs = primary ? (primary.documents || []) : [];
+  const docsSection = renderDocuments(docs);
+  if (docsSection) {
+    docsSection.classList.add('doc-section--fullwidth');
+    personView.appendChild(docsSection);
+  }
 }
 
 // ── Navigation navigateur (back / forward) ─────────────────────────────────

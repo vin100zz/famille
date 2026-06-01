@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Famille</title>
-  <link rel="stylesheet" href="src/ui/css/style.css?v=3">
+  <link rel="stylesheet" href="src/ui/css/style.css?v=4">
 </head>
 <body>
 
@@ -34,6 +34,12 @@
     </div>
     <div id="person-view"></div>
   </main>
+
+  <!-- Lightbox plein écran -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image en plein écran">
+    <img id="lightbox-img" class="lightbox__img" src="" alt="">
+    <button id="lightbox-close" class="lightbox__close" aria-label="Fermer">✕</button>
+  </div>
 
   <script src="src/ui/js/api.js?v=2"></script>
   <script src="src/ui/js/components.js?v=2"></script>

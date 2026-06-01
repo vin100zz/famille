@@ -182,6 +182,9 @@ class JsonPersonRepository implements IPersonRepository
                 'conjoint'         => $conjoint,
                 'conjoint_parents' => $conjointParents,
                 'enfants'          => $enfants,
+                'documents'        => isset($this->data['familles'][$familleId]['documents'])
+                                        ? $this->data['familles'][$familleId]['documents']
+                                        : array(),
             );
         }
 

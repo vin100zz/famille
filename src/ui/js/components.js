@@ -552,6 +552,78 @@ function renderSosaTree(treeData, onSelect) {
 
   return wrap;
 }
+// ── Documents riches ──────────────────────────────────────────────────────
+
+const IMAGES_BASE = 'website/pages/';
+
+/**
+ * Ouvre l'image dans la lightbox globale.
+ */
+function openLightbox(src) {
+  const lb  = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  if (!lb || !img) return;
+  img.src = src;
+  lb.classList.add('lightbox--open');
+}
+
+/**
+ * Construit et retourne le nœud DOM pour la section documents d'une union.
+ * @param {Array} documents  Liste de documents riches
+ */
+function renderDocuments(documents) {
+  if (!documents || !documents.length) return null;
+
+  const section = el('div', 'doc-section');
+
+  documents.forEach(function(doc) {
+    const card = el('div', 'doc-card');
+
+    // ── Titre ────────────────────────────────────────────────────────────
+    const titre = el('div', 'doc-titre');
+    if (doc.titre) {
+      if (doc.titre.annee != null) {
+        titre.appendChild(txt('span', 'doc-titre__annee', String(doc.titre.annee)));
+      }
+      if (doc.titre.label) {
+        titre.appendChild(txt('span', 'doc-titre__label', doc.titre.label));
+      }
+    }
+    card.appendChild(titre);
+
+    // ── Contenu (colonnes) ────────────────────────────────────────────────
+    const content = el('div', 'doc-content');
+
+    (doc.contenu || []).forEach(function(colBlocks) {
+      const col = el('div', 'doc-col');
+
+      colBlocks.forEach(function(block) {
+        if (block.type === 'IMAGE') {
+          const wrap = el('div', 'doc-block--image');
+          const img  = document.createElement('img');
+          img.src   = IMAGES_BASE + block.fichier;
+          img.alt   = '';
+          img.loading = 'lazy';
+          img.addEventListener('click', function() { openLightbox(img.src); });
+          wrap.appendChild(img);
+          col.appendChild(wrap);
+        } else if (block.type === 'TEXTE') {
+          const wrap = el('div', 'doc-block--texte');
+          wrap.innerHTML = block.fichier;   // HTML déjà sanitisé côté saisie
+          col.appendChild(wrap);
+        }
+      });
+
+      content.appendChild(col);
+    });
+
+    card.appendChild(content);
+    section.appendChild(card);
+  });
+
+  return section;
+}
+
 // ── Carte couple principale ────────────────────────────────────────────────
 
 /**
@@ -686,6 +758,7 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect, treeDat
   const commSection = makeSection('Commentaires',
     renderCommentairesCol(left), renderCommentairesCol(right));
   if (commSection) card.appendChild(commSection);
+
 
   return card;
 }
