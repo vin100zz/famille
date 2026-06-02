@@ -115,9 +115,11 @@ class JsonPersonRepository implements IPersonRepository
             'naissance_year' => $this->extractYear(
                 isset($p['naissance']['date']) ? $p['naissance']['date'] : null
             ),
+            'naissance_date' => isset($p['naissance']['date']) ? $p['naissance']['date'] : null,
             'deces_year'     => $this->extractYear(
                 isset($p['deces']['date']) ? $p['deces']['date'] : null
             ),
+            'deces_date'     => isset($p['deces']['date']) ? $p['deces']['date'] : null,
         );
     }
 

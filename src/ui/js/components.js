@@ -84,11 +84,37 @@ function formatPlace(lieu) {
   return parts.length ? parts.join(', ') : (lieu.brut || null);
 }
 
-function yearsLabel(birthY, deathY) {
-  if (!birthY && !deathY) return null;
-  const deathPart = deathY || (birthY && birthY >= 1900 ? '' : '?');
-  if (!deathPart) return String(birthY);
-  return (birthY || '?') + ' – ' + deathPart;
+/**
+ * Extrait l'année d'une chaîne de date GEDCOM en préservant le qualificatif :
+ *   "AFT 1751"  → "ap. 1751"
+ *   "BEF 1751"  → "av. 1751"
+ *   "ABT 1751"  → "v. 1751"
+ *   "1751"      → "1751"
+ */
+function extractYearLabel(dateStr) {
+  if (!dateStr) return null;
+  const s = String(dateStr).toUpperCase();
+  const m = s.match(/\b(\d{4})\b/);
+  if (!m) return null;
+  const year = m[1];
+  if (/\bAFT\b/.test(s))             return 'ap.\u00a0' + year;
+  if (/\bBEF\b/.test(s))             return 'av.\u00a0' + year;
+  if (/\b(ABT|CAL|ESTD?)\b/.test(s)) return 'v.\u00a0'  + year;
+  return year;
+}
+
+/**
+ * Construit le label "naissance – décès" à partir des chaînes de date GEDCOM brutes.
+ * Après 1900, l'absence de décès n'affiche pas de "?".
+ */
+function yearsLabel(birthDate, deathDate) {
+  const birthY     = extractYear(birthDate);
+  const birthLabel = extractYearLabel(birthDate);
+  const deathLabel = extractYearLabel(deathDate);
+  if (!birthLabel && !deathLabel) return null;
+  const deathPart = deathLabel || (birthY && birthY >= 1900 ? '' : '?');
+  if (!deathPart) return birthLabel;
+  return (birthLabel || '?') + '\u00a0–\u00a0' + deathPart;
 }
 
 // ── Boîte personne (parents / enfants) ────────────────────────────────────
@@ -120,7 +146,7 @@ function renderPersonBox(summary, onSelect) {
   if (!summary.nom && !summary.prenom) nameEl.textContent = '(inconnu)';
   box.appendChild(nameEl);
 
-  const years = yearsLabel(summary.naissance_year, summary.deces_year);
+  const years = yearsLabel(summary.naissance_date, summary.deces_date);
   if (years) box.appendChild(txt('span', 'person-box__years', years));
 
   box.addEventListener('click', () => onSelect(summary.id));
@@ -155,8 +181,8 @@ function renderPersonHeader(person) {
   if (person.prenom) header.appendChild(txt('div', 'person-header__prenom', person.prenom));
 
   const years = yearsLabel(
-    extractYear(person.naissance && person.naissance.date),
-    extractYear(person.deces     && person.deces.date)
+    person.naissance && person.naissance.date,
+    person.deces     && person.deces.date
   );
   if (years) header.appendChild(txt('div', 'person-header__years', years));
 
@@ -315,7 +341,9 @@ function personToSummary(p) {
     sexe:           p.sexe,
     sosa:           p.sosa,
     naissance_year: extractYear(p.naissance && p.naissance.date),
+    naissance_date: p.naissance && p.naissance.date || null,
     deces_year:     extractYear(p.deces     && p.deces.date),
+    deces_date:     p.deces     && p.deces.date     || null,
   };
 }
 
