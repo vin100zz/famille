@@ -108,7 +108,7 @@ function renderDropdown(results, query) {
       }
       info.appendChild(nameEl);
 
-      const years = yearsLabel(r.naissance_date, r.deces_date);
+      const years = yearsLabel(r.naissance_year, r.deces_year);
       if (years) info.appendChild(txt('div', 'result-years', years));
       item.appendChild(info);
 
