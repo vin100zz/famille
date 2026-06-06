@@ -208,9 +208,10 @@ def extract_event_before(conteneur: Tag) -> tuple[int | None, str]:
 
     label = " ".join(label_parts).strip()
     label = re.sub(r"\s+", " ", label)
-    # Supprimer l'année si elle apparaît en début de label (ex : "1692 : Baptême...")
+    # Supprimer l'année si elle apparaît en début de label
+    # (ex : "1692 : Baptême...", "1787 28 décembre...", "1770 Mariage...")
     if year:
-        label = re.sub(rf"^{year}\s*[:\.]\s*", "", label).strip()
+        label = re.sub(rf"^{year}\s*[:\.\-–]?\s*", "", label).strip()
     return year, label
 
 

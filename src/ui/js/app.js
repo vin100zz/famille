@@ -294,7 +294,7 @@ function goHome() {
   mainEl.hidden    = true;
   _showHomeBtn(false);
   CircularTree.showControls(true);
-  CircularTree.redraw();
+  CircularTree.redraw();   // no-op si pas encore initialisé (init() est async)
 }
 
 // ── Création d'une nouvelle personne ───────────────────────────────────────
@@ -372,19 +372,23 @@ document.addEventListener('keydown', e => {
 // ── Chargement initial depuis le hash ──────────────────────────────────────
 
 (function init() {
+  // L'arbre circulaire est toujours initialisé (en arrière-plan si besoin),
+  // pour qu'il soit prêt quand l'utilisateur revient à l'accueil.
+  const container = document.getElementById('tree-container');
+  const treeReady = CircularTree.init(container, id => selectPerson(id));
+
   const hash = decodeURIComponent(location.hash.slice(1));
   if (hash) {
-    // Naviguer directement vers une fiche
+    // Démarrage direct sur une fiche
     mainEl.hidden    = false;
     welcomeEl.hidden = true;
     loadPerson(hash);
+    // Afficher les contrôles de zoom uniquement quand l'arbre sera prêt ET qu'on
+    // sera revenu à l'accueil (géré dans goHome/popstate)
   } else {
-    // Accueil : afficher l'arbre circulaire
+    // Démarrage sur l'accueil
     mainEl.hidden    = true;
     welcomeEl.hidden = false;
-    const container = document.getElementById('tree-container');
-    CircularTree.init(container, id => selectPerson(id)).then(() => {
-      CircularTree.showControls(true);
-    });
+    treeReady.then(() => CircularTree.showControls(true));
   }
 })();
