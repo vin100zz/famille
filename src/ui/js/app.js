@@ -6,6 +6,12 @@ const searchInput  = document.getElementById('search-input');
 const searchDrop   = document.getElementById('search-dropdown');
 const personView   = document.getElementById('person-view');
 const welcomeEl    = document.getElementById('welcome');
+const mainEl       = document.getElementById('main-content');
+const homeBtnEl    = document.getElementById('home-btn');
+
+function _showHomeBtn(visible) {
+  if (homeBtnEl) homeBtnEl.hidden = !visible;
+}
 
 // ── Lightbox ────────────────────────────────────────────────────────────────
 
@@ -157,6 +163,9 @@ let _loadSeq = 0;  // séquence de chargement pour annuler les requêtes périm�
 async function loadPerson(id) {
   const seq = ++_loadSeq;
   welcomeEl.hidden = true;
+  mainEl.hidden    = false;
+  _showHomeBtn(true);
+  CircularTree.showControls(false);
   personView.innerHTML = '';
   personView.appendChild(txt('div', 'loading', 'Chargement…'));
 
@@ -232,16 +241,7 @@ async function renderPersonPage(data, seq) {
   const primary    = unions.length ? unions[primaryIdx] : null;
   const others     = unions.filter((_, i) => i !== primaryIdx);
 
-  // Sosa ≥ 2 : arbre depuis l'API (avec chaîne d'ancêtres jusqu'au Sosa 1)
-  // Sinon    : arbre local (couple + grands-parents + enfants, sans chaîne)
-  let treeData = null;
-  if (data.person.sosa != null && data.person.sosa >= 2) {
-    try { treeData = await api.getSosaTree(data.person.sosa); } catch (e) {}
-  } else {
-    treeData = buildLocalTree(data, primary);
-  }
-
-  // Bouton Mode Édition
+  // Bouton Mode Édition (l'arbre circulaire est affiché à l'accueil, pas ici)
   const editBar = el('div', 'view-edit-bar');
   const editBtn = el('button', 'view-edit-btn');
   editBtn.type = 'button';
@@ -261,7 +261,7 @@ async function renderPersonPage(data, seq) {
   editBar.appendChild(editBtn);
   personView.appendChild(editBar);
 
-  personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData));
+  personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect, null));
 
   // Documents riches : rendu pleine largeur, en dehors de la carte
   const docs = primary ? (primary.documents || []) : [];
@@ -280,6 +280,10 @@ window.addEventListener('popstate', e => {
   } else {
     personView.innerHTML = '';
     welcomeEl.hidden = false;
+    mainEl.hidden    = true;
+    _showHomeBtn(false);
+    CircularTree.showControls(true);
+    CircularTree.redraw();
   }
 });
 
@@ -287,6 +291,10 @@ function goHome() {
   history.pushState(null, '', location.pathname);
   personView.innerHTML = '';
   welcomeEl.hidden = false;
+  mainEl.hidden    = true;
+  _showHomeBtn(false);
+  CircularTree.showControls(true);
+  CircularTree.redraw();
 }
 
 // ── Création d'une nouvelle personne ───────────────────────────────────────
@@ -365,5 +373,18 @@ document.addEventListener('keydown', e => {
 
 (function init() {
   const hash = decodeURIComponent(location.hash.slice(1));
-  if (hash) loadPerson(hash);
+  if (hash) {
+    // Naviguer directement vers une fiche
+    mainEl.hidden    = false;
+    welcomeEl.hidden = true;
+    loadPerson(hash);
+  } else {
+    // Accueil : afficher l'arbre circulaire
+    mainEl.hidden    = true;
+    welcomeEl.hidden = false;
+    const container = document.getElementById('tree-container');
+    CircularTree.init(container, id => selectPerson(id)).then(() => {
+      CircularTree.showControls(true);
+    });
+  }
 })();

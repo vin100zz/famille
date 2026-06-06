@@ -17,6 +17,10 @@ class ApiClient {
     return this._get('sosa-tree.php', { sosa });
   }
 
+  async getSosaMap() {
+    return this._get('sosa-map.php', {});
+  }
+
   async savePerson(id, data) {
     return this._post('save.php', { type: 'person', id, data });
   }

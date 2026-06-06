@@ -26,6 +26,20 @@ body {
   min-height: 100vh;
 }
 
+.header-home-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.3rem;
+  line-height: 1;
+  padding: 4px 10px;
+  transition: background .15s;
+  flex-shrink: 0;
+}
+.header-home-btn:hover { background: rgba(255,255,255,.15); }
+
 /* ── Header ───────────────────────────────────────────────────────────────── */
 
 .site-header {
@@ -233,11 +247,96 @@ mark.hl {
   padding: 28px 24px 48px;
 }
 
-.welcome {
-  text-align: center;
-  color: var(--muted);
-  margin-top: 80px;
-  font-size: 1.05rem;
+/* ── Arbre circulaire (accueil plein écran) ───────────────────────────────── */
+
+.welcome-screen {
+  overflow: auto;
+  width: 100%;
+  height: calc(100vh - var(--hdr-h, 60px));
+  background: var(--gray-light);
+  /* scrollbars discrets */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.2) transparent;
+}
+.welcome-screen::-webkit-scrollbar { width: 6px; height: 6px; }
+.welcome-screen::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 3px; }
+
+/* Wrapper interne : s'étire pour centrer le canvas quand il est < viewport,
+   laisse le canvas déborder (avec scrollbars) quand il est > viewport */
+.tree-scroll-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width / height positionnés dynamiquement par JS (≥ viewport) */
+  min-width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+/* Boutons +/- flottants */
+.ct-zoom-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 500;
+}
+.ct-zoom-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(30, 41, 59, 0.85);
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  transition: background .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ct-zoom-btn:hover { background: rgba(30, 41, 59, 1); }
+
+.tree-container {
+  position: relative;
+  /* width/height positionnés dynamiquement par JS */
+}
+
+.ct-tooltip {
+  position: fixed;
+  display: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-family: system-ui, sans-serif;
+  line-height: 1.7;
+  pointer-events: none;
+  z-index: 2000;
+  box-shadow: 0 3px 10px rgba(0,0,0,.25);
+  max-width: 260px;
+}
+
+.ct-tip-name {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.ct-tip-sosa {
+  color: #999;
+  font-weight: normal;
+  font-size: 11px;
+  margin-left: 6px;
+}
+
+.ct-tip-lbl {
+  color: #999;
 }
 
 .loading, .error {

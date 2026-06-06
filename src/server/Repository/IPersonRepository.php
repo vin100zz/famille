@@ -66,4 +66,12 @@ interface IPersonRepository
      * @return array { idMap: {tempId: realId} }
      */
     public function saveAll($payload);
+
+    /**
+     * Retourne la map sosa→personne pour l'arbre circulaire.
+     * Seules les personnes ayant un numéro Sosa sont incluses.
+     * @return array  { sosa: { id, nom, prenom, naissance_date, naissance_ville,
+     *                          deces_date, deces_ville, mariage_date, mariage_ville } }
+     */
+    public function getSosaMap();
 }

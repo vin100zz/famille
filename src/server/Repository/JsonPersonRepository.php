@@ -533,8 +533,67 @@ class JsonPersonRepository implements IPersonRepository
         return 'I' . ($max + 1);
     }
 
-    private function generateFamilyId()
+    public function getSosaMap()
     {
+        $map = array();
+        foreach ($this->data['individus'] as $id => $p) {
+            if (!is_array($p) || !isset($p['sosa'])) {
+                continue;
+            }
+            $sosa = (int) $p['sosa'];
+
+            // Naissance
+            $naissance_date  = null;
+            $naissance_ville = null;
+            if (isset($p['naissance']) && is_array($p['naissance'])) {
+                $naissance_date  = isset($p['naissance']['date']) ? $p['naissance']['date'] : null;
+                $lieu = isset($p['naissance']['lieu']) && is_array($p['naissance']['lieu'])
+                    ? $p['naissance']['lieu'] : array();
+                $naissance_ville = isset($lieu['ville']) ? $lieu['ville'] : null;
+            }
+
+            // Décès
+            $deces_date  = null;
+            $deces_ville = null;
+            if (isset($p['deces']) && is_array($p['deces'])) {
+                $deces_date  = isset($p['deces']['date']) ? $p['deces']['date'] : null;
+                $lieu = isset($p['deces']['lieu']) && is_array($p['deces']['lieu'])
+                    ? $p['deces']['lieu'] : array();
+                $deces_ville = isset($lieu['ville']) ? $lieu['ville'] : null;
+            }
+
+            // Mariage (premier lien d'union)
+            $mariage_date  = null;
+            $mariage_ville = null;
+            if (isset($p['liens']['unions']) && is_array($p['liens']['unions'])) {
+                foreach ($p['liens']['unions'] as $u) {
+                    if (!is_array($u)) continue;
+                    if (isset($u['mariage']) && is_array($u['mariage'])) {
+                        $mariage_date = isset($u['mariage']['date']) ? $u['mariage']['date'] : null;
+                        $lieu = isset($u['mariage']['lieu']) && is_array($u['mariage']['lieu'])
+                            ? $u['mariage']['lieu'] : array();
+                        $mariage_ville = isset($lieu['ville']) ? $lieu['ville'] : null;
+                    }
+                    break;
+                }
+            }
+
+            $map[$sosa] = array(
+                'id'             => $id,
+                'nom'            => isset($p['nom'])    ? $p['nom']    : null,
+                'prenom'         => isset($p['prenom']) ? $p['prenom'] : null,
+                'naissance_date' => $naissance_date,
+                'naissance_ville'=> $naissance_ville,
+                'deces_date'     => $deces_date,
+                'deces_ville'    => $deces_ville,
+                'mariage_date'   => $mariage_date,
+                'mariage_ville'  => $mariage_ville,
+            );
+        }
+        return $map;
+    }
+
+    private function generateFamilyId()    {
         $max = 0;
         foreach (array_keys($this->data['familles']) as $id) {
             if (preg_match('/^F(\d+)$/', $id, $m)) {
