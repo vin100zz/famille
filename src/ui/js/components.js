@@ -608,16 +608,14 @@ function renderDocuments(documents) {
     const card = el('div', 'doc-card');
 
     // ── Titre ────────────────────────────────────────────────────────────
-    const titre = el('div', 'doc-titre');
-    if (doc.titre) {
-      if (doc.titre.annee != null) {
-        titre.appendChild(txt('span', 'doc-titre__annee', String(doc.titre.annee)));
-      }
-      if (doc.titre.label) {
-        titre.appendChild(txt('span', 'doc-titre__label', doc.titre.label));
-      }
+    const hasAnnee = doc.titre && doc.titre.annee != null;
+    const hasLabel = doc.titre && doc.titre.label && doc.titre.label.trim();
+    if (hasAnnee || hasLabel) {
+      const titre = el('div', 'doc-titre');
+      if (hasAnnee) titre.appendChild(txt('span', 'doc-titre__annee', String(doc.titre.annee)));
+      if (hasLabel) titre.appendChild(txt('span', 'doc-titre__label', doc.titre.label));
+      card.appendChild(titre);
     }
-    card.appendChild(titre);
 
     // ── Contenu (colonnes) ────────────────────────────────────────────────
     const content = el('div', 'doc-content');
