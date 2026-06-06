@@ -244,6 +244,276 @@ class JsonPersonRepository implements IPersonRepository
         );
     }
 
+    // ── Écriture ───────────────────────────────────────────────────────────
+
+    public function savePerson($id, $data)
+    {
+        if (!isset($this->data['individus'][$id])) {
+            throw new RuntimeException('Individu introuvable : ' . $id);
+        }
+        $p = &$this->data['individus'][$id];
+
+        $fields = array('nom', 'prenom', 'sexe', 'naissance', 'bapteme',
+                        'deces', 'sepulture', 'professions', 'residences', 'commentaires');
+        foreach ($fields as $f) {
+            if (array_key_exists($f, $data)) {
+                if ($data[$f] === null || $data[$f] === '' ||
+                    (is_array($data[$f]) && count($data[$f]) === 0)) {
+                    unset($p[$f]);
+                } else {
+                    $p[$f] = $data[$f];
+                }
+            }
+        }
+
+        // Mise à jour des parents dans les liens
+        if (isset($data['parents'])) {
+            if (!isset($p['liens'])) $p['liens'] = array();
+            if (empty($data['parents'])) {
+                unset($p['liens']['parents']);
+            } else {
+                $p['liens']['parents'] = array_values(array_unique($data['parents']));
+            }
+        }
+
+        $this->persist();
+    }
+
+    public function saveFamily($id, $data)
+    {
+        if (!isset($this->data['familles'][$id])) {
+            throw new RuntimeException('Famille introuvable : ' . $id);
+        }
+        $fam = &$this->data['familles'][$id];
+
+        $fields = array('mariage', 'documents');
+        foreach ($fields as $f) {
+            if (array_key_exists($f, $data)) {
+                if ($data[$f] === null || (is_array($data[$f]) && count($data[$f]) === 0)) {
+                    unset($fam[$f]);
+                } else {
+                    $fam[$f] = $data[$f];
+                }
+            }
+        }
+
+        // Enfants : mettre à jour la liste ET les liens des individus
+        if (isset($data['enfants'])) {
+            $newChildren  = array_values(array_unique($data['enfants']));
+            $prevChildren = isset($fam['enfants']) ? $fam['enfants'] : array();
+
+            // Retirer les enfants supprimés
+            foreach (array_diff($prevChildren, $newChildren) as $childId) {
+                if (isset($this->data['individus'][$childId]['liens']['parents'])) {
+                    $parents = $this->data['individus'][$childId]['liens']['parents'];
+                    $newParents = array();
+                    foreach ($parents as $pid) {
+                        if ($pid !== $fam['mari'] && $pid !== $fam['epouse']) {
+                            $newParents[] = $pid;
+                        }
+                    }
+                    if (empty($newParents)) {
+                        unset($this->data['individus'][$childId]['liens']['parents']);
+                    } else {
+                        $this->data['individus'][$childId]['liens']['parents'] = $newParents;
+                    }
+                }
+            }
+
+            // Ajouter les nouveaux enfants
+            foreach (array_diff($newChildren, $prevChildren) as $childId) {
+                if (isset($this->data['individus'][$childId])) {
+                    $child = &$this->data['individus'][$childId];
+                    if (!isset($child['liens'])) $child['liens'] = array();
+                    $parents = isset($child['liens']['parents']) ? $child['liens']['parents'] : array();
+                    if (!empty($fam['mari'])   && !in_array($fam['mari'],   $parents)) $parents[] = $fam['mari'];
+                    if (!empty($fam['epouse']) && !in_array($fam['epouse'], $parents)) $parents[] = $fam['epouse'];
+                    $child['liens']['parents'] = array_values($parents);
+                }
+            }
+
+            if (empty($newChildren)) {
+                unset($fam['enfants']);
+            } else {
+                $fam['enfants'] = $newChildren;
+            }
+        }
+
+        $this->persist();
+    }
+
+    private function persist()
+    {
+        $path = JSON_DATA_PATH;
+        $json = json_encode($this->data,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        if ($json === false) {
+            throw new RuntimeException('Erreur d\'encodage JSON : ' . json_last_error_msg());
+        }
+        $fp = fopen($path, 'c+');
+        if (!$fp) {
+            throw new RuntimeException('Impossible d\'ouvrir : ' . $path);
+        }
+        if (!flock($fp, LOCK_EX)) {
+            fclose($fp);
+            throw new RuntimeException('Impossible de verrouiller le fichier JSON');
+        }
+        ftruncate($fp, 0);
+        rewind($fp);
+        fwrite($fp, $json);
+        fflush($fp);
+        flock($fp, LOCK_UN);
+        fclose($fp);
+    }
+
+    // ── Sauvegarde groupée ────────────────────────────────────────────────────
+
+    public function saveAll($payload)
+    {
+        $idMap = array(); // tempId → realId
+
+        // 1. Créer les nouvelles personnes
+        $newPersons = isset($payload['newPersons']) ? $payload['newPersons'] : array();
+        foreach ($newPersons as $tempId => $pData) {
+            $realId = $this->generatePersonId();
+            $person = array();
+            $fields = array('nom','prenom','sexe','naissance','bapteme','deces',
+                            'sepulture','professions','residences','commentaires','sosa');
+            foreach ($fields as $f) {
+                if (isset($pData[$f]) && $pData[$f] !== null) {
+                    $person[$f] = $pData[$f];
+                }
+            }
+            if (!empty($pData['liens'])) {
+                $person['liens'] = $pData['liens'];
+            }
+            $this->data['individus'][$realId] = $person;
+            $idMap[$tempId] = $realId;
+        }
+
+        $self = $this;
+        $resolve = function ($id) use (&$idMap) {
+            return isset($idMap[$id]) ? $idMap[$id] : $id;
+        };
+
+        // 2. Créer les nouvelles familles
+        $newFamilies = isset($payload['newFamilies']) ? $payload['newFamilies'] : array();
+        foreach ($newFamilies as $tempId => $fData) {
+            $realId   = $this->generateFamilyId();
+            $mariId   = $resolve(isset($fData['mari'])   ? $fData['mari']   : null);
+            $epoUseId = $resolve(isset($fData['epouse']) ? $fData['epouse'] : null);
+            $enfants  = array_map($resolve, isset($fData['enfants']) ? $fData['enfants'] : array());
+
+            $fam = array();
+            if ($mariId)          $fam['mari']    = $mariId;
+            if ($epoUseId)        $fam['epouse']  = $epoUseId;
+            if (!empty($enfants)) $fam['enfants'] = array_values($enfants);
+            $this->data['familles'][$realId] = $fam;
+
+            // Mettre à jour liens.unions des deux époux
+            if ($mariId && isset($this->data['individus'][$mariId])) {
+                if (!isset($this->data['individus'][$mariId]['liens'])) {
+                    $this->data['individus'][$mariId]['liens'] = array();
+                }
+                $this->data['individus'][$mariId]['liens']['unions'][] = array(
+                    'famille' => $realId, 'conjoint' => $epoUseId
+                );
+            }
+            if ($epoUseId && isset($this->data['individus'][$epoUseId])) {
+                if (!isset($this->data['individus'][$epoUseId]['liens'])) {
+                    $this->data['individus'][$epoUseId]['liens'] = array();
+                }
+                $this->data['individus'][$epoUseId]['liens']['unions'][] = array(
+                    'famille' => $realId, 'conjoint' => $mariId
+                );
+            }
+            // Mettre à jour liens.parents des enfants
+            foreach ($enfants as $childId) {
+                if (isset($this->data['individus'][$childId])) {
+                    if (!isset($this->data['individus'][$childId]['liens'])) {
+                        $this->data['individus'][$childId]['liens'] = array();
+                    }
+                    $existing = isset($this->data['individus'][$childId]['liens']['parents'])
+                        ? $this->data['individus'][$childId]['liens']['parents'] : array();
+                    if ($mariId   && !in_array($mariId,   $existing)) $existing[] = $mariId;
+                    if ($epoUseId && !in_array($epoUseId, $existing)) $existing[] = $epoUseId;
+                    $this->data['individus'][$childId]['liens']['parents'] = array_values($existing);
+                }
+            }
+            $idMap[$tempId] = $realId;
+        }
+
+        // 3. Supprimer des familles
+        $deleteFamilies = isset($payload['deleteFamilies']) ? $payload['deleteFamilies'] : array();
+        foreach ($deleteFamilies as $fid) {
+            $fid = $resolve($fid);
+            if (!isset($this->data['familles'][$fid])) continue;
+            $fam = $this->data['familles'][$fid];
+            foreach (array('mari', 'epouse') as $role) {
+                $pid = isset($fam[$role]) ? $fam[$role] : null;
+                if ($pid && isset($this->data['individus'][$pid]['liens']['unions'])) {
+                    $filtered = array();
+                    foreach ($this->data['individus'][$pid]['liens']['unions'] as $u) {
+                        if ((isset($u['famille']) ? $u['famille'] : '') !== $fid) {
+                            $filtered[] = $u;
+                        }
+                    }
+                    $this->data['individus'][$pid]['liens']['unions'] = array_values($filtered);
+                }
+            }
+            unset($this->data['familles'][$fid]);
+        }
+
+        // 4. Mettre à jour les personnes existantes
+        $updatePersons = isset($payload['updatePersons']) ? $payload['updatePersons'] : array();
+        foreach ($updatePersons as $pid => $pData) {
+            $pid = $resolve($pid);
+            if (isset($pData['parents'])) {
+                $pData['parents'] = array_map($resolve, $pData['parents']);
+            }
+            if (isset($this->data['individus'][$pid])) {
+                $this->savePerson($pid, $pData);
+            }
+        }
+
+        // 5. Mettre à jour les familles existantes
+        $updateFamilies = isset($payload['updateFamilies']) ? $payload['updateFamilies'] : array();
+        foreach ($updateFamilies as $fid => $fData) {
+            $fid = $resolve($fid);
+            if (isset($fData['enfants'])) {
+                $fData['enfants'] = array_map($resolve, $fData['enfants']);
+            }
+            if (isset($this->data['familles'][$fid])) {
+                $this->saveFamily($fid, $fData);
+            }
+        }
+
+        $this->persist();
+        return array('idMap' => $idMap);
+    }
+
+    private function generatePersonId()
+    {
+        $max = 0;
+        foreach (array_keys($this->data['individus']) as $id) {
+            if (preg_match('/^I(\d+)$/', $id, $m)) {
+                $max = max($max, (int) $m[1]);
+            }
+        }
+        return 'I' . ($max + 1);
+    }
+
+    private function generateFamilyId()
+    {
+        $max = 0;
+        foreach (array_keys($this->data['familles']) as $id) {
+            if (preg_match('/^F(\d+)$/', $id, $m)) {
+                $max = max($max, (int) $m[1]);
+            }
+        }
+        return 'F' . ($max + 1);
+    }
+
     // ── Utilitaires ────────────────────────────────────────────────────────
 
     private function findBySosa($sosa)

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Famille</title>
-  <link rel="stylesheet" href="src/ui/css/style.css?v=4">
+  <link rel="stylesheet" href="src/ui/css/style.css?v=6">
 </head>
 <body>
 
@@ -25,8 +25,42 @@
         >
         <div id="search-dropdown" class="search-dropdown" role="listbox" hidden></div>
       </div>
+      <button class="header-new-btn" onclick="openCreatePerson()" title="Créer une nouvelle personne">＋ Nouvelle personne</button>
     </div>
   </header>
+
+  <!-- Modal : création d'une nouvelle personne -->
+  <div id="create-modal" class="create-modal" hidden role="dialog" aria-modal="true" aria-labelledby="create-modal-title">
+    <div class="create-modal__box">
+      <div class="create-modal__header">
+        <span id="create-modal-title" class="create-modal__title">Nouvelle personne</span>
+        <button class="create-modal__close" type="button" onclick="closeCreatePerson()" aria-label="Fermer">✕</button>
+      </div>
+      <div class="create-modal__body">
+        <div class="ed-field">
+          <label class="ed-label" for="cp-nom">Nom</label>
+          <input id="cp-nom" type="text" class="ed-input" placeholder="NOM (majuscules)">
+        </div>
+        <div class="ed-field">
+          <label class="ed-label" for="cp-prenom">Prénom</label>
+          <input id="cp-prenom" type="text" class="ed-input" placeholder="Prénom">
+        </div>
+        <div class="ed-field">
+          <label class="ed-label">Sexe</label>
+          <div class="ed-radio-group">
+            <label class="ed-radio-label"><input type="radio" name="cp-sexe" value="M" checked> Homme</label>
+            <label class="ed-radio-label"><input type="radio" name="cp-sexe" value="F"> Femme</label>
+            <label class="ed-radio-label"><input type="radio" name="cp-sexe" value=""> ?</label>
+          </div>
+        </div>
+        <div id="create-modal-error" class="create-modal__error" hidden></div>
+      </div>
+      <div class="create-modal__footer">
+        <button id="create-modal-submit" class="ed-btn ed-btn--save" type="button" onclick="submitCreatePerson()">Créer</button>
+        <button class="ed-btn ed-btn--cancel" type="button" onclick="closeCreatePerson()">Annuler</button>
+      </div>
+    </div>
+  </div>
 
   <main class="main-content">
     <div id="welcome" class="welcome">
@@ -41,9 +75,9 @@
     <button id="lightbox-close" class="lightbox__close" aria-label="Fermer">✕</button>
   </div>
 
-  <script src="src/ui/js/api.js?v=2"></script>
-  <script src="src/ui/js/components.js?v=2"></script>
-  <script src="src/ui/js/app.js?v=2"></script>
+  <script src="src/ui/js/api.js?v=3"></script>
+  <script src="src/ui/js/components.js?v=3"></script>
+  <script src="src/ui/js/editor.js?v=1"></script>
+  <script src="src/ui/js/app.js?v=4"></script>
 </body>
 </html>
-

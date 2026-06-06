@@ -241,6 +241,26 @@ async function renderPersonPage(data, seq) {
     treeData = buildLocalTree(data, primary);
   }
 
+  // Bouton Mode Édition
+  const editBar = el('div', 'view-edit-bar');
+  const editBtn = el('button', 'view-edit-btn');
+  editBtn.type = 'button';
+  editBtn.textContent = '\u270F\uFE0F Modifier';
+  editBtn.addEventListener('click', () => {
+    Editor.open({
+      personId:        data.person.id,
+      person:          data.person,
+      familleId:       primary ? primary.famille_id : null,
+      conjointId:      primary && primary.conjoint ? primary.conjoint.id : null,
+      conjoint:        primary ? primary.conjoint   : null,
+      union:           primary,
+      parents:         data.parents || [],
+      conjointParents: primary ? (primary.conjoint_parents || []) : [],
+    }, () => loadPerson(data.person.id));
+  });
+  editBar.appendChild(editBtn);
+  personView.appendChild(editBar);
+
   personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData));
 
   // Documents riches : rendu pleine largeur, en dehors de la carte
@@ -268,6 +288,78 @@ function goHome() {
   personView.innerHTML = '';
   welcomeEl.hidden = false;
 }
+
+// ── Création d'une nouvelle personne ───────────────────────────────────────
+
+function openCreatePerson() {
+  const modal = document.getElementById('create-modal');
+  document.getElementById('cp-nom').value    = '';
+  document.getElementById('cp-prenom').value = '';
+  document.querySelector('input[name="cp-sexe"][value="M"]').checked = true;
+  const errEl = document.getElementById('create-modal-error');
+  errEl.hidden = true;
+  errEl.textContent = '';
+  modal.hidden = false;
+  document.getElementById('cp-nom').focus();
+}
+
+function closeCreatePerson() {
+  document.getElementById('create-modal').hidden = true;
+}
+
+async function submitCreatePerson() {
+  const nom    = document.getElementById('cp-nom').value.trim();
+  const prenom = document.getElementById('cp-prenom').value.trim();
+  const sexe   = document.querySelector('input[name="cp-sexe"]:checked').value || null;
+
+  if (!nom && !prenom) {
+    const errEl = document.getElementById('create-modal-error');
+    errEl.textContent = 'Veuillez saisir au moins un nom ou un prénom.';
+    errEl.hidden = false;
+    return;
+  }
+
+  const btn = document.getElementById('create-modal-submit');
+  btn.disabled = true;
+  btn.textContent = 'Création…';
+
+  try {
+    const personData = {};
+    if (nom)    personData.nom    = nom;
+    if (prenom) personData.prenom = prenom;
+    if (sexe)   personData.sexe   = sexe;
+
+    const TEMP = '__new__';
+    const result = await api.saveAll({
+      newPersons:    { [TEMP]: personData },
+      newFamilies:   {},
+      updatePersons: {},
+      updateFamilies:{},
+      deleteFamilies:[],
+    });
+
+    closeCreatePerson();
+    const newId = result.idMap && result.idMap[TEMP];
+    if (newId) {
+      await selectPerson(newId);
+    }
+  } catch (err) {
+    const errEl = document.getElementById('create-modal-error');
+    errEl.textContent = 'Erreur : ' + err.message;
+    errEl.hidden = false;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Créer';
+  }
+}
+
+// Fermer le modal avec Échap
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('create-modal');
+    if (modal && !modal.hidden) closeCreatePerson();
+  }
+});
 
 // ── Chargement initial depuis le hash ──────────────────────────────────────
 

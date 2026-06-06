@@ -26,7 +26,7 @@ class Response
         http_response_code($status);
         header('Content-Type: application/json; charset=utf-8');
         header('Access-Control-Allow-Origin: ' . CORS_ORIGIN);
-        header('Access-Control-Allow-Methods: GET, OPTIONS');
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type');
 
         // Répondre immédiatement aux pre-flight CORS

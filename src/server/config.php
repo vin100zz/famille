@@ -20,3 +20,7 @@ define('JSON_DATA_PATH', realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR
 
 // Origines autorisées pour CORS (* = toutes)
 define('CORS_ORIGIN', '*');
+
+// Dossier racine des images du site (website/pages/)
+define('WEBSITE_PAGES_PATH', realpath(__DIR__ . '/../../website/pages'));
+

@@ -44,4 +44,26 @@ interface IPersonRepository
      *   - ancestors      : résumés de floor(sosa/2) → 1
      */
     public function getSosaTree($sosa);
+
+    /**
+     * Sauvegarde les données d'un individu (champs éditables uniquement).
+     * @param string $id   Identifiant GEDCOM
+     * @param array  $data Champs à mettre à jour
+     */
+    public function savePerson($id, $data);
+
+    /**
+     * Sauvegarde les données d'une famille (mariage, enfants, documents).
+     * @param string $id   Identifiant famille
+     * @param array  $data Champs à mettre à jour
+     */
+    public function saveFamily($id, $data);
+
+    /**
+     * Sauvegarde un lot d'opérations en une seule transaction.
+     * @param array $payload { newPersons, newFamilies, deleteFamilies,
+     *                         updatePersons, updateFamilies }
+     * @return array { idMap: {tempId: realId} }
+     */
+    public function saveAll($payload);
 }
