@@ -464,6 +464,12 @@ mark.hl {
   box-shadow: 0 5px 14px rgba(0,0,0,.22);
 }
 
+.person-box:disabled,
+.person-box[disabled] {
+  cursor: default;
+  pointer-events: none;
+}
+
 .person-box--M { background: #fff; color: var(--text); border-left-color: var(--sex-M); }
 .person-box--F { background: #fff; color: var(--text); border-left-color: var(--sex-F); }
 .person-box--U { background: #fff; color: var(--text); border-left-color: var(--gray); }

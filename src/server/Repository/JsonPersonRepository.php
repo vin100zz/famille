@@ -286,14 +286,44 @@ class JsonPersonRepository implements IPersonRepository
         }
         $fam = &$this->data['familles'][$id];
 
-        $fields = array('mariage', 'documents');
-        foreach ($fields as $f) {
-            if (array_key_exists($f, $data)) {
-                if ($data[$f] === null || (is_array($data[$f]) && count($data[$f]) === 0)) {
-                    unset($fam[$f]);
-                } else {
-                    $fam[$f] = $data[$f];
+        // documents → stocké dans familles (lu depuis familles dans buildUnions)
+        if (array_key_exists('documents', $data)) {
+            if ($data['documents'] === null || (is_array($data['documents']) && count($data['documents']) === 0)) {
+                unset($fam['documents']);
+            } else {
+                $fam['documents'] = $data['documents'];
+            }
+        }
+
+        // mariage et commentaires → stockés dans individus.liens.unions[i]
+        // (c'est de là que buildUnions les lit)
+        if (array_key_exists('mariage', $data) || array_key_exists('commentaires', $data)) {
+            foreach (array('mari', 'epouse') as $role) {
+                $pid = isset($fam[$role]) ? $fam[$role] : null;
+                if (!$pid || !isset($this->data['individus'][$pid]['liens']['unions'])) {
+                    continue;
                 }
+                foreach ($this->data['individus'][$pid]['liens']['unions'] as &$u) {
+                    if (!isset($u['famille']) || $u['famille'] !== $id) {
+                        continue;
+                    }
+                    if (array_key_exists('mariage', $data)) {
+                        if ($data['mariage'] === null) {
+                            unset($u['mariage']);
+                        } else {
+                            $u['mariage'] = $data['mariage'];
+                        }
+                    }
+                    if (array_key_exists('commentaires', $data)) {
+                        if (empty($data['commentaires'])) {
+                            unset($u['commentaires']);
+                        } else {
+                            $u['commentaires'] = $data['commentaires'];
+                        }
+                    }
+                    break;
+                }
+                unset($u);
             }
         }
 
@@ -543,24 +573,54 @@ class JsonPersonRepository implements IPersonRepository
 
     private function findChildrenOfCouple($maleId, $femaleId)
     {
+        $foundFamily = false;
+        $children    = array();
+        $childIds    = array();
+
+        // 1. Recherche prioritaire : famille avec les deux parents explicites
         foreach ($this->data['familles'] as $fam) {
             $mari   = isset($fam['mari'])   ? $fam['mari']   : null;
             $epouse = isset($fam['epouse']) ? $fam['epouse'] : null;
             if ($mari !== $maleId || $epouse !== $femaleId) {
                 continue;
             }
-            $children = array();
+            $foundFamily = true;
             if (!empty($fam['enfants'])) {
                 foreach ($fam['enfants'] as $childId) {
                     $s = $this->buildSummaryById($childId);
                     if ($s !== null) {
                         $children[] = $s;
+                        $childIds[] = $childId;
                     }
                 }
             }
-            return $children;
+            break; // une seule famille pour ce couple
         }
-        return array();
+
+        // 2. Fallback via liens.parents des individus :
+        //    - si aucune famille trouvée, OU
+        //    - si la famille trouvée n'a pas d'enfants (données incomplètes)
+        if (!$foundFamily || empty($children)) {
+            if ($maleId === null && $femaleId === null) {
+                return $children;
+            }
+            foreach ($this->data['individus'] as $childId => $child) {
+                if (in_array($childId, $childIds, true)) {
+                    continue; // déjà inclus via la famille
+                }
+                $parents     = isset($child['liens']['parents']) ? $child['liens']['parents'] : array();
+                $matchMale   = ($maleId   !== null && in_array($maleId,   $parents, true));
+                $matchFemale = ($femaleId !== null && in_array($femaleId, $parents, true));
+                if ($matchMale || $matchFemale) {
+                    $s = $this->buildSummary($childId, $child);
+                    if ($s !== null) {
+                        $children[] = $s;
+                    }
+                }
+            }
+        }
+
+        return $children;
     }
 
     /**

@@ -76,6 +76,7 @@ function formatDate(dateStr) {
 function formatPlace(lieu) {
   if (!lieu) return null;
   const parts = [];
+  if (lieu.adresse)    parts.push(lieu.adresse);
   if (lieu.ville)      parts.push(lieu.ville);
   if (lieu.dept_nom)   parts.push(lieu.dept_nom);
   else if (lieu.dept_num) parts.push(lieu.dept_num);
@@ -455,7 +456,7 @@ function drawTreeConnectors(treeEl) {
 
 // ── Arbre Sosa ─────────────────────────────────────────────────────────────
 
-function renderSosaTree(treeData, onSelect) {
+function renderSosaTree(treeData, onSelect, currentPersonId) {
   const sosa          = treeData.sosa;
   const couple        = treeData.couple;
   const maleParents   = treeData.male_parents;
@@ -486,7 +487,10 @@ function renderSosaTree(treeData, onSelect) {
 
   // Rang 3 : couple
   const maleBox = renderTreePersonBox(couple.male, onSelect);
-  if (couple.male) maleBox.classList.add('tree-box--selected');
+  if (couple.male) {
+    maleBox.classList.add('tree-box--selected');
+    if (couple.male.id === currentPersonId) maleBox.disabled = true;
+  }
   const maleCell = el('div', 'tree-ugrid-cell');
   maleCell.style.gridColumn = '1 / 3';
   maleCell.style.gridRow    = '3';
@@ -495,7 +499,10 @@ function renderSosaTree(treeData, onSelect) {
   upper.appendChild(maleCell);
 
   const femaleBox = renderTreePersonBox(couple.female, onSelect);
-  if (couple.female) femaleBox.classList.add('tree-box--selected');
+  if (couple.female) {
+    femaleBox.classList.add('tree-box--selected');
+    if (couple.female.id === currentPersonId) femaleBox.disabled = true;
+  }
   const femaleCell = el('div', 'tree-ugrid-cell');
   femaleCell.style.gridColumn = '3 / 5';
   femaleCell.style.gridRow    = '3';
@@ -563,9 +570,16 @@ function renderSosaTree(treeData, onSelect) {
     wrap.appendChild(toggleRow);
 
     btn.addEventListener('click', function() {
+      const wasExpanded = wrap.classList.contains('sosa-tree--anc-expanded');
       wrap.classList.toggle('sosa-tree--anc-expanded');
       requestAnimationFrame(function() {
-        requestAnimationFrame(function() { drawTreeConnectors(wrap); });
+        requestAnimationFrame(function() {
+          drawTreeConnectors(wrap);
+          // Après un repli, scroller vers le haut de la page
+          if (wasExpanded) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
       });
     });
   }
@@ -700,7 +714,7 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect, treeDat
   if (treeData) {
     const row = el('div', 'couple-row--full');
     row.appendChild(txt('div', 'section-bar section-bar--full', 'Arbre généalogique'));
-    const tree = renderSosaTree(treeData, onSelect);
+    const tree = renderSosaTree(treeData, onSelect, person.id);
     tree.classList.add('sosa-tree--card');
     row.appendChild(tree);
     card.appendChild(row);

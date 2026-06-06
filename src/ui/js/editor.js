@@ -65,6 +65,9 @@ const Editor = (function () {
     _container.innerHTML = '';
 
     // Bandeau fixe Enregistrer / Annuler (ajouté au body, hors flux)
+    // Supprimer l'éventuelle barre précédente avant d'en créer une nouvelle
+    // (évite les doublons lors des re-rendus après popup)
+    _removeBar();
     const bar = _buildBar();
     document.body.appendChild(bar);
 
@@ -507,19 +510,34 @@ const Editor = (function () {
         sosa = _sosaSpouse(_person.sosa);
       }
 
-      const newP = { nom, prenom, sexe: selectedSex };
-      if (sosa != null) newP.sosa = sosa;
-      _newPersons[tempId] = newP;
-      _cacheName(tempId, newP);
+      // Fix C : stocker une copie propre dans _newPersons (évite la mutation
+      //         par le rendu qui ajouterait des champs vides lieu:[] etc.)
+      const savedP = { nom, prenom, sexe: selectedSex };
+      if (sosa != null) savedP.sosa = sosa;
+      _newPersons[tempId] = savedP;
+      _cacheName(tempId, savedP);
+
+      // newP est la copie utilisée localement (peut être mutée par le rendu)
+      const newP = Object.assign({}, savedP);
 
       if (role === 'parent') {
         targetArr.push({ id: tempId, nom, prenom, sexe: selectedSex, sosa });
+        // Fix A : supprimer l'éventuelle famille de session pour cet enfant,
+        //         puis toujours recréer une famille même avec un seul parent.
+        for (const ftid in _newFamilies) {
+          const f = _newFamilies[ftid];
+          if (Array.isArray(f.enfants) && f.enfants.indexOf(targetPersonId) !== -1) {
+            delete _newFamilies[ftid];
+            break;
+          }
+        }
         const father = targetArr.find(p => p.sexe === 'M');
         const mother = targetArr.find(p => p.sexe === 'F');
-        if (father && mother) {
-          const ftid = _newTempId();
-          _newFamilies[ftid] = { mari: father.id, epouse: mother.id, enfants: [targetPersonId] };
-        }
+        const ftid = _newTempId();
+        const fam = { enfants: [targetPersonId] };
+        if (father) fam.mari   = father.id;
+        if (mother) fam.epouse = mother.id;
+        _newFamilies[ftid] = fam;
       } else if (role === 'child') {
         targetArr.push(tempId);
       } else if (role === 'spouse') {
@@ -527,6 +545,11 @@ const Editor = (function () {
         _conjointId = tempId;
         const ftid  = _newTempId();
         const isM   = (_person.sexe === 'M');
+        // Fix B : si une famille sans conjoint existe déjà (famille "parent seul"),
+        //         la supprimer pour éviter les doublons et récupérer ses enfants.
+        if (_familleId && !_newFamilies[_familleId]) {
+          _deleteFamilies.push(_familleId);
+        }
         _newFamilies[ftid] = {
           mari:    isM ? _personId : tempId,
           epouse:  isM ? tempId    : _personId,
