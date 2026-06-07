@@ -315,6 +315,7 @@ mark.hl {
   gap: 6px;
   z-index: 500;
 }
+.ct-zoom-controls[hidden] { display: none; }
 .ct-zoom-btn {
   width: 36px;
   height: 36px;

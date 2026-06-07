@@ -211,6 +211,7 @@ const CircularTree = (function () {
   function _createZoomControls() {
     const div = document.createElement('div');
     div.className = 'ct-zoom-controls'; div.id = 'ct-zoom-controls';
+    div.hidden = true;   // masqué par défaut ; showControls(true) l'active explicitement
     const mk = (lbl, fn, title) => {
       const b = document.createElement('button');
       b.className = 'ct-zoom-btn'; b.textContent = lbl;
