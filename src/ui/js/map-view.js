@@ -51,12 +51,10 @@ const PersonsMap = (function () {
   // ── Extraction des événements géolocalisés d'une personne ─────────────────
 
   /**
-   * Retourne un tableau d'objets { lieu, label, date } pour tous les événements
-   * d'une personne qui ont un lieu renseigné.
-   * @param {Object|null} person  Données complètes de la personne
-   * @param {Object|null} mariage Événement mariage de l'union (optionnel)
+   * Retourne les événements individuels d'une personne qui ont un lieu.
+   * Le mariage est exclu ici ; il est géré séparément comme événement commun.
    */
-  function _eventsForPerson(person, mariage) {
+  function _eventsForPerson(person) {
     const evs = [];
     function add(ev, label) {
       if (ev && ev.lieu) evs.push({ lieu: ev.lieu, label, date: ev.date || null });
@@ -64,7 +62,6 @@ const PersonsMap = (function () {
     if (!person) return evs;
     add(person.naissance, 'Naissance');
     add(person.bapteme,   'Baptême');
-    add(mariage,          'Mariage');
     add(person.deces,     'Décès');
     add(person.sepulture, 'Sépulture');
     (person.residences || []).forEach(r => add(r, 'Résidence'));
@@ -76,7 +73,7 @@ const PersonsMap = (function () {
     return [p.prenom, p.nom].filter(Boolean).join(' ');
   }
 
-  // ── Ajout d'un marqueur circulaire avec tooltip ───────────────────────────
+  // ── Marqueurs ─────────────────────────────────────────────────────────────
 
   // Couleurs lues depuis les variables CSS (même palette que les bordures de l'arbre)
   function _fillColors() {
@@ -88,45 +85,84 @@ const PersonsMap = (function () {
     };
   }
 
+  /** Petit cercle splitté inline pour les événements de couple dans le tooltip. */
+  function _splitDotHtml(cL, cR) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="map-tt__split-dot">'
+      + '<circle cx="8" cy="8" r="7" fill="white" stroke="rgba(0,0,0,0.20)" stroke-width="0.5"/>'
+      + '<path d="M8,3 A5,5 0 0,0 8,13 L8,8 Z" fill="' + cL + '"/>'
+      + '<path d="M8,3 A5,5 0 0,1 8,13 L8,8 Z" fill="' + cR + '"/>'
+      + '<circle cx="8" cy="8" r="5" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1"/>'
+      + '</svg>';
+  }
+
   function _addMarker(map, group, coords, fillColor) {
-    const color = fillColor[group.sexe] || fillColor.U;
+    const place = formatPlace(group.lieu) || group.lieu.brut || '';
+    const cL    = fillColor.M || fillColor.U;
+    const cR    = fillColor.F || fillColor.U;
 
-    // ── Halo blanc (couche de fond, non interactive) ───────────────────────
-    // Crée un anneau blanc visible entre la couleur et le fond de carte.
-    L.circleMarker(coords, {
-      radius:      13,
-      fillColor:   '#fff',
-      fillOpacity: 1,
-      color:       'rgba(0,0,0,0.30)',
-      weight:      1,
-      interactive: false,
-    }).addTo(map);
+    // ── Tooltip ───────────────────────────────────────────────────────────────
+    let html = '<div class="map-tt">';
+    if (place) html += '<div class="map-tt__place">' + place + '</div>';
 
-    // ── Marqueur coloré principal ──────────────────────────────────────────
-    const circle = L.circleMarker(coords, {
-      radius:      9,
-      fillColor:   color,
-      fillOpacity: 1,
-      color:       'rgba(0,0,0,0.55)',   // contour sombre
-      weight:      1.5,
-      opacity:     1,
-    }).addTo(map);
-
-    const place    = formatPlace(group.lieu) || group.lieu.brut || '';
-    const evLines  = group.events.map(ev => {
-      const d = formatDate(ev.date);
-      return '<span class="map-tt-ev-label">' + ev.label + '</span>'
-        + (d ? '<span class="map-tt-ev-date"> – ' + d + '</span>' : '');
+    // Événements individuels (un bloc par personne)
+    group.persons.forEach(pe => {
+      html += '<div class="map-tt__person">'
+        + '<div class="map-tt__person-hd">'
+        + '<span class="map-tt__dot map-tt__dot--' + pe.sexe + '"></span>'
+        + '<span class="map-tt__name">' + (pe.name || '(inconnu)') + '</span>'
+        + '</div><div class="map-tt__events">';
+      pe.events.forEach(ev => {
+        const d = formatDate(ev.date);
+        html += '<div><span class="map-tt-ev-label">' + ev.label + '</span>'
+          + (d ? '<span class="map-tt-ev-date"> – ' + d + '</span>' : '') + '</div>';
+      });
+      html += '</div></div>';
     });
 
-    const html =
-      '<div class="map-tt">'
-      + '<div class="map-tt__name">' + (group.name || '(inconnu)') + '</div>'
-      + (place ? '<div class="map-tt__place">' + place + '</div>' : '')
-      + '<div class="map-tt__events">' + evLines.join('') + '</div>'
-      + '</div>';
+    // Événements communs (mariage) : en dernier, avec l'icône splittée
+    if (group.coupleEvents && group.coupleEvents.length) {
+      group.coupleEvents.forEach(ev => {
+        const d = formatDate(ev.date);
+        html += '<div class="map-tt__couple-ev">'
+          + _splitDotHtml(cL, cR)
+          + '<span class="map-tt-ev-label">' + ev.label + '</span>'
+          + (d ? '<span class="map-tt-ev-date"> – ' + d + '</span>' : '')
+          + '</div>';
+      });
+    }
+    html += '</div>';
 
-    circle.bindTooltip(html, { direction: 'top', sticky: false, className: 'map-leaflet-tooltip' });
+    const tooltipOpts = { direction: 'top', sticky: false, className: 'map-leaflet-tooltip' };
+
+    // ── Type de marqueur ──────────────────────────────────────────────────────
+    // Splitté si : 2 personnes, ou mariage commun (même seul à cet endroit)
+    const isCouple = group.persons.length >= 2
+      || (group.coupleEvents && group.coupleEvents.length > 0);
+
+    if (isCouple) {
+      // Marqueur splitté : moitié gauche = homme, moitié droite = femme
+      const svg =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">'
+        + '<circle cx="15" cy="15" r="14" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1"/>'
+        + '<path d="M15,6 A9,9 0 0,0 15,24 L15,15 Z" fill="' + cL + '"/>'
+        + '<path d="M15,6 A9,9 0 0,1 15,24 L15,15 Z" fill="' + cR + '"/>'
+        + '<circle cx="15" cy="15" r="9" fill="none" stroke="rgba(0,0,0,0.50)" stroke-width="1.5"/>'
+        + '</svg>';
+      const icon = L.divIcon({ html: svg, className: '', iconSize: [30, 30], iconAnchor: [15, 15] });
+      L.marker(coords, { icon }).bindTooltip(html, tooltipOpts).addTo(map);
+
+    } else {
+      // Marqueur simple (une seule personne, aucun mariage commun ici)
+      const color = fillColor[group.persons[0].sexe] || fillColor.U;
+      L.circleMarker(coords, {
+        radius: 13, fillColor: '#fff', fillOpacity: 1,
+        color: 'rgba(0,0,0,0.25)', weight: 1, interactive: false,
+      }).addTo(map);
+      L.circleMarker(coords, {
+        radius: 9, fillColor: color, fillOpacity: 1,
+        color: 'rgba(0,0,0,0.50)', weight: 1.5,
+      }).bindTooltip(html, tooltipOpts).addTo(map);
+    }
   }
 
   // ── Point d'entrée principal ──────────────────────────────────────────────
@@ -155,26 +191,35 @@ const PersonsMap = (function () {
       else                              { maleP = conjoint; femaleP = person;   }
     }
 
-    const maleEvs   = _eventsForPerson(maleP,   mariage);
-    const femaleEvs = _eventsForPerson(femaleP, mariage);
+    // Événements individuels (mariage exclu)
+    const maleEvs   = _eventsForPerson(maleP);
+    const femaleEvs = _eventsForPerson(femaleP);
 
-    // ── Grouper les événements par lieu (clé = lieu formaté + sexe) ──────────
+    // ── Grouper par lieu ──────────────────────────────────────────────────────
     const markerMap = {};
 
     function _addToGroup(evs, sexe, p) {
       evs.forEach(ev => {
         const k = (formatPlace(ev.lieu) || ev.lieu.brut || '').trim();
         if (!k) return;
-        const mk = k + '|' + sexe;
-        if (!markerMap[mk]) {
-          markerMap[mk] = { lieu: ev.lieu, sexe, key: k, name: _personName(p), events: [] };
-        }
-        markerMap[mk].events.push(ev);
+        if (!markerMap[k]) markerMap[k] = { lieu: ev.lieu, key: k, persons: [], coupleEvents: [] };
+        let pe = markerMap[k].persons.find(x => x.sexe === sexe);
+        if (!pe) { pe = { sexe, name: _personName(p), events: [] }; markerMap[k].persons.push(pe); }
+        pe.events.push(ev);
       });
     }
 
     _addToGroup(maleEvs,   'M', maleP);
     _addToGroup(femaleEvs, 'F', femaleP);
+
+    // Mariage : événement commun, affiché une seule fois dans le groupe de son lieu
+    if (mariage && mariage.lieu) {
+      const k = (formatPlace(mariage.lieu) || mariage.lieu.brut || '').trim();
+      if (k) {
+        if (!markerMap[k]) markerMap[k] = { lieu: mariage.lieu, key: k, persons: [], coupleEvents: [] };
+        markerMap[k].coupleEvents.push({ label: 'Mariage', date: mariage.date || null });
+      }
+    }
 
     const groups = Object.values(markerMap);
 

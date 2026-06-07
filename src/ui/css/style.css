@@ -1972,20 +1972,6 @@ mark.hl {
   border-top-color: var(--border);
 }
 
-.map-tt__name {
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-
-.map-tt__place {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 5px;
-  font-style: italic;
-}
-
 .map-tt__events {
   display: flex;
   flex-direction: column;
@@ -2001,4 +1987,63 @@ mark.hl {
 .map-tt-ev-date {
   color: var(--muted);
 }
+
+.map-tt__place {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+/* Ligne d'événement commun (mariage) avec l'icône splittée – affiché en dernier */
+.map-tt__couple-ev {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 0 2px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+/* SVG splitté inline dans le tooltip */
+.map-tt__split-dot {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.map-tt__person {
+  padding-top: 5px;
+}
+
+.map-tt__person + .map-tt__person {
+  margin-top: 5px;
+  border-top: 1px solid var(--border);
+  padding-top: 5px;
+}
+
+.map-tt__person-hd {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 3px;
+}
+
+/* Petit dot coloré devant le nom (même couleur que les CSS variables) */
+.map-tt__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.25);
+}
+.map-tt__dot--M { background: var(--sex-M); }
+.map-tt__dot--F { background: var(--sex-F); }
+.map-tt__dot--U { background: #c4b5fd; }
+
+.map-tt__name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+}
+
 
