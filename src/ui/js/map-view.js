@@ -78,11 +78,18 @@ const PersonsMap = (function () {
 
   // ── Ajout d'un marqueur circulaire avec tooltip ───────────────────────────
 
-  // Couleurs vives (plus lisibles sur fond de carte que les pastels CSS)
-  const FILL_COLOR = { M: '#1a7abf', F: '#bf2d87', U: '#7c3aed' };
+  // Couleurs lues depuis les variables CSS (même palette que les bordures de l'arbre)
+  function _fillColors() {
+    const s = getComputedStyle(document.documentElement);
+    return {
+      M: s.getPropertyValue('--sex-M').trim() || '#ADE6F4',
+      F: s.getPropertyValue('--sex-F').trim() || '#FFC1F6',
+      U: s.getPropertyValue('--sex-U').trim() || '#c4b5fd',
+    };
+  }
 
-  function _addMarker(map, group, coords) {
-    const color = FILL_COLOR[group.sexe] || FILL_COLOR.U;
+  function _addMarker(map, group, coords, fillColor) {
+    const color = fillColor[group.sexe] || fillColor.U;
 
     // ── Halo blanc (couche de fond, non interactive) ───────────────────────
     // Crée un anneau blanc visible entre la couleur et le fond de carte.
@@ -212,7 +219,8 @@ const PersonsMap = (function () {
     map.invalidateSize();
 
     // ── Ajout des marqueurs ───────────────────────────────────────────────────
-    resolved.forEach(({ g, c }) => _addMarker(map, g, c));
+    const fillColor = _fillColors();
+    resolved.forEach(({ g, c }) => _addMarker(map, g, c, fillColor));
 
     // ── Cadrage automatique ───────────────────────────────────────────────────
     // On ne zoome jamais plus près que le niveau 10 (contexte ville/région).

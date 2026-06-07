@@ -1846,25 +1846,27 @@ mark.hl {
 
 /* ── Layout page personne avec carte latérale ────────────────────────────── */
 
-/*
- * Conteneur plein écran : sort du max-width de .main-content.
- * Utilisé seulement quand la fiche a des lieux référencés.
- * La carte est dans le flow normal, au même niveau que la fiche.
- */
 .person-page-layout {
   width: 100vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  align-items: stretch; /* carte = même hauteur que la fiche */
+  align-items: stretch;   /* carte = même hauteur que la fiche */
+  margin-bottom: 32px;    /* espace sous le bloc fiche+carte */
 }
 
 /* Colonne gauche : fiche (≈ 2/3) */
 .person-page-main {
   flex: 2;
   min-width: 0;
-  padding: 0 24px 48px;
+  padding: 0 24px;        /* pas de padding-bottom : la hauteur = exactement la fiche */
+}
+
+/* On annule le margin-bottom du couple-card dans ce contexte
+   (il créerait de l'espace vide sous la fiche → la carte dépasserait) */
+.person-page-main > .couple-card {
+  margin-bottom: 0;
 }
 
 /* Colonne droite : carte (≈ 1/3) – dans le flow, pas sticky */
@@ -1885,7 +1887,6 @@ mark.hl {
 }
 
 @media (max-width: 860px) {
-  /* Sur petit écran : colonnes empilées */
   .person-page-layout {
     flex-direction: column;
   }
