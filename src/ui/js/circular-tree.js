@@ -10,10 +10,11 @@ const CircularTree = (function () {
 
   // ── Paramètres ────────────────────────────────────────────────────────────
 
-  const LAYERS    = 13;
+  const LAYERS    = 22;   // couche maximale (sosa jusqu'à ~4 millions)
   const ZOOM_STEP = 0.75;
   const ZOOM_MIN  = 0.4;
   const ZOOM_MAX  = 8.0;
+  const MIN_LABEL_ARC = 5; // largeur minimale (px) d'un segment pour afficher son numéro
 
   // ── État ─────────────────────────────────────────────────────────────────
 
@@ -230,8 +231,8 @@ const CircularTree = (function () {
     _baseSize = Math.max(300, avail);
     _size     = Math.max(300, Math.round(_baseSize * _zoomLevel));
     _mid      = _size / 2;
-    _rad      = Math.floor(_size / (2 * (LAYERS + 1)));
-    _outer    = LAYERS * _rad;
+    _rad      = Math.floor(_size / (2 * (LAYERS + 2)));
+    _outer    = (LAYERS + 1) * _rad;   // bord extérieur du dernier anneau
 
     if (_container) {
       _container.style.width  = _size + 'px';
@@ -247,19 +248,22 @@ const CircularTree = (function () {
 
   function _drawNodes() {
     _ctx.clearRect(0, 0, _size, _size);
+    // Cujus (centre)
     if (_map[1]) {
       _ctx.globalAlpha = 1; _ctx.fillStyle = '#f4a261';
       _ctx.strokeStyle = '#aaa'; _ctx.lineWidth = 0.5;
       _ctx.beginPath(); _ctx.arc(_mid, _mid, _rad, 0, 2 * Math.PI);
       _ctx.fill(); _ctx.stroke();
     }
-    for (let layer = 1; layer <= LAYERS; layer++) {
-      const n = Math.pow(2, layer);
-      for (let i = 0; i < n; i++) {
-        const id = n + i;
-        if (_map[id]) _drawSegment(_ctx, layer, i, 'wheat', id % 2 === 1 ? 0.55 : 1.0);
-      }
-    }
+    // Ancêtres : on itère uniquement les entrées existantes dans _map
+    Object.keys(_map).forEach(sosaStr => {
+      const id = +sosaStr;
+      if (id < 2) return;
+      const layer = Math.floor(Math.log2(id));
+      if (layer < 1 || layer > LAYERS) return;
+      const i = id - (1 << layer);
+      _drawSegment(_ctx, layer, i, 'wheat', id % 2 === 1 ? 0.55 : 1.0);
+    });
   }
 
   function _drawSegment(ctx, layer, idx, color, alpha) {
@@ -319,21 +323,25 @@ const CircularTree = (function () {
       _ctx.restore();
     });
 
-    // Layers 3 → LAYERS−1 : numéros sosa (police fixée une fois hors boucle)
+    // Layers 3 → LAYERS : numéros sosa, uniquement si le segment est assez large
+    // On itère _map directement (évite des millions d'itérations à vide)
     _ctx.font = '8px Arial';
-    for (let layer = 3; layer < LAYERS; layer++) {
-      const n = Math.pow(2, layer);
-      for (let i = 0; i < n; i++) {
-        const id = n + i;
-        if (_map[id]) {
-          const angle = (2 * i + 1) * Math.PI / n;
-          const r     = (layer + 0.5) * _rad;
-          _ctx.fillText(String(id),
-            _mid + r * Math.cos(angle),
-            _mid - r * Math.sin(angle));
-        }
-      }
-    }
+    Object.keys(_map).forEach(sosaStr => {
+      const id = +sosaStr;
+      if (id < 8) return;  // layers 0-2 déjà traités ci-dessus
+      const layer = Math.floor(Math.log2(id));
+      if (layer < 3 || layer > LAYERS) return;
+      const n = 1 << layer;
+      const i = id - n;
+      // N'afficher le numéro que si le segment est suffisamment large
+      const arcWidth = 2 * Math.PI * (layer + 0.5) * _rad / n;
+      if (arcWidth < MIN_LABEL_ARC) return;
+      const angle = (2 * i + 1) * Math.PI / n;
+      const r     = (layer + 0.5) * _rad;
+      _ctx.fillText(String(id),
+        _mid + r * Math.cos(angle),
+        _mid - r * Math.sin(angle));
+    });
 
     _ctx.restore();
   }
@@ -359,7 +367,7 @@ const CircularTree = (function () {
     const r    = Math.sqrt((x - _mid) ** 2 + (y - _mid) ** 2);
 
     if (r <= _rad)  return _map[1] ? { id: 1, layer: 0, idx: 0 } : null;
-    if (r > _outer) return null;
+    if (r >= _outer) return null;
 
     const layer = Math.floor(r / _rad);
     if (layer < 1 || layer > LAYERS) return null;
@@ -428,7 +436,7 @@ const CircularTree = (function () {
   }
 
   function _getAncestors(id) {
-    const MAX = Math.pow(2, LAYERS + 1) - 1;
+    const MAX = (2 << LAYERS) - 1;   // 2^(LAYERS+1) - 1
     const res = [], q = [id], seen = new Set();
     while (q.length) {
       const c = q.shift();
