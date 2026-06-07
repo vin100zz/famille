@@ -158,10 +158,15 @@ async function selectPerson(id) {
   await loadPerson(id);
 }
 
-let _loadSeq = 0;  // séquence de chargement pour annuler les requêtes périmées
+let _loadSeq  = 0;  // séquence de chargement pour annuler les requêtes périmées
+let _activeMap = null; // instance Leaflet en cours (détruite à chaque nouvelle fiche)
 
 async function loadPerson(id) {
   const seq = ++_loadSeq;
+
+  // Détruire la carte précédente avant de vider le DOM
+  if (_activeMap) { _activeMap.remove(); _activeMap = null; }
+
   welcomeEl.hidden = true;
   mainEl.hidden    = false;
   _showHomeBtn(true);
@@ -241,7 +246,10 @@ async function renderPersonPage(data, seq) {
   const primary    = unions.length ? unions[primaryIdx] : null;
   const others     = unions.filter((_, i) => i !== primaryIdx);
 
-  // Bouton Mode Édition (l'arbre circulaire est affiché à l'accueil, pas ici)
+  const conjoint = primary ? primary.conjoint : null;
+  const mariage  = primary ? primary.mariage  : null;
+
+  // Bouton Mode Édition (position fixe, indépendant du layout)
   const editBar = el('div', 'view-edit-bar');
   const editBtn = el('button', 'view-edit-btn');
   editBtn.type = 'button';
@@ -261,14 +269,53 @@ async function renderPersonPage(data, seq) {
   editBar.appendChild(editBtn);
   personView.appendChild(editBar);
 
-  personView.appendChild(renderCoupleCard(data.person, data.parents, primary, others, onSelect, null));
-
-  // Documents riches : rendu pleine largeur, en dehors de la carte
-  const docs = primary ? (primary.documents || []) : [];
+  const treeData    = buildLocalTree(data, primary);
+  const coupleCard  = renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData);
+  const docs        = primary ? (primary.documents || []) : [];
   const docsSection = renderDocuments(docs);
+
+  const hasMap = PersonsMap.hasLocations(data.person, conjoint, mariage);
+
+  if (!hasMap) {
+    // ── Layout centré standard (aucun lieu référencé) ─────────────────────
+    personView.appendChild(coupleCard);
+    if (docsSection) {
+      docsSection.classList.add('doc-section--fullwidth');
+      personView.appendChild(docsSection);
+    }
+    return;
+  }
+
+  // ── Layout pleine largeur : fiche (2/3) + carte dans le flow (1/3) ───────
+  // La carte est au même niveau que la fiche ; les documents passent dessous.
+
+  const layout = el('div', 'person-page-layout');
+
+  // Colonne gauche : fiche uniquement
+  const leftCol = el('div', 'person-page-main');
+  leftCol.appendChild(coupleCard);
+  layout.appendChild(leftCol);
+
+  // Colonne droite : carte
+  const rightCol = el('div', 'person-page-map-col');
+  const mapEl    = el('div', 'persons-map persons-map--side');
+  rightCol.appendChild(mapEl);
+  layout.appendChild(rightCol);
+
+  personView.appendChild(layout);
+
+  // Documents sous les deux colonnes, pleine largeur
   if (docsSection) {
     docsSection.classList.add('doc-section--fullwidth');
     personView.appendChild(docsSection);
+  }
+
+  const mapInst = await PersonsMap.render(mapEl, data.person, conjoint, mariage);
+
+  if (seq !== _loadSeq) {
+    if (mapInst) mapInst.remove();
+  } else {
+    _activeMap = mapInst;
   }
 }
 
@@ -278,6 +325,7 @@ window.addEventListener('popstate', e => {
   if (e.state && e.state.id) {
     loadPerson(e.state.id);
   } else {
+    if (_activeMap) { _activeMap.remove(); _activeMap = null; }
     personView.innerHTML = '';
     welcomeEl.hidden = false;
     mainEl.hidden    = true;
@@ -288,6 +336,7 @@ window.addEventListener('popstate', e => {
 });
 
 function goHome() {
+  if (_activeMap) { _activeMap.remove(); _activeMap = null; }
   history.pushState(null, '', location.pathname);
   personView.innerHTML = '';
   welcomeEl.hidden = false;

@@ -993,8 +993,8 @@ mark.hl {
 
 .view-edit-bar {
   position: fixed;
-  top: 64px;   /* sous le header sticky */
-  right: 24px;
+  top: 80px;   /* sous le header sticky */
+  right: 20px;
   z-index: 150;
   display: flex;
   justify-content: flex-end;
@@ -1032,8 +1032,8 @@ mark.hl {
 
 .ed-bar {
   position: fixed;
-  top: 64px;
-  right: 24px;
+  top: 80px;
+  right: 20px;
   z-index: 150;
   display: flex;
   align-items: center;
@@ -1841,5 +1841,163 @@ mark.hl {
   outline: 2px dashed #f59e0b;
   outline-offset: -2px;
   background: #fffbeb;
+}
+
+
+/* ── Layout page personne avec carte latérale ────────────────────────────── */
+
+/*
+ * Conteneur plein écran : sort du max-width de .main-content.
+ * Utilisé seulement quand la fiche a des lieux référencés.
+ * La carte est dans le flow normal, au même niveau que la fiche.
+ */
+.person-page-layout {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: stretch; /* carte = même hauteur que la fiche */
+}
+
+/* Colonne gauche : fiche (≈ 2/3) */
+.person-page-main {
+  flex: 2;
+  min-width: 0;
+  padding: 0 24px 48px;
+}
+
+/* Colonne droite : carte (≈ 1/3) – dans le flow, pas sticky */
+.person-page-map-col {
+  flex: 1;
+  min-width: 280px;
+  border-left: 1px solid var(--border);
+  background: #e8f0f7;
+  overflow: hidden;
+}
+
+/* La carte remplit toute la hauteur de la colonne droite */
+.persons-map--side {
+  height: 100% !important;
+  min-height: 340px;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 860px) {
+  /* Sur petit écran : colonnes empilées */
+  .person-page-layout {
+    flex-direction: column;
+  }
+  .person-page-main {
+    width: 100%;
+  }
+  .person-page-map-col {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+  .persons-map--side {
+    height: 300px !important;
+  }
+}
+
+/* ── Carte des lieux de la fiche ─────────────────────────────────────────── */
+
+.persons-map-section {
+  margin-top: 8px;
+}
+
+.persons-map {
+  height: 380px;
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-top: none;
+  background: #e8f0f7;
+  position: relative;
+}
+
+.persons-map--no-data {
+  height: auto;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-style: italic;
+  padding: 16px;
+}
+
+/* ── Spinner pendant le géocodage ────────────────────────────────────────── */
+
+.map-spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  background: #e8f0f7;
+  z-index: 1;
+}
+
+.map-spinner__icon {
+  font-size: 22px;
+  animation: map-spin-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes map-spin-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.85); }
+}
+
+/* ── Tooltip personnalisé Leaflet ────────────────────────────────────────── */
+
+.map-leaflet-tooltip.leaflet-tooltip {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.15);
+  padding: 7px 10px;
+  max-width: 240px;
+  pointer-events: none;
+}
+
+.map-leaflet-tooltip.leaflet-tooltip::before {
+  border-top-color: var(--border);
+}
+
+.map-tt__name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.map-tt__place {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+.map-tt__events {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.map-tt-ev-label {
+  font-weight: 500;
+}
+
+.map-tt-ev-date {
+  color: var(--muted);
 }
 
