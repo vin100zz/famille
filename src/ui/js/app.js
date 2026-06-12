@@ -9,6 +9,15 @@ const welcomeEl    = document.getElementById('welcome');
 const mainEl       = document.getElementById('main-content');
 const homeBtnEl    = document.getElementById('home-btn');
 
+// Calcule et met à jour --hdr-h (hauteur réelle du header sticky)
+function _updateHdrH() {
+  const hdr  = document.querySelector('.site-header');
+  const hdrH = hdr ? hdr.offsetHeight : 60;
+  document.documentElement.style.setProperty('--hdr-h', hdrH + 'px');
+}
+_updateHdrH();
+window.addEventListener('resize', _updateHdrH);
+
 function _showHomeBtn(visible) {
   if (homeBtnEl) homeBtnEl.hidden = !visible;
 }

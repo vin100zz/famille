@@ -278,8 +278,42 @@ def clean_id(xref: str) -> str:
     return xref.strip("@") if xref else xref
 
 
+_STREET_RE = re.compile(
+    r"^("
+    r"rue\b|"
+    r"boulevard\b|"
+    r"bd\b|"
+    r"avenue\b|"
+    r"av\.?\s|"
+    r"chemin\b|"
+    r"grand\s+chemin\b|"
+    r"impasse\b|"
+    r"all[eé]es?\b|"
+    r"route\b|"
+    r"passage\b|"
+    r"quai\b|"
+    r"cour\b|"
+    r"traverse\b|"
+    r"mont[eé]e\b|"
+    r"ruelle\b|"
+    r"square\b|"
+    r"place\b|"
+    r"porte\b|"
+    r"\d+\s+(rue|bd|boulevard|avenue|av|chemin|impasse|all[eé]e|route|passage|quai)\b"
+    r")",
+    re.IGNORECASE,
+)
+
+
 def parse_place(plac_value: str) -> dict | None:
-    """Analyse un lieu GEDCOM en dict structuré."""
+    """Analyse un lieu GEDCOM en dict structuré.
+
+    Format Geneatique : "ville, dept_num, dept_nom, région, pays, complément"
+    Cas particulier : quand "ville" contient une adresse de rue (ex : "Rue Ste
+    Françoise"), le numéro de rue se retrouve dans dept_num et la vraie ville
+    est dans complément.  On corrige automatiquement en déplaçant la rue vers
+    "adresse" et le complément vers "ville".
+    """
     if not plac_value:
         return None
     # Format typique : "ville, dept_num, dept_nom, région, pays, complément"
@@ -290,19 +324,54 @@ def parse_place(plac_value: str) -> dict | None:
     if not parts:
         return None
 
+    ville     = parts[0] if len(parts) >= 1 else ""
+    dept_num  = parts[1] if len(parts) >= 2 else ""
+    dept_nom  = parts[2] if len(parts) >= 3 else ""
+    region    = parts[3] if len(parts) >= 4 else ""
+    pays      = parts[4] if len(parts) >= 5 else ""
+    complement = parts[5] if len(parts) >= 6 else ""
+
     result: dict = {"brut": plac_value}
-    if len(parts) >= 1 and parts[0]:
-        result["ville"] = parts[0]
-    if len(parts) >= 2 and parts[1]:
-        result["dept_num"] = parts[1]
-    if len(parts) >= 3 and parts[2]:
-        result["dept_nom"] = parts[2]
-    if len(parts) >= 4 and parts[3]:
-        result["region"] = parts[3]
-    if len(parts) >= 5 and parts[4]:
-        result["pays"] = parts[4]
-    if len(parts) >= 6 and parts[5]:
-        result["complement"] = parts[5]
+
+    if ville and _STREET_RE.match(ville):
+        # -----------------------------------------------------------------
+        # Adresse de rue dans le champ "ville"
+        # -----------------------------------------------------------------
+        if complement:
+            # La vraie ville est dans le complément ; dept_num était le
+            # numéro de rue (éventuellement coïncidant avec un n° de dépt).
+            adresse = f"{ville}, {dept_num}" if dept_num else ville
+            result["adresse"] = adresse
+            result["ville"] = complement
+            # dept_num / dept_nom supprimés (ils étaient erronés)
+        else:
+            # Pas de ville connue ; on conserve l'info dépt si dept_nom
+            # est renseigné (info valide), sinon dept_num était le n° de rue.
+            result["adresse"] = f"{ville}, {dept_num}" if (dept_num and not dept_nom) else ville
+            if dept_num and dept_nom:
+                result["dept_num"] = dept_num
+                result["dept_nom"] = dept_nom
+        if region:
+            result["region"] = region
+        if pays:
+            result["pays"] = pays
+    else:
+        # -----------------------------------------------------------------
+        # Lieu standard (ville en premier)
+        # -----------------------------------------------------------------
+        if ville:
+            result["ville"] = ville
+        if dept_num:
+            result["dept_num"] = dept_num
+        if dept_nom:
+            result["dept_nom"] = dept_nom
+        if region:
+            result["region"] = region
+        if pays:
+            result["pays"] = pays
+        if complement:
+            result["complement"] = complement
+
     return result
 
 

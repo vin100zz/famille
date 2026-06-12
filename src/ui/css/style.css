@@ -1852,8 +1852,8 @@ mark.hl {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  align-items: stretch;   /* carte = même hauteur que la fiche */
-  margin-bottom: 32px;    /* espace sous le bloc fiche+carte */
+  align-items: flex-start;  /* permet à la colonne carte d'être sticky */
+  margin-bottom: 32px;      /* espace sous le bloc fiche+carte */
 }
 
 /* Colonne gauche : fiche (≈ 2/3) */
@@ -1869,19 +1869,24 @@ mark.hl {
   margin-bottom: 0;
 }
 
-/* Colonne droite : carte (≈ 1/3) – dans le flow, pas sticky */
+/* Colonne droite : carte (≈ 1/3) – sticky pour rester visible sans scroller */
 .person-page-map-col {
   flex: 1;
   min-width: 280px;
   border-left: 1px solid var(--border);
   background: #e8f0f7;
   overflow: hidden;
+  /* Colle juste sous le header et reste visible sur tout le viewport */
+  position: sticky;
+  top: var(--hdr-h, 60px);
+  align-self: flex-start;
+  height: calc(100vh - var(--hdr-h, 60px));
 }
 
 /* La carte remplit toute la hauteur de la colonne droite */
 .persons-map--side {
   height: 100% !important;
-  min-height: 340px;
+  min-height: 0;
   border: none !important;
   border-radius: 0 !important;
 }
@@ -1897,6 +1902,10 @@ mark.hl {
     width: 100%;
     border-left: none;
     border-top: 1px solid var(--border);
+    /* En mobile : plus sticky, hauteur fixe */
+    position: static;
+    height: 300px;
+    align-self: auto;
   }
   .persons-map--side {
     height: 300px !important;
