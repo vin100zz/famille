@@ -900,7 +900,7 @@ const Editor = (function () {
 
   function _clone(obj) { return obj == null ? obj : JSON.parse(JSON.stringify(obj)); }
 
-  return { open };
+  return { open, close: _removeBar };
 })();
 
 

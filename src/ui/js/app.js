@@ -173,8 +173,9 @@ let _activeMap = null; // instance Leaflet en cours (détruite à chaque nouvell
 async function loadPerson(id) {
   const seq = ++_loadSeq;
 
-  // Détruire la carte précédente avant de vider le DOM
+  // Détruire la carte précédente et fermer l'éditeur avant de vider le DOM
   if (_activeMap) { _activeMap.remove(); _activeMap = null; }
+  Editor.close();
 
   welcomeEl.hidden = true;
   mainEl.hidden    = false;
@@ -335,6 +336,7 @@ window.addEventListener('popstate', e => {
     loadPerson(e.state.id);
   } else {
     if (_activeMap) { _activeMap.remove(); _activeMap = null; }
+    Editor.close();
     personView.innerHTML = '';
     welcomeEl.hidden = false;
     mainEl.hidden    = true;
@@ -346,6 +348,7 @@ window.addEventListener('popstate', e => {
 
 function goHome() {
   if (_activeMap) { _activeMap.remove(); _activeMap = null; }
+  Editor.close();
   history.pushState(null, '', location.pathname);
   personView.innerHTML = '';
   welcomeEl.hidden = false;
