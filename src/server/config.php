@@ -13,7 +13,10 @@
 define('DATA_SOURCE', 'json');
 
 // Chemin vers le fichier JSON (résolu depuis la racine du projet)
-define('JSON_DATA_PATH', realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . 'carle.json');
+define('JSON_DATA_PATH',  realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . 'carle.json');
+
+// Cache de géocodage Nominatim (partagé entre tous les clients)
+define('GEOCACHE_PATH',   realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . 'geocache.json');
 
 // Chemin SQLite (usage futur)
 // define('SQLITE_PATH', realpath(__DIR__ . '/../../data') . DIRECTORY_SEPARATOR . 'genealogy.db');

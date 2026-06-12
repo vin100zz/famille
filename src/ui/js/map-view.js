@@ -16,10 +16,40 @@ const PersonsMap = (function () {
 
   // ── Cache & constantes ────────────────────────────────────────────────────
 
-  const _cache = {};
-  let _lastReqTime = 0;
-  const RATE_MS        = 210;  // délai min entre 2 requêtes Nominatim
+  // Cache en mémoire, pré-chargé depuis le serveur (geocache.json).
+  // Les nouvelles entrées sont envoyées au serveur en une seule requête POST
+  // après chaque session de géocodage.
+  const _cache      = {};
+  const _CACHE_URL  = 'src/server/Api/geocache.php';
+  let   _cacheReady = false;   // chargement effectué (évite les doublons)
+  let   _newEntries = {};      // entrées à persister en fin de session
+
+  const MAX_CONCURRENT = 4;    // requêtes Photon simultanées
   const CLUSTER_RADIUS = 44;   // pixels : rayon de regroupement
+
+  /** Charge le cache depuis le serveur (une seule fois par session). */
+  async function _ensureCacheLoaded() {
+    if (_cacheReady) return;
+    _cacheReady = true; // positionné avant await pour éviter un double appel concurrent
+    try {
+      const resp = await fetch(_CACHE_URL);
+      if (resp.ok) Object.assign(_cache, await resp.json());
+    } catch { /* réseau indisponible : on continue sans cache pré-chargé */ }
+  }
+
+  /** Envoie les nouvelles entrées au serveur pour persistance. */
+  async function _flushCache() {
+    if (!Object.keys(_newEntries).length) return;
+    const toSave  = _newEntries;
+    _newEntries   = {};
+    try {
+      await fetch(_CACHE_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(toSave),
+      });
+    } catch { /* échec silencieux : les données seront re-géocodées au prochain chargement */ }
+  }
 
   // ── Géocodage Nominatim ───────────────────────────────────────────────────
 
@@ -50,25 +80,65 @@ const PersonsMap = (function () {
 
   function _sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-  /** Géocode une requête texte (cache + rate-limit intégré). */
+  /** Géocode une requête texte via Photon (cache serveur + gestion 429). */
   async function _fetchCoords(q) {
     if (!q) return null;
     if (Object.prototype.hasOwnProperty.call(_cache, q)) return _cache[q];
-    const wait = RATE_MS - (Date.now() - _lastReqTime);
-    if (wait > 0) await _sleep(wait);
-    _lastReqTime = Date.now();
+
+    // Photon (komoot) – retourne du GeoJSON, coordonnées [lon, lat]
+    const url = 'https://photon.komoot.io/api/?' +
+      new URLSearchParams({ q, limit: '1', lang: 'fr' });
+
+    async function _parse(resp) {
+      if (!resp.ok) return null;
+      const data = await resp.json();
+      const feat = data.features && data.features[0];
+      if (!feat) return null;
+      const [lon, lat] = feat.geometry.coordinates; // GeoJSON : lon en premier
+      return [lat, lon]; // Leaflet attend [lat, lon]
+    }
+
+    function _store(res) {
+      if (res) { _cache[q] = res; _newEntries[q] = res; }
+    }
+
     try {
-      const url = 'https://nominatim.openstreetmap.org/search?' +
-        new URLSearchParams({ q, format: 'json', limit: '1', 'accept-language': 'fr' });
-      const resp = await fetch(url, { headers: { 'User-Agent': 'FamilleGeneralogie/1.0' } });
-      const arr  = await resp.json();
-      const res  = arr.length ? [parseFloat(arr[0].lat), parseFloat(arr[0].lon)] : null;
-      _cache[q] = res;
-      return res;
+      const resp = await fetch(url);
+
+      if (resp.status === 429) {
+        await _sleep(5000);
+        const res2 = await _parse(await fetch(url));
+        _store(res2); return res2;
+      }
+
+      const res = await _parse(resp);
+      _store(res); return res;
     } catch (e) {
-      _cache[q] = null;
       return null;
     }
+  }
+
+  /**
+   * Géocode tous les groupes en parallèle (pool de MAX_CONCURRENT workers).
+   * Les entrées déjà en cache sont servies immédiatement sans requête réseau.
+   */
+  async function _geocodeAll(groups) {
+    const resolved = [];   // résultats dans l'ordre d'arrivée
+    let next = 0;          // index partagé entre les workers
+
+    async function worker() {
+      while (next < groups.length) {
+        const i = next++;           // chaque worker prend le prochain groupe
+        const g = groups[i];
+        const c = await _geocode(g.lieu);
+        if (c) resolved.push({ g, c });
+      }
+    }
+
+    // Lance MIN(MAX_CONCURRENT, nb groupes) workers en parallèle
+    const n = Math.min(MAX_CONCURRENT, groups.length);
+    await Promise.all(Array.from({ length: n }, worker));
+    return resolved;
   }
 
   /** Essaie rue+ville, replie sur ville seule. */
@@ -311,12 +381,14 @@ const PersonsMap = (function () {
       '<span>Géolocalisation…</span>' +
       '</div>';
 
-    // Géocodage (rate-limit géré dans _fetchCoords)
-    const resolved = [];
-    for (const g of groups) {
-      const c = await _geocode(g.lieu);
-      if (c) resolved.push({ g, c });
-    }
+    // Chargement du cache serveur (une seule fois par session)
+    await _ensureCacheLoaded();
+
+    // Géocodage parallèle (MAX_CONCURRENT workers)
+    const resolved = await _geocodeAll(groups);
+
+    // Persistance des nouvelles entrées sur le serveur
+    _flushCache(); // sans await : ne bloque pas l'affichage
 
     container.innerHTML = '';
 
