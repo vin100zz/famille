@@ -6,14 +6,38 @@
  * Dépend de :
  *   - Leaflet (L) disponible globalement
  *   - formatPlace(), formatDate() de components.js
+ *
+ * Fonctionnalités :
+ *   - Géocodage à deux niveaux : rue+ville d'abord, puis ville seule en fallback
+ *   - Clustering dynamique par distance en pixels (recalculé à chaque zoomend)
+ *     → un cluster par groupe de marqueurs proches ; clic pour zoomer
  */
 const PersonsMap = (function () {
 
-  // ── Géocodage Nominatim (avec cache mémoire) ─────────────────────────────
+  // ── Cache & constantes ────────────────────────────────────────────────────
 
   const _cache = {};
+  let _lastReqTime = 0;
+  const RATE_MS        = 210;  // délai min entre 2 requêtes Nominatim
+  const CLUSTER_RADIUS = 44;   // pixels : rayon de regroupement
 
-  function _buildQuery(lieu) {
+  // ── Géocodage Nominatim ───────────────────────────────────────────────────
+
+  /** Requête précise : rue + ville */
+  function _buildQueryFull(lieu) {
+    if (!lieu) return '';
+    const p = [];
+    if (lieu.adresse)       p.push(lieu.adresse);
+    if (lieu.ville)         p.push(lieu.ville);
+    if (lieu.dept_nom)      p.push(lieu.dept_nom);
+    else if (lieu.dept_num) p.push(lieu.dept_num);
+    if (lieu.pays)          p.push(lieu.pays);
+    else if (p.length)      p.push('France');
+    return p.join(', ');
+  }
+
+  /** Requête repli : ville seule */
+  function _buildQueryCity(lieu) {
     if (!lieu) return '';
     const p = [];
     if (lieu.ville)         p.push(lieu.ville);
@@ -24,36 +48,42 @@ const PersonsMap = (function () {
     return p.length ? p.join(', ') : (lieu.brut || '');
   }
 
-  async function _geocode(lieu) {
-    const q = _buildQuery(lieu);
+  function _sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  /** Géocode une requête texte (cache + rate-limit intégré). */
+  async function _fetchCoords(q) {
     if (!q) return null;
     if (Object.prototype.hasOwnProperty.call(_cache, q)) return _cache[q];
+    const wait = RATE_MS - (Date.now() - _lastReqTime);
+    if (wait > 0) await _sleep(wait);
+    _lastReqTime = Date.now();
     try {
       const url = 'https://nominatim.openstreetmap.org/search?' +
         new URLSearchParams({ q, format: 'json', limit: '1', 'accept-language': 'fr' });
-      const resp = await fetch(url, {
-        headers: { 'User-Agent': 'FamilleGeneralogie/1.0' }
-      });
-      const arr = await resp.json();
-      const result = arr.length ? [parseFloat(arr[0].lat), parseFloat(arr[0].lon)] : null;
-      _cache[q] = result;
-      return result;
+      const resp = await fetch(url, { headers: { 'User-Agent': 'FamilleGeneralogie/1.0' } });
+      const arr  = await resp.json();
+      const res  = arr.length ? [parseFloat(arr[0].lat), parseFloat(arr[0].lon)] : null;
+      _cache[q] = res;
+      return res;
     } catch (e) {
       _cache[q] = null;
       return null;
     }
   }
 
-  function _sleep(ms) {
-    return new Promise(r => setTimeout(r, ms));
+  /** Essaie rue+ville, replie sur ville seule. */
+  async function _geocode(lieu) {
+    const qFull = _buildQueryFull(lieu);
+    const qCity = _buildQueryCity(lieu);
+    if (qFull && qFull !== qCity) {
+      const r = await _fetchCoords(qFull);
+      if (r) return r;
+    }
+    return _fetchCoords(qCity);
   }
 
-  // ── Extraction des événements géolocalisés d'une personne ─────────────────
+  // ── Extraction des événements ─────────────────────────────────────────────
 
-  /**
-   * Retourne les événements individuels d'une personne qui ont un lieu.
-   * Le mariage est exclu ici ; il est géré séparément comme événement commun.
-   */
   function _eventsForPerson(person) {
     const evs = [];
     function add(ev, label) {
@@ -69,13 +99,11 @@ const PersonsMap = (function () {
   }
 
   function _personName(p) {
-    if (!p) return '';
-    return [p.prenom, p.nom].filter(Boolean).join(' ');
+    return p ? [p.prenom, p.nom].filter(Boolean).join(' ') : '';
   }
 
-  // ── Marqueurs ─────────────────────────────────────────────────────────────
+  // ── Marqueurs individuels ─────────────────────────────────────────────────
 
-  // Couleurs lues depuis les variables CSS (même palette que les bordures de l'arbre)
   function _fillColors() {
     const s = getComputedStyle(document.documentElement);
     return {
@@ -85,119 +113,175 @@ const PersonsMap = (function () {
     };
   }
 
-  /** Petit cercle splitté inline pour les événements de couple dans le tooltip. */
   function _splitDotHtml(cL, cR) {
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="map-tt__split-dot">'
-      + '<circle cx="8" cy="8" r="7" fill="white" stroke="rgba(0,0,0,0.20)" stroke-width="0.5"/>'
-      + '<path d="M8,3 A5,5 0 0,0 8,13 L8,8 Z" fill="' + cL + '"/>'
-      + '<path d="M8,3 A5,5 0 0,1 8,13 L8,8 Z" fill="' + cR + '"/>'
-      + '<circle cx="8" cy="8" r="5" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1"/>'
-      + '</svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="map-tt__split-dot">' +
+      '<circle cx="8" cy="8" r="7" fill="white" stroke="rgba(0,0,0,0.20)" stroke-width="0.5"/>' +
+      '<path d="M8,3 A5,5 0 0,0 8,13 L8,8 Z" fill="' + cL + '"/>' +
+      '<path d="M8,3 A5,5 0 0,1 8,13 L8,8 Z" fill="' + cR + '"/>' +
+      '<circle cx="8" cy="8" r="5" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="1"/>' +
+      '</svg>';
   }
 
-  function _addMarker(map, group, coords, fillColor) {
+  function _addMarker(layer, group, coords, fillColor) {
     const place = formatPlace(group.lieu) || group.lieu.brut || '';
     const cL    = fillColor.M || fillColor.U;
     const cR    = fillColor.F || fillColor.U;
 
-    // ── Tooltip ───────────────────────────────────────────────────────────────
     let html = '<div class="map-tt">';
     if (place) html += '<div class="map-tt__place">' + place + '</div>';
 
-    // Événements individuels (un bloc par personne)
     group.persons.forEach(pe => {
-      html += '<div class="map-tt__person">'
-        + '<div class="map-tt__person-hd">'
-        + '<span class="map-tt__dot map-tt__dot--' + pe.sexe + '"></span>'
-        + '<span class="map-tt__name">' + (pe.name || '(inconnu)') + '</span>'
-        + '</div><div class="map-tt__events">';
+      html += '<div class="map-tt__person">' +
+        '<div class="map-tt__person-hd">' +
+        '<span class="map-tt__dot map-tt__dot--' + pe.sexe + '"></span>' +
+        '<span class="map-tt__name">' + (pe.name || '(inconnu)') + '</span>' +
+        '</div><div class="map-tt__events">';
       pe.events.forEach(ev => {
         const d = formatDate(ev.date);
-        html += '<div><span class="map-tt-ev-label">' + ev.label + '</span>'
-          + (d ? '<span class="map-tt-ev-date"> – ' + d + '</span>' : '') + '</div>';
+        html += '<div><span class="map-tt-ev-label">' + ev.label + '</span>' +
+          (d ? '<span class="map-tt-ev-date"> – ' + d + '</span>' : '') + '</div>';
       });
       html += '</div></div>';
     });
 
-    // Événements communs (mariage) : en dernier, avec l'icône splittée
     if (group.coupleEvents && group.coupleEvents.length) {
       group.coupleEvents.forEach(ev => {
         const d = formatDate(ev.date);
-        html += '<div class="map-tt__couple-ev">'
-          + _splitDotHtml(cL, cR)
-          + '<span class="map-tt-ev-label">' + ev.label + '</span>'
-          + (d ? '<span class="map-tt-ev-date"> – ' + d + '</span>' : '')
-          + '</div>';
+        html += '<div class="map-tt__couple-ev">' +
+          _splitDotHtml(cL, cR) +
+          '<span class="map-tt-ev-label">' + ev.label + '</span>' +
+          (d ? '<span class="map-tt-ev-date"> – ' + d + '</span>' : '') +
+          '</div>';
       });
     }
     html += '</div>';
 
     const tooltipOpts = { direction: 'top', sticky: false, className: 'map-leaflet-tooltip' };
-
-    // ── Type de marqueur ──────────────────────────────────────────────────────
-    // Splitté si : 2 personnes, ou mariage commun (même seul à cet endroit)
-    const isCouple = group.persons.length >= 2
+    const isCouple    = group.persons.length >= 2
       || (group.coupleEvents && group.coupleEvents.length > 0);
 
     if (isCouple) {
-      // Marqueur splitté : moitié gauche = homme, moitié droite = femme
       const svg =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">'
-        + '<circle cx="15" cy="15" r="14" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1"/>'
-        + '<path d="M15,6 A9,9 0 0,0 15,24 L15,15 Z" fill="' + cL + '"/>'
-        + '<path d="M15,6 A9,9 0 0,1 15,24 L15,15 Z" fill="' + cR + '"/>'
-        + '<circle cx="15" cy="15" r="9" fill="none" stroke="rgba(0,0,0,0.50)" stroke-width="1.5"/>'
-        + '</svg>';
+        '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">' +
+        '<circle cx="15" cy="15" r="14" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1"/>' +
+        '<path d="M15,6 A9,9 0 0,0 15,24 L15,15 Z" fill="' + cL + '"/>' +
+        '<path d="M15,6 A9,9 0 0,1 15,24 L15,15 Z" fill="' + cR + '"/>' +
+        '<circle cx="15" cy="15" r="9" fill="none" stroke="rgba(0,0,0,0.50)" stroke-width="1.5"/>' +
+        '</svg>';
       const icon = L.divIcon({ html: svg, className: '', iconSize: [30, 30], iconAnchor: [15, 15] });
-      L.marker(coords, { icon }).bindTooltip(html, tooltipOpts).addTo(map);
-
+      L.marker(coords, { icon }).bindTooltip(html, tooltipOpts).addTo(layer);
     } else {
-      // Marqueur simple (une seule personne, aucun mariage commun ici)
-      const color = fillColor[group.persons[0].sexe] || fillColor.U;
+      const color = fillColor[(group.persons[0] || {}).sexe] || fillColor.U;
       L.circleMarker(coords, {
         radius: 13, fillColor: '#fff', fillOpacity: 1,
         color: 'rgba(0,0,0,0.25)', weight: 1, interactive: false,
-      }).addTo(map);
+      }).addTo(layer);
       L.circleMarker(coords, {
         radius: 9, fillColor: color, fillOpacity: 1,
         color: 'rgba(0,0,0,0.50)', weight: 1.5,
-      }).bindTooltip(html, tooltipOpts).addTo(map);
+      }).bindTooltip(html, tooltipOpts).addTo(layer);
     }
+  }
+
+  // ── Clustering par distance en pixels ─────────────────────────────────────
+
+  /**
+   * Regroupe les marqueurs dont les positions écran sont ≤ CLUSTER_RADIUS px.
+   * Algorithme glouton : le premier point non affecté devient le centre d'un cluster.
+   */
+  function _buildClusters(map, resolved) {
+    const n    = resolved.length;
+    const used = new Array(n).fill(false);
+    const clusters = [];
+
+    for (let i = 0; i < n; i++) {
+      if (used[i]) continue;
+      const cluster = [resolved[i]];
+      used[i] = true;
+      const p1 = map.latLngToContainerPoint(resolved[i].c);
+      for (let j = i + 1; j < n; j++) {
+        if (used[j]) continue;
+        if (p1.distanceTo(map.latLngToContainerPoint(resolved[j].c)) <= CLUSTER_RADIUS) {
+          cluster.push(resolved[j]);
+          used[j] = true;
+        }
+      }
+      clusters.push(cluster);
+    }
+    return clusters;
+  }
+
+  /** Marqueur de cluster (cercle coloré avec compteur). */
+  function _addClusterMarker(map, layer, items, fillColor) {
+    const lat = items.reduce((s, r) => s + r.c[0], 0) / items.length;
+    const lng = items.reduce((s, r) => s + r.c[1], 0) / items.length;
+
+    // Tooltip : liste des lieux regroupés
+    let html = '<div class="map-tt"><div class="map-tt__cluster-title">' +
+      items.length + ' lieux groupés</div>';
+    items.forEach(({ g }) => {
+      const p = formatPlace(g.lieu) || g.lieu.brut || '';
+      if (p) html += '<div class="map-tt__cluster-item">• ' + p + '</div>';
+    });
+    html += '<div class="map-tt__cluster-hint">Cliquez pour zoomer</div></div>';
+
+    const icon = L.divIcon({
+      html: '<div class="map-cluster"><span>' + items.length + '</span></div>',
+      className: '',
+      iconSize: [38, 38],
+      iconAnchor: [19, 19],
+    });
+
+    L.marker([lat, lng], { icon })
+      .bindTooltip(html, { direction: 'top', sticky: false, className: 'map-leaflet-tooltip' })
+      .on('click', function () {
+        const bounds = L.latLngBounds(items.map(r => r.c));
+        const ne = bounds.getNorthEast(), sw = bounds.getSouthWest();
+        if (Math.abs(ne.lat - sw.lat) < 0.0001 && Math.abs(ne.lng - sw.lng) < 0.0001) {
+          // Tous les points sont au même endroit → zoom progressif
+          map.setView(items[0].c, Math.min(map.getZoom() + 3, 15));
+        } else {
+          map.fitBounds(bounds.pad(0.5), { maxZoom: 15 });
+        }
+      })
+      .addTo(layer);
+  }
+
+  // ── Rendu des marqueurs (recalculé à chaque zoomend) ─────────────────────
+
+  function _renderMarkers(map, layer, resolved, fillColor) {
+    layer.clearLayers();
+    const clusters = _buildClusters(map, resolved);
+    clusters.forEach(items => {
+      if (items.length === 1) {
+        _addMarker(layer, items[0].g, items[0].c, fillColor);
+      } else {
+        _addClusterMarker(map, layer, items, fillColor);
+      }
+    });
   }
 
   // ── Point d'entrée principal ──────────────────────────────────────────────
 
-  /**
-   * Géocode tous les lieux de la fiche, initialise la carte Leaflet et place
-   * les marqueurs colorés.
-   *
-   * @param {HTMLElement}  container  Div recevant la carte (hauteur fixée par CSS)
-   * @param {Object}       person     Données complètes de la personne sélectionnée
-   * @param {Object|null}  conjoint   Données complètes du conjoint principal
-   * @param {Object|null}  mariage    Événement mariage de l'union principale
-   * @returns {L.Map|null}            Instance Leaflet (ou null si rien à afficher)
-   */
   async function render(container, person, conjoint, mariage) {
 
-    // ── Déterminer homme (gauche/bleu) et femme (droite/rose) ────────────────
+    // Déterminer homme (gauche/bleu) et femme (droite/rose)
     let maleP = null, femaleP = null;
     if (!conjoint) {
       if (person && person.sexe === 'F') femaleP = person;
       else                               maleP   = person;
     } else {
-      const pMale = person  && person.sexe  === 'M';
-      const cMale = conjoint && conjoint.sexe === 'M';
+      const pMale = person   && person.sexe   === 'M';
+      const cMale = conjoint && conjoint.sexe  === 'M';
       if (pMale || (!pMale && !cMale)) { maleP = person;   femaleP = conjoint; }
       else                              { maleP = conjoint; femaleP = person;   }
     }
 
-    // Événements individuels (mariage exclu)
     const maleEvs   = _eventsForPerson(maleP);
     const femaleEvs = _eventsForPerson(femaleP);
 
-    // ── Grouper par lieu ──────────────────────────────────────────────────────
+    // Grouper par lieu (clé = texte formaté)
     const markerMap = {};
-
     function _addToGroup(evs, sexe, p) {
       evs.forEach(ev => {
         const k = (formatPlace(ev.lieu) || ev.lieu.brut || '').trim();
@@ -208,11 +292,8 @@ const PersonsMap = (function () {
         pe.events.push(ev);
       });
     }
-
     _addToGroup(maleEvs,   'M', maleP);
     _addToGroup(femaleEvs, 'F', femaleP);
-
-    // Mariage : événement commun, affiché une seule fois dans le groupe de son lieu
     if (mariage && mariage.lieu) {
       const k = (formatPlace(mariage.lieu) || mariage.lieu.brut || '').trim();
       if (k) {
@@ -223,23 +304,20 @@ const PersonsMap = (function () {
 
     const groups = Object.values(markerMap);
 
-    // ── Affichage du spinner pendant le géocodage ─────────────────────────────
+    // Spinner
     container.innerHTML =
-      '<div class="map-spinner">'
-      + '<span class="map-spinner__icon">⏳</span>'
-      + '<span>Géolocalisation…</span>'
-      + '</div>';
+      '<div class="map-spinner">' +
+      '<span class="map-spinner__icon">⏳</span>' +
+      '<span>Géolocalisation…</span>' +
+      '</div>';
 
-    // ── Géocodage séquentiel (200 ms entre chaque requête) ────────────────────
+    // Géocodage (rate-limit géré dans _fetchCoords)
     const resolved = [];
-    for (let i = 0; i < groups.length; i++) {
-      if (i > 0) await _sleep(200);
-      const g = groups[i];
+    for (const g of groups) {
       const c = await _geocode(g.lieu);
       if (c) resolved.push({ g, c });
     }
 
-    // ── Nettoyage du spinner ──────────────────────────────────────────────────
     container.innerHTML = '';
 
     if (!resolved.length) {
@@ -248,33 +326,28 @@ const PersonsMap = (function () {
       return null;
     }
 
-    // ── Initialisation Leaflet ────────────────────────────────────────────────
-    // requestAnimationFrame garantit que le conteneur est bien dimensionné
     await new Promise(r => requestAnimationFrame(r));
-
     const map = L.map(container, { zoomControl: true }).setView([46.5, 2.5], 5);
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 19,
     }).addTo(map);
 
-    // invalidateSize pour les layouts sticky/flex où la taille peut changer
     await new Promise(r => requestAnimationFrame(r));
     map.invalidateSize();
 
-    // ── Ajout des marqueurs ───────────────────────────────────────────────────
     const fillColor = _fillColors();
-    resolved.forEach(({ g, c }) => _addMarker(map, g, c, fillColor));
+    const layer     = L.layerGroup().addTo(map);
 
-    // ── Cadrage automatique ───────────────────────────────────────────────────
-    // On ne zoome jamais plus près que le niveau 10 (contexte ville/région).
-    // Sans maxZoom, fitBounds zoomait au maximum quand plusieurs lieux
-    // se trouvent dans la même ville (coords quasi identiques).
+    // Rendu initial + recalcul à chaque zoom
+    _renderMarkers(map, layer, resolved, fillColor);
+    map.on('zoomend', () => _renderMarkers(map, layer, resolved, fillColor));
+
+    // Cadrage automatique (jamais plus près que zoom 10)
     const MAX_ZOOM = 10;
     const coords = resolved.map(r => r.c);
     if (coords.length === 1) {
-      map.setView(coords[0], 9);   // ville + contexte régional
+      map.setView(coords[0], 9);
     } else {
       map.fitBounds(L.latLngBounds(coords), { padding: [50, 50], maxZoom: MAX_ZOOM });
     }
@@ -284,11 +357,6 @@ const PersonsMap = (function () {
 
   // ── Vérification rapide (sans géocodage) ─────────────────────────────────
 
-  /**
-   * Retourne true si au moins un événement parmi la personne, le conjoint
-   * ou le mariage possède un champ lieu renseigné.
-   * Permet de décider du layout AVANT de lancer le géocodage.
-   */
   function hasLocations(person, conjoint, mariage) {
     function _hasLieu(ev) { return !!(ev && ev.lieu); }
     function _personHasLoc(p) {
@@ -302,4 +370,3 @@ const PersonsMap = (function () {
 
   return { render, hasLocations };
 })();
-

@@ -1965,6 +1965,57 @@ mark.hl {
   50%       { opacity: .5; transform: scale(.85); }
 }
 
+/* ── Marqueur de cluster ─────────────────────────────────────────────────── */
+
+.map-cluster {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.40);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+.map-cluster:hover {
+  transform: scale(1.12);
+  box-shadow: 0 4px 16px rgba(0,0,0,.50);
+}
+.map-cluster span {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  line-height: 1;
+}
+
+.map-tt__cluster-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 6px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.map-tt__cluster-item {
+  font-size: 12px;
+  color: var(--text);
+  padding: 2px 0;
+}
+
+.map-tt__cluster-hint {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 6px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
 /* ── Tooltip personnalisé Leaflet ────────────────────────────────────────── */
 
 .map-leaflet-tooltip.leaflet-tooltip {
