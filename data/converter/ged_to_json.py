@@ -337,20 +337,13 @@ def parse_place(plac_value: str) -> dict | None:
         # -----------------------------------------------------------------
         # Adresse de rue dans le champ "ville"
         # -----------------------------------------------------------------
+        # Règle unique : dept_num est TOUJOURS le numéro de maison quand
+        # ville est une rue. Geneatique auto-remplit dept_nom à partir du
+        # numéro de maison → dept_nom est un faux positif, on le supprime.
+        result["adresse"] = f"{ville}, {dept_num}" if dept_num else ville
         if complement:
-            # La vraie ville est dans le complément ; dept_num était le
-            # numéro de rue (éventuellement coïncidant avec un n° de dépt).
-            adresse = f"{ville}, {dept_num}" if dept_num else ville
-            result["adresse"] = adresse
             result["ville"] = complement
-            # dept_num / dept_nom supprimés (ils étaient erronés)
-        else:
-            # Pas de ville connue ; on conserve l'info dépt si dept_nom
-            # est renseigné (info valide), sinon dept_num était le n° de rue.
-            result["adresse"] = f"{ville}, {dept_num}" if (dept_num and not dept_nom) else ville
-            if dept_num and dept_nom:
-                result["dept_num"] = dept_num
-                result["dept_nom"] = dept_nom
+        # dept_num et dept_nom supprimés dans tous les cas
         if region:
             result["region"] = region
         if pays:
