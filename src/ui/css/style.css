@@ -2148,6 +2148,25 @@ mark.hl {
   font-size: .88rem;
 }
 
+/* ── Bouton switch fond de carte ─────────────────────────────────────────── */
+
+.map-basemap-btn {
+  display: block;
+  margin-top: 5px;
+  padding: 5px 10px;
+  background: #fff;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.map-basemap-btn:hover {
+  background: #f4f4f4;
+  cursor: pointer;
+}
+
 /* ── Marqueur de cluster ─────────────────────────────────────────────────── */
 
 .map-cluster {

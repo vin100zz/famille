@@ -397,10 +397,46 @@ const PersonsMap = (function () {
 
     await new Promise(r => requestAnimationFrame(r));
     const map = L.map(container, { zoomControl: true }).setView([46.5, 2.5], 5);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+    const tileOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 19,
-    }).addTo(map);
+    });
+    const tileCassini = L.tileLayer.wms('https://data.geopf.fr/wms-r', {
+      layers: 'BNF-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI',
+      format: 'image/png',
+      transparent: false,
+      version: '1.3.0',
+      attribution: '&copy; <a href="https://www.geoportail.gouv.fr">IGN-Géoportail / BnF</a>',
+      maxZoom: 15,
+    });
+    tileOSM.addTo(map);
+
+    // Bouton switch fond de carte (topleft, sous les +/-)
+    const BasemapControl = L.Control.extend({
+      options: { position: 'topleft' },
+      onAdd() {
+        const btn = L.DomUtil.create('button', 'map-basemap-btn');
+        btn.title = 'Changer le fond de carte';
+        btn.textContent = 'Cassini';
+        let cassiniActive = false;
+        L.DomEvent.on(btn, 'click', () => {
+          cassiniActive = !cassiniActive;
+          if (cassiniActive) {
+            map.removeLayer(tileOSM);
+            tileCassini.addTo(map);
+            btn.textContent = 'Moderne';
+          } else {
+            map.removeLayer(tileCassini);
+            tileOSM.addTo(map);
+            btn.textContent = 'Cassini';
+          }
+        });
+        L.DomEvent.disableClickPropagation(btn);
+        return btn;
+      },
+    });
+    new BasemapControl().addTo(map);
 
     await new Promise(r => requestAnimationFrame(r));
     map.invalidateSize();
