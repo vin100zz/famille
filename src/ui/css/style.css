@@ -1,4 +1,13 @@
-﻿/* Dancing Script 700 — polices locales (pas de dépendance externe) */
+﻿/* Cinzel ExtraBold — chiffres romains de l'arbre généalogique */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('Cinzel-ExtraBold.ttf') format('truetype');
+}
+
+/* Dancing Script 700 — polices locales (pas de dépendance externe) */
 @font-face {
   font-family: 'Dancing Script';
   font-style: normal;
@@ -694,7 +703,37 @@ mark.hl {
   border: 1px solid var(--border);
   padding: 24px 20px 28px;
   margin-top: 16px;
+  display: flex;
+  gap: 0;
+}
+
+.tree-gen-col {
+  width: 30px;
+  flex-shrink: 0;
+  position: relative;
+  margin-right: 10px;
+}
+
+.tree-content {
+  flex: 1;
+  min-width: 0;
   position: relative;   /* ancre pour l'overlay de connecteurs */
+}
+
+.tree-gen-label {
+  position: absolute;
+  right: 4px;
+  transform: translateY(-50%);
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  font-style: normal;
+  color: #ccc;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  width: 30px;
+  text-align: center;
 }
 
 .sosa-tree--card {

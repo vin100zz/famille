@@ -453,6 +453,46 @@ function drawTreeConnectors(treeEl) {
   });
 }
 
+// ── Numéros de génération en chiffres romains ──────────────────────────────
+
+function toRoman(n) {
+  if (n <= 0) return '?';
+  const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+  const syms = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];
+  let r = '';
+  vals.forEach((v, i) => { while (n >= v) { r += syms[i]; n -= v; } });
+  return r;
+}
+
+function drawGenLabels(wrap, sosa, children, ancestorsToShow) {
+  if (!sosa) return;
+  const col = wrap.querySelector('.tree-gen-col');
+  if (!col) return;
+  col.querySelectorAll('.tree-gen-label').forEach(function(l) { l.remove(); });
+
+  const colTop = col.getBoundingClientRect().top;
+  const G = Math.floor(Math.log2(sosa)) + 1;
+
+  function addLabel(gen, selector) {
+    const ref = wrap.querySelector(selector);
+    if (!ref) return;
+    const r = ref.getBoundingClientRect();
+    if (r.width === 0 && r.height === 0) return; // élément caché
+    const label = document.createElement('div');
+    label.className = 'tree-gen-label';
+    label.textContent = toRoman(gen);
+    label.style.top = (r.top - colTop + r.height / 2) + 'px';
+    col.appendChild(label);
+  }
+
+  addLabel(G + 1, '[data-tree="gp0"]');
+  addLabel(G,     '[data-tree="male"]');
+  if (children.length) addLabel(G - 1, '[data-tree="child-0"]');
+  ancestorsToShow.forEach(function(_, i) {
+    addLabel(G - 2 - i, '[data-tree="anc-' + i + '"]');
+  });
+}
+
 // ── Arbre Sosa ─────────────────────────────────────────────────────────────
 
 function renderSosaTree(treeData, onSelect, currentPersonId) {
@@ -463,7 +503,11 @@ function renderSosaTree(treeData, onSelect, currentPersonId) {
   const children      = treeData.children  || [];
   const ancestors     = treeData.ancestors || [];
 
-  const wrap = el('div', 'sosa-tree');
+  const wrap    = el('div', 'sosa-tree');
+  const genCol  = el('div', 'tree-gen-col');
+  const content = el('div', 'tree-content');
+  wrap.appendChild(genCol);
+  wrap.appendChild(content);
 
   // ── Grille supérieure : 4 colonnes, alternance contenu / espace ───────────
   const upper = el('div', 'tree-upper-grid');
@@ -515,7 +559,7 @@ function renderSosaTree(treeData, onSelect, currentPersonId) {
   sp2.style.gridRow    = '4';
   upper.appendChild(sp2);
 
-  wrap.appendChild(upper);
+  content.appendChild(upper);
 
   // ── Grille inférieure : N colonnes (enfants + ancêtres) ───────────────────
   const n = children.length || 1;
@@ -556,7 +600,7 @@ function renderSosaTree(treeData, onSelect, currentPersonId) {
     lower.appendChild(cell);
   });
 
-  wrap.appendChild(lower);
+  content.appendChild(lower);
 
   // ── Bouton déplier / replier la chaîne d'ancêtres ────────────────────────
   if (ancestorsToShow.length > 0) {
@@ -566,15 +610,15 @@ function renderSosaTree(treeData, onSelect, currentPersonId) {
     const arrow = txt('span', 'tree-anc-btn__arrow', '▼');
     btn.appendChild(arrow);
     toggleRow.appendChild(btn);
-    wrap.appendChild(toggleRow);
+    content.appendChild(toggleRow);
 
     btn.addEventListener('click', function() {
       const wasExpanded = wrap.classList.contains('sosa-tree--anc-expanded');
       wrap.classList.toggle('sosa-tree--anc-expanded');
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
-          drawTreeConnectors(wrap);
-          // Après un repli, scroller vers le haut de la page
+          drawTreeConnectors(content);
+          drawGenLabels(wrap, sosa, children, ancestorsToShow);
           if (wasExpanded) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }
@@ -584,11 +628,14 @@ function renderSosaTree(treeData, onSelect, currentPersonId) {
   }
 
   // ── Overlay connecteurs (position:absolute, tracé après rendu) ────────────
-  wrap.appendChild(el('div', 'tree-conn-overlay'));
+  content.appendChild(el('div', 'tree-conn-overlay'));
 
   // Double rAF : garantit que le DOM est rendu avant la mesure
   requestAnimationFrame(function() {
-    requestAnimationFrame(function() { drawTreeConnectors(wrap); });
+    requestAnimationFrame(function() {
+      drawTreeConnectors(content);
+      drawGenLabels(wrap, sosa, children, ancestorsToShow);
+    });
   });
 
   return wrap;
