@@ -698,50 +698,178 @@ const Editor = (function () {
     return wrap;
   }
 
-  // ── Bloc IMAGE : image + overlay ──────────────────────────────────────────
+  // ── Explorateur d'images (modale) ────────────────────────────────────────
+  // Ouvre une fenêtre listant les fichiers sous IMAGES_BASE (via images.php).
+  // onSelect(relPath) est appelé quand l'utilisateur clique sur un fichier.
+
+  function _showImageBrowser(onSelect, initialDir) {
+    const BASE_URL = typeof IMAGES_BASE !== 'undefined' ? IMAGES_BASE : '../famille/contenu/pages/';
+
+    const overlay = el('div', 'imgbr-overlay');
+    const modal   = el('div', 'imgbr-modal');
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', e => { if (e.target === overlay) _close(); });
+
+    function _close() { document.body.removeChild(overlay); }
+
+    async function _browse(dir) {
+      modal.innerHTML = '';
+
+      // En-tête
+      const hdr = el('div', 'imgbr-hdr');
+      hdr.appendChild(txt('span', 'imgbr-title', '📁 Sélectionner une image'));
+      const closeBtn = el('button', 'imgbr-close');
+      closeBtn.type = 'button'; closeBtn.textContent = '✕';
+      closeBtn.addEventListener('click', _close);
+      hdr.appendChild(closeBtn);
+      modal.appendChild(hdr);
+
+      // Fil d'Ariane
+      const crumbs = el('div', 'imgbr-breadcrumb');
+      const root = el('span', 'imgbr-crumb imgbr-crumb--link');
+      root.textContent = 'Racine';
+      root.addEventListener('click', () => _browse(''));
+      crumbs.appendChild(root);
+      if (dir) {
+        const parts = dir.split('/');
+        parts.forEach((part, i) => {
+          crumbs.appendChild(txt('span', 'imgbr-sep', ' › '));
+          const isLast = i === parts.length - 1;
+          const crumb = el('span', 'imgbr-crumb' + (isLast ? '' : ' imgbr-crumb--link'));
+          crumb.textContent = part;
+          if (!isLast) {
+            const p = parts.slice(0, i + 1).join('/');
+            crumb.addEventListener('click', () => _browse(p));
+          }
+          crumbs.appendChild(crumb);
+        });
+      }
+      modal.appendChild(crumbs);
+
+      // Corps
+      const body = el('div', 'imgbr-body');
+      body.textContent = 'Chargement…';
+      modal.appendChild(body);
+
+      try {
+        const resp = await fetch('src/server/Api/images.php?dir=' + encodeURIComponent(dir));
+        if (!resp.ok) throw new Error(resp.status + ' ' + resp.statusText);
+        const data = await resp.json();
+        body.innerHTML = '';
+
+        // Dossier parent
+        if (dir) {
+          const up = el('div', 'imgbr-item imgbr-item--dir');
+          up.textContent = '📁 ..';
+          const parent = dir.includes('/') ? dir.replace(/\/[^/]+$/, '') : '';
+          up.addEventListener('click', () => _browse(parent));
+          body.appendChild(up);
+        }
+
+        // Sous-dossiers
+        data.dirs.forEach(d => {
+          const item = el('div', 'imgbr-item imgbr-item--dir');
+          item.textContent = '📁 ' + d.name;
+          item.addEventListener('click', () => _browse(d.path));
+          body.appendChild(item);
+        });
+
+        // Images
+        data.files.forEach(f => {
+          const item = el('div', 'imgbr-item imgbr-item--file');
+          const thumb = document.createElement('img');
+          thumb.src = BASE_URL + f.path; thumb.alt = ''; thumb.className = 'imgbr-thumb'; thumb.loading = 'lazy';
+          item.appendChild(thumb);
+          item.appendChild(txt('span', 'imgbr-name', f.name));
+          item.addEventListener('click', () => { onSelect(f.path); _close(); });
+          body.appendChild(item);
+        });
+
+        if (!data.dirs.length && !data.files.length) {
+          body.appendChild(txt('div', 'imgbr-empty', 'Dossier vide.'));
+        }
+      } catch (e) {
+        body.textContent = 'Erreur : ' + e.message;
+      }
+    }
+
+    _browse(initialDir || '');
+  }
+
+  // ── Bloc IMAGE : prévisualisation + explorateur ───────────────────────────
 
   function _buildImageBlockEditor(wrap, block, blockIdx, colBlocks, renderCols) {
     wrap.classList.add('ed-img-block');
 
+    const BASE_URL = typeof IMAGES_BASE !== 'undefined' ? IMAGES_BASE : '../famille/contenu/pages/';
+
+    // Prévisualisation (cliquable)
     const imgWrap = el('div', 'ed-img-block__img');
-    if (block.fichier) {
-      const img = document.createElement('img');
-      img.src = 'website/pages/' + block.fichier; img.alt = '';
-      imgWrap.appendChild(img);
-    } else {
-      imgWrap.appendChild(txt('span', 'ed-img-placeholder', 'Aucune image'));
+    imgWrap.title  = 'Cliquer pour choisir une image';
+    imgWrap.style.cursor = 'pointer';
+
+    function _refreshPreview(path) {
+      imgWrap.innerHTML = '';
+      if (path) {
+        const img = document.createElement('img');
+        img.src = BASE_URL + path; img.alt = '';
+        imgWrap.appendChild(img);
+      } else {
+        imgWrap.appendChild(txt('span', 'ed-img-placeholder', '📷 Cliquer pour choisir une image'));
+      }
     }
+    _refreshPreview(block.fichier);
+
+    function _openBrowser() {
+      const cur = block.fichier || '';
+      const initialDir = cur.includes('/') ? cur.replace(/\/[^/]+$/, '') : '';
+      _showImageBrowser(path => { block.fichier = path; _refreshPreview(path); pathInp.value = path; errEl.textContent = ''; }, initialDir);
+    }
+    imgWrap.addEventListener('click', _openBrowser);
     wrap.appendChild(imgWrap);
 
-    // Overlay
+    // Ligne chemin + bouton parcourir
+    const pathRow = el('div', 'ed-img-path-row');
+    const pathInp = document.createElement('input');
+    pathInp.type = 'text'; pathInp.className = 'ed-input ed-input--sm';
+    pathInp.placeholder = 'ex : carle/portrait.jpg'; pathInp.value = block.fichier || '';
+    pathInp.title = 'Chemin relatif à ' + BASE_URL;
+
+    const browseBtn = el('button', 'ed-icon-btn');
+    browseBtn.type = 'button'; browseBtn.title = 'Parcourir…'; browseBtn.textContent = '📁';
+    browseBtn.addEventListener('click', _openBrowser);
+
+    const errEl = txt('div', 'ed-img-path-error', '');
+
+    function _validate(path) {
+      if (!path) return null;
+      if (/\.\./.test(path))             return 'Le chemin ne doit pas contenir ".."';
+      if (/^[/\\]/.test(path))           return 'Chemin absolu interdit';
+      if (/^[a-zA-Z]:[/\\]/.test(path)) return 'Chemin absolu interdit';
+      if (/^https?:\/\//i.test(path))   return 'URL externe interdite';
+      return null;
+    }
+    pathInp.addEventListener('input', () => {
+      const val = pathInp.value.trim();
+      const err = _validate(val);
+      errEl.textContent = err || '';
+      if (!err) { block.fichier = val; _refreshPreview(val); }
+    });
+
+    pathRow.appendChild(pathInp);
+    pathRow.appendChild(browseBtn);
+    wrap.appendChild(pathRow);
+    wrap.appendChild(errEl);
+
+    // Overlay déplacer/supprimer
     const overlay = el('div', 'ed-img-block__overlay');
     if (blockIdx > 0)
-      overlay.appendChild(_ib('▲','Monter','',() => { colBlocks.splice(blockIdx-1,0,colBlocks.splice(blockIdx,1)[0]); renderCols(); }));
+      overlay.appendChild(_ib('▲', 'Monter', '', () => { colBlocks.splice(blockIdx-1,0,colBlocks.splice(blockIdx,1)[0]); renderCols(); }));
     if (blockIdx < colBlocks.length-1)
-      overlay.appendChild(_ib('▼','Descendre','',() => { colBlocks.splice(blockIdx+1,0,colBlocks.splice(blockIdx,1)[0]); renderCols(); }));
-
-    const fileInp = document.createElement('input');
-    fileInp.type = 'file'; fileInp.accept = 'image/*'; fileInp.style.display = 'none';
-    fileInp.addEventListener('change', async () => {
-      if (!fileInp.files[0]) return;
-      try { const r = await api.uploadImage(fileInp.files[0]); block.fichier = r.fichier; renderCols(); }
-      catch (e) { alert('Upload : ' + e.message); }
-    });
-    overlay.appendChild(_ib('📂', 'Changer l\'image', '', () => fileInp.click()));
-    overlay.appendChild(fileInp);
-    overlay.appendChild(_ib('×','Supprimer','ed-icon-btn--del',() => { colBlocks.splice(blockIdx,1); renderCols(); }));
+      overlay.appendChild(_ib('▼', 'Descendre', '', () => { colBlocks.splice(blockIdx+1,0,colBlocks.splice(blockIdx,1)[0]); renderCols(); }));
+    overlay.appendChild(_ib('×', 'Supprimer', 'ed-icon-btn--del', () => { colBlocks.splice(blockIdx,1); renderCols(); }));
     wrap.appendChild(overlay);
-
-    // Drag image directement sur le bloc
-    wrap.addEventListener('dragover', e => { if (e.dataTransfer.types.indexOf && e.dataTransfer.types.indexOf('Files') >= 0) { e.preventDefault(); wrap.classList.add('ed-upload-zone--over'); } });
-    wrap.addEventListener('dragleave', () => wrap.classList.remove('ed-upload-zone--over'));
-    wrap.addEventListener('drop', async e => {
-      const f = e.dataTransfer.files && e.dataTransfer.files[0];
-      if (!f || !f.type.startsWith('image/')) return;
-      e.preventDefault(); e.stopPropagation(); wrap.classList.remove('ed-upload-zone--over');
-      try { const r = await api.uploadImage(f); block.fichier = r.fichier; renderCols(); }
-      catch (err) { alert('Upload : ' + err.message); }
-    });
   }
 
   // ── Bloc TEXTE : barre unique (formatage + déplacer + supprimer) ───────────
@@ -902,5 +1030,10 @@ const Editor = (function () {
 
   return { open, close: _removeBar };
 })();
+
+
+
+
+
 
 
