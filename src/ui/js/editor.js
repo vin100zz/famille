@@ -973,7 +973,7 @@ const Editor = (function () {
     if (!ev) return null;
     const hasDate = ev.date && String(ev.date).trim();
     const lieu    = ev.lieu || {};
-    const keys    = ['ville','adresse','dept_num','dept_nom','region','pays','complement'];
+    const keys    = ['ville','adresse','dept_num','dept_nom','region','pays'];
     const hasLieu = keys.some(k => lieu[k] && String(lieu[k]).trim());
     if (!hasDate && !hasLieu) return null;
     const result = {};

@@ -76,12 +76,11 @@ function formatDate(dateStr) {
 function formatPlace(lieu) {
   if (!lieu) return null;
   const parts = [];
-  if (lieu.adresse)    parts.push(lieu.adresse);
   if (lieu.ville)      parts.push(lieu.ville);
   if (lieu.dept_nom)   parts.push(lieu.dept_nom);
   else if (lieu.dept_num) parts.push(lieu.dept_num);
   if (lieu.pays)       parts.push(lieu.pays);
-  if (lieu.complement) parts.push(lieu.complement);
+  if (lieu.adresse)    parts.push(lieu.adresse);
   return parts.length ? parts.join(', ') : (lieu.brut || null);
 }
 
