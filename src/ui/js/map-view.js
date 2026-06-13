@@ -59,10 +59,9 @@ const PersonsMap = (function () {
     const p = [];
     if (lieu.adresse)       p.push(lieu.adresse);
     if (lieu.ville)         p.push(lieu.ville);
-    if (lieu.dept_nom)      p.push(lieu.dept_nom);
-    else if (lieu.dept_num) p.push(lieu.dept_num);
-    if (lieu.pays)          p.push(lieu.pays);
-    else if (p.length)      p.push('France');
+    if (lieu.dept_num) p.push(lieu.dept_num);
+    if (!lieu.pays || lieu.pays.toLowerCase() === 'france') p.push('France');
+    else p.push(lieu.pays);
     return p.join(', ');
   }
 
@@ -71,10 +70,8 @@ const PersonsMap = (function () {
     if (!lieu) return '';
     const p = [];
     if (lieu.ville)         p.push(lieu.ville);
-    if (lieu.dept_nom)      p.push(lieu.dept_nom);
-    else if (lieu.dept_num) p.push(lieu.dept_num);
-    if (lieu.pays)          p.push(lieu.pays);
-    else if (p.length)      p.push('France');
+    if (lieu.dept_num) p.push(lieu.dept_num);
+    p.push('France');
     return p.length ? p.join(', ') : (lieu.brut || '');
   }
 

@@ -292,12 +292,9 @@ const Editor = (function () {
     const lieu = ev.lieu;
     const lieuBlock = el('div', 'ed-lieu');
     [
-      ['Ville',          'ville'],
       ['Adresse',        'adresse'],
       ['N° département', 'dept_num'],
-      ['Département',    'dept_nom'],
-      ['Région',         'region'],
-      ['Pays',           'pays'],
+      ['Ville',          'ville'],
     ].forEach(([lbl, fkey]) => {
       const row = el('div', 'ed-field ed-field--sm');
       row.appendChild(txt('label', 'ed-label', lbl));
@@ -973,7 +970,7 @@ const Editor = (function () {
     if (!ev) return null;
     const hasDate = ev.date && String(ev.date).trim();
     const lieu    = ev.lieu || {};
-    const keys    = ['ville','adresse','dept_num','dept_nom','region','pays'];
+    const keys    = ['ville','adresse','dept_num'];
     const hasLieu = keys.some(k => lieu[k] && String(lieu[k]).trim());
     if (!hasDate && !hasLieu) return null;
     const result = {};

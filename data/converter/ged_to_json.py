@@ -308,7 +308,7 @@ _STREET_RE = re.compile(
 def parse_place(plac_value: str) -> dict | None:
     """Analyse un lieu GEDCOM en dict structuré.
 
-    Format Geneatique : "ville, dept_num, dept_nom, région, pays, complément"
+    Format Geneatique : "ville, dept_num, dept_nom, région, pays, complément" (région/pays ignorés)
     Cas particulier : quand "ville" contient une adresse de rue (ex : "Rue Ste
     Françoise"), le numéro de rue se retrouve dans dept_num et la vraie ville
     est dans complément.  On corrige automatiquement en déplaçant la rue vers
@@ -343,11 +343,6 @@ def parse_place(plac_value: str) -> dict | None:
         result["adresse"] = f"{ville}, {dept_num}" if dept_num else ville
         if complement:
             result["ville"] = complement
-        # dept_num et dept_nom supprimés dans tous les cas
-        if region:
-            result["region"] = region
-        if pays:
-            result["pays"] = pays
     else:
         # -----------------------------------------------------------------
         # Lieu standard (ville en premier)
@@ -356,12 +351,6 @@ def parse_place(plac_value: str) -> dict | None:
             result["ville"] = ville
         if dept_num:
             result["dept_num"] = dept_num
-        if dept_nom:
-            result["dept_nom"] = dept_nom
-        if region:
-            result["region"] = region
-        if pays:
-            result["pays"] = pays
         if complement:
             result["complement"] = complement
 
