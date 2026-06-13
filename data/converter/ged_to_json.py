@@ -666,6 +666,7 @@ def convert(input_path: Path, output_path: Path) -> None:
     output_path.write_text(
         json.dumps(data, ensure_ascii=False, indent=2),
         encoding="utf-8",
+        newline="\n",   # force LF pour éviter les diffs parasites sous Windows
     )
     print("Terminé.")
 
