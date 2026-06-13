@@ -478,13 +478,6 @@ def parse_individual(indi_node: dict, records: dict) -> dict:
         if ev:
             person["naissance"] = ev
 
-    # --- Baptême ---
-    chr_node = get_child_node(indi_node, "CHR")
-    if chr_node:
-        ev = parse_event(chr_node, records)
-        if ev:
-            person["bapteme"] = ev
-
     # --- Décès ---
     deat = get_child_node(indi_node, "DEAT")
     if deat:

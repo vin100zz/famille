@@ -145,8 +145,8 @@ const Editor = (function () {
 
     // 2. Naissance
     appendSection('Naissance',
-      left  ? _buildEvtGroup(left,  ['naissance', 'bapteme']) : null,
-      right ? _buildEvtGroup(right, ['naissance', 'bapteme']) : null
+      left  ? _buildEvtGroup(left,  ['naissance']) : null,
+      right ? _buildEvtGroup(right, ['naissance']) : null
     );
 
     // 3. Mariage (pleine largeur)
@@ -257,7 +257,7 @@ const Editor = (function () {
     const wrap = el('div', 'ed-evt-group');
     keys.forEach((k, i) => {
       if (i > 0) {
-        const label = { bapteme: 'Baptême', sepulture: 'Sépulture' }[k] || k;
+        const label = { sepulture: 'Sépulture' }[k] || k;
         wrap.appendChild(txt('div', 'ed-block-title', label));
       }
       wrap.appendChild(_buildEventEditor(person, k));
@@ -956,7 +956,7 @@ const Editor = (function () {
       sexe:         person.sexe   || null,
       sosa:         person.sosa   != null ? person.sosa : undefined,
       naissance:    _cleanEvent(person.naissance),
-      bapteme:      _cleanEvent(person.bapteme),
+
       deces:        _cleanEvent(person.deces),
       sepulture:    _cleanEvent(person.sepulture),
       professions:  (person.professions  || []).filter(Boolean),

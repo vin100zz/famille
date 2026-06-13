@@ -158,7 +158,7 @@ const PersonsMap = (function () {
     }
     if (!person) return evs;
     add(person.naissance, 'Naissance');
-    add(person.bapteme,   'Baptême');
+
     add(person.deces,     'Décès');
     add(person.sepulture, 'Sépulture');
     (person.residences || []).forEach(r => add(r, 'Résidence'));
@@ -430,7 +430,7 @@ const PersonsMap = (function () {
     function _hasLieu(ev) { return !!(ev && ev.lieu); }
     function _personHasLoc(p) {
       if (!p) return false;
-      return _hasLieu(p.naissance) || _hasLieu(p.bapteme) ||
+      return _hasLieu(p.naissance) ||
              _hasLieu(p.deces)     || _hasLieu(p.sepulture) ||
              (p.residences || []).some(_hasLieu);
     }

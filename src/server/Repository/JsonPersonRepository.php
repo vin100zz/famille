@@ -92,7 +92,7 @@ class JsonPersonRepository implements IPersonRepository
             'sexe'         => isset($p['sexe'])         ? $p['sexe']         : null,
             'sosa'         => isset($p['sosa'])         ? (int) $p['sosa']   : null,
             'naissance'    => isset($p['naissance'])    ? $p['naissance']    : null,
-            'bapteme'      => isset($p['bapteme'])      ? $p['bapteme']      : null,
+
             'deces'        => isset($p['deces'])        ? $p['deces']        : null,
             'sepulture'    => isset($p['sepulture'])    ? $p['sepulture']    : null,
             'professions'  => isset($p['professions'])  ? $p['professions']  : array(),
@@ -253,7 +253,7 @@ class JsonPersonRepository implements IPersonRepository
         }
         $p = &$this->data['individus'][$id];
 
-        $fields = array('nom', 'prenom', 'sexe', 'naissance', 'bapteme',
+        $fields = array('nom', 'prenom', 'sexe', 'naissance',
                         'deces', 'sepulture', 'professions', 'residences', 'commentaires');
         foreach ($fields as $f) {
             if (array_key_exists($f, $data)) {
@@ -407,7 +407,7 @@ class JsonPersonRepository implements IPersonRepository
         foreach ($newPersons as $tempId => $pData) {
             $realId = $this->generatePersonId();
             $person = array();
-            $fields = array('nom','prenom','sexe','naissance','bapteme','deces',
+            $fields = array('nom','prenom','sexe','naissance','deces',
                             'sepulture','professions','residences','commentaires','sosa');
             foreach ($fields as $f) {
                 if (isset($pData[$f]) && $pData[$f] !== null) {

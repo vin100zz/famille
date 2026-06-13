@@ -193,17 +193,10 @@ function renderNaissanceCol(person, onSelect) {
   const col = el('div', 'person-col' + (person ? '' : ' person-col--empty'));
   if (!person) return col;
 
-  const hasNaiss = person.naissance || person.bapteme;
-  if (!hasNaiss) return col;
+  if (!person.naissance) return col;
 
   if (person.naissance) {
     const ev = renderEventBlock(person.naissance);
-    if (ev) col.appendChild(ev);
-  }
-
-  if (person.bapteme) {
-    col.appendChild(txt('div', 'section-sublabel', 'Baptême'));
-    const ev = renderEventBlock(person.bapteme);
     if (ev) col.appendChild(ev);
   }
 
