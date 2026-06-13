@@ -279,7 +279,13 @@ async function renderPersonPage(data, seq) {
   editBar.appendChild(editBtn);
   personView.appendChild(editBar);
 
-  const treeData    = buildLocalTree(data, primary);
+  let treeData = buildLocalTree(data, primary);
+  const personSosa = data.person.sosa;
+  if (personSosa != null && personSosa >= 2) {
+    try { treeData = await api.getSosaTree(personSosa); } catch (e) {}
+  } else if (conjoint && conjoint.sosa != null && conjoint.sosa >= 2) {
+    try { treeData = await api.getSosaTree(conjoint.sosa); } catch (e) {}
+  }
   const coupleCard  = renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData);
   const docs        = primary ? (primary.documents || []) : [];
   const docsSection = renderDocuments(docs);
