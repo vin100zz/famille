@@ -487,7 +487,7 @@ function drawGenLabels(wrap, sosa, children, ancestorsToShow) {
 
   addLabel(G + 1, '[data-tree="gp0"]');
   addLabel(G,     '[data-tree="male"]');
-  if (children.length) addLabel(G - 1, '[data-tree="child-0"]');
+  if (children.length) addLabel(G - 1, '[data-tree~="child-0"]');
   ancestorsToShow.forEach(function(_, i) {
     addLabel(G - 2 - i, '[data-tree="anc-' + i + '"]');
   });
