@@ -354,24 +354,28 @@ function renderCollapsibleComments(comments) {
 
   const content = el('div', 'comment-collapsible__content');
 
-  const body = el('div', 'comment-body comment-body--clamped');
-  comments.forEach(c => body.appendChild(txt('p', 'comment-text', c)));
+  // Bloc jaune : zone de texte clampée + bouton toujours visible
+  const block    = el('div', 'comment-block');
+  const textArea = el('div', 'comment-text-area comment-text-area--clamped');
+  comments.forEach(c => textArea.appendChild(txt('p', 'comment-para', c)));
+  block.appendChild(textArea);
 
   const toggleWrap = el('div', 'comment-expand-wrap');
-  const toggleBtn  = el('button', 'tree-anc-btn comment-expand-btn');
+  const toggleBtn  = el('button', 'tree-anc-btn');
   toggleBtn.type   = 'button';
   const arrow      = txt('span', 'tree-anc-btn__arrow', '▼');
   toggleBtn.appendChild(arrow);
   toggleWrap.appendChild(toggleBtn);
+  block.appendChild(toggleWrap);
+
   let expanded = false;
   toggleBtn.addEventListener('click', () => {
     expanded = !expanded;
-    body.classList.toggle('comment-body--clamped', !expanded);
+    textArea.classList.toggle('comment-text-area--clamped', !expanded);
     arrow.style.transform = expanded ? 'rotate(180deg)' : '';
   });
 
-  content.appendChild(body);
-  content.appendChild(toggleWrap);
+  content.appendChild(block);
   wrap.appendChild(content);
 
   return wrap;
