@@ -347,7 +347,7 @@ const Editor = (function () {
       return cities
         .filter(c => !q || c.ville.toLowerCase().includes(q))
         .sort((a, b) => a.ville.localeCompare(b.ville, 'fr'))
-        .slice(0, 8)
+        .slice(0, 30)
         .map(c => ({
           label: c.ville,
           sub:   c.dept || '',
@@ -373,7 +373,7 @@ const Editor = (function () {
         ? professions.filter(p => p.toLowerCase().includes(q))
         : professions
       ).slice().sort((a, b) => a.localeCompare(b, 'fr'));
-      return list.slice(0, 10).map(p => ({
+      return list.slice(0, 30).map(p => ({
         label: p, sub: '', onSelect: () => { inp.dispatchEvent(new Event('input')); },
       }));
     }, { minChars: 0 });
@@ -390,7 +390,7 @@ const Editor = (function () {
           return matchQ && matchV;
         })
         .sort((a, b) => a.adresse.localeCompare(b.adresse, 'fr'))
-        .slice(0, 8)
+        .slice(0, 30)
         .map(a => ({
           label: a.adresse,
           sub:   a.ville || '',
