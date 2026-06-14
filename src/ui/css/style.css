@@ -556,6 +556,15 @@ mark.hl {
   color: var(--muted);
   font-size: .82rem;
 }
+.event-place--clickable {
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+.event-place--clickable:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
 
 /* ── Person boxes (parents / children) ───────────────────────────────────── */
 

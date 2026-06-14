@@ -23,6 +23,7 @@ const PersonsMap = (function () {
   const _CACHE_URL  = 'src/server/Api/geocache.php';
   let   _cacheReady = false;   // chargement effectué (évite les doublons)
   let   _newEntries = {};      // entrées à persister en fin de session
+  let   _activeMap  = null;    // instance Leaflet courante
 
   const MAX_CONCURRENT = 4;    // requêtes Photon simultanées
   const CLUSTER_RADIUS = 44;   // pixels : rayon de regroupement
@@ -457,7 +458,37 @@ const PersonsMap = (function () {
       map.fitBounds(L.latLngBounds(coords), { padding: [50, 50], maxZoom: MAX_ZOOM });
     }
 
+    _activeMap = map;
     return map;
+  }
+
+  // ── Focus sur un lieu depuis la fiche ────────────────────────────────────
+
+  let _focusMarker = null;
+
+  async function focusLieu(lieu) {
+    if (!_activeMap || !lieu) return;
+    await _ensureCacheLoaded();
+    const coords = await _geocode(lieu);
+    if (!coords) return;
+
+    // Supprime l'ancien marqueur de focus
+    if (_focusMarker) { _activeMap.removeLayer(_focusMarker); _focusMarker = null; }
+
+    // Vole vers le lieu
+    const zoom = lieu.adresse ? 16 : 13;
+    _activeMap.flyTo(coords, zoom, { duration: 0.8 });
+
+    // Marqueur de focus pulsé
+    _focusMarker = L.circleMarker(coords, {
+      radius: 12, color: '#f59e0b', weight: 3,
+      fillColor: '#fde68a', fillOpacity: 0.85,
+    }).addTo(_activeMap);
+
+    // Disparaît après 3s
+    setTimeout(() => {
+      if (_focusMarker) { _activeMap.removeLayer(_focusMarker); _focusMarker = null; }
+    }, 3000);
   }
 
   // ── Vérification rapide (sans géocodage) ─────────────────────────────────
@@ -473,5 +504,5 @@ const PersonsMap = (function () {
     return _personHasLoc(person) || _personHasLoc(conjoint) || _hasLieu(mariage);
   }
 
-  return { render, hasLocations };
+  return { render, hasLocations, focusLieu };
 })();

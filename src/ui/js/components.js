@@ -203,7 +203,15 @@ function renderEventBlock(event) {
   const date  = formatDate(event.date);
   const place = formatPlace(event.lieu);
   if (date)  wrap.appendChild(txt('span', 'event-date', date));
-  if (place) wrap.appendChild(txt('span', 'event-place', place));
+  if (place) {
+    const span = txt('span', 'event-place', place);
+    if (event.lieu) {
+      span.classList.add('event-place--clickable');
+      span.title = 'Voir sur la carte';
+      span.addEventListener('click', () => PersonsMap.focusLieu(event.lieu));
+    }
+    wrap.appendChild(span);
+  }
   if (!date && !place) return null;
   return wrap;
 }
