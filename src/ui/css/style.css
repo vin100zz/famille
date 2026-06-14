@@ -1765,6 +1765,73 @@ mark.hl {
 }
 .ed-date-tip:hover { background: #bfdbfe; }
 
+.ed-date-tooltip {
+  display: none;
+  position: absolute;
+  z-index: 500;
+  background: #fff;
+  border: 1px solid #93c5fd;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
+  font-size: .8rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.ed-date-tooltip--visible { display: block; }
+
+.ed-dt-title {
+  font-weight: 700;
+  font-size: .85rem;
+  color: #1d4ed8;
+  margin-bottom: 8px;
+}
+.ed-dt-table { border-collapse: collapse; width: 100%; }
+.ed-dt-table tr + tr td { padding-top: 3px; }
+.ed-dt-ex {
+  font-family: ui-monospace, monospace;
+  font-size: .78rem;
+  color: #0f172a;
+  background: #f1f5f9;
+  border-radius: 3px;
+  padding: 1px 5px;
+  padding-right: 12px;
+  white-space: nowrap;
+}
+.ed-dt-months-title {
+  font-weight: 600;
+  font-size: .75rem;
+  color: #64748b;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.ed-dt-months {
+  font-family: ui-monospace, monospace;
+  font-size: .76rem;
+  color: #334155;
+  background: #f8fafc;
+  border-radius: 4px;
+  padding: 5px 8px;
+  letter-spacing: .03em;
+}
+
+.ed-input--error {
+  border-color: #f87171 !important;
+  background: #fff5f5;
+}
+.ed-input--error:focus {
+  box-shadow: 0 0 0 2px rgba(248,113,113,.25);
+}
+.ed-date-error {
+  font-size: .75rem;
+  color: #dc2626;
+  margin-top: 3px;
+  min-height: 1em;
+}
+
 /* ── Groupe d'événements ──────────────────────────────────────────────────── */
 
 .ed-evt-group {

@@ -272,20 +272,65 @@ const Editor = (function () {
     const ev = obj[key];
     const wrap = el('div', 'ed-event');
 
-    // Date avec infobulle
-    const dateRow = el('div', 'ed-field');
-    const lblRow  = el('div', 'ed-label-row');
+    // Date avec infobulle + validateur
+    const MONTHS  = 'JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC';
+    const DATE_RE  = new RegExp(
+      '^(' +
+        '\\d{4}'                                          + '|' + // 1740
+        '(?:' + MONTHS + ')\\s+\\d{4}'                   + '|' + // JAN 1740
+        '\\d{1,2}\\s+(?:' + MONTHS + ')\\s+\\d{4}'      + '|' + // 12 JAN 1740
+        '(?:BEF|AFT|ABT|CAL|EST)\\s+(?:\\d{4}|\\d{1,2}\\s+(?:' + MONTHS + ')\\s+\\d{4}|(?:' + MONTHS + ')\\s+\\d{4})' + '|' + // BEF/AFT/... + date
+        'BET\\s+\\d{4}\\s+AND\\s+\\d{4}'                         // BET 1740 AND 1750
+      + ')$', 'i'
+    );
+
+    const dateRow  = el('div', 'ed-field');
+    const lblRow   = el('div', 'ed-label-row');
     lblRow.appendChild(txt('span', 'ed-label', 'Date'));
     const tip = el('button', 'ed-date-tip');
     tip.type = 'button'; tip.textContent = 'ℹ';
-    tip.title = 'Formats acceptés :\n• Date exacte : 12 JAN 1740\n• Approximative : ABT 1750\n• Intervalle : BET 1756 AND 1759\n• Avant : BEF 1751\n• Après : AFT 1751\n• Calculée : CAL 1800';
     lblRow.appendChild(tip);
     dateRow.appendChild(lblRow);
-    const dateInp = document.createElement('input');
-    dateInp.type = 'text'; dateInp.className = 'ed-input';
-    dateInp.value = ev.date || '';
-    dateInp.addEventListener('input', () => { ev.date = dateInp.value.trim() || null; });
+
+    // Tooltip riche pour les formats de date
+    const dateTip = el('div', 'ed-date-tooltip');
+    dateTip.innerHTML =
+      '<div class="ed-dt-title">Formats de date acceptés</div>' +
+      '<table class="ed-dt-table">' +
+        '<tr><td>Année seule</td><td class="ed-dt-ex">1740</td></tr>' +
+        '<tr><td>Mois + année</td><td class="ed-dt-ex">JAN 1740</td></tr>' +
+        '<tr><td>Date exacte</td><td class="ed-dt-ex">12 JAN 1740</td></tr>' +
+        '<tr><td>Approximative</td><td class="ed-dt-ex">ABT 1750</td></tr>' +
+        '<tr><td>Avant</td><td class="ed-dt-ex">BEF 1751</td></tr>' +
+        '<tr><td>Après</td><td class="ed-dt-ex">AFT 1751</td></tr>' +
+        '<tr><td>Calculée</td><td class="ed-dt-ex">CAL 1800</td></tr>' +
+        '<tr><td>Estimée</td><td class="ed-dt-ex">EST 1800</td></tr>' +
+        '<tr><td>Intervalle</td><td class="ed-dt-ex">BET 1756 AND 1759</td></tr>' +
+      '</table>' +
+      '<div class="ed-dt-months-title">Abréviations des mois</div>' +
+      '<div class="ed-dt-months">JAN · FEB · MAR · APR · MAY · JUN · JUL · AUG · SEP · OCT · NOV · DEC</div>';
+    lblRow.appendChild(dateTip);
+
+    let _tipTimer = null;
+    const showDateTip = () => { clearTimeout(_tipTimer); dateTip.classList.add('ed-date-tooltip--visible'); };
+    const hideDateTip = () => { _tipTimer = setTimeout(() => dateTip.classList.remove('ed-date-tooltip--visible'), 120); };
+    [tip, dateTip].forEach(el => {
+      el.addEventListener('mouseenter', showDateTip);
+      el.addEventListener('mouseleave', hideDateTip);
+    });
+    const dateInp  = document.createElement('input');
+    dateInp.type   = 'text'; dateInp.className = 'ed-input';
+    dateInp.value  = ev.date || '';
+    const dateErr  = txt('div', 'ed-date-error', '');
+    dateInp.addEventListener('input', () => {
+      const val = dateInp.value.trim();
+      ev.date   = val || null;
+      const ok  = !val || DATE_RE.test(val.toUpperCase());
+      dateInp.classList.toggle('ed-input--error', !ok);
+      dateErr.textContent = ok ? '' : 'Format invalide — ex : 12 JAN 1740, ABT 1750, BET 1740 AND 1750';
+    });
     dateRow.appendChild(dateInp);
+    dateRow.appendChild(dateErr);
     wrap.appendChild(dateRow);
 
     if (!ev.lieu) ev.lieu = {};
