@@ -949,19 +949,20 @@ const Editor = (function () {
 
   // ── Utilitaires ────────────────────────────────────────────────────────────
 
+  function _t(v) { return (v && typeof v === 'string') ? v.trim() || null : (v ?? null); }
+
   function _buildPersonPayload(person, parentIds) {
     return {
-      nom:          person.nom    || null,
-      prenom:       person.prenom || null,
-      sexe:         person.sexe   || null,
-      sosa:         person.sosa   != null ? person.sosa : undefined,
+      nom:          _t(person.nom),
+      prenom:       _t(person.prenom),
+      sexe:         _t(person.sexe),
+      sosa:         person.sosa != null ? person.sosa : undefined,
       naissance:    _cleanEvent(person.naissance),
-
       deces:        _cleanEvent(person.deces),
       sepulture:    _cleanEvent(person.sepulture),
-      professions:  (person.professions  || []).filter(Boolean),
+      professions:  (person.professions  || []).map(p => _t(p)).filter(Boolean),
       residences:   (person.residences   || []).map(r => _cleanEvent(r)).filter(Boolean),
-      commentaires: (person.commentaires || []).filter(Boolean),
+      commentaires: (person.commentaires || []).map(c => _t(c)).filter(Boolean),
       parents:      parentIds.filter(Boolean),
     };
   }
@@ -977,8 +978,8 @@ const Editor = (function () {
     if (hasDate) result.date = String(ev.date).trim();
     if (hasLieu) {
       result.lieu = {};
-      keys.forEach(k => { if (lieu[k]) result.lieu[k] = lieu[k]; });
-      result.lieu.brut = keys.map(k => lieu[k]).filter(Boolean).join(', ');
+      keys.forEach(k => { if (lieu[k]) result.lieu[k] = String(lieu[k]).trim(); });
+      result.lieu.brut = keys.map(k => result.lieu[k]).filter(Boolean).join(', ');
     }
     return result;
   }
