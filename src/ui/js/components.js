@@ -685,7 +685,7 @@ function renderSosaTree(treeData, onSelect, currentPersonId) {
 }
 // ── Documents riches ──────────────────────────────────────────────────────
 
-const IMAGES_BASE = '../famille/contenu/pages/';
+const IMAGES_BASE = './images/';
 
 /**
  * Ouvre l'image dans la lightbox globale.

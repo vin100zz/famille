@@ -911,7 +911,7 @@ const Editor = (function () {
   // onSelect(relPath) est appelé quand l'utilisateur clique sur un fichier.
 
   function _showImageBrowser(onSelect, initialDir) {
-    const BASE_URL = typeof IMAGES_BASE !== 'undefined' ? IMAGES_BASE : '../famille/contenu/pages/';
+    const BASE_URL = typeof IMAGES_BASE !== 'undefined' ? IMAGES_BASE : './images/';
 
     const overlay = el('div', 'imgbr-overlay');
     const modal   = el('div', 'imgbr-modal');
@@ -1010,7 +1010,7 @@ const Editor = (function () {
   function _buildImageBlockEditor(wrap, block, blockIdx, colBlocks, renderCols) {
     wrap.classList.add('ed-img-block');
 
-    const BASE_URL = typeof IMAGES_BASE !== 'undefined' ? IMAGES_BASE : '../famille/contenu/pages/';
+    const BASE_URL = typeof IMAGES_BASE !== 'undefined' ? IMAGES_BASE : './images/';
 
     // Prévisualisation (cliquable)
     const imgWrap = el('div', 'ed-img-block__img');
