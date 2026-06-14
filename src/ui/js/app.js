@@ -71,7 +71,8 @@ let currentResults = [];
 searchInput.addEventListener('input', () => {
   clearTimeout(searchTimer);
   const q = searchInput.value.trim();
-  if (q.length < 2) { hideDropdown(); return; }
+  if (q.length < 1) { hideDropdown(); return; }
+  if (q.length < 2 && !/^\d$/.test(q)) { hideDropdown(); return; }
   searchTimer = setTimeout(() => doSearch(q), 260);
 });
 

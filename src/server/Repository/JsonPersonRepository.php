@@ -31,6 +31,9 @@ class JsonPersonRepository implements IPersonRepository
             return array();
         }
 
+        // Découpe en mots (tous doivent matcher, dans n'importe quel ordre)
+        $words = array_filter(preg_split('/\s+/', $q));
+
         // Recherche par numéro Sosa si la requête est purement numérique
         $sosaNum = ctype_digit(trim($query)) ? (int) trim($query) : null;
 
@@ -39,11 +42,18 @@ class JsonPersonRepository implements IPersonRepository
             $nom    = $this->normalize(isset($p['nom'])    ? $p['nom']    : '');
             $prenom = $this->normalize(isset($p['prenom']) ? $p['prenom'] : '');
 
-            $nameMatch = ($nom !== '' || $prenom !== '') && (
-                strpos($nom, $q) !== false
-                || strpos($prenom, $q) !== false
-                || strpos($prenom . ' ' . $nom, $q) !== false
-            );
+            // Champ de recherche : "nom prenom" + "prenom nom" pour couvrir tous les ordres
+            $haystack = $nom . ' ' . $prenom . ' ' . $prenom . ' ' . $nom;
+
+            $nameMatch = ($nom !== '' || $prenom !== '');
+            if ($nameMatch) {
+                foreach ($words as $word) {
+                    if (strpos($haystack, $word) === false) {
+                        $nameMatch = false;
+                        break;
+                    }
+                }
+            }
 
             $sosaMatch = $sosaNum !== null
                 && isset($p['sosa'])

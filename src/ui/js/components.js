@@ -42,18 +42,44 @@ function normalizeStr(s) {
 function highlightNodes(text, query) {
   if (!text) return [document.createTextNode('')];
   if (!query) return [document.createTextNode(text)];
-  const normText  = normalizeStr(text);
-  const normQuery = normalizeStr(query);
-  const idx = normText.indexOf(normQuery);
-  if (idx === -1) return [document.createTextNode(text)];
-  const len   = normQuery.length;
+
+  // Découpe la requête en mots et cherche chacun indépendamment
+  const words = normalizeStr(query).split(/\s+/).filter(Boolean);
+  const normText = normalizeStr(text);
+
+  // Construit un tableau de plages [start, end] à surligner (union, sans doublons)
+  const ranges = [];
+  words.forEach(w => {
+    let i = 0;
+    while ((i = normText.indexOf(w, i)) !== -1) {
+      ranges.push([i, i + w.length]);
+      i += w.length;
+    }
+  });
+
+  if (!ranges.length) return [document.createTextNode(text)];
+
+  // Fusionne les plages qui se chevauchent, trie par début
+  ranges.sort((a, b) => a[0] - b[0]);
+  const merged = [ranges[0]];
+  for (let i = 1; i < ranges.length; i++) {
+    const last = merged[merged.length - 1];
+    if (ranges[i][0] <= last[1]) last[1] = Math.max(last[1], ranges[i][1]);
+    else merged.push(ranges[i]);
+  }
+
+  // Construit les nœuds DOM
   const nodes = [];
-  if (idx > 0) nodes.push(document.createTextNode(text.slice(0, idx)));
-  const mark = document.createElement('mark');
-  mark.className = 'hl';
-  mark.textContent = text.slice(idx, idx + len);
-  nodes.push(mark);
-  if (idx + len < text.length) nodes.push(document.createTextNode(text.slice(idx + len)));
+  let pos = 0;
+  merged.forEach(([s, e]) => {
+    if (s > pos) nodes.push(document.createTextNode(text.slice(pos, s)));
+    const mark = document.createElement('mark');
+    mark.className = 'hl';
+    mark.textContent = text.slice(s, e);
+    nodes.push(mark);
+    pos = e;
+  });
+  if (pos < text.length) nodes.push(document.createTextNode(text.slice(pos)));
   return nodes;
 }
 
