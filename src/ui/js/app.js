@@ -1,13 +1,32 @@
 'use strict';
 
 // ── Initialisation ─────────────────────────────────────────────────────────
-const api          = new ApiClient('src/server/Api');
-const searchInput  = document.getElementById('search-input');
-const searchDrop   = document.getElementById('search-dropdown');
-const personView   = document.getElementById('person-view');
-const welcomeEl    = document.getElementById('welcome');
-const mainEl       = document.getElementById('main-content');
-const homeBtnEl    = document.getElementById('home-btn');
+const api             = new ApiClient('src/server/Api');
+const searchInput     = document.getElementById('search-input');
+const searchDrop      = document.getElementById('search-dropdown');
+const personView      = document.getElementById('person-view');
+const welcomeEl       = document.getElementById('welcome');
+const mainEl          = document.getElementById('main-content');
+const homeBtnEl       = document.getElementById('home-btn');
+const globalMapScreen = document.getElementById('global-map-screen');
+const globalMapBtn    = document.getElementById('global-map-btn');
+
+// ── Carte globale ──────────────────────────────────────────────────────────
+
+let _globalMapOpen = false;
+
+function toggleGlobalMap() {
+  _globalMapOpen = !_globalMapOpen;
+  if (_globalMapOpen) {
+    globalMapScreen.hidden = false;
+    globalMapBtn.classList.add('header-map-btn--active');
+    GlobalMap.open(globalMapScreen);
+  } else {
+    GlobalMap.close();
+    globalMapScreen.hidden = true;
+    globalMapBtn.classList.remove('header-map-btn--active');
+  }
+}
 
 // Calcule et met à jour --hdr-h (hauteur réelle du header sticky)
 function _updateHdrH() {

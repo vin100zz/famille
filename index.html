@@ -18,6 +18,7 @@
         </svg>
       </button>
       <span class="site-title">Une famille marseillaise</span>
+      <button id="global-map-btn" class="header-map-btn" onclick="toggleGlobalMap()" title="Carte de tous les ancêtres">🌍</button>
       <div class="search-wrapper">
         <input
           type="text"
@@ -79,6 +80,9 @@
     </div>
   </div>
 
+  <!-- Carte globale (plein écran) -->
+  <div id="global-map-screen" class="global-map-screen" hidden></div>
+
   <!-- Tooltip arbre -->
   <div id="ct-tooltip" class="ct-tooltip"></div>
 
@@ -94,6 +98,7 @@
   <script src="src/ui/js/editor.js?v=6"></script>
   <script src="src/ui/js/circular-tree.js?v=2"></script>
   <script src="src/ui/js/map-view.js?v=12"></script>
+  <script src="src/ui/js/global-map.js?v=1"></script>
   <script src="src/ui/js/app.js?v=8"></script>
 </body>
 </html>
