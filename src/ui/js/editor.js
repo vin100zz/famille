@@ -157,8 +157,8 @@ const Editor = (function () {
 
     // 4. Professions
     appendSection('Professions',
-      left  ? _buildStringListEditor(left.professions  || (left.professions  = []))       : null,
-      right ? _buildStringListEditor(right.professions || (right.professions = []))       : null
+      left  ? _buildStringListEditor(left.professions  || (left.professions  = []), false, _attachProfessionAutocomplete) : null,
+      right ? _buildStringListEditor(right.professions || (right.professions = []), false, _attachProfessionAutocomplete) : null
     );
 
     // 5. Résidences
@@ -265,6 +265,140 @@ const Editor = (function () {
     return wrap;
   }
 
+  // ── Autocomplete villes ───────────────────────────────────────────────────
+
+  let _placesCache = null;
+
+  async function _loadPlaces() {
+    if (_placesCache) return _placesCache;
+    try {
+      const r = await fetch('src/server/Api/cities.php');
+      _placesCache = r.ok ? await r.json() : { cities: [], addresses: [] };
+    } catch { _placesCache = { cities: [], addresses: [] }; }
+    return _placesCache;
+  }
+
+  /**
+   * Attache un autocomplete sur un input ville.
+   * onSelect(ville, dept) est appelé quand l'utilisateur choisit une suggestion.
+   */
+  /** Autocomplete générique. getCandidates(q) → [{label, sub, onSelect}] */
+  function _attachAutocomplete(inp, getCandidates, { minChars = 2 } = {}) {
+    const wrap = inp.parentElement;
+    wrap.style.position = 'relative';
+
+    const dropdown = el('ul', 'ed-ac-list');
+    wrap.appendChild(dropdown);
+
+    let _items = [], _active = -1;
+
+    function close() {
+      dropdown.innerHTML = '';
+      dropdown.classList.remove('ed-ac-list--open');
+      _active = -1;
+    }
+
+    function highlight(i) {
+      [...dropdown.children].forEach((li, j) => li.classList.toggle('ed-ac-item--active', j === i));
+      _active = i;
+    }
+
+    async function refresh() {
+      const q = inp.value.trim().toLowerCase();
+      if (q.length < minChars) { close(); return; }
+      _items = await getCandidates(q);
+      dropdown.innerHTML = '';
+      if (!_items.length) { close(); return; }
+      _items.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.className = 'ed-ac-item';
+        li.innerHTML = item.sub
+          ? `<span class="ed-ac-ville">${item.label}</span><span class="ed-ac-dept">${item.sub}</span>`
+          : `<span class="ed-ac-ville">${item.label}</span>`;
+        li.addEventListener('mousedown', e => { e.preventDefault(); inp.value = item.label; item.onSelect(); close(); });
+        li.addEventListener('mouseover', () => highlight(i));
+        dropdown.appendChild(li);
+      });
+      dropdown.classList.add('ed-ac-list--open');
+      _active = -1;
+    }
+
+    inp.addEventListener('input', refresh);
+    inp.addEventListener('focus', refresh);
+
+    inp.addEventListener('keydown', e => {
+      if (!dropdown.classList.contains('ed-ac-list--open')) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); highlight(Math.min(_active + 1, _items.length - 1)); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); highlight(Math.max(_active - 1, 0)); }
+      else if (e.key === 'Enter' && _active >= 0) {
+        e.preventDefault();
+        const item = _items[_active];
+        inp.value = item.label; item.onSelect(); close();
+      }
+      else if (e.key === 'Escape') close();
+    });
+
+    inp.addEventListener('blur', () => setTimeout(close, 150));
+  }
+
+  function _attachVilleAutocomplete(inp, onSelect) {
+    _attachAutocomplete(inp, async q => {
+      const { cities } = await _loadPlaces();
+      return cities
+        .filter(c => !q || c.ville.toLowerCase().includes(q))
+        .sort((a, b) => a.ville.localeCompare(b.ville, 'fr'))
+        .slice(0, 8)
+        .map(c => ({
+          label: c.ville,
+          sub:   c.dept || '',
+          onSelect: () => onSelect(c.ville, c.dept),
+        }));
+    }, { minChars: 0 });
+  }
+
+  function _attachProfessionAutocomplete(inp) {
+    // Capitalise automatiquement la première lettre
+    inp.addEventListener('input', () => {
+      const v = inp.value;
+      if (v && v[0] !== v[0].toUpperCase()) {
+        const pos = inp.selectionStart;
+        inp.value = v[0].toUpperCase() + v.slice(1);
+        inp.setSelectionRange(pos, pos);
+      }
+    });
+
+    _attachAutocomplete(inp, async q => {
+      const { professions } = await _loadPlaces();
+      const list = (q
+        ? professions.filter(p => p.toLowerCase().includes(q))
+        : professions
+      ).slice().sort((a, b) => a.localeCompare(b, 'fr'));
+      return list.slice(0, 10).map(p => ({
+        label: p, sub: '', onSelect: () => { inp.dispatchEvent(new Event('input')); },
+      }));
+    }, { minChars: 0 });
+  }
+
+  function _attachAdresseAutocomplete(inp, getVille, onSelect) {
+    _attachAutocomplete(inp, async q => {
+      const { addresses } = await _loadPlaces();
+      const ville = (getVille() || '').toLowerCase();
+      return addresses
+        .filter(a => {
+          const matchQ = !q || a.adresse.toLowerCase().includes(q);
+          const matchV = !ville || a.ville.toLowerCase() === ville;
+          return matchQ && matchV;
+        })
+        .sort((a, b) => a.adresse.localeCompare(b.adresse, 'fr'))
+        .slice(0, 8)
+        .map(a => ({
+          label: a.adresse,
+          sub:   a.ville || '',
+          onSelect: () => onSelect(a.adresse, a.ville, a.dept),
+        }));
+    }, { minChars: 0 });
+  }
+
   // ── Éditeur d'événement (date + lieu + adresse) ────────────────────────────
 
   function _buildEventEditor(obj, key) {
@@ -336,10 +470,12 @@ const Editor = (function () {
     if (!ev.lieu) ev.lieu = {};
     const lieu = ev.lieu;
     const lieuBlock = el('div', 'ed-lieu');
+    const inpByKey = {};
+
     [
       ['Adresse',        'adresse'],
-      ['N° département', 'dept_num'],
       ['Ville',          'ville'],
+      ['N° département', 'dept_num'],
     ].forEach(([lbl, fkey]) => {
       const row = el('div', 'ed-field ed-field--sm');
       row.appendChild(txt('label', 'ed-label', lbl));
@@ -349,14 +485,43 @@ const Editor = (function () {
       inp.addEventListener('input', () => { lieu[fkey] = inp.value.trim() || undefined; });
       row.appendChild(inp);
       lieuBlock.appendChild(row);
+      inpByKey[fkey] = inp;
     });
+
+    _attachVilleAutocomplete(inpByKey['ville'], (ville, dept) => {
+      lieu['ville'] = ville;
+      inpByKey['ville'].value = ville;
+      const deptInp = inpByKey['dept_num'];
+      if (dept && deptInp && !deptInp.value.trim()) {
+        deptInp.value    = dept;
+        lieu['dept_num'] = dept;
+      }
+    });
+
+    _attachAdresseAutocomplete(
+      inpByKey['adresse'],
+      () => inpByKey['ville'].value.trim(),
+      (adresse, ville, dept) => {
+        lieu['adresse'] = adresse;
+        if (ville && !inpByKey['ville'].value.trim()) {
+          inpByKey['ville'].value = ville;
+          lieu['ville'] = ville;
+        }
+        const deptInp = inpByKey['dept_num'];
+        if (dept && !deptInp.value.trim()) {
+          deptInp.value    = dept;
+          lieu['dept_num'] = dept;
+        }
+      }
+    );
+
     wrap.appendChild(lieuBlock);
     return wrap;
   }
 
   // ── Liste de chaînes (professions, commentaires) ──────────────────────────
 
-  function _buildStringListEditor(arr, multiline) {
+  function _buildStringListEditor(arr, multiline, attachAC) {
     const wrap = el('div', 'ed-list');
     const refresh = () => {
       wrap.innerHTML = '';
@@ -371,6 +536,7 @@ const Editor = (function () {
         inp.value = val;
         inp.addEventListener('input', () => { arr[i] = inp.value; });
         row.appendChild(inp);
+        if (attachAC && !multiline) attachAC(inp);
         const del = el('button', 'ed-icon-btn ed-icon-btn--del');
         del.type = 'button'; del.title = 'Supprimer'; del.textContent = '×';
         del.addEventListener('click', () => { arr.splice(i, 1); refresh(); });

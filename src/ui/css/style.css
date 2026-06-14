@@ -1286,6 +1286,49 @@ mark.hl {
   gap: 4px;
 }
 
+/* ── Autocomplete villes ─────────────────────────────────────────────────── */
+
+.ed-ac-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0; right: 0;
+  margin: 2px 0 0;
+  padding: 4px 0;
+  background: #fff;
+  border: 1px solid #93c5fd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  list-style: none;
+  z-index: 300;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.ed-ac-list--open { display: block; }
+
+.ed-ac-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: .83rem;
+  gap: 8px;
+}
+.ed-ac-item--active,
+.ed-ac-item:hover {
+  background: #eff6ff;
+}
+.ed-ac-ville { flex: 1; }
+.ed-ac-dept {
+  font-size: .75rem;
+  color: #64748b;
+  background: #f1f5f9;
+  border-radius: 3px;
+  padding: 1px 5px;
+  white-space: nowrap;
+}
+
 /* ── Listes éditables ─────────────────────────────────────────────────────── */
 
 .ed-list { display: flex; flex-direction: column; gap: 6px; }
