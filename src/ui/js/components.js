@@ -339,29 +339,41 @@ function renderDecesCol(person) {
 // ── Colonne commentaires ───────────────────────────────────────────────────
 
 /**
- * Retourne un bloc repliable : icône "i" jaune + contenu masqué par défaut.
+ * Affiche les commentaires avec les 3 premières lignes visibles par défaut.
+ * Un bouton "Voir plus / Voir moins" apparaît si le contenu déborde.
  */
 function renderCollapsibleComments(comments) {
   if (!comments || !comments.length) return null;
 
   const wrap = el('div', 'comment-collapsible');
 
-  const btn = el('button', 'comment-toggle');
-  btn.type  = 'button';
-  btn.title = 'Afficher / masquer les commentaires';
-  btn.textContent = 'i';
+  const icon = el('span', 'comment-icon');
+  icon.textContent = 'i';
+  icon.title = 'Commentaires';
+  wrap.appendChild(icon);
 
-  const body = el('div', 'comment-body');
-  body.hidden = true;
+  const content = el('div', 'comment-collapsible__content');
+
+  const body = el('div', 'comment-body comment-body--clamped');
   comments.forEach(c => body.appendChild(txt('p', 'comment-text', c)));
 
-  btn.addEventListener('click', () => {
-    body.hidden = !body.hidden;
-    btn.classList.toggle('comment-toggle--open', !body.hidden);
+  const toggleWrap = el('div', 'comment-expand-wrap');
+  const toggleBtn  = el('button', 'tree-anc-btn comment-expand-btn');
+  toggleBtn.type   = 'button';
+  const arrow      = txt('span', 'tree-anc-btn__arrow', '▼');
+  toggleBtn.appendChild(arrow);
+  toggleWrap.appendChild(toggleBtn);
+  let expanded = false;
+  toggleBtn.addEventListener('click', () => {
+    expanded = !expanded;
+    body.classList.toggle('comment-body--clamped', !expanded);
+    arrow.style.transform = expanded ? 'rotate(180deg)' : '';
   });
 
-  wrap.appendChild(btn);
-  wrap.appendChild(body);
+  content.appendChild(body);
+  content.appendChild(toggleWrap);
+  wrap.appendChild(content);
+
   return wrap;
 }
 
