@@ -764,6 +764,7 @@ function renderDocuments(documents) {
 
     // ── Contenu (colonnes) ────────────────────────────────────────────────
     const content = el('div', 'doc-content');
+    if ((doc.contenu || []).length === 1) content.classList.add('doc-content--single');
 
     (doc.contenu || []).forEach(function(colBlocks) {
       const col = el('div', 'doc-col');
@@ -775,6 +776,7 @@ function renderDocuments(documents) {
           img.src   = IMAGES_BASE + block.fichier;
           img.alt   = '';
           img.loading = 'lazy';
+          if (block.width && block.width !== 100) img.style.maxWidth = block.width + '%';
           img.addEventListener('click', function() { openLightbox(img.src); });
           wrap.appendChild(img);
           col.appendChild(wrap);

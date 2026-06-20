@@ -1070,6 +1070,36 @@ const Editor = (function () {
     wrap.appendChild(pathRow);
     wrap.appendChild(errEl);
 
+    // Slider de taille
+    const sizeRow = el('div', 'ed-img-size-row');
+    const sizeLabel = txt('span', 'ed-img-size-label', 'Largeur : ');
+    const sizeVal   = txt('span', 'ed-img-size-val', (block.width || 100) + ' %');
+    const sizeInp   = document.createElement('input');
+    sizeInp.type = 'range'; sizeInp.min = 10; sizeInp.max = 100; sizeInp.step = 5;
+    sizeInp.value = block.width || 100;
+    sizeInp.className = 'ed-img-size-range';
+    sizeInp.addEventListener('mousedown', () => {
+      const bwrap = wrap.closest('[draggable]');
+      if (bwrap) {
+        bwrap.setAttribute('draggable', 'false');
+        const restore = () => { bwrap.setAttribute('draggable', 'true'); window.removeEventListener('mouseup', restore); };
+        window.addEventListener('mouseup', restore);
+      }
+    });
+    sizeInp.addEventListener('input', () => {
+      block.width = +sizeInp.value;
+      sizeVal.textContent = block.width + ' %';
+      const img = imgWrap.querySelector('img');
+      if (img) img.style.maxWidth = block.width + '%';
+    });
+    // Appliquer visuellement à l'aperçu initial
+    const initImg = imgWrap.querySelector('img');
+    if (initImg && block.width && block.width !== 100) initImg.style.maxWidth = block.width + '%';
+    sizeRow.appendChild(sizeLabel);
+    sizeRow.appendChild(sizeInp);
+    sizeRow.appendChild(sizeVal);
+    wrap.appendChild(sizeRow);
+
     // Overlay déplacer/supprimer
     const overlay = el('div', 'ed-img-block__overlay');
     if (blockIdx > 0)
