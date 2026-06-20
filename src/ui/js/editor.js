@@ -1147,7 +1147,7 @@ const Editor = (function () {
       bar.appendChild(btn);
     });
     // Appliquer l'alignement initial
-    const initAlign = block.align || 'center';
+    const initAlign = block.align || 'left';
     edDiv.style.textAlign = initAlign;
     if (alignBtns[initAlign]) alignBtns[initAlign].classList.add('ed-txt-btn--active');
 

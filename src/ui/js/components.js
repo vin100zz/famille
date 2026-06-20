@@ -783,8 +783,7 @@ function renderDocuments(documents) {
         } else if (block.type === 'TEXTE') {
           const wrap = el('div', 'doc-block--texte');
           wrap.innerHTML = block.fichier;   // HTML déjà sanitisé côté saisie
-          const textAlign = block.align || 'center';
-          if (textAlign !== 'left') wrap.style.textAlign = textAlign;
+          if (block.align && block.align !== 'left') wrap.style.textAlign = block.align;
           col.appendChild(wrap);
         }
       });
