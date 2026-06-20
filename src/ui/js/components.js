@@ -42,18 +42,44 @@ function normalizeStr(s) {
 function highlightNodes(text, query) {
   if (!text) return [document.createTextNode('')];
   if (!query) return [document.createTextNode(text)];
-  const normText  = normalizeStr(text);
-  const normQuery = normalizeStr(query);
-  const idx = normText.indexOf(normQuery);
-  if (idx === -1) return [document.createTextNode(text)];
-  const len   = normQuery.length;
+
+  // Découpe la requête en mots et cherche chacun indépendamment
+  const words = normalizeStr(query).split(/\s+/).filter(Boolean);
+  const normText = normalizeStr(text);
+
+  // Construit un tableau de plages [start, end] à surligner (union, sans doublons)
+  const ranges = [];
+  words.forEach(w => {
+    let i = 0;
+    while ((i = normText.indexOf(w, i)) !== -1) {
+      ranges.push([i, i + w.length]);
+      i += w.length;
+    }
+  });
+
+  if (!ranges.length) return [document.createTextNode(text)];
+
+  // Fusionne les plages qui se chevauchent, trie par début
+  ranges.sort((a, b) => a[0] - b[0]);
+  const merged = [ranges[0]];
+  for (let i = 1; i < ranges.length; i++) {
+    const last = merged[merged.length - 1];
+    if (ranges[i][0] <= last[1]) last[1] = Math.max(last[1], ranges[i][1]);
+    else merged.push(ranges[i]);
+  }
+
+  // Construit les nœuds DOM
   const nodes = [];
-  if (idx > 0) nodes.push(document.createTextNode(text.slice(0, idx)));
-  const mark = document.createElement('mark');
-  mark.className = 'hl';
-  mark.textContent = text.slice(idx, idx + len);
-  nodes.push(mark);
-  if (idx + len < text.length) nodes.push(document.createTextNode(text.slice(idx + len)));
+  let pos = 0;
+  merged.forEach(([s, e]) => {
+    if (s > pos) nodes.push(document.createTextNode(text.slice(pos, s)));
+    const mark = document.createElement('mark');
+    mark.className = 'hl';
+    mark.textContent = text.slice(s, e);
+    nodes.push(mark);
+    pos = e;
+  });
+  if (pos < text.length) nodes.push(document.createTextNode(text.slice(pos)));
   return nodes;
 }
 
@@ -313,29 +339,45 @@ function renderDecesCol(person) {
 // ── Colonne commentaires ───────────────────────────────────────────────────
 
 /**
- * Retourne un bloc repliable : icône "i" jaune + contenu masqué par défaut.
+ * Affiche les commentaires avec les 3 premières lignes visibles par défaut.
+ * Un bouton "Voir plus / Voir moins" apparaît si le contenu déborde.
  */
 function renderCollapsibleComments(comments) {
   if (!comments || !comments.length) return null;
 
   const wrap = el('div', 'comment-collapsible');
 
-  const btn = el('button', 'comment-toggle');
-  btn.type  = 'button';
-  btn.title = 'Afficher / masquer les commentaires';
-  btn.textContent = 'i';
+  const icon = el('span', 'comment-icon');
+  icon.textContent = 'i';
+  icon.title = 'Commentaires';
+  wrap.appendChild(icon);
 
-  const body = el('div', 'comment-body');
-  body.hidden = true;
-  comments.forEach(c => body.appendChild(txt('p', 'comment-text', c)));
+  const content = el('div', 'comment-collapsible__content');
 
-  btn.addEventListener('click', () => {
-    body.hidden = !body.hidden;
-    btn.classList.toggle('comment-toggle--open', !body.hidden);
+  // Bloc jaune : zone de texte clampée + bouton toujours visible
+  const block    = el('div', 'comment-block');
+  const textArea = el('div', 'comment-text-area comment-text-area--clamped');
+  comments.forEach(c => textArea.appendChild(txt('p', 'comment-para', c)));
+  block.appendChild(textArea);
+
+  const toggleWrap = el('div', 'comment-expand-wrap');
+  const toggleBtn  = el('button', 'tree-anc-btn');
+  toggleBtn.type   = 'button';
+  const arrow      = txt('span', 'tree-anc-btn__arrow', '▼');
+  toggleBtn.appendChild(arrow);
+  toggleWrap.appendChild(toggleBtn);
+  block.appendChild(toggleWrap);
+
+  let expanded = false;
+  toggleBtn.addEventListener('click', () => {
+    expanded = !expanded;
+    textArea.classList.toggle('comment-text-area--clamped', !expanded);
+    arrow.style.transform = expanded ? 'rotate(180deg)' : '';
   });
 
-  wrap.appendChild(btn);
-  wrap.appendChild(body);
+  content.appendChild(block);
+  wrap.appendChild(content);
+
   return wrap;
 }
 
@@ -722,6 +764,7 @@ function renderDocuments(documents) {
 
     // ── Contenu (colonnes) ────────────────────────────────────────────────
     const content = el('div', 'doc-content');
+    if ((doc.contenu || []).length === 1) content.classList.add('doc-content--single');
 
     (doc.contenu || []).forEach(function(colBlocks) {
       const col = el('div', 'doc-col');
@@ -733,12 +776,14 @@ function renderDocuments(documents) {
           img.src   = IMAGES_BASE + block.fichier;
           img.alt   = '';
           img.loading = 'lazy';
+          if (block.width && block.width !== 100) img.style.maxWidth = block.width + '%';
           img.addEventListener('click', function() { openLightbox(img.src); });
           wrap.appendChild(img);
           col.appendChild(wrap);
         } else if (block.type === 'TEXTE') {
           const wrap = el('div', 'doc-block--texte');
           wrap.innerHTML = block.fichier;   // HTML déjà sanitisé côté saisie
+          if (block.align && block.align !== 'left') wrap.style.textAlign = block.align;
           col.appendChild(wrap);
         }
       });

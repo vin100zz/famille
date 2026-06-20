@@ -347,7 +347,7 @@ const Editor = (function () {
       return cities
         .filter(c => !q || c.ville.toLowerCase().includes(q))
         .sort((a, b) => a.ville.localeCompare(b.ville, 'fr'))
-        .slice(0, 8)
+        .slice(0, 30)
         .map(c => ({
           label: c.ville,
           sub:   c.dept || '',
@@ -373,7 +373,7 @@ const Editor = (function () {
         ? professions.filter(p => p.toLowerCase().includes(q))
         : professions
       ).slice().sort((a, b) => a.localeCompare(b, 'fr'));
-      return list.slice(0, 10).map(p => ({
+      return list.slice(0, 30).map(p => ({
         label: p, sub: '', onSelect: () => { inp.dispatchEvent(new Event('input')); },
       }));
     }, { minChars: 0 });
@@ -390,7 +390,7 @@ const Editor = (function () {
           return matchQ && matchV;
         })
         .sort((a, b) => a.adresse.localeCompare(b.adresse, 'fr'))
-        .slice(0, 8)
+        .slice(0, 30)
         .map(a => ({
           label: a.adresse,
           sub:   a.ville || '',
@@ -961,7 +961,7 @@ const Editor = (function () {
       modal.appendChild(body);
 
       try {
-        const resp = await fetch('src/server/Api/images.php?dir=' + encodeURIComponent(dir));
+        const resp = await fetch('src/server/Api/images.php' + (dir ? '?dir=' + encodeURIComponent(dir) : ''));
         if (!resp.ok) throw new Error(resp.status + ' ' + resp.statusText);
         const data = await resp.json();
         body.innerHTML = '';
@@ -1070,6 +1070,36 @@ const Editor = (function () {
     wrap.appendChild(pathRow);
     wrap.appendChild(errEl);
 
+    // Slider de taille
+    const sizeRow = el('div', 'ed-img-size-row');
+    const sizeLabel = txt('span', 'ed-img-size-label', 'Largeur : ');
+    const sizeVal   = txt('span', 'ed-img-size-val', (block.width || 100) + ' %');
+    const sizeInp   = document.createElement('input');
+    sizeInp.type = 'range'; sizeInp.min = 10; sizeInp.max = 100; sizeInp.step = 5;
+    sizeInp.value = block.width || 100;
+    sizeInp.className = 'ed-img-size-range';
+    sizeInp.addEventListener('mousedown', () => {
+      const bwrap = wrap.closest('[draggable]');
+      if (bwrap) {
+        bwrap.setAttribute('draggable', 'false');
+        const restore = () => { bwrap.setAttribute('draggable', 'true'); window.removeEventListener('mouseup', restore); };
+        window.addEventListener('mouseup', restore);
+      }
+    });
+    sizeInp.addEventListener('input', () => {
+      block.width = +sizeInp.value;
+      sizeVal.textContent = block.width + ' %';
+      const img = imgWrap.querySelector('img');
+      if (img) img.style.maxWidth = block.width + '%';
+    });
+    // Appliquer visuellement à l'aperçu initial
+    const initImg = imgWrap.querySelector('img');
+    if (initImg && block.width && block.width !== 100) initImg.style.maxWidth = block.width + '%';
+    sizeRow.appendChild(sizeLabel);
+    sizeRow.appendChild(sizeInp);
+    sizeRow.appendChild(sizeVal);
+    wrap.appendChild(sizeRow);
+
     // Overlay déplacer/supprimer
     const overlay = el('div', 'ed-img-block__overlay');
     if (blockIdx > 0)
@@ -1095,9 +1125,31 @@ const Editor = (function () {
       btn.addEventListener('mousedown', e => { e.preventDefault(); document.execCommand(cmd,false,null); });
       bar.appendChild(btn);
     });
-    const brBtn = el('button','ed-txt-btn'); brBtn.type='button'; brBtn.title='Saut de ligne'; brBtn.textContent='↵';
-    brBtn.addEventListener('mousedown', e => { e.preventDefault(); _insertBr(edDiv); });
-    bar.appendChild(brBtn);
+    // Alignement
+    bar.appendChild(txt('span','ed-txt-sep',''));
+    const alignBtns = {};
+    const _alignSVG = {
+      left:   '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0"  width="14" height="2"/><rect x="0" y="4"  width="9"  height="2"/><rect x="0" y="8"  width="12" height="2"/><rect x="0" y="12" width="7"  height="2"/></svg>',
+      center: '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0"  width="14" height="2"/><rect x="2" y="4"  width="10" height="2"/><rect x="1" y="8"  width="12" height="2"/><rect x="3" y="12" width="8"  height="2"/></svg>',
+      right:  '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0"  width="14" height="2"/><rect x="5" y="4"  width="9"  height="2"/><rect x="2" y="8"  width="12" height="2"/><rect x="7" y="12" width="7"  height="2"/></svg>',
+    };
+    [['left','Aligner à gauche'],['center','Centrer'],['right','Aligner à droite']].forEach(([align,title]) => {
+      const btn = el('button','ed-txt-btn ed-txt-align-btn'); btn.type='button'; btn.title=title; btn.innerHTML=_alignSVG[align];
+      btn.dataset.align = align;
+      btn.addEventListener('mousedown', e => {
+        e.preventDefault();
+        block.align = align;
+        edDiv.style.textAlign = align;
+        Object.values(alignBtns).forEach(b => b.classList.remove('ed-txt-btn--active'));
+        btn.classList.add('ed-txt-btn--active');
+      });
+      alignBtns[align] = btn;
+      bar.appendChild(btn);
+    });
+    // Appliquer l'alignement initial
+    const initAlign = block.align || 'left';
+    edDiv.style.textAlign = initAlign;
+    if (alignBtns[initAlign]) alignBtns[initAlign].classList.add('ed-txt-btn--active');
 
     // Séparateur
     bar.appendChild(txt('span','ed-txt-sep',''));

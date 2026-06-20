@@ -3,7 +3,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 $query = isset($_GET['q']) ? trim($_GET['q']) : '';
 
-if (mb_strlen($query, 'UTF-8') < 2) {
+if (mb_strlen($query, 'UTF-8') < 2 && !ctype_digit(trim($query))) {
     Response::json(array());
 }
 
