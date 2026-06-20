@@ -1801,6 +1801,7 @@ mark.hl {
 .ed-txt-btn:hover { background: #334155; transform: translateY(-1px); }
 .ed-txt-btn.ed-icon-btn--del            { background: #dc2626; }
 .ed-txt-btn.ed-icon-btn--del:hover      { background: #b91c1c; }
+.ed-txt-btn--active                     { background: #1d4ed8 !important; }
 
 .ed-txt-content {
   min-height: 80px;

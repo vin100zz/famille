@@ -10,7 +10,8 @@
 require_once __DIR__ . '/../bootstrap.php';
 
 if (!defined('IMAGES_BASE_PATH') || !IMAGES_BASE_PATH || !is_dir(IMAGES_BASE_PATH)) {
-    Response::error('Répertoire d\'images non configuré ou introuvable.', 500);
+    $raw = defined('IMAGES_BASE_RAW') ? IMAGES_BASE_RAW : '(non défini)';
+    Response::error('Répertoire d\'images introuvable : ' . $raw, 500);
 }
 
 $BASE = IMAGES_BASE_PATH;

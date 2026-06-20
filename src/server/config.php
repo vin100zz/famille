@@ -28,5 +28,6 @@ define('CORS_ORIGIN', '*');
 define('WEBSITE_PAGES_PATH', realpath(__DIR__ . '/../../website/pages'));
 
 // Dossier racine des images des documents (./images/)
-define('IMAGES_BASE_PATH', realpath(__DIR__ . './images/'));
+define('IMAGES_BASE_RAW',  __DIR__ . '/../../images/');
+define('IMAGES_BASE_PATH', realpath(IMAGES_BASE_RAW));
 

@@ -961,7 +961,7 @@ const Editor = (function () {
       modal.appendChild(body);
 
       try {
-        const resp = await fetch('src/server/Api/images.php?dir=' + encodeURIComponent(dir));
+        const resp = await fetch('src/server/Api/images.php' + (dir ? '?dir=' + encodeURIComponent(dir) : ''));
         if (!resp.ok) throw new Error(resp.status + ' ' + resp.statusText);
         const data = await resp.json();
         body.innerHTML = '';
@@ -1095,9 +1095,31 @@ const Editor = (function () {
       btn.addEventListener('mousedown', e => { e.preventDefault(); document.execCommand(cmd,false,null); });
       bar.appendChild(btn);
     });
-    const brBtn = el('button','ed-txt-btn'); brBtn.type='button'; brBtn.title='Saut de ligne'; brBtn.textContent='↵';
-    brBtn.addEventListener('mousedown', e => { e.preventDefault(); _insertBr(edDiv); });
-    bar.appendChild(brBtn);
+    // Alignement
+    bar.appendChild(txt('span','ed-txt-sep',''));
+    const alignBtns = {};
+    const _alignSVG = {
+      left:   '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0"  width="14" height="2"/><rect x="0" y="4"  width="9"  height="2"/><rect x="0" y="8"  width="12" height="2"/><rect x="0" y="12" width="7"  height="2"/></svg>',
+      center: '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0"  width="14" height="2"/><rect x="2" y="4"  width="10" height="2"/><rect x="1" y="8"  width="12" height="2"/><rect x="3" y="12" width="8"  height="2"/></svg>',
+      right:  '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0"  width="14" height="2"/><rect x="5" y="4"  width="9"  height="2"/><rect x="2" y="8"  width="12" height="2"/><rect x="7" y="12" width="7"  height="2"/></svg>',
+    };
+    [['left','Aligner à gauche'],['center','Centrer'],['right','Aligner à droite']].forEach(([align,title]) => {
+      const btn = el('button','ed-txt-btn ed-txt-align-btn'); btn.type='button'; btn.title=title; btn.innerHTML=_alignSVG[align];
+      btn.dataset.align = align;
+      btn.addEventListener('mousedown', e => {
+        e.preventDefault();
+        block.align = align;
+        edDiv.style.textAlign = align;
+        Object.values(alignBtns).forEach(b => b.classList.remove('ed-txt-btn--active'));
+        btn.classList.add('ed-txt-btn--active');
+      });
+      alignBtns[align] = btn;
+      bar.appendChild(btn);
+    });
+    // Appliquer l'alignement initial
+    const initAlign = block.align || 'left';
+    edDiv.style.textAlign = initAlign;
+    if (alignBtns[initAlign]) alignBtns[initAlign].classList.add('ed-txt-btn--active');
 
     // Séparateur
     bar.appendChild(txt('span','ed-txt-sep',''));
