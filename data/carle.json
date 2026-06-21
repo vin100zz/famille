@@ -3676,19 +3676,19 @@
             "naissance": {
                 "date": "25 DEC 1722",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Quartier de Botte",
-                    "adresse": "Quartier de Botte",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "adresse": "Quartier de Botte",
+                    "dept_num": "13",
+                    "brut": "Allauch, Quartier de Botte, 13"
                 }
             },
             "deces": {
                 "date": "18 JAN 1766",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Quartier de Botte",
-                    "adresse": "Quartier de Botte",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "adresse": "Quartier de Botte",
+                    "dept_num": "13",
+                    "brut": "Allauch, Quartier de Botte, 13"
                 }
             },
             "professions": [
@@ -3707,9 +3707,9 @@
                         "mariage": {
                             "date": "12 AUG 1748",
                             "lieu": {
-                                "brut": "Allauch, 13, Bouches du Rhône, , ,",
                                 "ville": "Allauch",
-                                "dept_num": "13"
+                                "dept_num": "13",
+                                "brut": "Allauch, 13"
                             }
                         },
                         "commentaires": [
@@ -3727,26 +3727,26 @@
             "naissance": {
                 "date": "01 SEP 1728",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "deces": {
                 "date": "18 OCT 1784",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "residences": [
                 {
                     "lieu": {
-                        "brut": "Allauch, 13, Bouches du Rhône, , ,",
                         "ville": "Allauch",
-                        "dept_num": "13"
+                        "dept_num": "13",
+                        "brut": "Allauch, 13"
                     }
                 }
             ],
@@ -3762,9 +3762,9 @@
                         "mariage": {
                             "date": "12 AUG 1748",
                             "lieu": {
-                                "brut": "Allauch, 13, Bouches du Rhône, , ,",
                                 "ville": "Allauch",
-                                "dept_num": "13"
+                                "dept_num": "13",
+                                "brut": "Allauch, 13"
                             }
                         },
                         "commentaires": [
@@ -5689,18 +5689,18 @@
             "naissance": {
                 "date": "15 FEB 1759",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "10 FEB 1836",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Rue Tramontane",
-                    "adresse": "Rue Tramontane",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "adresse": "Rue Tramontane",
+                    "dept_num": "13",
+                    "brut": "Allauch, Rue Tramontane, 13"
                 }
             },
             "professions": [
@@ -5718,9 +5718,9 @@
                         "mariage": {
                             "date": "12 MAR 1782",
                             "lieu": {
-                                "brut": "Allauch, 13, Bouches du Rhône, , ,",
                                 "ville": "Allauch",
-                                "dept_num": "13"
+                                "dept_num": "13",
+                                "brut": "Allauch, 13"
                             }
                         },
                         "commentaires": [
@@ -5832,18 +5832,18 @@
             "naissance": {
                 "date": "21 APR 1760",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "20 FEB 1833",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Rue Tramontane",
-                    "adresse": "Rue Tramontane",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "adresse": "Rue Tramontane",
+                    "dept_num": "13",
+                    "brut": "Allauch, Rue Tramontane, 13"
                 }
             },
             "professions": [
@@ -5861,9 +5861,9 @@
                         "mariage": {
                             "date": "12 MAR 1782",
                             "lieu": {
-                                "brut": "Allauch, 13, Bouches du Rhône, , ,",
                                 "ville": "Allauch",
-                                "dept_num": "13"
+                                "dept_num": "13",
+                                "brut": "Allauch, 13"
                             }
                         },
                         "commentaires": [
@@ -6140,19 +6140,19 @@
             "naissance": {
                 "date": "27 OCT 1747",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Quartier de la Pounche",
-                    "adresse": "Quartier de la Pounche",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "adresse": "Quartier de la Pounche",
+                    "dept_num": "13",
+                    "brut": "Allauch, Quartier de la Pounche, 13"
                 }
             },
             "deces": {
                 "date": "06 DEC 1809",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Quartier de la Pounche",
-                    "adresse": "Quartier de la Pounche",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "adresse": "Quartier de la Pounche",
+                    "dept_num": "13",
+                    "brut": "Allauch, Quartier de la Pounche, 13"
                 }
             },
             "professions": [
@@ -6171,10 +6171,10 @@
                         "mariage": {
                             "date": "23 JUL 1771",
                             "lieu": {
-                                "brut": "Marseille Major, 13, Bouches du Rhône, , ,",
-                                "adresse": "Major",
                                 "ville": "Marseille",
-                                "dept_num": "13"
+                                "adresse": "Major",
+                                "dept_num": "13",
+                                "brut": "Marseille, Major, 13"
                             }
                         },
                         "commentaires": [
@@ -6282,17 +6282,17 @@
             "naissance": {
                 "date": "07 APR 1750",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "02 APR 1833",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , ,",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Marseille, 13"
                 }
             },
             "liens": {
@@ -6307,10 +6307,10 @@
                         "mariage": {
                             "date": "23 JUL 1771",
                             "lieu": {
-                                "brut": "Marseille Major, 13, Bouches du Rhône, , ,",
-                                "adresse": "Major",
                                 "ville": "Marseille",
-                                "dept_num": "13"
+                                "adresse": "Major",
+                                "dept_num": "13",
+                                "brut": "Marseille, Major, 13"
                             }
                         },
                         "commentaires": [
@@ -6847,18 +6847,18 @@
             "naissance": {
                 "date": "BET 1772 AND 1774",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , ,",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Marseille, 13"
                 }
             },
             "deces": {
                 "date": "24 OCT 1814",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , , Hôtel-Dieu",
-                    "adresse": "Hôtel-Dieu",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Hôtel-Dieu",
+                    "dept_num": "13",
+                    "brut": "Marseille, Hôtel-Dieu, 13"
                 }
             },
             "professions": [
@@ -6879,10 +6879,10 @@
                         "mariage": {
                             "date": "29 NOV 1791",
                             "lieu": {
-                                "brut": "Marseille St-Marcel, 13, Bouches du Rhône, , ,",
-                                "adresse": "St-Marcel",
                                 "ville": "Marseille",
-                                "dept_num": "13"
+                                "adresse": "St-Marcel",
+                                "dept_num": "13",
+                                "brut": "Marseille, St-Marcel, 13"
                             }
                         },
                         "commentaires": [
@@ -6993,18 +6993,18 @@
             "naissance": {
                 "date": "BET 1771 AND 1773",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , ,",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Marseille, 13"
                 }
             },
             "deces": {
                 "date": "20 JAN 1810",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , , Cul-de-Sac Paty du Chayne",
-                    "adresse": "Cul-de-Sac Paty du Chayne",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Cul-de-Sac Paty du Chayne",
+                    "dept_num": "13",
+                    "brut": "Marseille, Cul-de-Sac Paty du Chayne, 13"
                 }
             },
             "liens": {
@@ -7019,10 +7019,10 @@
                         "mariage": {
                             "date": "29 NOV 1791",
                             "lieu": {
-                                "brut": "Marseille St-Marcel, 13, Bouches du Rhône, , ,",
-                                "adresse": "St-Marcel",
                                 "ville": "Marseille",
-                                "dept_num": "13"
+                                "adresse": "St-Marcel",
+                                "dept_num": "13",
+                                "brut": "Marseille, St-Marcel, 13"
                             }
                         },
                         "commentaires": [
@@ -128260,7 +128260,8 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...Jean CASTELIN fils de<br/>Noël, ménager, du quartier de Crotte, terroir de ce lieu<br/>et de Marguerite Clement, mariés..."
+                                "fichier": "...Jean CASTELIN fils de<br/>Noël, ménager, du quartier de Crotte, terroir de ce lieu<br/>et de Marguerite Clement, mariés...",
+                                "align": "left"
                             }
                         ]
                     ],
@@ -128300,7 +128301,7 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...entre Jean CASTELIN\n\t\t laboureur, fils mineur de feu Noël et de Marguerite\n\t\t CLÉMENT de cette paroisse y demeurant d'une part\n\t\t et Lucrèce MOUTTE fille mineure de Pierre et de\n\t\t Rose RAMPAL de cette même paroisse y demeurant\n\t\t d'autre..."
+                                "fichier": "                ...entre Jean CASTELIN\n\t\t laboureur, fils mineur de feu Noël et de Marguerite\n\t\t CLÉMENT de cette paroisse y demeurant d'une part\n\t\t et Lucrèce MOUTTE fille mineure de Pierre et de\n\t\t Rose RAMPAL de cette même paroisse y demeurant\n\t\t d'autre..."
                             }
                         ]
                     ],
@@ -128551,7 +128552,8 @@
                             },
                             {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/8e/8e_castelin_clement/225M_signature.jpg"
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/8e/8e_castelin_clement/225M_signature.jpg",
+                                "width": 55
                             }
                         ]
                     ],
@@ -129298,6 +129300,10 @@
                             {
                                 "type": "TEXTE",
                                 "fichier": "Laurent : tonnelier<br/>Les deux mariés sont mineurs, le pére de Jean étant décédé son frère est \"curateur à sa minorité\".<br/>Magdeleine Jean sait signer."
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Dix enfants sont connus (entre 1782 et 1801) dont Thérèse Virginie notre ancêtre."
                             }
                         ]
                     ],
@@ -129648,12 +129654,14 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/dates_delestrade_blanc.jpg"
-                            }
-                        ],
-                        [
+                            },
                             {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/lieux.jpg"
+                                "fichier": ""
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Joseph DELESTRADE est d'abord paysan (\"ménager\") à l'origine à Allauch quartier de la Pounche mais il semble exercer son activité sur d'autres \nterroirs : les  Crottes et les Aygalades. Son épouse est aussi d'Allauch mais le mariage a lieu à La Major. Il auront dix enfants.<br/>\nA partir de 1785 il devient \"caissier\" et s'installe au coeur de Marseille. Il meurt toutefois à Allauch en 1809 à 62 ans.<br/>\nSon épouse vit avec son fils Julien dans le quartier du Panier, lorsque celui-ci épouse en 1816 Rose Claire SAUVAIRE, et meurt en 1833 à\n 83 ans."
                             }
                         ]
                     ],
@@ -129690,6 +129698,24 @@
                     }
                 },
                 {
+                    "titre": {
+                        "annee": 1771,
+                        "label": "Mariage à La Major"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Registre de 1770 de La Major (\"Sainte Marie Majeur\")"
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/registre1770.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
                     "contenu": [
                         [
                             {
@@ -129705,8 +129731,8 @@
                         ]
                     ],
                     "titre": {
-                        "label": "Mariage à La Major",
-                        "annee": 1771
+                        "label": "",
+                        "annee": null
                     }
                 },
                 {
@@ -129716,15 +129742,10 @@
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58aN.jpg"
                             }
-                        ],
-                        [
-                            {
-                                "type": "TEXTE"
-                            }
                         ]
                     ],
                     "titre": {
-                        "label": "6 décembre 1771 : Baptême de Rosalie aux Aygalades",
+                        "label": "6 décembre 1771 : Baptême de leur enfant Rosalie aux Aygalades",
                         "annee": 1771
                     }
                 },
@@ -129740,11 +129761,15 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/ange_D.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Meurt en 1850 à 77ans, chemin de St-Barnabé à Marseille ; marié et propriétaire."
                             }
                         ]
                     ],
                     "titre": {
-                        "label": "vers 1773: naissance d'Ange",
+                        "label": "vers 1773 : naissance d'Ange",
                         "annee": 1773
                     }
                 },
@@ -129760,6 +129785,10 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58bD.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Meurt en 1777 (2 ans et 1/2) à Allauch."
                             }
                         ]
                     ],
@@ -129774,12 +129803,6 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58cN.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "- ?"
                             }
                         ]
                     ],
@@ -129800,6 +129823,10 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58dD.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "- mariée à Blaise Toussaint MOUNIER\n - morte en 1847 (\"63 ans\" 68 en fait), \"Cul de sac de la rue du Chêne, n° 7\"\n\t\t\t"
                             }
                         ]
                     ],
@@ -129820,6 +129847,10 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58eD.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "- Morte le 3 mai 1783 à Allauch"
                             }
                         ]
                     ],
@@ -129840,6 +129871,10 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58fD.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "- morte en 1785 (2 ans et 1/2)\n- \"prise à la rue du Bon Pasteur\"\n- Joseph : charretier\n\t     "
                             }
                         ]
                     ],
@@ -129855,12 +129890,6 @@
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58gN.jpg"
                             }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58gP.jpg"
-                            }
                         ]
                     ],
                     "titre": {
@@ -129874,12 +129903,6 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/58hN.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "- ?"
                             }
                         ]
                     ],
@@ -129934,12 +129957,16 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/7e_delestrade_blanc/116D.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "\"quartier de la Pouche\""
                             }
                         ],
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "\"quartier de la Pouche\""
+                                "fichier": "Table des  successions : pas de patrimoine pour Joseph"
                             }
                         ]
                     ],
@@ -130200,12 +130227,6 @@
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/7e_sauvaire_caillol/dates.jpg"
                             }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/7e_sauvaire_caillol/lieux.jpg"
-                            }
                         ]
                     ],
                     "titre": {
@@ -130227,16 +130248,32 @@
                     }
                 },
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": "vers 1771 : Naissance de François Marie SAUVAIRE, baptisé à La Major ? "
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
                     "contenu": [
                         [
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/7e_sauvaire_caillol/118M.jpg"
                             }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "L'an mil sept cent quatre vingt onze et le vingt \nneuf novembre après trois publications préalables\nfaites dans notre église sans avoir découvert\nempêchement quelconque (ayant obtenu dispense\ndu temps prohibé de  Mgr  le vicaire général)\n nous avons reçu le mutuel consentement de\n mariage et donné  la bénédiction nuptiale\n suivant le rite de la ste-mère Église à <b>François\nMarie Sauvaire</b>, travailleur, fils mineur d'Henry\net de Claire Guichard de la <u>paroisse Saint-Martin\nquartier de Notre Dame du Mont</u>  pour le \ndomicile de droit et sur celle de <u>Saint-Mathieu\ncy-devant Château-Gombert quartier de Saint-Just</u>\n pour le domicile de fait d'une part et honnête\n fille <b>Madeleine Caillot</b> fille mineure \nde François et Rose Caillol de la <u>paroisse\nSt-Marcel</u> y résidant d\"autre lieu et l\"autre\ncontractant a été autorisé du consentement\n père et mère en présence de Charles\nPerrodier, Jean Liautaud, Julien Paul et\nAugustin Bouis, témoins requis et soussigné\n et le domicile des\n les futurs  et la future\nétant illetrés n\"ont pas signé\n\n\t       "
+                            }
                         ]
                     ],
                     "titre": {
-                        "label": ""
+                        "label": "Mariage de François Marie SAUVAIRE paroisse St-Martin, quartier ND du Mont (en droit), St-Just (en fait) et Madeleine CAILLOL de St-Martin",
+                        "annee": 1791
                     }
                 },
                 {
@@ -130297,6 +130334,25 @@
                         [
                             {
                                 "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/7e_sauvaire_caillol/fabre.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/7e_sauvaire_caillol/pati.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": ""
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/7e_sauvaire_caillol/59bD.jpg"
                             }
                         ]
@@ -130346,23 +130402,13 @@
                     }
                 },
                 {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/7e_sauvaire_caillol/fabre.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/7e_sauvaire_caillol/pati.jpg"
-                            }
-                        ]
-                    ],
                     "titre": {
+                        "annee": null,
                         "label": ""
-                    }
+                    },
+                    "contenu": [
+                        []
+                    ]
                 }
             ]
         },
