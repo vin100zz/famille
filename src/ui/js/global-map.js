@@ -172,7 +172,7 @@ const GlobalMap = (function () {
     'Mariage':   '#f59e0b',
   };
 
-  function _renderMarkers(yearMax, cumulative) {
+  function _renderMarkers(yearMax, cumulative, sosaOnly) {
     if (!_layer || !_map) return;
     _layer.clearLayers();
 
@@ -181,9 +181,10 @@ const GlobalMap = (function () {
     const keyFn   = useAddr ? _keyFull   : _keyCity;
     const geoMap  = useAddr ? _geocodedFull : _geocodedCity;
 
-    const events = _allEvents.filter(ev =>
-      cumulative ? ev.year <= yearMax : Math.abs(ev.year - yearMax) <= 25
-    );
+    const events = _allEvents.filter(ev => {
+      if (sosaOnly && !ev.sosa) return false;
+      return cumulative ? ev.year <= yearMax : Math.abs(ev.year - yearMax) <= 25;
+    });
 
     // Groupe par lieu
     const groups = new Map();
@@ -246,15 +247,29 @@ const GlobalMap = (function () {
         <div class="gm-controls">
           <div class="gm-year-display">
             <span class="gm-year-label">Jusqu'en</span>
-            <span class="gm-year-val" id="gm-year-val">1800</span>
+            <span class="gm-year-val" id="gm-year-val">${YEAR_MAX}</span>
           </div>
           <input type="range" class="gm-slider" id="gm-slider"
-            min="${YEAR_MIN}" max="${YEAR_MAX}" value="1800" step="5">
+            min="${YEAR_MIN}" max="${YEAR_MAX}" value="${YEAR_MAX}" step="5">
           <div class="gm-year-bounds">
             <span>${YEAR_MIN}</span><span>${YEAR_MAX}</span>
           </div>
         </div>
         <div class="gm-right">
+          <select id="gm-basemap" class="gm-basemap-select">
+            <option value="osm">OpenStreetMap</option>
+            <option value="carto-light">CartoDB Clair</option>
+            <option value="carto-voyager" selected>CartoDB Voyager</option>
+            <option value="carto-dark">CartoDB Sombre</option>
+            <option value="topo">Topographique</option>
+            <option value="satellite">Satellite</option>
+          </select>
+          <div class="gm-toggle">
+            <label class="gm-toggle-label">
+              <input type="checkbox" id="gm-sosa" checked>
+              Ascendants directs
+            </label>
+          </div>
           <div class="gm-toggle">
             <label class="gm-toggle-label">
               <input type="checkbox" id="gm-cumul" checked>
@@ -283,9 +298,25 @@ const GlobalMap = (function () {
 
     await new Promise(r => requestAnimationFrame(r));
     _map = L.map('gm-map', { zoomControl: true }).setView([46.5, 2.5], 5);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap', maxZoom: 19,
-    }).addTo(_map);
+    const BASEMAPS = {
+      'osm':           { url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',                                                attr: '&copy; OpenStreetMap', maxZoom: 19 },
+      'carto-light':   { url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',                                   attr: '&copy; OpenStreetMap &copy; CartoDB', maxZoom: 19 },
+      'carto-voyager': { url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',                         attr: '&copy; OpenStreetMap &copy; CartoDB', maxZoom: 19 },
+      'carto-dark':    { url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',                                    attr: '&copy; OpenStreetMap &copy; CartoDB', maxZoom: 19 },
+      'topo':          { url: 'https://tile.opentopomap.org/{z}/{x}/{y}.png',                                                     attr: '&copy; OpenStreetMap &copy; OpenTopoMap', maxZoom: 17 },
+      'satellite':     { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',    attr: '&copy; Esri', maxZoom: 18 },
+    };
+
+    const basemapSel = containerEl.querySelector('#gm-basemap');
+    const bm0 = BASEMAPS['carto-voyager'];
+    let _tileLayer = L.tileLayer(bm0.url, { attribution: bm0.attr, maxZoom: bm0.maxZoom }).addTo(_map);
+    basemapSel.addEventListener('change', () => {
+      const bm = BASEMAPS[basemapSel.value];
+      if (!bm) return;
+      _map.removeLayer(_tileLayer);
+      _tileLayer = L.tileLayer(bm.url, { attribution: bm.attr, maxZoom: bm.maxZoom }).addTo(_map);
+    });
+
     _layer = L.layerGroup().addTo(_map);
 
     const statsEl = containerEl.querySelector('.gm-stats');
@@ -298,10 +329,11 @@ const GlobalMap = (function () {
     await _geocodeAllCity(events);
     await _flushCache();
 
-    // Slider + cumul
+    // Slider + cumul + sosa
     const slider  = containerEl.querySelector('#gm-slider');
     const yearVal = containerEl.querySelector('#gm-year-val');
     const cumulCb = containerEl.querySelector('#gm-cumul');
+    const sosaCb  = containerEl.querySelector('#gm-sosa');
     const labelEl = containerEl.querySelector('.gm-year-label');
 
     function update() {
@@ -309,12 +341,13 @@ const GlobalMap = (function () {
       const cumul = cumulCb.checked;
       yearVal.textContent = y;
       labelEl.textContent = cumul ? "Jusqu'en" : '±25 ans autour de';
-      _renderMarkers(y, cumul);
+      _renderMarkers(y, cumul, sosaCb.checked);
     }
     _updateFn = update;
 
     slider.addEventListener('input', update);
     cumulCb.addEventListener('change', update);
+    sosaCb.addEventListener('change', update);
 
     // Bascule vers précision adresse au zoom in
     _map.on('zoomend', async () => {

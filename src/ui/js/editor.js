@@ -71,10 +71,28 @@ const Editor = (function () {
     const bar = _buildBar();
     document.body.appendChild(bar);
 
-    // Carte éditeur (bordure ambrée = indicateur de mode édition)
+    // Section fiche synthétique : collapsible, repliée par défaut
+    const ficheSection = el('div', 'ed-fiche-section');
+    const ficheToggle  = el('div', 'fiche-collapsible__toggle');
+    const ficheArrow   = txt('span', 'tree-anc-btn__arrow fiche-collapsible__arrow', '▼');
+    ficheToggle.appendChild(txt('span', 'fiche-collapsible__label', 'Fiche synthétique'));
+    ficheToggle.appendChild(ficheArrow);
+    ficheSection.appendChild(ficheToggle);
+
     const wrap = el('div', 'ed-wrapper');
     wrap.appendChild(_buildCard());
-    _container.appendChild(wrap);
+    wrap.hidden = true;
+    ficheArrow.style.transform = 'rotate(-90deg)';
+    ficheSection.appendChild(wrap);
+
+    let collapsed = true;
+    ficheToggle.addEventListener('click', () => {
+      collapsed = !collapsed;
+      wrap.hidden = collapsed;
+      ficheArrow.style.transform = collapsed ? 'rotate(-90deg)' : '';
+    });
+
+    _container.appendChild(ficheSection);
 
     // Documents hors du wrapper (même position qu'en vue)
     const docsSec = _buildDocSection();
@@ -1119,6 +1137,14 @@ const Editor = (function () {
     edDiv.innerHTML = (block.fichier || '').replace(/<br\/>/gi, '<br>');
     edDiv.addEventListener('input', () => { block.fichier = _serializeRichText(edDiv); });
     edDiv.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); _insertBr(edDiv); } });
+    edDiv.addEventListener('mousedown', () => {
+      const bwrap = edDiv.closest('[draggable]');
+      if (bwrap) {
+        bwrap.setAttribute('draggable', 'false');
+        const restore = () => { bwrap.setAttribute('draggable', 'true'); window.removeEventListener('mouseup', restore); };
+        window.addEventListener('mouseup', restore);
+      }
+    });
 
     [['<b>G</b>','bold','Gras'],['<i>I</i>','italic','Italique'],['<u>S</u>','underline','Souligné']].forEach(([lbl,cmd,title]) => {
       const btn = el('button','ed-txt-btn'); btn.type='button'; btn.title=title; btn.innerHTML=lbl;
