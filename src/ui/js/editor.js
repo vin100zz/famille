@@ -1137,6 +1137,14 @@ const Editor = (function () {
     edDiv.innerHTML = (block.fichier || '').replace(/<br\/>/gi, '<br>');
     edDiv.addEventListener('input', () => { block.fichier = _serializeRichText(edDiv); });
     edDiv.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); _insertBr(edDiv); } });
+    edDiv.addEventListener('mousedown', () => {
+      const bwrap = edDiv.closest('[draggable]');
+      if (bwrap) {
+        bwrap.setAttribute('draggable', 'false');
+        const restore = () => { bwrap.setAttribute('draggable', 'true'); window.removeEventListener('mouseup', restore); };
+        window.addEventListener('mouseup', restore);
+      }
+    });
 
     [['<b>G</b>','bold','Gras'],['<i>I</i>','italic','Italique'],['<u>S</u>','underline','Souligné']].forEach(([lbl,cmd,title]) => {
       const btn = el('button','ed-txt-btn'); btn.type='button'; btn.title=title; btn.innerHTML=lbl;
