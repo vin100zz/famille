@@ -15,16 +15,18 @@ const globalMapBtn    = document.getElementById('global-map-btn');
 
 let _globalMapOpen = false;
 
-function toggleGlobalMap() {
+function toggleGlobalMap(skipHistory) {
   _globalMapOpen = !_globalMapOpen;
   if (_globalMapOpen) {
     globalMapScreen.hidden = false;
     globalMapBtn.classList.add('header-map-btn--active');
     GlobalMap.open(globalMapScreen);
+    if (!skipHistory) history.pushState({ map: true }, '', '#map');
   } else {
     GlobalMap.close();
     globalMapScreen.hidden = true;
     globalMapBtn.classList.remove('header-map-btn--active');
+    if (!skipHistory && location.hash === '#map') history.pushState({}, '', location.pathname);
   }
 }
 
@@ -358,17 +360,22 @@ async function renderPersonPage(data, seq) {
 // ── Navigation navigateur (back / forward) ─────────────────────────────────
 
 window.addEventListener('popstate', e => {
-  if (e.state && e.state.id) {
-    loadPerson(e.state.id);
+  if (e.state && e.state.map) {
+    if (!_globalMapOpen) toggleGlobalMap(true);
   } else {
-    if (_activeMap) { _activeMap.remove(); _activeMap = null; }
-    Editor.close();
-    personView.innerHTML = '';
-    welcomeEl.hidden = false;
-    mainEl.hidden    = true;
-    _showHomeBtn(false);
-    CircularTree.showControls(true);
-    CircularTree.redraw();
+    if (_globalMapOpen) toggleGlobalMap(true);
+    if (e.state && e.state.id) {
+      loadPerson(e.state.id);
+    } else {
+      if (_activeMap) { _activeMap.remove(); _activeMap = null; }
+      Editor.close();
+      personView.innerHTML = '';
+      welcomeEl.hidden = false;
+      mainEl.hidden    = true;
+      _showHomeBtn(false);
+      CircularTree.showControls(true);
+      CircularTree.redraw();
+    }
   }
 });
 
@@ -465,7 +472,10 @@ document.addEventListener('keydown', e => {
   const treeReady = CircularTree.init(container, id => selectPerson(id));
 
   const hash = decodeURIComponent(location.hash.slice(1));
-  if (hash) {
+  if (hash === 'map') {
+    toggleGlobalMap(true);
+    history.replaceState({ map: true }, '', '#map');
+  } else if (hash) {
     // Démarrage direct sur une fiche
     mainEl.hidden    = false;
     welcomeEl.hidden = true;

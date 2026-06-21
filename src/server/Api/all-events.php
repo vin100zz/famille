@@ -31,6 +31,7 @@ try {
         $nom    = isset($p['nom'])    ? $p['nom']    : '';
         $prenom = isset($p['prenom']) ? $p['prenom'] : '';
         $sexe   = isset($p['sexe'])   ? $p['sexe']   : '';
+        $sosa   = isset($p['sosa'])   ? $p['sosa']   : null;
 
         $evTypes = array(
             'Naissance' => isset($p['naissance'])  ? $p['naissance']  : null,
@@ -45,6 +46,7 @@ try {
                 'nom'    => $nom,
                 'prenom' => $prenom,
                 'sexe'   => $sexe,
+                'sosa'   => $sosa,
                 'type'   => $type,
                 'year'   => $year,
                 'lieu'   => $ev['lieu'],
@@ -58,6 +60,7 @@ try {
                 'nom'    => $nom,
                 'prenom' => $prenom,
                 'sexe'   => $sexe,
+                'sosa'   => $sosa,
                 'type'   => 'Résidence',
                 'year'   => $year,
                 'lieu'   => $r['lieu'],
