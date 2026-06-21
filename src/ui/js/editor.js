@@ -1134,7 +1134,7 @@ const Editor = (function () {
     const bar = el('div', 'ed-txt-toolbar');
     const edDiv = el('div', 'ed-txt-content');
     edDiv.contentEditable = 'true'; edDiv.spellcheck = true;
-    edDiv.innerHTML = (block.fichier || '').replace(/<br\/>/gi, '<br>');
+    edDiv.innerHTML = (block.fichier || '').replace(/\t/g, '').replace(/\n/g, '<br>').replace(/<br\/>/gi, '<br>');
     edDiv.addEventListener('input', () => { block.fichier = _serializeRichText(edDiv); });
     edDiv.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); _insertBr(edDiv); } });
     edDiv.addEventListener('mousedown', () => {

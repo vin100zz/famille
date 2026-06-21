@@ -782,7 +782,7 @@ function renderDocuments(documents) {
           col.appendChild(wrap);
         } else if (block.type === 'TEXTE') {
           const wrap = el('div', 'doc-block--texte');
-          wrap.innerHTML = block.fichier;   // HTML déjà sanitisé côté saisie
+          wrap.innerHTML = (block.fichier || '').replace(/\t/g, '').replace(/\n/g, '<br/>');
           if (block.align && block.align !== 'left') wrap.style.textAlign = block.align;
           col.appendChild(wrap);
         }
