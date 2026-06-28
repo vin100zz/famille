@@ -81,13 +81,105 @@ def build_sosa_to_individu(data: dict) -> dict:
     }
 
 
+# ---------------------------------------------------------------------------
+# Extraction de noms depuis un titre de heading
+# ---------------------------------------------------------------------------
+
+RE_COUPLE_NAME = re.compile(
+    r'^(.*?)\s+([A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÆŒ][A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÆŒ\'\-]+(?:\s+[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÆŒ][A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÆŒ\'\-]+)*)'
+    r'\s*[&]\s*'
+    r'(.*?)\s+([A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÆŒ][A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÆŒ\'\-]+(?:\s+[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÆŒ][A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÆŒ\'\-]+)*)$'
+)
+
+
+def parse_couple_names(text: str) -> tuple | None:
+    """
+    Parse 'Prénom NOM & Prénom NOM' (ou 'et') depuis un heading.
+    Retourne (prenom_mari, nom_mari, prenom_epouse, nom_epouse) ou None.
+    """
+    # Supprimer le préfixe [N/M] ou [N]
+    text = RE_COUPLE_BRACKET.sub('', text)
+    text = RE_SINGLE_BRACKET.sub('', text).strip()
+    # Supprimer les précisions entre parenthèses : "(vers 1740-1780)"
+    text = re.sub(r'\([^)]*\)', '', text).strip()
+
+    # Trouver le séparateur & ou " et " (minuscule pour éviter "Etienne")
+    sep = None
+    if '&' in text:
+        sep = '&'
+    elif re.search(r'\s+et\s+', text):
+        sep = ' et '
+
+    if sep is None:
+        return None
+
+    def split_prenom_nom(s: str):
+        """
+        Sépare 'Prénom NOM' en (prenom, nom).
+        NOM = mots entièrement majuscules, y compris avec particule ou préfixe abrégé.
+        """
+        words = s.strip().split()
+        noms, prenoms = [], []
+        for w in words:
+            # Supprimer préfixes hagiographiques (St-, Ste-)
+            clean = re.sub(r"^(Ste|St)['\-]", "", w)
+            # Supprimer particule minuscule avant ' (d', l')
+            clean = re.sub(r"^[a-zàâäéèêëîïôùûü]+'", "", clean)
+            # Supprimer tirets et apostrophes restants
+            clean = re.sub(r"['\-]", "", clean)
+            # Extraire uniquement les caractères alpha pour le test majuscule
+            alpha = re.sub(r"[^A-ZÀ-Ÿa-zà-ÿ]", "", clean)
+            if alpha and alpha == alpha.upper() and len(alpha) > 1:
+                noms.append(w)
+            else:
+                prenoms.append(w)
+        return ' '.join(prenoms).strip(), ' '.join(noms).strip()
+
+    parts = text.split(sep, 1) if sep == '&' else re.split(r'\s+et\s+', text, maxsplit=1)
+    if len(parts) != 2:
+        return None
+    prenom1, nom1 = split_prenom_nom(parts[0])
+    prenom2, nom2 = split_prenom_nom(parts[1])
+
+    # Rejeter si l'épouse est inconnue ("?")
+    if nom1 and nom2 and nom2 != '?':
+        return prenom1, nom1, prenom2, nom2
+    return None
+
+
+def _next_individu_id(data: dict) -> str:
+    nums = [int(iid[1:]) for iid in data["individus"] if iid.startswith("I") and iid[1:].isdigit()]
+    return f"I{max(nums, default=0) + 1}"
+
+
+def _next_famille_id(data: dict) -> str:
+    nums = [int(fid[1:]) for fid in data["familles"] if fid.startswith("F") and fid[1:].isdigit()]
+    return f"F{max(nums, default=0) + 1}"
+
+
+def _create_individu(data: dict, sosa_to_individu: dict,
+                     sosa: int, prenom: str, nom: str, sexe: str) -> str:
+    """Crée un individu minimal et l'enregistre dans data et sosa_to_individu."""
+    new_iid = _next_individu_id(data)
+    data["individus"][new_iid] = {
+        "nom": nom,
+        "prenom": prenom,
+        "sexe": sexe,
+        "sosa": sosa,
+        "liens": {"unions": []},
+    }
+    sosa_to_individu[sosa] = new_iid
+    return new_iid
+
+
 def ensure_family(data: dict, sosa_to_family: dict, sosa_to_individu: dict,
-                  ck: tuple) -> str | None:
+                  ck: tuple, heading_text: str = "") -> str | None:
     """
     Retourne l'id de famille pour le couple ck.
-    Si la famille n'existe pas mais que les deux individus existent,
-    crée la famille et met à jour sosa_to_family.
-    Retourne None si les individus sont introuvables.
+    Si la famille n'existe pas :
+      - Si les individus existent, crée la famille.
+      - Si des noms sont extraits du heading, crée aussi les individus manquants.
+    Retourne None si impossible de compléter les informations.
     """
     if ck in sosa_to_family:
         return sosa_to_family[ck]
@@ -95,15 +187,29 @@ def ensure_family(data: dict, sosa_to_family: dict, sosa_to_individu: dict,
     s_mari, s_epouse = ck  # sosa pair = mari, sosa impair = épouse
     mari_id   = sosa_to_individu.get(s_mari)
     epouse_id = sosa_to_individu.get(s_epouse)
+
     if not mari_id or not epouse_id:
-        return None
+        names = parse_couple_names(heading_text) if heading_text else None
+        if not names:
+            return None
+        prenom1, nom1, prenom2, nom2 = names
+        if not mari_id:
+            mari_id   = _create_individu(data, sosa_to_individu, s_mari,   prenom1, nom1, 'M')
+        if not epouse_id:
+            epouse_id = _create_individu(data, sosa_to_individu, s_epouse, prenom2, nom2, 'F')
 
-    # Générer un nouvel identifiant famille
-    nums = [int(fid[1:]) for fid in data["familles"] if fid.startswith("F") and fid[1:].isdigit()]
-    new_fid = f"F{max(nums, default=0) + 1}"
-
+    new_fid = _next_famille_id(data)
     data["familles"][new_fid] = {"mari": mari_id, "epouse": epouse_id}
     sosa_to_family[ck] = new_fid
+
+    # Ajouter le lien union dans chaque individu
+    for iid in (mari_id, epouse_id):
+        ind = data["individus"].get(iid, {})
+        liens = ind.setdefault("liens", {})
+        unions = liens.setdefault("unions", [])
+        if not any(u.get("famille") == new_fid for u in unions):
+            unions.append({"famille": new_fid})
+
     return new_fid
 
 
@@ -329,6 +435,7 @@ def parse_html_page(html_path: Path) -> dict:
         return {}
 
     result: dict = {ck: [] for ck in page_couples}
+    couple_headings: dict = {}  # {ck: heading_text} pour créer les individus manquants
 
     # ── Parcours linéaire ─────────────────────────────────────────────────
     # État courant
@@ -380,10 +487,17 @@ def parse_html_page(html_path: Path) -> dict:
                 cur_year = None; cur_label = ""
                 if current_couple not in result:
                     result[current_couple] = []
+                # Mémoriser le heading pour extraction de noms si besoin
+                if current_couple not in couple_headings:
+                    couple_headings[current_couple] = text
             else:
                 # Nouvelle section : flush les textes en attente comme doc standalone
                 flush_pending_as_doc(current_couple)
                 cur_year, cur_label = heading_to_titre(elem)
+                # Heading sans [N/M] mais avec noms → mémoriser pour le couple courant
+                if current_couple not in couple_headings:
+                    if '&' in text or re.search(r'\s+et\s+', text):
+                        couple_headings[current_couple] = text
 
         # ── Paragraphe ────────────────────────────────────────────────────
         elif tag == "p":
@@ -440,7 +554,8 @@ def parse_html_page(html_path: Path) -> dict:
     # Flush final
     flush_pending_as_doc(current_couple)
 
-    return {ck: docs for ck, docs in result.items() if docs}
+    docs = {ck: d for ck, d in result.items() if d}
+    return docs, couple_headings
 
 
 # ---------------------------------------------------------------------------
@@ -452,30 +567,35 @@ def enrich_json(
     sosa_to_family: dict,
     sosa_to_individu: dict,
     page_docs: dict,
+    couple_headings: dict,
     overwrite: bool = False,
 ) -> tuple:
     """
     Applique les documents extraits dans data.
-    Crée les familles manquantes si les individus existent.
-    Retourne (nb_familles_mises_à_jour, nb_familles_créées).
+    Crée les individus et familles manquants si les noms sont dans le heading.
+    Retourne (nb_familles_mises_à_jour, nb_familles_créées, nb_individus_créés).
     """
     updated = 0
-    created = 0
+    created_fam = 0
+    created_ind = 0
     for ck, docs in page_docs.items():
         if not docs:
             continue
-        existed = ck in sosa_to_family
-        fam_id  = ensure_family(data, sosa_to_family, sosa_to_individu, ck)
+        existed_fam = ck in sosa_to_family
+        ind_before  = len(data["individus"])
+        heading     = couple_headings.get(ck, "")
+        fam_id      = ensure_family(data, sosa_to_family, sosa_to_individu, ck, heading)
         if not fam_id:
             continue
-        if not existed:
-            created += 1
+        if not existed_fam:
+            created_fam += 1
+            created_ind += len(data["individus"]) - ind_before
         fam = data["familles"][fam_id]
         if "documents" in fam and not overwrite:
             continue
         fam["documents"] = docs
         updated += 1
-    return updated, created
+    return updated, created_fam, created_ind
 
 
 # ---------------------------------------------------------------------------
@@ -515,10 +635,14 @@ def main():
     total_docs    = 0
     total_updated = 0
     total_created = 0
+    total_individus_created = 0
     skipped_no_family = []
 
     for html_path in html_files:
-        page_docs = parse_html_page(html_path)
+        result = parse_html_page(html_path)
+        if not result:
+            continue
+        page_docs, couple_headings = result
         if not page_docs:
             continue
 
@@ -526,10 +650,10 @@ def main():
         total_docs  += sum(len(v) for v in page_docs.values())
 
         for ck in list(page_docs.keys()):
-            # Vérifier si la famille existe ou peut être créée
             fam_exists  = ck in sosa_to_family
-            can_create  = (sosa_to_individu.get(ck[0]) and sosa_to_individu.get(ck[1]))
-            if not fam_exists and not can_create:
+            inds_exist  = sosa_to_individu.get(ck[0]) and sosa_to_individu.get(ck[1])
+            has_names   = parse_couple_names(couple_headings.get(ck, "")) is not None
+            if not fam_exists and not inds_exist and not has_names:
                 skipped_no_family.append((ck, html_path.relative_to(IMAGES_BASE)))
 
         if verbose:
@@ -539,19 +663,22 @@ def main():
                 if fam_id != "?":
                     status = "OK"
                 elif sosa_to_individu.get(ck[0]) and sosa_to_individu.get(ck[1]):
-                    status = "A CREER"
+                    status = "A CREER (famille)"
+                elif parse_couple_names(couple_headings.get(ck, "")):
+                    status = "A CREER (individus+famille)"
                 else:
-                    status = "ABSENT (individus manquants)"
+                    status = "ABSENT (noms introuvables)"
                 print(f"  [{ck[0]}/{ck[1]}] fam={fam_id} -> {len(docs)} doc(s)  {status}  ({rel})")
 
         if dry_run:
-            # Compter ce qui serait fait sans modifier data
             for ck, docs in page_docs.items():
                 if not docs:
                     continue
-                fam_id = sosa_to_family.get(ck)
-                can_create = sosa_to_individu.get(ck[0]) and sosa_to_individu.get(ck[1])
-                if not fam_id and not can_create:
+                fam_id    = sosa_to_family.get(ck)
+                inds_ok   = sosa_to_individu.get(ck[0]) and sosa_to_individu.get(ck[1])
+                names_ok  = parse_couple_names(couple_headings.get(ck, "")) is not None
+                can_act   = fam_id or inds_ok or names_ok
+                if not can_act:
                     continue
                 if fam_id and "documents" in data["familles"].get(fam_id, {}) and not overwrite:
                     continue
@@ -559,22 +686,25 @@ def main():
                 if not fam_id:
                     total_created += 1
         else:
-            n_upd, n_cre = enrich_json(
-                data, sosa_to_family, sosa_to_individu, page_docs,
+            n_upd, n_cre, n_ind = enrich_json(
+                data, sosa_to_family, sosa_to_individu, page_docs, couple_headings,
                 overwrite=overwrite,
             )
             total_updated += n_upd
             total_created += n_cre
+            total_individus_created += n_ind
 
     print(f"\n{'[DRY-RUN] ' if dry_run else ''}Résumé :")
     print(f"  Pages traitées         : {total_pages}")
     print(f"  Documents extraits     : {total_docs}")
     print(f"  Familles mises à jour  : {total_updated}")
     print(f"  Familles créées        : {total_created}")
+    if not dry_run:
+        print(f"  Individus créés        : {total_individus_created}")
 
     if skipped_no_family:
         unique = sorted(set(ck for ck, _ in skipped_no_family))
-        print(f"\n  Couples sans individus JSON ({len(unique)}) :")
+        print(f"\n  Couples sans noms dans les titres ({len(unique)}) :")
         for ck in unique[:30]:
             print(f"    [{ck[0]}/{ck[1]}]")
         if len(unique) > 30:
