@@ -56,19 +56,36 @@ HEADING_TAGS = {"h1", "h2", "h3", "h4"}
 # ---------------------------------------------------------------------------
 
 def build_sosa_to_family(data: dict) -> dict:
-    """Retourne {(sosa_min, sosa_max): family_id} pour toutes les familles."""
+    """
+    Retourne {(sosa_min, sosa_max): family_id} pour toutes les familles.
+    Indexe aussi les familles où l'épouse n'a pas encore de sosa,
+    en déduisant le sosa attendu depuis celui du mari (Sosa pair → épouse = mari+1).
+    Les familles complètes (deux sosas connus) ont la priorité.
+    """
     indis = data["individus"]
     fams  = data["familles"]
     result = {}
+    partial = {}  # familles avec sosa mari connu mais épouse sans sosa
+
     for fid, fam in fams.items():
         mari_id   = fam.get("mari")
         epouse_id = fam.get("epouse")
-        if not (mari_id and epouse_id):
-            continue
-        sm = indis.get(mari_id,   {}).get("sosa")
-        sf = indis.get(epouse_id, {}).get("sosa")
+        sm = indis.get(mari_id   or "", {}).get("sosa") if mari_id   else None
+        sf = indis.get(epouse_id or "", {}).get("sosa") if epouse_id else None
+
         if sm and sf:
             result[(min(sm, sf), max(sm, sf))] = fid
+        elif sm and not sf and sm % 2 == 0:
+            # Mari sosa pair, épouse sosa inconnue → sosa attendu = sm+1
+            ck = (sm, sm + 1)
+            if ck not in partial:
+                partial[ck] = fid
+
+    # Ajouter les familles partielles uniquement si pas déjà couverte par une famille complète
+    for ck, fid in partial.items():
+        if ck not in result:
+            result[ck] = fid
+
     return result
 
 
@@ -94,24 +111,15 @@ RE_COUPLE_NAME = re.compile(
 
 def parse_couple_names(text: str) -> tuple | None:
     """
-    Parse 'Prénom NOM & Prénom NOM' (ou 'et') depuis un heading.
+    Parse 'Prénom NOM [& Prénom NOM]' (ou 'et') depuis un titre.
     Retourne (prenom_mari, nom_mari, prenom_epouse, nom_epouse) ou None.
+    L'épouse peut être inconnue : prenom_epouse='' et nom_epouse=''.
     """
     # Supprimer le préfixe [N/M] ou [N]
     text = RE_COUPLE_BRACKET.sub('', text)
     text = RE_SINGLE_BRACKET.sub('', text).strip()
-    # Supprimer les précisions entre parenthèses : "(vers 1740-1780)"
+    # Supprimer les précisions entre parenthèses : "(vers 1740-1780)", "(?-1655)"
     text = re.sub(r'\([^)]*\)', '', text).strip()
-
-    # Trouver le séparateur & ou " et " (minuscule pour éviter "Etienne")
-    sep = None
-    if '&' in text:
-        sep = '&'
-    elif re.search(r'\s+et\s+', text):
-        sep = ' et '
-
-    if sep is None:
-        return None
 
     def split_prenom_nom(s: str):
         """
@@ -121,6 +129,8 @@ def parse_couple_names(text: str) -> tuple | None:
         words = s.strip().split()
         noms, prenoms = [], []
         for w in words:
+            if w == '?':
+                continue
             # Supprimer préfixes hagiographiques (St-, Ste-)
             clean = re.sub(r"^(Ste|St)['\-]", "", w)
             # Supprimer particule minuscule avant ' (d', l')
@@ -135,14 +145,22 @@ def parse_couple_names(text: str) -> tuple | None:
                 prenoms.append(w)
         return ' '.join(prenoms).strip(), ' '.join(noms).strip()
 
-    parts = text.split(sep, 1) if sep == '&' else re.split(r'\s+et\s+', text, maxsplit=1)
-    if len(parts) != 2:
+    # Trouver le séparateur & ou " et " (minuscule pour éviter "Etienne")
+    if '&' in text:
+        parts = text.split('&', 1)
+    elif re.search(r'\s+et\s+', text):
+        parts = re.split(r'\s+et\s+', text, maxsplit=1)
+    else:
+        # Pas de séparateur : un seul individu connu
+        prenom1, nom1 = split_prenom_nom(text)
+        if nom1:
+            return prenom1, nom1, '', ''
         return None
-    prenom1, nom1 = split_prenom_nom(parts[0])
-    prenom2, nom2 = split_prenom_nom(parts[1])
 
-    # Rejeter si l'épouse est inconnue ("?")
-    if nom1 and nom2 and nom2 != '?':
+    prenom1, nom1 = split_prenom_nom(parts[0])
+    prenom2, nom2 = split_prenom_nom(parts[1])  # peut être vide si "& ?"
+
+    if nom1:
         return prenom1, nom1, prenom2, nom2
     return None
 
@@ -176,9 +194,10 @@ def ensure_family(data: dict, sosa_to_family: dict, sosa_to_individu: dict,
                   ck: tuple, heading_text: str = "") -> str | None:
     """
     Retourne l'id de famille pour le couple ck.
-    Si la famille n'existe pas :
-      - Si les individus existent, crée la famille.
-      - Si des noms sont extraits du heading, crée aussi les individus manquants.
+    Si la famille n'existe pas dans l'index :
+      - Cherche d'abord une famille pré-existante dont le mari a le bon sosa
+        mais dont l'épouse n'a pas de sosa (famille "incomplète").
+      - Sinon crée la famille (et les individus manquants si les noms sont connus).
     Retourne None si impossible de compléter les informations.
     """
     if ck in sosa_to_family:
@@ -187,6 +206,35 @@ def ensure_family(data: dict, sosa_to_family: dict, sosa_to_individu: dict,
     s_mari, s_epouse = ck  # sosa pair = mari, sosa impair = épouse
     mari_id   = sosa_to_individu.get(s_mari)
     epouse_id = sosa_to_individu.get(s_epouse)
+
+    # Chercher une famille pré-existante dont le mari est connu mais l'épouse sans sosa
+    if mari_id:
+        for fid, fam in data["familles"].items():
+            if fam.get("mari") != mari_id:
+                continue
+            ep_id   = fam.get("epouse")
+            ep_sosa = data["individus"].get(ep_id or "", {}).get("sosa") if ep_id else None
+            if ep_sosa is None:
+                # Famille avec épouse sans sosa → on l'adopte
+                if not epouse_id:
+                    names = parse_couple_names(heading_text) if heading_text else None
+                    p2, n2 = ("", "")
+                    if names:
+                        _, _, p2, n2 = names
+                    if ep_id:
+                        # Mettre à jour l'individu épouse existant
+                        ind = data["individus"][ep_id]
+                        ind["sosa"] = s_epouse
+                        if n2:
+                            ind.setdefault("nom", n2)
+                            ind.setdefault("prenom", p2)
+                        sosa_to_individu[s_epouse] = ep_id
+                        epouse_id = ep_id
+                    else:
+                        epouse_id = _create_individu(data, sosa_to_individu, s_epouse, p2, n2, 'F')
+                        data["familles"][fid]["epouse"] = epouse_id
+                sosa_to_family[ck] = fid
+                return fid
 
     if not mari_id or not epouse_id:
         names = parse_couple_names(heading_text) if heading_text else None
@@ -555,6 +603,22 @@ def parse_html_page(html_path: Path) -> dict:
     flush_pending_as_doc(current_couple)
 
     docs = {ck: d for ck, d in result.items() if d}
+
+    # Pour les couples sans heading mémorisé, chercher dans les <p> du document
+    missing = [ck for ck in docs if ck not in couple_headings]
+    if missing:
+        for p in soup.find_all("p"):
+            text_p = p.get_text(" ", strip=True)
+            for ck in list(missing):
+                # Le <p> doit mentionner le numéro Sosa du couple
+                if str(ck[0]) in text_p or str(ck[1]) in text_p:
+                    if parse_couple_names(text_p) is not None:
+                        couple_headings[ck] = text_p
+                        missing.remove(ck)
+                        break
+            if not missing:
+                break
+
     return docs, couple_headings
 
 

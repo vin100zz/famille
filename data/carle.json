@@ -127596,6 +127596,84 @@
                     }
                 ]
             }
+        },
+        "I7978": {
+            "nom": "d'APCHIER",
+            "prenom": "François Philibert",
+            "sexe": "M",
+            "sosa": 3906,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1809"
+                    }
+                ]
+            }
+        },
+        "I7979": {
+            "nom": "",
+            "prenom": "",
+            "sexe": "F",
+            "sosa": 3907,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1809"
+                    }
+                ]
+            }
+        },
+        "I7980": {
+            "nom": "LAURENT",
+            "prenom": "Sommaire : - Charles",
+            "sexe": "M",
+            "sosa": 988,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1810"
+                    }
+                ]
+            }
+        },
+        "I7981": {
+            "nom": "CHAUMEL",
+            "prenom": "Marie - - -",
+            "sexe": "F",
+            "sosa": 989,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1810"
+                    }
+                ]
+            }
+        },
+        "I7982": {
+            "nom": "REYNIER",
+            "prenom": "Vincent",
+            "sexe": "M",
+            "sosa": 6476,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1811"
+                    }
+                ]
+            }
+        },
+        "I7983": {
+            "nom": "",
+            "prenom": "",
+            "sexe": "F",
+            "sosa": 6477,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1811"
+                    }
+                ]
+            }
         }
     },
     "familles": {
@@ -128531,15 +128609,129 @@
             "documents": [
                 {
                     "titre": {
-                        "annee": null,
                         "label": ""
                     },
                     "contenu": [
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "<a href=\"https://babouch.fr/famille/#/chapitre/0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/4_8e_nicolas_carl\">Voir : A la recherche de Nicolas CARL</a>",
-                                "align": "center"
+                                "fichier": "Son existence nous est connue par l'acte de mariage de son fils Nicolas, le 1er septembre 1721, à Saint-Hippolyte. Il est \"défunt\" et \"jadis citoyen de «Abach» ou «Assach» (?)\"."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "label": "Les recherches"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "C'est donc vers ce lieu qu'il nous faut orienter les recherches pour progresser dans la quête de nos origines. Outre le fait que la dénomination n'est pas certaine, l'existence de quatre communes portant ce nom augmente la difficulté. Le Dictionnaire des Communes (éd. 1997) connaît en effet un Aspach en Moselle et trois dans le Haut-Rhin : un dans l'arrondissement de Altkirch et deux, \"le Haut\" et \"le Bas\", dans celui de Thann.\n\tRené Senior s'est intéressé à \"l'Aspach de Altkirch\" et en a retiré les renseignements décevants suivants : \"La communauté d'Aspach n'était pas paroisse avant la Révolution ; elle était administrée par un vicaire intérimaire qui dépendait du curé de Carspach ; elle a été érigée en paroisse en 1814\" (dictionnaire des communes du Haut-Rhin).\n Malheureusement, les registres de Carspach ont disparu. René Senior a consulté les registres notariaux d'Altkirch (?), Communauté d'Aspach 1628/1719, mais ils sont rédigés en allemand.\n\tUn généalogiste professionnel, à qui nous avons fait appel en 2001, nous a assuré que le nom de la paroisse inscrit sur l'acte était soit Assach, soit Abach, mais certainement pas Aspach. Or, s'il n'existe aucun Assach ni en Alsace, ni en Suisse, ni en Allemagne, il a jadis existé un Abbach en Bavière, près de Ratisbonne (Regensburg). Ce village est devenu Bad-Abbach par la suite, ce qui signifie Abbach-les-bains. Cette piste, assurément la plus sérieuse, mérite d'être suivie.\n\tNous ne lui connaissons qu'un enfant, Nicolas notre ancêtre, et ne possédons aucun renseignement sur son épouse qui n'est pas citée sur l'acte évoqué.    (17/11/2001)"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "En bleu : texte de Jean"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/4_8e_nicolas_carl/10.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/4_8e_nicolas_carl/11.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Recherches en 2001",
+                        "annee": 2001
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/4_8e_nicolas_carl/13.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/4_8e_nicolas_carl/12.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Recherches en 2012",
+                        "annee": 2012
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "1765, St-Hippolyte : Franciscus Carolus CARLÉ épouse Joanna SONTAG ; son père Antonin CARLÉ est \"civis in Endingen\", sa mère Anna Maria MERKLÉ"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/4_8e_nicolas_carl/carolus.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Registres St-Hippolyte 1765-1769 (EDEPOT/11) p. 10/47"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/4_8e_nicolas_carl/carolus1.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Recherches 2023",
+                        "annee": 2023
+                    }
+                },
+                {
+                    "titre": {
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "On trouve (source : Généanet) un couple Antonius CARLÉ (un Antonius CARLÉ est né en 1718)- Anna Maria MARKLIN qui a eu à Endingen de nombreux enfants :<br/>- 1747 : Anna Maria<br/>- 1749 : Coradus<br/>- 1751 : Franciscus Michaek<br/>- 1753 : Maria Rosa<br/>- 1757 : Franciscus Josephus<br/>- 1759 : Aloysius Bernardus<br/>- 1760 : Maria Anna<br/>- 1765 : Anna Cathérina<br/><br/>Franciscus Carolus CARLÉ est-il un  enfant d'Antonius ? Existe-il une parenté avec Nicolas CARL ?"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Proche d'Endingen se trouve la cité de Sasbach qui peut évoquer notre recherché \"Asbach\"... Mais on ne trouve pas de KARL/CARL à Sasbach."
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Un Aschbach existe dans le Bas-Rhin."
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Un autre Aschbach se trouve en Rhénanie-Palatinat, en Allemagne."
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Mais pas de KARL/CARL dans ces deux villes..."
                             }
                         ]
                     ]
@@ -175351,6 +175543,125 @@
                         "label": "18 janvier 1786 : Décès de Marie COMTE à Landos (43)",
                         "annee": 1786
                     }
+                }
+            ]
+        },
+        "F1809": {
+            "mari": "I7978",
+            "epouse": "I7979",
+            "documents": [
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "François Philibert d'APCHIER<br/>Naissance :vers 1600<br/>fils de Jacques d'APCHIER<br/>et de Delphine de TAILLAC<br/>mariés<br/>parrain :  ; marraine :Situation :Vicomte, Chevalier de l'Ordre du Roi, seigneur de Vazeilles.\n\t\t\tbaronnie de Vabres acquise le 30 avril 1630 par Philibert d'APCHIER, seigneur de la Beaume.Décès :1655  Saint-Jean-Lachalm (43)<br/>Remarques :se marie en 1645 avec Anne de PONTAUD, morte en 1672, qui eut plusieurs enfants dont Jeanne-Marie d'APCHIER (voir document)."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "?<br/>Naissance :<br/><br/><br/><br/>Situation :<br/>Décès :<br/>Remarques :"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": ""
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Mariage : non Enfants : - Louise d'APCHIER, fille naturelle Sources : - \"A moi Auvergne !\" n° 82 et 117 - Geneal43\n\t   - Geneanet zethos"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "→François Philibert d'APCHIER  meurt le 8 juin 1655 à Saint-Jean-Lachalm"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/3_jp_itier/12e_apchier/3906D.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": ""
+                    }
+                },
+                {
+                    "titre": {
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "\"obiit die\" = \"est mort le jour\""
+                            }
+                        ]
+                    ]
+                }
+            ]
+        },
+        "F1810": {
+            "mari": "I7980",
+            "epouse": "I7981",
+            "documents": [
+                {
+                    "titre": {
+                        "label": "Branche Louise LAURENT : 10e génération"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Sommaire :<br/>- [988/989] Charles LAURENT & Marie CHAUMEL<br/>-<br/>-<br/>-"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/laurent/10e_laurent/988M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Le 6 may 1679 par moy a été bénit le<br/>mariage de Charles Laurent cadissier âgé<br/>... 30 ans et Marie Chaumel<br/>âgée d'environ 29 ans..."
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mariage le 6 mai à Thueyts.",
+                        "annee": 1679
+                    }
+                }
+            ]
+        },
+        "F1811": {
+            "mari": "I7982",
+            "epouse": "I7983",
+            "documents": [
+                {
+                    "titre": {
+                        "label": "13e génération"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Sommaire :"
+                            }
+                        ]
+                    ]
                 }
             ]
         }
