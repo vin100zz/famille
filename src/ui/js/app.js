@@ -48,11 +48,68 @@ function _showHomeBtn(visible) {
 (function initLightbox() {
   const lb    = document.getElementById('lightbox');
   const close = document.getElementById('lightbox-close');
-  if (!lb || !close) return;
+  const img   = document.getElementById('lightbox-img');
+  if (!lb || !close || !img) return;
+
+  // ── Zoom / pan ────────────────────────────────────────────────────────────
+  let _scale = 1, _tx = 0, _ty = 0;
+  let _dragging = false, _dragStartX = 0, _dragStartY = 0;
+
+  function _applyTransform() {
+    img.style.transform = `translate(${_tx}px, ${_ty}px) scale(${_scale})`;
+    img.style.cursor = _scale > 1 ? (_dragging ? 'grabbing' : 'grab') : '';
+  }
+
+  function _resetTransform() {
+    _scale = 1; _tx = 0; _ty = 0;
+    img.style.transform = '';
+    img.style.cursor = '';
+  }
+
+  // Zoom centré sur le point sous le curseur
+  lb.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    const rect  = img.getBoundingClientRect();
+    const ratio = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+    const newScale = Math.min(10, Math.max(1, _scale * ratio));
+    // Décalage pour garder le point sous le curseur fixe
+    const cx = e.clientX - (rect.left + rect.width  / 2);
+    const cy = e.clientY - (rect.top  + rect.height / 2);
+    _tx = cx - (cx - _tx) * (newScale / _scale);
+    _ty = cy - (cy - _ty) * (newScale / _scale);
+    _scale = newScale;
+    if (_scale === 1) { _tx = 0; _ty = 0; }
+    _applyTransform();
+  }, { passive: false });
+
+  // Pan (glisser quand zoomé)
+  img.addEventListener('mousedown', function(e) {
+    if (_scale <= 1) return;
+    _dragging = true;
+    _dragStartX = e.clientX - _tx;
+    _dragStartY = e.clientY - _ty;
+    img.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!_dragging) return;
+    _tx = e.clientX - _dragStartX;
+    _ty = e.clientY - _dragStartY;
+    _applyTransform();
+  });
+  window.addEventListener('mouseup', function() {
+    if (_dragging) { _dragging = false; _applyTransform(); }
+  });
+
+  // Double-clic : reset zoom
+  img.addEventListener('dblclick', _resetTransform);
+
+  // ─────────────────────────────────────────────────────────────────────────
 
   function closeLb() {
     lb.classList.remove('lightbox--open');
-    document.getElementById('lightbox-img').src = '';
+    img.src = '';
+    _resetTransform();
   }
 
   // Fermeture manuelle : ferme le DOM et neutralise l'entrée lightbox
