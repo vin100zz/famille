@@ -55,12 +55,30 @@ function _showHomeBtn(visible) {
     document.getElementById('lightbox-img').src = '';
   }
 
-  close.addEventListener('click', closeLb);
+  // Fermeture manuelle : ferme le DOM et neutralise l'entrée lightbox
+  // dans l'historique sans naviguer (replaceState écrase l'état courant).
+  function closeLbByUser() {
+    if (!lb.classList.contains('lightbox--open')) return;
+    closeLb();
+    history.replaceState(null, '');
+  }
+
+  // Bouton Précédent du navigateur : si la lightbox est ouverte on la ferme
+  // et on bloque le handler de routing SPA (qui afficherait l'accueil).
+  // Ce listener est enregistré avant le handler SPA → stopImmediatePropagation fonctionne.
+  window.addEventListener('popstate', function(e) {
+    if (lb.classList.contains('lightbox--open')) {
+      e.stopImmediatePropagation();
+      closeLb();
+    }
+  });
+
+  close.addEventListener('click', closeLbByUser);
   lb.addEventListener('click', function(e) {
-    if (e.target === lb) closeLb();
+    if (e.target === lb) closeLbByUser();
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLb();
+    if (e.key === 'Escape') closeLbByUser();
   });
 })();
 

@@ -738,6 +738,7 @@ function openLightbox(src) {
   if (!lb || !img) return;
   img.src = src;
   lb.classList.add('lightbox--open');
+  history.pushState({ lightbox: true }, '');
 }
 
 /**
