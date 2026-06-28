@@ -872,6 +872,36 @@ const Editor = (function () {
   // ── Colonne avec drag-and-drop ─────────────────────────────────────────────
 
   let _dragPayload = null;
+  let _lastUsedImgDir = '';
+
+  // Cherche le dossier de l'image "la plus proche" : même colonne, autres colonnes, autres sections.
+  function _findNearestImgDir(doc, colIdx) {
+    const getDir = f => (f && f.includes('/')) ? f.replace(/\/[^/]+$/, '') : null;
+    // 1. Même colonne
+    for (const b of doc.contenu[colIdx]) {
+      const d = (b.type === 'IMAGE') ? getDir(b.fichier) : null;
+      if (d !== null) return d;
+    }
+    // 2. Autres colonnes de la même section
+    for (let ci = 0; ci < doc.contenu.length; ci++) {
+      if (ci === colIdx) continue;
+      for (const b of doc.contenu[ci]) {
+        const d = (b.type === 'IMAGE') ? getDir(b.fichier) : null;
+        if (d !== null) return d;
+      }
+    }
+    // 3. Autres sections de la même page
+    for (const otherDoc of (_family.documents || [])) {
+      if (otherDoc === doc) continue;
+      for (const col of (otherDoc.contenu || [])) {
+        for (const b of col) {
+          const d = (b.type === 'IMAGE') ? getDir(b.fichier) : null;
+          if (d !== null) return d;
+        }
+      }
+    }
+    return null;
+  }
 
   function _buildColEditor(doc, colIdx, renderCols) {
     const colBlocks = doc.contenu[colIdx];
@@ -882,7 +912,7 @@ const Editor = (function () {
     const refreshBlocks = () => {
       blockList.innerHTML = '';
       colBlocks.forEach((block, bi) => {
-        const bwrap = _buildBlockEditor(block, bi, colBlocks, renderCols);
+        const bwrap = _buildBlockEditor(block, bi, colBlocks, renderCols, doc, colIdx);
         bwrap.setAttribute('draggable', 'true');
         bwrap.addEventListener('dragstart', e => {
           _dragPayload = { doc, fromCol: colIdx, fromIdx: bi };
@@ -917,9 +947,9 @@ const Editor = (function () {
     return col;
   }
 
-  function _buildBlockEditor(block, blockIdx, colBlocks, renderCols) {
+  function _buildBlockEditor(block, blockIdx, colBlocks, renderCols, doc, colIdx) {
     const wrap = el('div', 'ed-block-editor');
-    if (block.type === 'IMAGE') _buildImageBlockEditor(wrap, block, blockIdx, colBlocks, renderCols);
+    if (block.type === 'IMAGE') _buildImageBlockEditor(wrap, block, blockIdx, colBlocks, renderCols, doc, colIdx);
     else                        _buildTextBlockEditor(wrap,  block, blockIdx, colBlocks, renderCols);
     return wrap;
   }
@@ -1025,7 +1055,7 @@ const Editor = (function () {
 
   // ── Bloc IMAGE : prévisualisation + explorateur ───────────────────────────
 
-  function _buildImageBlockEditor(wrap, block, blockIdx, colBlocks, renderCols) {
+  function _buildImageBlockEditor(wrap, block, blockIdx, colBlocks, renderCols, doc, colIdx) {
     wrap.classList.add('ed-img-block');
 
     const BASE_URL = typeof IMAGES_BASE !== 'undefined' ? IMAGES_BASE : './images/';
@@ -1049,8 +1079,19 @@ const Editor = (function () {
 
     function _openBrowser() {
       const cur = block.fichier || '';
-      const initialDir = cur.includes('/') ? cur.replace(/\/[^/]+$/, '') : '';
-      _showImageBrowser(path => { block.fichier = path; _refreshPreview(path); pathInp.value = path; errEl.textContent = ''; }, initialDir);
+      let initialDir;
+      if (cur.includes('/')) {
+        initialDir = cur.replace(/\/[^/]+$/, '');
+      } else {
+        initialDir = _findNearestImgDir(doc, colIdx) ?? _lastUsedImgDir;
+      }
+      _showImageBrowser(path => {
+        block.fichier = path;
+        _refreshPreview(path);
+        pathInp.value = path;
+        errEl.textContent = '';
+        if (path.includes('/')) _lastUsedImgDir = path.replace(/\/[^/]+$/, '');
+      }, initialDir);
     }
     imgWrap.addEventListener('click', _openBrowser);
     wrap.appendChild(imgWrap);

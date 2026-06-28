@@ -287,6 +287,7 @@ async function renderPersonPage(data, seq) {
   editBtn.type = 'button';
   editBtn.textContent = '\u270F\uFE0F Modifier';
   editBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     Editor.open({
       personId:        data.person.id,
       person:          data.person,
