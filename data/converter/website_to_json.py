@@ -387,7 +387,13 @@ def main():
     overwrite = "--overwrite" in sys.argv
 
     print("Chargement de", JSON_PATH)
-    data = json.loads(JSON_PATH.read_text(encoding="utf-8"))
+    raw = JSON_PATH.read_bytes()
+    newline   = '\r\n' if b'\r\n' in raw else '\n'
+    src_text  = raw.decode('utf-8')
+    second_line = src_text.split('\n')[1] if '\n' in src_text else '  '
+    indent = len(second_line) - len(second_line.lstrip())
+
+    data = json.loads(src_text)
     sosa_to_family = build_sosa_to_family(data)
     print(f"  {len(sosa_to_family)} familles avec numéros Sosa identifiés.")
 
@@ -440,9 +446,10 @@ def main():
 
     if not dry_run:
         print(f"\nÉcriture de {OUTPUT_PATH}...")
-        OUTPUT_PATH.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
+        output = json.dumps(data, ensure_ascii=False, indent=indent)
+        if newline == '\r\n':
+            output = output.replace('\n', '\r\n')
+        OUTPUT_PATH.write_bytes(output.encode('utf-8'))
         print("Terminé.")
     else:
         print("\n(Aucune écriture en mode dry-run)")
