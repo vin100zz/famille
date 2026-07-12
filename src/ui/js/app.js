@@ -385,7 +385,8 @@ async function renderPersonPage(data, seq) {
     try { treeData = await api.getSosaTree(conjoint.sosa); } catch (e) {}
   }
   const coupleCard  = renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData);
-  const docs        = primary ? (primary.documents || []) : [];
+  // Documents de la personne (indépendants de l'union) + documents de l'union le cas échéant
+  const docs        = (data.person.documents || []).concat(primary ? (primary.documents || []) : []);
   const docsSection = renderDocuments(docs);
 
   const hasMap = PersonsMap.hasLocations(data.person, conjoint, mariage);

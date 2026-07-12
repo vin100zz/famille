@@ -799,8 +799,14 @@ const Editor = (function () {
 
   // ── Section Documents ──────────────────────────────────────────────────────
 
+  // Sans union, il n'existe pas de famille pour porter les documents :
+  // on les rattache alors directement à la personne (persistés via updatePersons).
+  function _currentDocs() {
+    return _familleId ? _family.documents : (_person.documents || (_person.documents = []));
+  }
+
   function _buildDocSection() {
-    const docs = _family.documents;
+    const docs = _currentDocs();
     const section = el('div', 'doc-section');
     const renderDocs = () => {
       section.innerHTML = '';
@@ -891,7 +897,7 @@ const Editor = (function () {
       }
     }
     // 3. Autres sections de la même page
-    for (const otherDoc of (_family.documents || [])) {
+    for (const otherDoc of _currentDocs()) {
       if (otherDoc === doc) continue;
       for (const col of (otherDoc.contenu || [])) {
         for (const b of col) {
@@ -1293,6 +1299,7 @@ const Editor = (function () {
       professions:  (person.professions  || []).map(p => _t(p)).filter(Boolean),
       residences:   (person.residences   || []).map(r => _cleanEvent(r)).filter(Boolean),
       commentaires: (person.commentaires || []).map(c => _t(c)).filter(Boolean),
+      documents:    person.documents || [],
       parents:      parentIds.filter(Boolean),
     };
   }
