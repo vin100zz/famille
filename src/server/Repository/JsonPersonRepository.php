@@ -707,15 +707,27 @@ class JsonPersonRepository implements IPersonRepository
 
     /**
      * Normalise une chaîne pour la recherche : minuscules + suppression des accents.
+     *
+     * Utilise une table explicite plutôt que iconv//TRANSLIT, dont la
+     * translittération dépend de la plateforme (peu fiable sous PHP Windows,
+     * ex : "Ü" n'était pas ramené à "u").
      */
     private function normalize($str)
     {
         if (!$str) {
             return '';
         }
-        $str = mb_strtolower($str, 'UTF-8');
-        // iconv translitère les caractères accentués en ASCII
-        $ascii = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $str);
-        return $ascii !== false ? $ascii : $str;
+        static $map = array(
+            'à'=>'a','á'=>'a','â'=>'a','ã'=>'a','ä'=>'a','å'=>'a','ā'=>'a',
+            'ç'=>'c','ć'=>'c','č'=>'c',
+            'è'=>'e','é'=>'e','ê'=>'e','ë'=>'e','ē'=>'e','ė'=>'e','ę'=>'e',
+            'ì'=>'i','í'=>'i','î'=>'i','ï'=>'i','ī'=>'i',
+            'ñ'=>'n','ń'=>'n',
+            'ò'=>'o','ó'=>'o','ô'=>'o','õ'=>'o','ö'=>'o','ø'=>'o','ō'=>'o',
+            'ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u','ū'=>'u',
+            'ý'=>'y','ÿ'=>'y',
+            'ß'=>'ss','æ'=>'ae','œ'=>'oe',
+        );
+        return strtr(mb_strtolower($str, 'UTF-8'), $map);
     }
 }
