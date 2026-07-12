@@ -786,8 +786,15 @@ const Editor = (function () {
       }
 
       document.body.removeChild(overlay);
-      if (onDone) onDone();
-      _render();
+      if (role === 'spouse') {
+        // Ajouter un conjoint change toute la colonne droite de la fiche
+        // (en-tête, sections...) : un re-rendu complet est nécessaire.
+        _render();
+      } else if (onDone) {
+        // Parent/enfant : rafraîchit uniquement la liste concernée, sans
+        // réinitialiser le reste de la vue (ex : Fiche synthétique dépliée).
+        onDone();
+      }
     });
 
     btnRow.appendChild(btnCreate); btnRow.appendChild(btnCancel);
