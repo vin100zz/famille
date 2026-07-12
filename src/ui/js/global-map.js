@@ -92,11 +92,24 @@ const GlobalMap = (function () {
 
   // ── Géocodage niveau ville ─────────────────────────────────────────────────
 
+  /**
+   * Résout le numéro de département en nom (ex : "67" → "Bas-Rhin").
+   * Un nom en toutes lettres est un terme de recherche plein texte bien plus
+   * fiable qu'un simple numéro, qui peut matcher n'importe quel autre chiffre
+   * (numéro de rue, code postal…) ailleurs en France (cf. DEPT_NOMS dans
+   * components.js).
+   */
+  function _deptQueryPart(num) {
+    if (!num) return '';
+    const key = /^\d$/.test(num) ? '0' + num : num; // "4" → "04"
+    return DEPT_NOMS[key] || num;
+  }
+
   async function _geocodeLieuCity(lieu) {
     if (!lieu) return null;
     const parts = [];
     if (lieu.ville)    parts.push(lieu.ville);
-    if (lieu.dept_num) parts.push(lieu.dept_num);
+    if (lieu.dept_num) parts.push(_deptQueryPart(lieu.dept_num));
     parts.push('France');
     return _fetchCoords(parts.join(', '));
   }
@@ -128,7 +141,7 @@ const GlobalMap = (function () {
     if (!lieu) return null;
     const cityParts = [];
     if (lieu.ville)    cityParts.push(lieu.ville);
-    if (lieu.dept_num) cityParts.push(lieu.dept_num);
+    if (lieu.dept_num) cityParts.push(_deptQueryPart(lieu.dept_num));
     cityParts.push('France');
     const qCity = cityParts.join(', ');
 
