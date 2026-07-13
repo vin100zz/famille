@@ -19,13 +19,15 @@ function toggleGlobalMap(skipHistory) {
   _globalMapOpen = !_globalMapOpen;
   if (_globalMapOpen) {
     globalMapScreen.hidden = false;
-    globalMapBtn.classList.add('header-map-btn--active');
+    globalMapBtn.hidden = true;   // pas d'intérêt à "voir la carte" quand on y est déjà
+    _showHomeBtn(true);           // permet de revenir à l'accueil depuis la carte
     GlobalMap.open(globalMapScreen);
     if (!skipHistory) history.pushState({ map: true }, '', '#map');
   } else {
     GlobalMap.close();
     globalMapScreen.hidden = true;
-    globalMapBtn.classList.remove('header-map-btn--active');
+    globalMapBtn.hidden = false;
+    _showHomeBtn(welcomeEl.hidden); // visible si on revient sur une fiche, caché si on revient à l'accueil
     if (!skipHistory && location.hash === '#map') history.pushState({}, '', location.pathname);
   }
 }
@@ -457,6 +459,7 @@ window.addEventListener('popstate', e => {
 });
 
 function goHome() {
+  if (_globalMapOpen) toggleGlobalMap(true);
   if (_activeMap) { _activeMap.remove(); _activeMap = null; }
   Editor.close();
   history.pushState(null, '', location.pathname);
