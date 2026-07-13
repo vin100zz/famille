@@ -54,13 +54,26 @@ const PersonsMap = (function () {
 
   // ── Géocodage Nominatim ───────────────────────────────────────────────────
 
+  /**
+   * Résout le numéro de département en nom (ex : "67" → "Bas-Rhin").
+   * Un nom en toutes lettres est un terme de recherche plein texte bien plus
+   * fiable qu'un simple numéro, qui peut matcher n'importe quel autre chiffre
+   * (numéro de rue, code postal…) ailleurs en France (cf. DEPT_NOMS dans
+   * components.js).
+   */
+  function _deptQueryPart(num) {
+    if (!num) return '';
+    const key = /^\d$/.test(num) ? '0' + num : num; // "4" → "04"
+    return DEPT_NOMS[key] || num;
+  }
+
   /** Requête précise : rue + ville */
   function _buildQueryFull(lieu) {
     if (!lieu) return '';
     const p = [];
     if (lieu.adresse)       p.push(lieu.adresse);
     if (lieu.ville)         p.push(lieu.ville);
-    if (lieu.dept_num) p.push(lieu.dept_num);
+    if (lieu.dept_num) p.push(_deptQueryPart(lieu.dept_num));
     if (!lieu.pays || lieu.pays.toLowerCase() === 'france') p.push('France');
     else p.push(lieu.pays);
     return p.join(', ');
@@ -71,7 +84,7 @@ const PersonsMap = (function () {
     if (!lieu) return '';
     const p = [];
     if (lieu.ville)         p.push(lieu.ville);
-    if (lieu.dept_num) p.push(lieu.dept_num);
+    if (lieu.dept_num) p.push(_deptQueryPart(lieu.dept_num));
     p.push('France');
     return p.length ? p.join(', ') : (lieu.brut || '');
   }

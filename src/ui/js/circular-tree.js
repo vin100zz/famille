@@ -28,7 +28,7 @@ const CircularTree = (function () {
   let _onSelect    = null;
   let _initialized = false;
 
-  let _zoomLevel   = 1.0;
+  let _zoomLevel   = 2.0;
   let _baseSize    = 800;
   let _container   = null;
   let _scrollEl    = null;
