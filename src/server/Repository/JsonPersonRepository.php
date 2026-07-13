@@ -265,6 +265,17 @@ class JsonPersonRepository implements IPersonRepository
 
     public function savePerson($id, $data)
     {
+        $this->updatePersonFields($id, $data);
+        $this->persist();
+    }
+
+    /**
+     * Applique les champs d'un individu en mémoire, sans écrire sur disque.
+     * Utilisé par savePerson() (écrit tout de suite) et saveAll() (écrit une
+     * seule fois à la fin du lot, plutôt qu'une fois par personne/famille).
+     */
+    private function updatePersonFields($id, $data)
+    {
         if (!isset($this->data['individus'][$id])) {
             throw new RuntimeException('Individu introuvable : ' . $id);
         }
@@ -292,11 +303,16 @@ class JsonPersonRepository implements IPersonRepository
                 $p['liens']['parents'] = array_values(array_unique($data['parents']));
             }
         }
-
-        $this->persist();
     }
 
     public function saveFamily($id, $data)
+    {
+        $this->updateFamilyFields($id, $data);
+        $this->persist();
+    }
+
+    /** Équivalent de updatePersonFields() pour une famille (voir son commentaire). */
+    private function updateFamilyFields($id, $data)
     {
         if (!isset($this->data['familles'][$id])) {
             throw new RuntimeException('Famille introuvable : ' . $id);
@@ -385,8 +401,6 @@ class JsonPersonRepository implements IPersonRepository
                 $fam['enfants'] = $newChildren;
             }
         }
-
-        $this->persist();
     }
 
     private function persist()
@@ -532,7 +546,7 @@ class JsonPersonRepository implements IPersonRepository
                 $pData['parents'] = array_map($resolve, $pData['parents']);
             }
             if (isset($this->data['individus'][$pid])) {
-                $this->savePerson($pid, $pData);
+                $this->updatePersonFields($pid, $pData);
             }
         }
 
@@ -544,7 +558,7 @@ class JsonPersonRepository implements IPersonRepository
                 $fData['enfants'] = array_map($resolve, $fData['enfants']);
             }
             if (isset($this->data['familles'][$fid])) {
-                $this->saveFamily($fid, $fData);
+                $this->updateFamilyFields($fid, $fData);
             }
         }
 
