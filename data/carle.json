@@ -123622,7 +123622,7 @@
                 ],
                 "unions": [
                     {
-                        "famille": "F1702",
+                        "famille": "F1802",
                         "conjoint": "I7774"
                     }
                 ]
@@ -123640,7 +123640,7 @@
                 ],
                 "unions": [
                     {
-                        "famille": "F1702",
+                        "famille": "F1802",
                         "conjoint": "I7773"
                     }
                 ]
@@ -127781,32 +127781,6 @@
                 "unions": [
                     {
                         "famille": "F1801"
-                    }
-                ]
-            }
-        },
-        "I7966": {
-            "nom": "d'ALBON ROUSSIERE",
-            "prenom": "Michel de la",
-            "sexe": "M",
-            "sosa": 1578,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1802"
-                    }
-                ]
-            }
-        },
-        "I7967": {
-            "nom": "GAYFFIER",
-            "prenom": "Louise de",
-            "sexe": "F",
-            "sosa": 1579,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1802"
                     }
                 ]
             }
@@ -170344,13 +170318,6 @@
                 "I7761"
             ]
         },
-        "F1702": {
-            "mari": "I7773",
-            "epouse": "I7774",
-            "enfants": [
-                "I7762"
-            ]
-        },
         "F1704": {
             "mari": "I7775",
             "epouse": "I7776",
@@ -176800,8 +176767,11 @@
             ]
         },
         "F1802": {
-            "mari": "I7966",
-            "epouse": "I7967",
+            "mari": "I7773",
+            "epouse": "I7774",
+            "enfants": [
+                "I7762"
+            ],
             "documents": [
                 {
                     "contenu": [
