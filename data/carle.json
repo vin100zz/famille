@@ -22769,7 +22769,12 @@
             "prenom": "Maury",
             "sexe": "M",
             "naissance": {
-                "date": "BEF 1684"
+                "date": "BEF 1684",
+                "lieu": {
+                    "ville": "Naizin",
+                    "dept_num": "56",
+                    "brut": "Naizin, 56"
+                }
             },
             "liens": {
                 "unions": [
@@ -22779,9 +22784,9 @@
                         "mariage": {
                             "date": "08 JAN 1709",
                             "lieu": {
-                                "brut": "Crédin, 56, Morbihan, , ,",
                                 "ville": "Crédin",
-                                "dept_num": "56"
+                                "dept_num": "56",
+                                "brut": "Crédin, 56"
                             }
                         },
                         "commentaires": [
@@ -22807,9 +22812,9 @@
                         "mariage": {
                             "date": "08 JAN 1709",
                             "lieu": {
-                                "brut": "Crédin, 56, Morbihan, , ,",
                                 "ville": "Crédin",
-                                "dept_num": "56"
+                                "dept_num": "56",
+                                "brut": "Crédin, 56"
                             }
                         },
                         "commentaires": [
@@ -118156,10 +118161,10 @@
             "deces": {
                 "date": "17 JAN 1742",
                 "lieu": {
-                    "brut": "Crédin, 56, Morbihan, , , Kerdo",
-                    "adresse": "Kerdo",
                     "ville": "Crédin",
-                    "dept_num": "56"
+                    "adresse": "Kerdo",
+                    "dept_num": "56",
+                    "brut": "Crédin, Kerdo, 56"
                 }
             },
             "liens": {
@@ -118170,9 +118175,9 @@
                         "mariage": {
                             "date": "04 FEB 1704",
                             "lieu": {
-                                "brut": "Crédin, 56, Morbihan, , ,",
                                 "ville": "Crédin",
-                                "dept_num": "56"
+                                "dept_num": "56",
+                                "brut": "Crédin, 56"
                             }
                         },
                         "commentaires": [
@@ -118198,9 +118203,9 @@
                         "mariage": {
                             "date": "04 FEB 1704",
                             "lieu": {
-                                "brut": "Crédin, 56, Morbihan, , ,",
                                 "ville": "Crédin",
-                                "dept_num": "56"
+                                "dept_num": "56",
+                                "brut": "Crédin, 56"
                             }
                         },
                         "commentaires": [
@@ -121120,22 +121125,34 @@
             "prenom": "Robert",
             "sexe": "M",
             "naissance": {
-                "date": "1696"
+                "date": "07 nov 1694",
+                "lieu": {
+                    "ville": "Pleugriffet",
+                    "dept_num": "56",
+                    "brut": "Pleugriffet, 56"
+                }
             },
             "deces": {
                 "date": "03 MAY 1731",
                 "lieu": {
-                    "brut": "Réguiny, 56, Morbihan, , ,",
                     "ville": "Réguiny",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Réguiny, 56"
                 }
             },
             "liens": {
                 "unions": [
                     {
                         "famille": "F373",
-                        "conjoint": "I7641"
+                        "conjoint": "I7641",
+                        "mariage": {
+                            "date": "bef 1786"
+                        }
                     }
+                ],
+                "parents": [
+                    "I8015",
+                    "I8016"
                 ]
             },
             "sosa": 368
@@ -121148,7 +121165,10 @@
                 "unions": [
                     {
                         "famille": "F373",
-                        "conjoint": "I7640"
+                        "conjoint": "I7640",
+                        "mariage": {
+                            "date": "bef 1786"
+                        }
                     }
                 ]
             },
@@ -124391,9 +124411,9 @@
             "deces": {
                 "date": "31 JUL 1753",
                 "lieu": {
-                    "brut": "Rohan, 56",
                     "ville": "Rohan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Rohan, 56"
                 }
             },
             "liens": {
@@ -124405,7 +124425,8 @@
                             "date": "20 FEB 1719",
                             "lieu": {
                                 "ville": "Bréhan",
-                                "dept_num": "56"
+                                "dept_num": "56",
+                                "brut": "Bréhan, 56"
                             }
                         }
                     }
@@ -124425,19 +124446,19 @@
             "prenom": "Marie",
             "sexe": "F",
             "naissance": {
-                "date": "20 FEB 1719",
+                "date": "09 jul 1701",
                 "lieu": {
-                    "brut": "Bréhan, 56",
                     "ville": "Bréhan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Bréhan, 56"
                 }
             },
             "deces": {
                 "date": "06 JUL 1760",
                 "lieu": {
-                    "brut": "Rohan, 56",
                     "ville": "Rohan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Rohan, 56"
                 }
             },
             "liens": {
@@ -124449,7 +124470,8 @@
                             "date": "20 FEB 1719",
                             "lieu": {
                                 "ville": "Bréhan",
-                                "dept_num": "56"
+                                "dept_num": "56",
+                                "brut": "Bréhan, 56"
                             }
                         }
                     }
@@ -124468,17 +124490,17 @@
             "naissance": {
                 "date": "06 NOV 1675",
                 "lieu": {
-                    "brut": "Rohan, 56",
                     "ville": "Rohan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Rohan, 56"
                 }
             },
             "deces": {
                 "date": "29 APR 1742",
                 "lieu": {
-                    "brut": "Crédin, 56",
                     "ville": "Crédin",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Crédin, 56"
                 }
             },
             "liens": {
@@ -127774,8 +127796,6 @@
             }
         },
         "I7968": {
-            "nom": "DURAND",
-            "prenom": "Pierre",
             "sexe": "M",
             "sosa": 986,
             "liens": {
@@ -127787,8 +127807,6 @@
             }
         },
         "I7969": {
-            "nom": "VIDAL",
-            "prenom": "Isabelle",
             "sexe": "F",
             "sosa": 987,
             "liens": {
@@ -128176,8 +128194,6 @@
             }
         },
         "I7995": {
-            "nom": "DURAND",
-            "prenom": "Pierre",
             "sexe": "M",
             "sosa": 986,
             "liens": {
@@ -128254,6 +128270,10 @@
                         "famille": "F1820",
                         "conjoint": "I7998"
                     }
+                ],
+                "parents": [
+                    "I8013",
+                    "I8014"
                 ]
             }
         },
@@ -128445,6 +128465,62 @@
                     {
                         "famille": "F1827",
                         "conjoint": "I8011"
+                    }
+                ]
+            }
+        },
+        "I8013": {
+            "nom": "GIRON",
+            "prenom": "Jacques",
+            "sexe": "M",
+            "sosa": 1974,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1828",
+                        "conjoint": "I8014"
+                    }
+                ]
+            }
+        },
+        "I8014": {
+            "nom": "PERRIER",
+            "prenom": "Antoinette",
+            "sexe": "F",
+            "sosa": 1975,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1828",
+                        "conjoint": "I8013"
+                    }
+                ]
+            }
+        },
+        "I8015": {
+            "nom": "NOUVEL",
+            "prenom": "Raoul",
+            "sexe": "M",
+            "sosa": 736,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1829",
+                        "conjoint": "I8016"
+                    }
+                ]
+            }
+        },
+        "I8016": {
+            "nom": "BLANDEL",
+            "prenom": "Mathurine",
+            "sexe": "F",
+            "sosa": 737,
+            "liens": {
+                "unions": [
+                    {
+                        "famille": "F1829",
+                        "conjoint": "I8015"
                     }
                 ]
             }
@@ -144215,133 +144291,22 @@
             ],
             "documents": [
                 {
+                    "titre": {
+                        "annee": 1709,
+                        "label": "8 janvier, Crédin : le mariage"
+                    },
                     "contenu": [
                         [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/368D.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/368D_detail.jpg"
-                            },
                             {
                                 "type": "TEXTE",
-                                "fichier": "Robert NOUVEL s'est remarié avec une autre Guillemette (CHEVILLARD)"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "3 mai, Réguigny : Mort de Robert NOUVEL",
-                        "annee": 1731
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/372M.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/372M_detail.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "4 février, Crédin : le mariage",
-                        "annee": 1704
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/michelle.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/carte_4.jpg"
+                                "fichier": "Le registre",
+                                "align": "center"
                             },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "...fille de Luc FLOHO et d'Yvonne<br/>JAN..."
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "19 juillet, Crédin : naissance d'un enfant : Michelle FLOHO",
-                        "annee": 1722
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/372D.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/372D_detail.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "17 janvier, Crédin : mort de Luc FLOHO",
-                        "annee": 1742
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/373D.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/373D_detail.jpg"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "On retrouve ici «Michelle FLOHO, sa fille» mais JAN est devenu JOHANNO. Est-ce la même personne ?"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "25 mars, Crédin : mort de Yvonne JEHANNO ?",
-                        "annee": 1749
-                    }
-                },
-                {
-                    "contenu": [
-                        [
                             {
                                 "type": "IMAGE",
                                 "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/374M.jpg"
                             }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "8 janvier, Crédin : le mariage",
-                        "annee": 1709
-                    }
-                },
-                {
-                    "contenu": [
+                        ],
                         [
                             {
                                 "type": "IMAGE",
@@ -144354,20 +144319,21 @@
                         ],
                         [
                             {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/carte_5.jpg"
-                            },
-                            {
                                 "type": "TEXTE",
                                 "fichier": "...Maury LA NÖE de la paroisse de Naizin et Marie ALLIOUX de la paroisse<br/>de Crédin, le dit Maury LA NÖE agé de plus de vingt cinq ans..."
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/carte_5.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": 1758,
+                        "label": "14 décembre, Crédin : Mort de Maury LA NÖE"
+                    },
                     "contenu": [
                         [
                             {
@@ -144378,14 +144344,10 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...le corps de Maur LANOS agé de soixante seize ans...<br/>au village de Kaudran<br/>Il décède au village de Keraudran. Présents à son inhumation: Nicolas LORILLEC, son gendre + Renée, sa fille + Louis PIRY, François LAMOUR, de Keraudran + Marie LANOS, sa fille, de Crésadio."
+                                "fichier": ".. inhumé dans le cimetière .le corps de Maury LANOE agé de soixante seize ans...<br/>au village de Kaudran [Keraudran]<br/>Présents à son inhumation: Nicolas \nLORILLEC, son gendre + Renée, sa fille + Louis PIRY, François LAMOUR, de\n Keraudran + Marie LANOS, sa fille, de Crésadio.\n"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": "14 décembre, Crédin : Mort de Maury LA NÖE",
-                        "annee": 1758
-                    }
+                    ]
                 }
             ]
         },
@@ -167923,6 +167885,24 @@
             ],
             "documents": [
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": "Vers 1662 : Naissance de Luc FLOHO (d'après son acte de décès)"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Vers 1669 : naissance de Yvonne JAN (d'après son acte de décès)"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
                     "contenu": [
                         [
                             {
@@ -168413,13 +168393,57 @@
             "documents": [
                 {
                     "titre": {
-                        "label": "Les ancêtres de Jean Nouvel : 9e génération"
+                        "annee": 1694,
+                        "label": "Naissance de Robert NOUVEL le 7 novembre à Pleugriffet"
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/368N.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "Sommaire"
+                                "fichier": "L'an de grâce mil six cent quattre vingt quattorze le septiesme 9bre le soubz signé\nCuré a baptizé un fils né du dit Jour du legittime mariage de Gautier Nouvel\net de Mathurine Blandel ses pere et mere de la convoest du village de keridama de\ncel de cette p[arois}ffe de Pleugriffet a qui on a donné le nom de Robert; le parrain\na esté Robert Bijoin et Marraine Guillemette Blandel du villaige de [?kergebet?] le\ntout dans laditte p[arois}ffe lesquels ne savent signer"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Avant 1726 mariage avec Guillemette CHEREL ; un enfant connu : Jean NOUVEL (1726-1785), notre ancêtre"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": " Robert NOUVEL s'est remarié avec une autre Guillemette (CHEVILLARD)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/368D_detail.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "label": "3 mai, Réguigny : Mort de Robert NOUVEL",
+                        "annee": 1731
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/368D.jpg"
                             }
                         ]
                     ]
@@ -171411,28 +171435,30 @@
             "documents": [
                 {
                     "titre": {
-                        "label": "Les ancêtres de Marie Houédé : 9e génération :"
+                        "annee": 1701,
+                        "label": "9 juillet, Bréhan : Baptême de Marie PICHART ...fille de Guillaume et de Louise DOLO née d'aujourd'hui à Queuvré..."
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/377N.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "Sommaire :"
+                                "fichier": "Marie PICHART, fille de Guillaumeet de  et de Louise Dolo née d'aujourd'hui à Queuvré<br/>et baptisée de Marie neuvième juillet mil sept cent un par moy Guillaume, prestre, parrain<br/>Louis DOLO et Marie GAUTIER  qui ne signent."
                             }
                         ]
                     ]
                 },
                 {
                     "titre": {
-                        "label": ""
+                        "label": "Vers 1705 : Naissance de Nicolas HOUÉDÉ (acte de décès)"
                     },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Vers 1705 : Naissance de Nicolas HOUÉDÉ (acte de décès) 1701 9 juillet, Bréhan : Baptême de Marie PICHART ...fille de Guillaume et de Louise DOLO née d'aujourd'hui à Queuvré..."
-                            }
-                        ]
+                        []
                     ]
                 },
                 {
@@ -171445,19 +171471,34 @@
                         ]
                     ],
                     "titre": {
-                        "label": "20 février, Bréhan : le mariage",
+                        "label": "20 février, Bréhan : le mariage entre Michel «LOUEDEC» et Marie «PICHARD»",
                         "annee": 1719
                     }
                 },
                 {
                     "titre": {
-                        "label": ""
+                        "label": " 31 juillet, Rohan (St-Samson) : Mort de Nicolas LOUEDEC ",
+                        "annee": 1753
                     },
                     "contenu": [
                         [
                             {
-                                "type": "TEXTE",
-                                "fichier": "1753 31 juillet, Rohan (St-Samson) : Mort de Nicolas LOUEDEC 1760 6 juillet, Rohan (St-Samson) : Mort de Marie PICHART (59 ans) ... veuve de Nicolas LOÜEDEC décédée hier au village de Cocsquelen... agée d'en viron soixant sept ans..."
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/376D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1760,
+                        "label": "6 juillet, Rohan (St-Samson) : Mort de Marie PICHART (59 ans) ... veuve de Nicolas LOÜEDEC décédée hier au village de Cocsquelen... agée d'en viron soixant sept ans..."
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/377D.jpg"
                             }
                         ]
                     ]
@@ -171502,7 +171543,7 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...Yvonne BOCHET agée de soixante et seize ans décédée le jour<br/>précédent..ont assisté au covoy François ROBER son<br/>mary, Gilles BONNEFOY [père de sa belle-fille]..."
+                                "fichier": "...Yvonne BOCHET agée de soixante et seize ans décédée le jour<br/>précédent..ont assisté au convoy François ROBER son<br/>mary, Gilles BONNEFOY [père de sa belle-fille]..."
                             }
                         ]
                     ],
@@ -178422,6 +178463,42 @@
         "F1827": {
             "mari": "I8011",
             "epouse": "I8012"
+        },
+        "F1828": {
+            "mari": "I8013",
+            "epouse": "I8014",
+            "enfants": [
+                "I7999"
+            ]
+        },
+        "F1829": {
+            "mari": "I8015",
+            "epouse": "I8016",
+            "enfants": [
+                "I7640"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Connus seulement par leur mention dans l'acte de naissance de leur fils Robert (1694)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/368N_detail_1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/46_jean_nouvel/9e/368N_detail_2.jpg"
+                            }
+                        ]
+                    ]
+                }
+            ]
         }
     }
 }
