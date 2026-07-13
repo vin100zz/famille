@@ -123929,9 +123929,6 @@
             "liens": {
                 "unions": [
                     {
-                        "famille": "F1806"
-                    },
-                    {
                         "famille": "F1813",
                         "conjoint": "I7986"
                     }
@@ -127568,15 +127565,6 @@
                 }
             }
         },
-        "I7949": {
-            "nom": "LOUDEAC",
-            "prenom": "Michelle",
-            "sexe": "F",
-            "sosa": 365,
-            "liens": {
-                "unions": []
-            }
-        },
         "I7950": {
             "nom": "BOCHET",
             "prenom": "Gilles",
@@ -127853,19 +127841,6 @@
                     {
                         "famille": "F1826",
                         "conjoint": "I8010"
-                    }
-                ]
-            }
-        },
-        "I7974": {
-            "nom": "RIVET",
-            "prenom": "Françoise",
-            "sexe": "F",
-            "sosa": 251,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1806"
                     }
                 ]
             }
@@ -177468,52 +177443,6 @@
                     "titre": {
                         "label": "Mort de Pierre MAZOYER le 23 mars à Juvinas.",
                         "annee": 1731
-                    }
-                }
-            ]
-        },
-        "F1806": {
-            "mari": "I7790",
-            "epouse": "I7974",
-            "documents": [
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/15_roche/jp_roche/8e_portalier_rivet/250D.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "... à Bargettes, Antoine<br/>PORTALIER dit La Barbe âgé d'environ 40 ans ..."
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "18 juin 1780 : Décès d'Antoine PORTALIER à Landos (43)",
-                        "annee": 1780
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/15_roche/jp_roche/8e_portalier_rivet/251D.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "... à Bargettes, Françoise RIVET veuve de<br/>Antoine PORTALIER, âgée d'environ 50<br/>ans..."
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "1er décembre 1787 : Décès de Françoise RIVET à Landos (43)",
-                        "annee": 1787
                     }
                 }
             ]
