@@ -171496,9 +171496,23 @@
                         ]
                     ],
                     "titre": {
-                        "label": "20 février, Bréhan : le mariage entre Michel «LOUEDEC» et Marie «PICHARD»",
+                        "label": "20 février, Bréhan : le mariage entre Nicolas «LOUEDEC» et Marie «PICHARD»",
                         "annee": 1719
                     }
+                },
+                {
+                    "titre": {
+                        "annee": 1743,
+                        "label": "Présent aux obsèques de sa soeur Marie"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/376T.jpg"
+                            }
+                        ]
+                    ]
                 },
                 {
                     "titre": {
@@ -171576,6 +171590,26 @@
                         "label": "29 avril, Crédin : mort d'Yvonne BOCHET",
                         "annee": 1742
                     }
+                },
+                {
+                    "titre": {
+                        "annee": 1743,
+                        "label": "28 janvier : remariage de François ROBERT (s'il s'agit du même) avec Marie LEMOIGNE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/380M_2.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/380M_2a.jpg"
+                            }
+                        ]
+                    ]
                 }
             ]
         },
