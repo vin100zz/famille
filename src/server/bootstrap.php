@@ -6,6 +6,7 @@ if (PHP_MAJOR_VERSION < 7) {
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
 
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/Perf.php';
 require_once __DIR__ . '/Repository/IPersonRepository.php';
 require_once __DIR__ . '/Repository/JsonPersonRepository.php';
 require_once __DIR__ . '/Api/Response.php';

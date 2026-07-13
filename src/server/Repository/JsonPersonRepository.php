@@ -12,11 +12,17 @@ class JsonPersonRepository implements IPersonRepository
 
     public function __construct($jsonPath)
     {
+        $t   = microtime(true);
         $raw = file_get_contents($jsonPath);
+        Perf::mark('read_file', (microtime(true) - $t) * 1000);
+        Perf::context('file_bytes', strlen($raw === false ? '' : $raw));
         if ($raw === false) {
             throw new RuntimeException('Impossible de lire : ' . $jsonPath);
         }
+
+        $t = microtime(true);
         $this->data = json_decode($raw, true);
+        Perf::mark('json_decode', (microtime(true) - $t) * 1000);
         if ($this->data === null) {
             throw new RuntimeException('JSON invalide : ' . $jsonPath);
         }
@@ -386,25 +392,38 @@ class JsonPersonRepository implements IPersonRepository
     private function persist()
     {
         $path = JSON_DATA_PATH;
+
+        $t = microtime(true);
         $json = json_encode($this->data,
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        Perf::mark('json_encode', (microtime(true) - $t) * 1000);
         if ($json === false) {
             throw new RuntimeException('Erreur d\'encodage JSON : ' . json_last_error_msg());
         }
+
         $fp = fopen($path, 'c+');
         if (!$fp) {
             throw new RuntimeException('Impossible d\'ouvrir : ' . $path);
         }
-        if (!flock($fp, LOCK_EX)) {
+
+        // Chronométré séparément : un verrou pris par une autre requête concurrente
+        // (un autre utilisateur qui enregistre en même temps) se verrait ici.
+        $t = microtime(true);
+        $locked = flock($fp, LOCK_EX);
+        Perf::mark('flock_wait', (microtime(true) - $t) * 1000);
+        if (!$locked) {
             fclose($fp);
             throw new RuntimeException('Impossible de verrouiller le fichier JSON');
         }
+
+        $t = microtime(true);
         ftruncate($fp, 0);
         rewind($fp);
         fwrite($fp, $json);
         fflush($fp);
         flock($fp, LOCK_UN);
         fclose($fp);
+        Perf::mark('file_write', (microtime(true) - $t) * 1000);
     }
 
     // ── Sauvegarde groupée ────────────────────────────────────────────────────
