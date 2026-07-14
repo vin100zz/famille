@@ -28493,9 +28493,9 @@
             "deces": {
                 "date": "AFT 1746",
                 "lieu": {
-                    "brut": "Barles ?, 04, Alpes de Haute Provence, , ,",
                     "ville": "Barles ?",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Barles ?, 04"
                 }
             },
             "commentaires": [
@@ -28513,9 +28513,9 @@
                         "mariage": {
                             "date": "26 MAY 1721",
                             "lieu": {
-                                "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                                 "ville": "Barles",
-                                "dept_num": "04"
+                                "dept_num": "04",
+                                "brut": "Barles, 04"
                             }
                         }
                     }
@@ -28533,9 +28533,9 @@
             "deces": {
                 "date": "22 DEC 1737",
                 "lieu": {
-                    "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                     "ville": "Barles",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Barles, 04"
                 }
             },
             "commentaires": [
@@ -28565,9 +28565,9 @@
                         "mariage": {
                             "date": "26 MAY 1721",
                             "lieu": {
-                                "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                                 "ville": "Barles",
-                                "dept_num": "04"
+                                "dept_num": "04",
+                                "brut": "Barles, 04"
                             }
                         }
                     }
@@ -148223,7 +148223,27 @@
                     "ville": "Barles",
                     "dept_num": "04"
                 }
-            }
+            },
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1721,
+                        "label": "26 mai, Barles : Le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/402N_1.jpg"
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/402N_2.jpg"
+                            }
+                        ]
+                    ]
+                }
+            ]
         },
         "F516": {
             "mari": "I1133",
