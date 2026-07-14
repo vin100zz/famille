@@ -184,7 +184,6 @@ def _create_individu(data: dict, sosa_to_individu: dict,
         "prenom": prenom,
         "sexe": sexe,
         "sosa": sosa,
-        "liens": {"unions": []},
     }
     sosa_to_individu[sosa] = new_iid
     return new_iid
@@ -249,14 +248,6 @@ def ensure_family(data: dict, sosa_to_family: dict, sosa_to_individu: dict,
     new_fid = _next_famille_id(data)
     data["familles"][new_fid] = {"mari": mari_id, "epouse": epouse_id}
     sosa_to_family[ck] = new_fid
-
-    # Ajouter le lien union dans chaque individu
-    for iid in (mari_id, epouse_id):
-        ind = data["individus"].get(iid, {})
-        liens = ind.setdefault("liens", {})
-        unions = liens.setdefault("unions", [])
-        if not any(u.get("famille") == new_fid for u in unions):
-            unions.append({"famille": new_fid})
 
     return new_fid
 

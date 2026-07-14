@@ -3,12 +3,24 @@
  * Implémentation du dépôt lisant le fichier carlé.json.
  *
  * Le JSON est chargé une seule fois en mémoire lors de la construction.
+ * `familles` est la seule source de vérité pour les relations (parents/enfants,
+ * conjoints, mariage) : les individus ne stockent plus de liens dupliqués, ils
+ * sont dérivés à la volée via deux index construits sur `familles`.
+ *
  * Pour passer à SQLite, créer SqlitePersonRepository avec la même interface.
  */
 class JsonPersonRepository implements IPersonRepository
 {
     /** @var array  Structure : { individus: {...}, familles: {...} } */
     private $data;
+
+    /** @var array|null  childId => familleId (famille de naissance) */
+    private $childToFamily = null;
+
+    /** @var array|null  personId => [familleId, ...] (familles où la personne est mari/epouse) */
+    private $personToUnions = null;
+
+    private $indexesDirty = true;
 
     public function __construct($jsonPath)
     {
@@ -26,6 +38,60 @@ class JsonPersonRepository implements IPersonRepository
         if ($this->data === null) {
             throw new RuntimeException('JSON invalide : ' . $jsonPath);
         }
+    }
+
+    // ── Index dérivés de familles ────────────────────────────────────────────
+
+    /**
+     * (Re)construit childToFamily et personToUnions à partir de familles.
+     * Appelé paresseusement : toute mutation de familles doit appeler
+     * invalidateIndexes(), la reconstruction n'a lieu qu'à la prochaine lecture.
+     */
+    private function ensureIndexes()
+    {
+        if (!$this->indexesDirty && $this->childToFamily !== null) {
+            return;
+        }
+        $this->childToFamily  = array();
+        $this->personToUnions = array();
+        foreach ($this->data['familles'] as $fid => $fam) {
+            foreach ((isset($fam['enfants']) ? $fam['enfants'] : array()) as $childId) {
+                $this->childToFamily[$childId] = $fid;
+            }
+            if (!empty($fam['mari'])) {
+                $this->personToUnions[$fam['mari']][] = $fid;
+            }
+            if (!empty($fam['epouse'])) {
+                $this->personToUnions[$fam['epouse']][] = $fid;
+            }
+        }
+        $this->indexesDirty = false;
+    }
+
+    private function invalidateIndexes()
+    {
+        $this->indexesDirty = true;
+    }
+
+    /** Ids des parents (0 à 2) d'un individu, dérivés de sa famille de naissance. */
+    private function getParentIds($id)
+    {
+        $this->ensureIndexes();
+        if (!isset($this->childToFamily[$id])) {
+            return array();
+        }
+        $fam = $this->data['familles'][$this->childToFamily[$id]];
+        $ids = array();
+        if (!empty($fam['mari']))   $ids[] = $fam['mari'];
+        if (!empty($fam['epouse'])) $ids[] = $fam['epouse'];
+        return $ids;
+    }
+
+    /** Ids des familles où la personne est mari ou épouse. */
+    private function getUnionFamilyIds($id)
+    {
+        $this->ensureIndexes();
+        return isset($this->personToUnions[$id]) ? $this->personToUnions[$id] : array();
     }
 
     // ── Interface publique ────────────────────────────────────────────────
@@ -149,15 +215,12 @@ class JsonPersonRepository implements IPersonRepository
     }
 
     /**
-     * Résumés des parents d'un individu.
+     * Résumés des parents d'un individu (dérivés de sa famille de naissance).
      */
     private function getParentSummaries($id)
     {
-        if (!isset($this->data['individus'][$id]['liens']['parents'])) {
-            return array();
-        }
         $summaries = array();
-        foreach ($this->data['individus'][$id]['liens']['parents'] as $parentId) {
+        foreach ($this->getParentIds($id) as $parentId) {
             $s = $this->buildSummaryById($parentId);
             if ($s !== null) {
                 $summaries[] = $s;
@@ -167,26 +230,29 @@ class JsonPersonRepository implements IPersonRepository
     }
 
     /**
-     * Construit la liste des unions d'un individu.
-     * Pour chaque union : conjoint (données complètes), ses parents, les enfants.
+     * Construit la liste des unions d'un individu à partir des familles où il
+     * est mari ou épouse. mariage/commentaires/documents viennent directement
+     * de la famille (source de vérité unique, plus de copie côté individu).
      */
     private function buildUnions($id)
     {
-        $individu  = $this->data['individus'][$id];
-        $liens     = isset($individu['liens']) ? $individu['liens'] : array();
-        $rawUnions = isset($liens['unions'])   ? $liens['unions']   : array();
-
         $result = array();
-        foreach ($rawUnions as $union) {
-            $conjointId = isset($union['conjoint']) ? $union['conjoint'] : null;
-            $familleId  = isset($union['famille'])  ? $union['famille']  : null;
+        foreach ($this->getUnionFamilyIds($id) as $familleId) {
+            $fam = isset($this->data['familles'][$familleId]) ? $this->data['familles'][$familleId] : array();
+
+            $conjointId = null;
+            if (isset($fam['mari']) && $fam['mari'] !== $id) {
+                $conjointId = $fam['mari'];
+            } elseif (isset($fam['epouse']) && $fam['epouse'] !== $id) {
+                $conjointId = $fam['epouse'];
+            }
 
             $conjoint        = $conjointId ? $this->buildPersonData($conjointId)   : null;
             $conjointParents = $conjointId ? $this->getParentSummaries($conjointId) : array();
 
             $enfants = array();
-            if ($familleId && isset($this->data['familles'][$familleId]['enfants'])) {
-                foreach ($this->data['familles'][$familleId]['enfants'] as $childId) {
+            if (!empty($fam['enfants'])) {
+                foreach ($fam['enfants'] as $childId) {
                     $child = $this->buildSummaryById($childId);
                     if ($child !== null) {
                         $enfants[] = $child;
@@ -196,14 +262,12 @@ class JsonPersonRepository implements IPersonRepository
 
             $result[] = array(
                 'famille_id'       => $familleId,
-                'mariage'          => isset($union['mariage'])      ? $union['mariage']      : null,
-                'commentaires'     => isset($union['commentaires']) ? $union['commentaires'] : array(),
+                'mariage'          => isset($fam['mariage'])      ? $fam['mariage']      : null,
+                'commentaires'     => isset($fam['commentaires']) ? $fam['commentaires'] : array(),
                 'conjoint'         => $conjoint,
                 'conjoint_parents' => $conjointParents,
                 'enfants'          => $enfants,
-                'documents'        => isset($this->data['familles'][$familleId]['documents'])
-                                        ? $this->data['familles'][$familleId]['documents']
-                                        : array(),
+                'documents'        => isset($fam['documents']) ? $fam['documents'] : array(),
             );
         }
 
@@ -294,14 +358,109 @@ class JsonPersonRepository implements IPersonRepository
             }
         }
 
-        // Mise à jour des parents dans les liens
-        if (isset($data['parents'])) {
-            if (!isset($p['liens'])) $p['liens'] = array();
-            if (empty($data['parents'])) {
-                unset($p['liens']['parents']);
-            } else {
-                $p['liens']['parents'] = array_values(array_unique($data['parents']));
+        // Parents : rattache l'individu à la famille correspondante (créée/
+        // réutilisée si besoin) plutôt que d'écrire un tableau dupliqué.
+        if (array_key_exists('parents', $data)) {
+            $parentIds = is_array($data['parents']) ? array_values(array_unique($data['parents'])) : array();
+            $this->applyParentsChange($id, $parentIds);
+        }
+    }
+
+    /**
+     * Rattache $childId à la famille correspondant à $parentIds (0 à 2 ids).
+     * Réutilise, dans l'ordre : une famille existante avec exactement ce
+     * couple, sinon la famille de naissance actuelle de l'enfant (mise à
+     * jour), sinon en crée une nouvelle. Évite de recréer des familles vides
+     * en double à chaque édition.
+     */
+    private function applyParentsChange($childId, $parentIds)
+    {
+        $this->ensureIndexes();
+        $oldFamId = isset($this->childToFamily[$childId]) ? $this->childToFamily[$childId] : null;
+
+        if (empty($parentIds)) {
+            if ($oldFamId !== null) {
+                $this->removeChildFromFamily($childId, $oldFamId);
+                $this->invalidateIndexes();
             }
+            return;
+        }
+
+        // Détermine mari/épouse à partir du sexe de chaque parent fourni
+        // (par élimination si le sexe n'est pas renseigné).
+        $mari = null;
+        $epouse = null;
+        foreach ($parentIds as $pid) {
+            $sexe = isset($this->data['individus'][$pid]['sexe']) ? $this->data['individus'][$pid]['sexe'] : null;
+            if ($sexe === 'F' && $epouse === null) {
+                $epouse = $pid;
+            } elseif ($sexe !== 'F' && $mari === null) {
+                $mari = $pid;
+            } else {
+                $epouse = $pid;
+            }
+        }
+
+        // 1. Une famille existante avec exactement ce couple ?
+        $targetFamId = null;
+        foreach ($this->data['familles'] as $fid => $fam) {
+            $fMari   = isset($fam['mari'])   ? $fam['mari']   : null;
+            $fEpouse = isset($fam['epouse']) ? $fam['epouse'] : null;
+            if ($fMari === $mari && $fEpouse === $epouse) {
+                $targetFamId = $fid;
+                break;
+            }
+        }
+
+        // 2. Sinon, réutiliser (et corriger) la famille de naissance actuelle
+        if ($targetFamId === null && $oldFamId !== null) {
+            $targetFamId = $oldFamId;
+            if ($mari)   { $this->data['familles'][$targetFamId]['mari']   = $mari; }
+            else         { unset($this->data['familles'][$targetFamId]['mari']); }
+            if ($epouse) { $this->data['familles'][$targetFamId]['epouse'] = $epouse; }
+            else         { unset($this->data['familles'][$targetFamId]['epouse']); }
+        }
+
+        // 3. Sinon, en créer une nouvelle
+        if ($targetFamId === null) {
+            $targetFamId = $this->generateFamilyId();
+            $fam = array();
+            if ($mari)   $fam['mari']   = $mari;
+            if ($epouse) $fam['epouse'] = $epouse;
+            $this->data['familles'][$targetFamId] = $fam;
+        }
+
+        // Déplace l'enfant : retire de l'ancienne famille si différente, ajoute à la nouvelle
+        if ($oldFamId !== null && $oldFamId !== $targetFamId) {
+            $this->removeChildFromFamily($childId, $oldFamId);
+        }
+        $enfants = isset($this->data['familles'][$targetFamId]['enfants'])
+            ? $this->data['familles'][$targetFamId]['enfants'] : array();
+        if (!in_array($childId, $enfants, true)) {
+            $enfants[] = $childId;
+        }
+        $this->data['familles'][$targetFamId]['enfants'] = array_values($enfants);
+
+        $this->invalidateIndexes();
+    }
+
+    /** Retire un enfant d'une famille ; supprime la famille si elle devient totalement vide. */
+    private function removeChildFromFamily($childId, $famId)
+    {
+        if (!isset($this->data['familles'][$famId])) {
+            return;
+        }
+        $fam = &$this->data['familles'][$famId];
+        if (isset($fam['enfants'])) {
+            $enfants = array_values(array_diff($fam['enfants'], array($childId)));
+            if (empty($enfants)) {
+                unset($fam['enfants']);
+            } else {
+                $fam['enfants'] = $enfants;
+            }
+        }
+        if (empty($fam['mari']) && empty($fam['epouse']) && empty($fam['enfants'])) {
+            unset($this->data['familles'][$famId]);
         }
     }
 
@@ -319,7 +478,6 @@ class JsonPersonRepository implements IPersonRepository
         }
         $fam = &$this->data['familles'][$id];
 
-        // documents → stocké dans familles (lu depuis familles dans buildUnions)
         if (array_key_exists('documents', $data)) {
             if ($data['documents'] === null || (is_array($data['documents']) && count($data['documents']) === 0)) {
                 unset($fam['documents']);
@@ -328,78 +486,30 @@ class JsonPersonRepository implements IPersonRepository
             }
         }
 
-        // mariage et commentaires → stockés dans individus.liens.unions[i]
-        // (c'est de là que buildUnions les lit)
-        if (array_key_exists('mariage', $data) || array_key_exists('commentaires', $data)) {
-            foreach (array('mari', 'epouse') as $role) {
-                $pid = isset($fam[$role]) ? $fam[$role] : null;
-                if (!$pid || !isset($this->data['individus'][$pid]['liens']['unions'])) {
-                    continue;
-                }
-                foreach ($this->data['individus'][$pid]['liens']['unions'] as &$u) {
-                    if (!isset($u['famille']) || $u['famille'] !== $id) {
-                        continue;
-                    }
-                    if (array_key_exists('mariage', $data)) {
-                        if ($data['mariage'] === null) {
-                            unset($u['mariage']);
-                        } else {
-                            $u['mariage'] = $data['mariage'];
-                        }
-                    }
-                    if (array_key_exists('commentaires', $data)) {
-                        if (empty($data['commentaires'])) {
-                            unset($u['commentaires']);
-                        } else {
-                            $u['commentaires'] = $data['commentaires'];
-                        }
-                    }
-                    break;
-                }
-                unset($u);
+        if (array_key_exists('mariage', $data)) {
+            if ($data['mariage'] === null) {
+                unset($fam['mariage']);
+            } else {
+                $fam['mariage'] = $data['mariage'];
             }
         }
 
-        // Enfants : mettre à jour la liste ET les liens des individus
+        if (array_key_exists('commentaires', $data)) {
+            if (empty($data['commentaires'])) {
+                unset($fam['commentaires']);
+            } else {
+                $fam['commentaires'] = $data['commentaires'];
+            }
+        }
+
         if (isset($data['enfants'])) {
-            $newChildren  = array_values(array_unique($data['enfants']));
-            $prevChildren = isset($fam['enfants']) ? $fam['enfants'] : array();
-
-            // Retirer les enfants supprimés
-            foreach (array_diff($prevChildren, $newChildren) as $childId) {
-                if (isset($this->data['individus'][$childId]['liens']['parents'])) {
-                    $parents = $this->data['individus'][$childId]['liens']['parents'];
-                    $newParents = array();
-                    foreach ($parents as $pid) {
-                        if ($pid !== $fam['mari'] && $pid !== $fam['epouse']) {
-                            $newParents[] = $pid;
-                        }
-                    }
-                    if (empty($newParents)) {
-                        unset($this->data['individus'][$childId]['liens']['parents']);
-                    } else {
-                        $this->data['individus'][$childId]['liens']['parents'] = $newParents;
-                    }
-                }
-            }
-
-            // Ajouter les nouveaux enfants
-            foreach (array_diff($newChildren, $prevChildren) as $childId) {
-                if (isset($this->data['individus'][$childId])) {
-                    $child = &$this->data['individus'][$childId];
-                    if (!isset($child['liens'])) $child['liens'] = array();
-                    $parents = isset($child['liens']['parents']) ? $child['liens']['parents'] : array();
-                    if (!empty($fam['mari'])   && !in_array($fam['mari'],   $parents)) $parents[] = $fam['mari'];
-                    if (!empty($fam['epouse']) && !in_array($fam['epouse'], $parents)) $parents[] = $fam['epouse'];
-                    $child['liens']['parents'] = array_values($parents);
-                }
-            }
-
+            $newChildren = array_values(array_unique($data['enfants']));
             if (empty($newChildren)) {
                 unset($fam['enfants']);
             } else {
                 $fam['enfants'] = $newChildren;
             }
+            $this->invalidateIndexes();
         }
     }
 
@@ -458,14 +568,10 @@ class JsonPersonRepository implements IPersonRepository
                     $person[$f] = $pData[$f];
                 }
             }
-            if (!empty($pData['liens'])) {
-                $person['liens'] = $pData['liens'];
-            }
             $this->data['individus'][$realId] = $person;
             $idMap[$tempId] = $realId;
         }
 
-        $self = $this;
         $resolve = function ($id) use (&$idMap) {
             return isset($idMap[$id]) ? $idMap[$id] : $id;
         };
@@ -484,58 +590,35 @@ class JsonPersonRepository implements IPersonRepository
             if (!empty($enfants)) $fam['enfants'] = array_values($enfants);
             $this->data['familles'][$realId] = $fam;
 
-            // Mettre à jour liens.unions des deux époux
-            if ($mariId && isset($this->data['individus'][$mariId])) {
-                if (!isset($this->data['individus'][$mariId]['liens'])) {
-                    $this->data['individus'][$mariId]['liens'] = array();
-                }
-                $this->data['individus'][$mariId]['liens']['unions'][] = array(
-                    'famille' => $realId, 'conjoint' => $epoUseId
-                );
-            }
-            if ($epoUseId && isset($this->data['individus'][$epoUseId])) {
-                if (!isset($this->data['individus'][$epoUseId]['liens'])) {
-                    $this->data['individus'][$epoUseId]['liens'] = array();
-                }
-                $this->data['individus'][$epoUseId]['liens']['unions'][] = array(
-                    'famille' => $realId, 'conjoint' => $mariId
-                );
-            }
-            // Mettre à jour liens.parents des enfants
+            // Un enfant peut déjà appartenir à une autre famille (ex : le
+            // client recrée une famille depuis zéro en rouvrant l'édition
+            // d'une fiche qui avait déjà un parent enregistré) : on l'en
+            // retire pour ne pas le dupliquer dans deux familles à la fois.
             foreach ($enfants as $childId) {
-                if (isset($this->data['individus'][$childId])) {
-                    if (!isset($this->data['individus'][$childId]['liens'])) {
-                        $this->data['individus'][$childId]['liens'] = array();
+                foreach (array_keys($this->data['familles']) as $fid) {
+                    if ($fid === $realId || empty($this->data['familles'][$fid]['enfants'])) {
+                        continue;
                     }
-                    $existing = isset($this->data['individus'][$childId]['liens']['parents'])
-                        ? $this->data['individus'][$childId]['liens']['parents'] : array();
-                    if ($mariId   && !in_array($mariId,   $existing)) $existing[] = $mariId;
-                    if ($epoUseId && !in_array($epoUseId, $existing)) $existing[] = $epoUseId;
-                    $this->data['individus'][$childId]['liens']['parents'] = array_values($existing);
+                    if (in_array($childId, $this->data['familles'][$fid]['enfants'], true)) {
+                        $this->removeChildFromFamily($childId, $fid);
+                    }
                 }
             }
+
             $idMap[$tempId] = $realId;
+        }
+        if (!empty($newFamilies)) {
+            $this->invalidateIndexes();
         }
 
         // 3. Supprimer des familles
         $deleteFamilies = isset($payload['deleteFamilies']) ? $payload['deleteFamilies'] : array();
         foreach ($deleteFamilies as $fid) {
             $fid = $resolve($fid);
-            if (!isset($this->data['familles'][$fid])) continue;
-            $fam = $this->data['familles'][$fid];
-            foreach (array('mari', 'epouse') as $role) {
-                $pid = isset($fam[$role]) ? $fam[$role] : null;
-                if ($pid && isset($this->data['individus'][$pid]['liens']['unions'])) {
-                    $filtered = array();
-                    foreach ($this->data['individus'][$pid]['liens']['unions'] as $u) {
-                        if ((isset($u['famille']) ? $u['famille'] : '') !== $fid) {
-                            $filtered[] = $u;
-                        }
-                    }
-                    $this->data['individus'][$pid]['liens']['unions'] = array_values($filtered);
-                }
-            }
             unset($this->data['familles'][$fid]);
+        }
+        if (!empty($deleteFamilies)) {
+            $this->invalidateIndexes();
         }
 
         // 4. Mettre à jour les personnes existantes
@@ -606,19 +689,17 @@ class JsonPersonRepository implements IPersonRepository
                 $deces_ville = isset($lieu['ville']) ? $lieu['ville'] : null;
             }
 
-            // Mariage (premier lien d'union)
+            // Mariage (première union, dérivée de familles)
             $mariage_date  = null;
             $mariage_ville = null;
-            if (isset($p['liens']['unions']) && is_array($p['liens']['unions'])) {
-                foreach ($p['liens']['unions'] as $u) {
-                    if (!is_array($u)) continue;
-                    if (isset($u['mariage']) && is_array($u['mariage'])) {
-                        $mariage_date = isset($u['mariage']['date']) ? $u['mariage']['date'] : null;
-                        $lieu = isset($u['mariage']['lieu']) && is_array($u['mariage']['lieu'])
-                            ? $u['mariage']['lieu'] : array();
-                        $mariage_ville = isset($lieu['ville']) ? $lieu['ville'] : null;
-                    }
-                    break;
+            $unionFamIds = $this->getUnionFamilyIds($id);
+            if (!empty($unionFamIds)) {
+                $fam = $this->data['familles'][$unionFamIds[0]];
+                if (isset($fam['mariage']) && is_array($fam['mariage'])) {
+                    $mariage_date = isset($fam['mariage']['date']) ? $fam['mariage']['date'] : null;
+                    $lieu = isset($fam['mariage']['lieu']) && is_array($fam['mariage']['lieu'])
+                        ? $fam['mariage']['lieu'] : array();
+                    $mariage_ville = isset($lieu['ville']) ? $lieu['ville'] : null;
                 }
             }
 
@@ -674,55 +755,26 @@ class JsonPersonRepository implements IPersonRepository
         return array($father, $mother);
     }
 
+    /** Enfants d'un couple, lus directement dans familles (source de vérité unique). */
     private function findChildrenOfCouple($maleId, $femaleId)
     {
-        $foundFamily = false;
-        $children    = array();
-        $childIds    = array();
-
-        // 1. Recherche prioritaire : famille avec les deux parents explicites
+        $children = array();
         foreach ($this->data['familles'] as $fam) {
             $mari   = isset($fam['mari'])   ? $fam['mari']   : null;
             $epouse = isset($fam['epouse']) ? $fam['epouse'] : null;
             if ($mari !== $maleId || $epouse !== $femaleId) {
                 continue;
             }
-            $foundFamily = true;
             if (!empty($fam['enfants'])) {
                 foreach ($fam['enfants'] as $childId) {
                     $s = $this->buildSummaryById($childId);
                     if ($s !== null) {
                         $children[] = $s;
-                        $childIds[] = $childId;
                     }
                 }
             }
             break; // une seule famille pour ce couple
         }
-
-        // 2. Fallback via liens.parents des individus :
-        //    - si aucune famille trouvée, OU
-        //    - si la famille trouvée n'a pas d'enfants (données incomplètes)
-        if (!$foundFamily || empty($children)) {
-            if ($maleId === null && $femaleId === null) {
-                return $children;
-            }
-            foreach ($this->data['individus'] as $childId => $child) {
-                if (in_array($childId, $childIds, true)) {
-                    continue; // déjà inclus via la famille
-                }
-                $parents     = isset($child['liens']['parents']) ? $child['liens']['parents'] : array();
-                $matchMale   = ($maleId   !== null && in_array($maleId,   $parents, true));
-                $matchFemale = ($femaleId !== null && in_array($femaleId, $parents, true));
-                if ($matchMale || $matchFemale) {
-                    $s = $this->buildSummary($childId, $child);
-                    if ($s !== null) {
-                        $children[] = $s;
-                    }
-                }
-            }
-        }
-
         return $children;
     }
 

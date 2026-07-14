@@ -561,7 +561,13 @@ def parse_family(fam_node: dict, records: dict) -> dict:
 
 
 def build_json(records: dict) -> dict:
-    """Construit le JSON final à partir des records GEDCOM."""
+    """Construit le JSON final à partir des records GEDCOM.
+
+    Les relations (parents/enfants, conjoints, mariage) ne sont stockées
+    qu'une fois, dans `familles` (mari/epouse/enfants/mariage/commentaires).
+    Elles sont dérivées à la volée côté serveur (JsonPersonRepository) plutôt
+    que dupliquées ici sur chaque individu.
+    """
     individus: dict = {}
     familles: dict = {}
 
@@ -574,51 +580,8 @@ def build_json(records: dict) -> dict:
         elif tag == "FAM":
             familles[cid] = parse_family(node, records)
 
-    # Résolution des liens : parents et unions (les enfants sont accessibles
-    # via familles[union.famille] et ne sont pas dupliqués ici).
-    for xref, person in individus.items():
-        parents = []
-        conjoint_mariages = []
-
-        # Famille où la personne est enfant → parents
-        for famc_ref in person.get("_famc", []):
-            fam = familles.get(famc_ref)
-            if fam:
-                if fam.get("mari"):
-                    parents.append(fam["mari"])
-                if fam.get("epouse"):
-                    parents.append(fam["epouse"])
-
-        # Familles où la personne est époux/épouse → conjoint(s)
-        for fams_ref in person.get("_fams", []):
-            fam = familles.get(fams_ref)
-            if fam:
-                conjoint = None
-                if fam.get("mari") and fam["mari"] != xref:
-                    conjoint = fam["mari"]
-                elif fam.get("epouse") and fam["epouse"] != xref:
-                    conjoint = fam["epouse"]
-
-                entry: dict = {"famille": fams_ref}
-                if conjoint:
-                    entry["conjoint"] = conjoint
-                if fam.get("mariage"):
-                    entry["mariage"] = fam["mariage"]
-                if fam.get("divorce"):
-                    entry["divorce"] = fam["divorce"]
-                if fam.get("commentaires"):
-                    entry["commentaires"] = fam["commentaires"]
-                conjoint_mariages.append(entry)
-
-        liens: dict = {}
-        if parents:
-            liens["parents"] = parents
-        if conjoint_mariages:
-            liens["unions"] = conjoint_mariages
-        if liens:
-            person["liens"] = liens
-
-        # Nettoyage des champs internes
+    # Nettoyage des champs internes (_fams/_famc n'ont servi qu'à construire familles)
+    for person in individus.values():
         person.pop("_fams", None)
         person.pop("_famc", None)
 
