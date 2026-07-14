@@ -328,6 +328,15 @@ body {
 }
 .search-result--empty:hover { background: none; }
 
+.search-result--more {
+  color: var(--muted);
+  cursor: default;
+  font-size: 0.85em;
+  justify-content: center;
+  padding: 7px 14px;
+}
+.search-result--more:hover { background: none; }
+
 .result-dot {
   width: 9px; height: 9px;
   border-radius: 50%;

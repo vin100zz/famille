@@ -157,7 +157,7 @@ searchInput.addEventListener('input', () => {
 
 searchInput.addEventListener('keydown', e => {
   if (searchDrop.hidden) return;
-  const items = searchDrop.querySelectorAll('.search-result:not(.search-result--empty)');
+  const items = searchDrop.querySelectorAll('.search-result:not(.search-result--empty):not(.search-result--more)');
   if (!items.length) return;
 
   if (e.key === 'ArrowDown') {
@@ -183,15 +183,15 @@ document.addEventListener('click', e => {
 
 async function doSearch(q) {
   try {
-    const results = await api.search(q);
+    const { results, total } = await api.search(q);
     currentResults = results;
-    renderDropdown(results, q);
+    renderDropdown(results, total, q);
   } catch (err) {
     console.error('Recherche :', err);
   }
 }
 
-function renderDropdown(results, query) {
+function renderDropdown(results, total, query) {
   searchDrop.innerHTML = '';
   activeIdx = -1;
 
@@ -236,6 +236,13 @@ function renderDropdown(results, query) {
       item.addEventListener('click', () => selectPerson(r.id));
       searchDrop.appendChild(item);
     });
+
+    const hidden = total - results.length;
+    if (hidden > 0) {
+      const more = el('div', 'search-result search-result--more');
+      more.textContent = '+ ' + hidden + ' autre' + (hidden > 1 ? 's' : '') + ' résultat' + (hidden > 1 ? 's' : '') + ' non affiché' + (hidden > 1 ? 's' : '');
+      searchDrop.appendChild(more);
+    }
   }
 
   searchDrop.hidden = false;

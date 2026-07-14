@@ -10,14 +10,16 @@ interface IPersonRepository
 {
     /**
      * Recherche les individus dont le nom ou le prénom contient $query.
-     * La recherche est insensible aux accents et à la casse.
+     * La recherche est insensible aux accents et à la casse. Résultats triés
+     * par année décroissante (naissance, ou décès si naissance inconnue) ;
+     * ceux sans aucune date connue sont placés en dernier.
      *
      * @param  string $query   Terme recherché (min. 2 caractères recommandés)
-     * @param  int    $limit   Nombre maximum de résultats
-     * @return array           Tableau de résumés : id, nom, prenom, sexe,
-     *                         naissance_year, deces_year
+     * @param  int    $limit   Nombre maximum de résultats renvoyés
+     * @return array  { results: [résumé, ...], total: nombre total de correspondances }
+     *                Résumé : id, nom, prenom, sexe, naissance_year, deces_year
      */
-    public function search($query, $limit = 20);
+    public function search($query, $limit = 50);
 
     /**
      * Retourne la fiche complète d'une personne avec ses liens familiaux.

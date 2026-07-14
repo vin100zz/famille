@@ -96,11 +96,11 @@ class JsonPersonRepository implements IPersonRepository
 
     // ── Interface publique ────────────────────────────────────────────────
 
-    public function search($query, $limit = 20)
+    public function search($query, $limit = 50)
     {
         $q = $this->normalize($query);
         if ($q === '') {
-            return array();
+            return array('results' => array(), 'total' => 0);
         }
 
         // Découpe en mots (tous doivent matcher, dans n'importe quel ordre)
@@ -109,7 +109,7 @@ class JsonPersonRepository implements IPersonRepository
         // Recherche par numéro Sosa si la requête est purement numérique
         $sosaNum = ctype_digit(trim($query)) ? (int) trim($query) : null;
 
-        $results = array();
+        $matches = array();
         foreach ($this->data['individus'] as $id => $p) {
             $nom    = $this->normalize(isset($p['nom'])    ? $p['nom']    : '');
             $prenom = $this->normalize(isset($p['prenom']) ? $p['prenom'] : '');
@@ -132,14 +132,24 @@ class JsonPersonRepository implements IPersonRepository
                 && (int) $p['sosa'] === $sosaNum;
 
             if ($nameMatch || $sosaMatch) {
-                $results[] = $this->buildSummary($id, $p);
-                if (count($results) >= $limit) {
-                    break;
-                }
+                $matches[] = $this->buildSummary($id, $p);
             }
         }
 
-        return $results;
+        // Tri par année décroissante (naissance, sinon décès) ; sans date en dernier
+        usort($matches, function ($a, $b) {
+            $ya = $a['naissance_year'] !== null ? $a['naissance_year'] : $a['deces_year'];
+            $yb = $b['naissance_year'] !== null ? $b['naissance_year'] : $b['deces_year'];
+            if ($ya === null && $yb === null) return 0;
+            if ($ya === null) return 1;
+            if ($yb === null) return -1;
+            return $yb - $ya;
+        });
+
+        return array(
+            'results' => array_slice($matches, 0, $limit),
+            'total'   => count($matches),
+        );
     }
 
     public function getPerson($id)
