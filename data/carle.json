@@ -127788,28 +127788,6 @@
                 ]
             }
         },
-        "I7968": {
-            "sexe": "M",
-            "sosa": 986,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1803"
-                    }
-                ]
-            }
-        },
-        "I7969": {
-            "sexe": "F",
-            "sosa": 987,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1803"
-                    }
-                ]
-            }
-        },
         "I7970": {
             "nom": "MAZOYER",
             "prenom": "François",
@@ -128140,18 +128118,6 @@
                 "parents": [
                     "I7970",
                     "I7993"
-                ]
-            }
-        },
-        "I7995": {
-            "sexe": "M",
-            "sosa": 986,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1818",
-                        "conjoint": null
-                    }
                 ]
             }
         },
@@ -176852,308 +176818,6 @@
                 }
             ]
         },
-        "F1803": {
-            "mari": "I7968",
-            "epouse": "I7969",
-            "documents": [
-                {
-                    "titre": {
-                        "label": "Branche Claude DURAND : 10e génération"
-                    },
-                    "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Sommaire :<br/>- [984/985] Pierre DURAND & Isabelle VIDAL<br/>- [986/987] Pierre MAZOYER & Marie GIRON"
-                            }
-                        ]
-                    ]
-                },
-                {
-                    "titre": {
-                        "label": "Pierre DURAND & Isabelle VIDAL"
-                    },
-                    "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1637Naissance de Pierre DURAND [d'après l'acte de décès]"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1650Naissance de Isabelle VIDAL [d'après l'acte de décès]"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1681Mariage"
-                            }
-                        ]
-                    ]
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_1.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_2.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_3.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Contrat de mariage",
-                        "annee": 1681
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Transcription"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_1.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_1t.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_2.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_2t.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_3.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_3t.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_4.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_4t.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_5.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_5t.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/984D.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mort de Pierre DURAND le 10 juillet à Asperjoc, Le Ranc.",
-                        "annee": 1697
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/985D.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mort de \"Elisabel\" VIDAL le 7 mai à Asperjoc, Le Ranc.",
-                        "annee": 1710
-                    }
-                },
-                {
-                    "titre": {
-                        "label": "Pierre MAZOYER & Marie GIRON"
-                    },
-                    "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1661Naissance de Pierre DURAND [d'après l'acte de mariage ; son acte de décès, sans doute moins précis, lui donne \"75 ans\" soit une naissance en 1656]"
-                            }
-                        ]
-                    ]
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/987N.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "...<br/>Marie Giron fille naturelle à<br/>Jacques et Anthoinette[Perryer]"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Baptème de Marie GIRON le 3 février à St-Cirgues-en-Montagne",
-                        "annee": 1664
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/986M.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "...Pierre Mazoyer âgé<br/>de dix sept ans ou environ fils naturel et légitime de François<br/>Mazoyer et de Louise Issartel mariés...<br/>... d'une part et ...Marie<br/>Gironne âgée de quinze ans ou environ fille naturelle et<br/>légitime de Jacques Giron et Anthoinette Périer<br/>ses père et mère ménagères ... du lieu d'aubrage? paroisse<br/>de Saint-Cirgues en Montagne d'autre..."
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mariage",
-                        "annee": 1678
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_1.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_2.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_3.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Contrat de mariage passé chez maître Benoît OLLIER, notaire à Montpezat-sous-Bauzon - 2E2696 photo 111",
-                        "annee": 1678
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/987D.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mort de Marie Giron le 29 novembre à Juvinas",
-                        "annee": 1727
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/986D.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mort de Pierre MAZOYER le 23 mars à Juvinas.",
-                        "annee": 1731
-                    }
-                }
-            ]
-        },
         "F1807": {
             "mari": "I7975",
             "epouse": "I7976",
@@ -178017,12 +177681,6 @@
                 "I7994"
             ]
         },
-        "F1818": {
-            "mari": "I7995",
-            "enfants": [
-                "I1386"
-            ]
-        },
         "F1819": {
             "mari": "I7996",
             "epouse": "I7997",
@@ -178035,6 +177693,304 @@
             "epouse": "I7999",
             "enfants": [
                 "I1386"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "label": "Branche Claude DURAND : 10e génération"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Sommaire :<br/>- [984/985] Pierre DURAND & Isabelle VIDAL<br/>- [986/987] Pierre MAZOYER & Marie GIRON"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "label": "Pierre DURAND & Isabelle VIDAL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "vers 1637Naissance de Pierre DURAND [d'après l'acte de décès]"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "vers 1650Naissance de Isabelle VIDAL [d'après l'acte de décès]"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "vers 1681Mariage"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_2.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_3.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Contrat de mariage",
+                        "annee": 1681
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Transcription"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_1t.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": ""
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_2.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_2t.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": ""
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_3.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_3t.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": ""
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_4.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_4t.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": ""
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_5.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_5t.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": ""
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/984D.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mort de Pierre DURAND le 10 juillet à Asperjoc, Le Ranc.",
+                        "annee": 1697
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/985D.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mort de \"Elisabel\" VIDAL le 7 mai à Asperjoc, Le Ranc.",
+                        "annee": 1710
+                    }
+                },
+                {
+                    "titre": {
+                        "label": "Pierre MAZOYER & Marie GIRON"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "vers 1661Naissance de Pierre DURAND [d'après l'acte de mariage ; son acte de décès, sans doute moins précis, lui donne \"75 ans\" soit une naissance en 1656]"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/987N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "...<br/>Marie Giron fille naturelle à<br/>Jacques et Anthoinette[Perryer]"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Baptème de Marie GIRON le 3 février à St-Cirgues-en-Montagne",
+                        "annee": 1664
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/986M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "...Pierre Mazoyer âgé<br/>de dix sept ans ou environ fils naturel et légitime de François<br/>Mazoyer et de Louise Issartel mariés...<br/>... d'une part et ...Marie<br/>Gironne âgée de quinze ans ou environ fille naturelle et<br/>légitime de Jacques Giron et Anthoinette Périer<br/>ses père et mère ménagères ... du lieu d'aubrage? paroisse<br/>de Saint-Cirgues en Montagne d'autre..."
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mariage",
+                        "annee": 1678
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_2.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_3.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Contrat de mariage passé chez maître Benoît OLLIER, notaire à Montpezat-sous-Bauzon - 2E2696 photo 111",
+                        "annee": 1678
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/987D.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mort de Marie Giron le 29 novembre à Juvinas",
+                        "annee": 1727
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/986D.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mort de Pierre MAZOYER le 23 mars à Juvinas.",
+                        "annee": 1731
+                    }
+                }
             ]
         },
         "F1821": {
