@@ -4584,77 +4584,6 @@
                 "Sans profession"
             ]
         },
-        "I358": {
-            "nom": "NOGIER",
-            "prenom": "Jean",
-            "sexe": "M",
-            "naissance": {
-                "lieu": {
-                    "brut": "Mayres, , , , ,",
-                    "ville": "Mayres",
-                    "dept_num": "07"
-                }
-            },
-            "deces": {
-                "date": "BEF 1805"
-            },
-            "professions": [
-                "Cultivateur"
-            ],
-            "commentaires": [
-                "\"Nogier\" ou \"Nougier\" ? L'orthographe varie suivant les actes, sans signification particulière... Nous avons uniformisé sur la forme définitive, \"Nogier\".\nJean Pierre est \"cultivateur\" et habite toute sa vie \"au lieu du Chambon\", \"paroisse\" puis \"commune\" de Mayres.\nL'acte de son mariage qui, malheureusement ne comporte pas le nom de ses parents, le prénomme \"Jean Pierre\". Idem sur l'acte de mariage de son fils Jacques, le 12 novembre 1805. Par contre, sur l'acte de décès de celui-ci, en 1853, il est devenu \"Jacques\", ce qui est vraisemblablement une erreur d'état civil...\nNaissance : au moins 18 ans lors de son mariage, le 16 juillet 1765.\nDécès : il est \"feu\" lors du mariage de son fils Jacques, le 12 novembre 1805."
-            ]
-        },
-        "I359": {
-            "nom": "LOURDIN",
-            "prenom": "Anne",
-            "sexe": "F",
-            "naissance": {
-                "date": "BET 1727 AND 1731",
-                "lieu": {
-                    "brut": "Mayres, 07, Ardèche, , ,",
-                    "ville": "Mayres",
-                    "dept_num": "07"
-                }
-            },
-            "deces": {
-                "date": "18 DEC 1816",
-                "lieu": {
-                    "brut": "Mayres, 07, Ardèche, , , Mayres (le Chambon)",
-                    "adresse": "Mayres (le Chambon)",
-                    "ville": "Mayres",
-                    "dept_num": "07"
-                }
-            },
-            "professions": [
-                "Ménagère"
-            ],
-            "commentaires": [
-                "Naissance : elle meurt \"âgée de huitante sept ans...\" ; elle est dite \"Peussone\" (?), exerce la profession de \"ménagère\" et habite \"au lieu du Chambon commune de Mayres\"."
-            ]
-        },
-        "I361": {
-            "nom": "LOURDIN",
-            "prenom": "Dominique",
-            "sexe": "M",
-            "naissance": {
-                "date": "BEF 1713"
-            },
-            "commentaires": [
-                "Naissance : estimation, d'après la date (estimée) du mariage de sa fille Anne..."
-            ]
-        },
-        "I362": {
-            "nom": "PONSSARD",
-            "prenom": "Antoinette",
-            "sexe": "F",
-            "naissance": {
-                "date": "BEF 1715"
-            },
-            "commentaires": [
-                "Naissance : estimation, d'après la date (estimée) du mariage de sa fille Anne..."
-            ]
-        },
         "I369": {
             "nom": "ITIER",
             "prenom": "Jacques",
@@ -71895,29 +71824,6 @@
                     ]
                 }
             ]
-        },
-        "F126": {
-            "mari": "I358",
-            "epouse": "I359",
-            "mariage": {
-                "date": "16 JUL 1765",
-                "lieu": {
-                    "brut": "Mayres, 07, Ardèche, , ,",
-                    "ville": "Mayres",
-                    "dept_num": "07"
-                }
-            },
-            "enfants": []
-        },
-        "F128": {
-            "mari": "I361",
-            "epouse": "I362",
-            "enfants": [
-                "I359"
-            ],
-            "mariage": {
-                "date": "BEF 1731"
-            }
         },
         "F129": {
             "mari": "I369",
