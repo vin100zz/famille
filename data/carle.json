@@ -127788,20 +127788,6 @@
                 ]
             }
         },
-        "I7970": {
-            "nom": "MAZOYER",
-            "prenom": "François",
-            "sexe": "M",
-            "sosa": 1972,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1817",
-                        "conjoint": "I7993"
-                    }
-                ]
-            }
-        },
         "I7971": {
             "nom": "ISSARTEL",
             "prenom": "Louise",
@@ -128093,31 +128079,6 @@
                         "famille": "F1816",
                         "conjoint": "I7991"
                     }
-                ]
-            }
-        },
-        "I7993": {
-            "nom": "ISSARTEL",
-            "prenom": "Louise",
-            "sexe": "F",
-            "sosa": 1973,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1817",
-                        "conjoint": "I7970"
-                    }
-                ]
-            }
-        },
-        "I7994": {
-            "nom": "MAZOYER",
-            "prenom": "Pierre",
-            "sexe": "M",
-            "liens": {
-                "parents": [
-                    "I7970",
-                    "I7993"
                 ]
             }
         },
@@ -177593,94 +177554,6 @@
                 "I538"
             ]
         },
-        "F1817": {
-            "mari": "I7970",
-            "epouse": "I7993",
-            "documents": [
-                {
-                    "titre": {
-                        "label": "Branche Claude DURAND : 11e génération"
-                    },
-                    "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Sommaire :<br/>- [1970/1971] Jacques VIDAL & Jeanne PONTAL<br/>- [1972/1973] François MAZOYER & Louise ISSARTEL"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "avril 1641Contrat de mariage Me Osée Guibourdenche 2 E 1817 (cf.https://gw.geneanet.org/zethos?n=pontal&oc=1&p=jeanne&type=fiche )"
-                            }
-                        ]
-                    ]
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/11e_durand/1971D.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mort de Jeanne PONTAL le 26 septembre à Asperjoc.",
-                        "annee": 1669
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/11e_durand/1970D.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mort de Jacques VIDAL le 16 octobre à Asperjoc, Le Chadanet.",
-                        "annee": 1691
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/11e_durand/1972M.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "...François Mazoyer<br/>fils de Pierre et de Magdeleine<br/>Vinie? du lieu et paroisse<br/>de Juvinas d'une part et<br/>Louise Issartel fille<br/>à feu Benoît et Marguerite<br/>Giron du lieu de<br/>Vinaudoy paroisse de<br/>Saint-Cirgues en Montagne<br/>d'autre part moy soussigné<br/>...<br/>du contrat de mariage<br/>reçu par Me de Lafare<br/>notaire dudit Saint-Cirgues<br/><br/><br/>le 28e may ...<br/><br/>année susdite 1649..."
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mariage",
-                        "annee": 1649
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/11e_durand/1972D.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Mort de François MAZOYER le 4 janvier à Juvinas",
-                        "annee": 1689
-                    }
-                }
-            ],
-            "enfants": [
-                "I7994"
-            ]
-        },
         "F1819": {
             "mari": "I7996",
             "epouse": "I7997",
@@ -177998,6 +177871,87 @@
             "epouse": "I8001",
             "enfants": [
                 "I7998"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "label": "Branche Claude DURAND : 11e génération"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Sommaire :<br/>- [1970/1971] Jacques VIDAL & Jeanne PONTAL<br/>- [1972/1973] François MAZOYER & Louise ISSARTEL"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "avril 1641Contrat de mariage Me Osée Guibourdenche 2 E 1817 (cf.https://gw.geneanet.org/zethos?n=pontal&oc=1&p=jeanne&type=fiche )"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/11e_durand/1971D.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mort de Jeanne PONTAL le 26 septembre à Asperjoc.",
+                        "annee": 1669
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/11e_durand/1970D.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mort de Jacques VIDAL le 16 octobre à Asperjoc, Le Chadanet.",
+                        "annee": 1691
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/11e_durand/1972M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "...François Mazoyer<br/>fils de Pierre et de Magdeleine<br/>Vinie? du lieu et paroisse<br/>de Juvinas d'une part et<br/>Louise Issartel fille<br/>à feu Benoît et Marguerite<br/>Giron du lieu de<br/>Vinaudoy paroisse de<br/>Saint-Cirgues en Montagne<br/>d'autre part moy soussigné<br/>...<br/>du contrat de mariage<br/>reçu par Me de Lafare<br/>notaire dudit Saint-Cirgues<br/><br/><br/>le 28e may ...<br/><br/>année susdite 1649..."
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mariage",
+                        "annee": 1649
+                    }
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/11e_durand/1972D.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Mort de François MAZOYER le 4 janvier à Juvinas",
+                        "annee": 1689
+                    }
+                }
             ]
         },
         "F1822": {
