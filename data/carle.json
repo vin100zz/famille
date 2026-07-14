@@ -127788,24 +127788,6 @@
                 ]
             }
         },
-        "I7971": {
-            "nom": "ISSARTEL",
-            "prenom": "Louise",
-            "sexe": "F",
-            "sosa": 1973,
-            "liens": {
-                "unions": []
-            }
-        },
-        "I7972": {
-            "nom": "VIDAL",
-            "prenom": "Pierre",
-            "sexe": "M",
-            "sosa": 3940,
-            "liens": {
-                "unions": []
-            }
-        },
         "I7975": {
             "nom": "PORTALIER",
             "prenom": "Claude",
