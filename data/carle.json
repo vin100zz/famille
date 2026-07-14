@@ -28152,17 +28152,17 @@
             "naissance": {
                 "date": "BEF 1685",
                 "lieu": {
-                    "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                     "ville": "Barles",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Barles, 04"
                 }
             },
             "deces": {
                 "date": "29 JUN 1755",
                 "lieu": {
-                    "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                     "ville": "Barles",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Barles, 04"
                 }
             },
             "liens": {
@@ -28189,9 +28189,9 @@
                         "mariage": {
                             "date": "31 AUG 1722",
                             "lieu": {
-                                "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                                 "ville": "Barles",
-                                "dept_num": "04"
+                                "dept_num": "04",
+                                "brut": "Barles, 04"
                             }
                         },
                         "commentaires": [
@@ -28212,9 +28212,9 @@
             "deces": {
                 "date": "22 DEC 1735",
                 "lieu": {
-                    "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                     "ville": "Barles",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Barles, 04"
                 }
             },
             "liens": {
@@ -28244,9 +28244,9 @@
                         "mariage": {
                             "date": "31 AUG 1722",
                             "lieu": {
-                                "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                                 "ville": "Barles",
-                                "dept_num": "04"
+                                "dept_num": "04",
+                                "brut": "Barles, 04"
                             }
                         },
                         "commentaires": [
@@ -124520,23 +124520,16 @@
             "deces": {
                 "date": "11 MAY 1750",
                 "lieu": {
-                    "brut": "Crédin, 56",
                     "ville": "Crédin",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Crédin, 56"
                 }
             },
             "liens": {
                 "unions": [
                     {
                         "famille": "F1722",
-                        "conjoint": "I7312",
-                        "mariage": {
-                            "date": "17 JAN 1702",
-                            "lieu": {
-                                "ville": "Crédin",
-                                "dept_num": "56"
-                            }
-                        }
+                        "conjoint": "I7312"
                     }
                 ]
             }
@@ -148309,6 +148302,23 @@
             },
             "commentaires": [
                 "Charles représente la deuxième génération repérée des Payan. Bien que son acte de sépulture (\"60 ans\") le fasse naitre vers 1695, il est plus vraisemblable, compte tenu de la date de son premier mariage, qu'il ait vu le jour vers 1685. Ce qui est certain, c'est qu'il est fils de Jean et de Marie Lombard et qu'il épouse, le 4 août 1704, une jeune \"payse\", sans doute parente, Marie Payan. Le degré de parenté doit être éloigné puisque non mentionné. Mais l'état civil est d'application encore récente à Barles et, de toute façon dans ce village bien enclavé, nombre de mariages ont lieu entre familles \"de ce lieu\"...\n\tA noter que, le même jour, sa soeur Catherine épouse Claude Payan, le frère de Marie. On reste vraiment entre Payan ! Marie donne naissance, entre 1706 et 1721, à six enfants dont Thérèse (1714) qui marque le point de divergence avec la lignée de notre cousine Colette Chapoix. Le 27 juin 1721, elle décède \"âgé d'environ 35 ans\", suivant sa belle-mère de quelques jours dans la tombe...\n\tCharles se remarie un an plus tard, le 31 août 1722, avec Jeanne Arnaud, 35 ans environ, de Barles également. Celle-ci est la récente veuve de Domnin Vielh, qu'elle a épousé le 1er juillet 1715 et qui est mort le 17 mars 1718, \"âgé d'environ trente ans\"... Heureuse initiative, car elle permettra la naissance, le 11 novembre 1723, de Martin, notre ancêtre, sans lequel nous ne serions pas ce que nous sommes aujourd'hui... Nous n'avons reconnu aucun autre enfant du couple. Jeanne meurt le 22 décembre 1735, \"âgée d'environ 48 ans\" ; Charles, de nouveau veuf, lui survit près de vingt ans,  jusqu'au  29 juin 1755...                  (27/07/2000)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "<a href=\"http://babouch.fr/1_barles/#/chapitre/2_charles\">Voir : Charles PAYAN & Jeanne ARNAUD</a>",
+                                "align": "center"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F505": {
@@ -171185,13 +171195,24 @@
             "documents": [
                 {
                     "titre": {
-                        "label": ""
+                        "label": " 3 décembre, Crédin Baptême de Gilles BONNEFOY ",
+                        "annee": 1679
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/382N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/382N_detail.jpg"
+                            },
+                            {
                                 "type": "TEXTE",
-                                "fichier": "1679 3 décembre, Crédin Baptême de Gilles BONNEFOY : ...mariage de François BONNEFOY et Hélène RAOULER..."
+                                "fichier": " ...mariage de François BONNEFOY et Hélène RAOULER..."
                             }
                         ]
                     ]
@@ -171214,6 +171235,10 @@
                                 "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/382M_detail.jpg"
                             },
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/382M_detail.jpg"
+                            },
+                            {
                                 "type": "TEXTE",
                                 "fichier": "...en présence de<br/>François BONNEFOY père de Gilles et de<br/>BOUDET père de la fille Marguerite..."
                             }
@@ -171226,13 +171251,40 @@
                 },
                 {
                     "titre": {
-                        "label": ""
+                        "label": "11 juillet, Crédin : mort de Gilles BONNEFOY",
+                        "annee": 1742
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/382D.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "1742 11 juillet, Crédin : mort de Gilles BONNEFOY ...agé de soixante quatre ans... ...ont assisté Marguerite BOUDET sa veuve... 1750 11 mai, Crédin : mort de Marguerite BOUDET ...Marguerite BOUDET morte d'hier Jacques les BONNEFOIS [son fils]..."
+                                "fichier": "  ...agé de soixante quatre ans... ...ont assisté Marguerite BOUDET sa <br/>veuve... "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1750,
+                        "label": "11 mai, Crédin : mort de Marguerite BOUDET"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/9e/383D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": " ...Marguerite <br/>BOUDET morte d'hier Jacques les BONNEFOIS [son fils]..."
                             }
                         ]
                     ]
