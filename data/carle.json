@@ -27670,67 +27670,6 @@
                 }
             }
         },
-        "I2604": {
-            "nom": "RAMPAL",
-            "prenom": "Marguerite Rose",
-            "sexe": "F",
-            "naissance": {
-                "date": "19 JUL 1732",
-                "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
-                    "ville": "Allauch",
-                    "dept_num": "13"
-                }
-            },
-            "deces": {
-                "date": "02 SEP 1797",
-                "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
-                    "ville": "Allauch",
-                    "dept_num": "13"
-                }
-            }
-        },
-        "I2605": {
-            "nom": "RAMPAL",
-            "prenom": "Victor",
-            "sexe": "M",
-            "deces": {
-                "date": "14 NOV 1778",
-                "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
-                    "ville": "Allauch",
-                    "dept_num": "13"
-                }
-            },
-            "professions": [
-                "Ménager"
-            ]
-        },
-        "I2606": {
-            "nom": "MOUTTE",
-            "prenom": "Pierre",
-            "sexe": "M",
-            "naissance": {
-                "date": "09 APR 1727",
-                "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
-                    "ville": "Allauch",
-                    "dept_num": "13"
-                }
-            },
-            "deces": {
-                "date": "13 MAR 1795",
-                "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
-                    "ville": "Allauch",
-                    "dept_num": "13"
-                }
-            },
-            "professions": [
-                "Ménager"
-            ]
-        },
         "I2613": {
             "nom": "D'AÜ",
             "prenom": "André",
@@ -55962,13 +55901,7 @@
         "I6496": {
             "nom": "DELESTRADE",
             "prenom": "Catherine",
-            "sexe": "F",
-            "naissance": {
-                "date": "BEF 1618"
-            },
-            "deces": {
-                "date": "AFT 1664"
-            }
+            "sexe": "F"
         },
         "I6497": {
             "nom": "SEREN",
@@ -67162,12 +67095,6 @@
             "enfants": [
                 "I7632",
                 "I7633"
-            ]
-        },
-        "F843": {
-            "mari": "I2605",
-            "enfants": [
-                "I2604"
             ]
         },
         "F846": {
@@ -91568,19 +91495,6 @@
             "enfants": [
                 "I2588"
             ]
-        },
-        "F842": {
-            "mari": "I2606",
-            "epouse": "I2604",
-            "mariage": {
-                "date": "14 NOV 1751",
-                "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
-                    "ville": "Allauch",
-                    "dept_num": "13"
-                }
-            },
-            "enfants": []
         },
         "F844": {
             "mari": "I2614",
