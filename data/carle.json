@@ -127806,20 +127806,6 @@
                 "unions": []
             }
         },
-        "I7973": {
-            "nom": "?TESTON",
-            "prenom": "Jeanne",
-            "sexe": "F",
-            "sosa": 3941,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1826",
-                        "conjoint": "I8010"
-                    }
-                ]
-            }
-        },
         "I7975": {
             "nom": "PORTALIER",
             "prenom": "Claude",
@@ -128298,50 +128284,6 @@
                     {
                         "famille": "F1825",
                         "conjoint": "I8008"
-                    }
-                ]
-            }
-        },
-        "I8010": {
-            "nom": "VIDAL",
-            "prenom": "Pierre",
-            "sexe": "M",
-            "sosa": 3940,
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1826",
-                        "conjoint": "I7973"
-                    }
-                ]
-            }
-        },
-        "I8011": {
-            "nom": "VIDAL",
-            "prenom": "Jacques",
-            "sexe": "M",
-            "liens": {
-                "parents": [
-                    "I8010",
-                    "I7973"
-                ],
-                "unions": [
-                    {
-                        "famille": "F1827",
-                        "conjoint": "I8012"
-                    }
-                ]
-            }
-        },
-        "I8012": {
-            "nom": "PONTAL",
-            "prenom": "Jeanne",
-            "sexe": "F",
-            "liens": {
-                "unions": [
-                    {
-                        "famille": "F1827",
-                        "conjoint": "I8011"
                     }
                 ]
             }
@@ -177973,18 +177915,7 @@
             "epouse": "I8007",
             "enfants": [
                 "I8004"
-            ]
-        },
-        "F1825": {
-            "mari": "I8008",
-            "epouse": "I8009",
-            "enfants": [
-                "I8005"
-            ]
-        },
-        "F1826": {
-            "mari": "I8010",
-            "epouse": "I7973",
+            ],
             "documents": [
                 {
                     "titre": {
@@ -178031,14 +177962,14 @@
                         "annee": 1710
                     }
                 }
-            ],
-            "enfants": [
-                "I8011"
             ]
         },
-        "F1827": {
-            "mari": "I8011",
-            "epouse": "I8012"
+        "F1825": {
+            "mari": "I8008",
+            "epouse": "I8009",
+            "enfants": [
+                "I8005"
+            ]
         },
         "F1828": {
             "mari": "I8013",
