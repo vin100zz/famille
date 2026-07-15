@@ -1433,6 +1433,15 @@ const Editor = (function () {
     range.deleteContents();
     const br = document.createElement('br');
     range.insertNode(br);
+
+    // insertNode() dans un n\u0153ud texte le scinde en deux : la partie apr\u00E8s le
+    // curseur devient un n\u0153ud texte vide (pas null). Sans ce nettoyage, le
+    // test "fin de contenu" ci-dessous ne se d\u00E9clenche jamais et le <br> n'est
+    // pas rendu visible par le navigateur tant qu'on n'appuie pas une 2e fois.
+    if (br.nextSibling && br.nextSibling.nodeType === Node.TEXT_NODE && br.nextSibling.textContent === '') {
+      br.parentNode.removeChild(br.nextSibling);
+    }
+
     if (!br.nextSibling) br.parentNode.insertBefore(document.createTextNode('\u00A0'), br.nextSibling);
     range.setStartAfter(br); range.setEndAfter(br);
     sel.removeAllRanges(); sel.addRange(range);
