@@ -31,6 +31,7 @@ interface IPersonRepository
      *   - siblings         : résumés des frères et sœurs
      *   - unions[]         : mariage + conjoint (données complètes)
      *                        + conjoint_parents + conjoint_siblings + enfants (résumés)
+     *                        + conjoint_other_unions (autres mariages du conjoint)
      */
     public function getPerson($id);
 
