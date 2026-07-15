@@ -393,7 +393,7 @@ async function renderPersonPage(data, seq) {
   } else if (conjoint && conjoint.sosa != null && conjoint.sosa >= 2) {
     try { treeData = await api.getSosaTree(conjoint.sosa); } catch (e) {}
   }
-  const coupleCard  = renderCoupleCard(data.person, data.parents, primary, others, onSelect, treeData);
+  const coupleCard  = renderCoupleCard(data.person, data.parents, data.siblings, primary, others, onSelect, treeData);
   // Documents de la personne (indépendants de l'union) + documents de l'union le cas échéant
   const docs        = (data.person.documents || []).concat(primary ? (primary.documents || []) : []);
   const docsSection = renderDocuments(docs);

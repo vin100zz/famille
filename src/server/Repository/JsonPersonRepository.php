@@ -94,6 +94,27 @@ class JsonPersonRepository implements IPersonRepository
         return isset($this->personToUnions[$id]) ? $this->personToUnions[$id] : array();
     }
 
+    /** Résumés des frères et sœurs d'un individu (autres enfants de sa famille de naissance). */
+    private function getSiblingSummaries($id)
+    {
+        $this->ensureIndexes();
+        if (!isset($this->childToFamily[$id])) {
+            return array();
+        }
+        $fam = $this->data['familles'][$this->childToFamily[$id]];
+        $summaries = array();
+        foreach ((isset($fam['enfants']) ? $fam['enfants'] : array()) as $childId) {
+            if ($childId === $id) {
+                continue;
+            }
+            $s = $this->buildSummaryById($childId);
+            if ($s !== null) {
+                $summaries[] = $s;
+            }
+        }
+        return $summaries;
+    }
+
     // ── Interface publique ────────────────────────────────────────────────
 
     public function search($query, $limit = 50)
@@ -159,9 +180,10 @@ class JsonPersonRepository implements IPersonRepository
         }
 
         return array(
-            'person'  => $this->buildPersonData($id),
-            'parents' => $this->getParentSummaries($id),
-            'unions'  => $this->buildUnions($id),
+            'person'   => $this->buildPersonData($id),
+            'parents'  => $this->getParentSummaries($id),
+            'siblings' => $this->getSiblingSummaries($id),
+            'unions'   => $this->buildUnions($id),
         );
     }
 
@@ -257,8 +279,9 @@ class JsonPersonRepository implements IPersonRepository
                 $conjointId = $fam['epouse'];
             }
 
-            $conjoint        = $conjointId ? $this->buildPersonData($conjointId)   : null;
-            $conjointParents = $conjointId ? $this->getParentSummaries($conjointId) : array();
+            $conjoint         = $conjointId ? $this->buildPersonData($conjointId)     : null;
+            $conjointParents  = $conjointId ? $this->getParentSummaries($conjointId)  : array();
+            $conjointSiblings = $conjointId ? $this->getSiblingSummaries($conjointId) : array();
 
             $enfants = array();
             if (!empty($fam['enfants'])) {
@@ -271,13 +294,14 @@ class JsonPersonRepository implements IPersonRepository
             }
 
             $result[] = array(
-                'famille_id'       => $familleId,
-                'mariage'          => isset($fam['mariage'])      ? $fam['mariage']      : null,
-                'commentaires'     => isset($fam['commentaires']) ? $fam['commentaires'] : array(),
-                'conjoint'         => $conjoint,
-                'conjoint_parents' => $conjointParents,
-                'enfants'          => $enfants,
-                'documents'        => isset($fam['documents']) ? $fam['documents'] : array(),
+                'famille_id'        => $familleId,
+                'mariage'           => isset($fam['mariage'])      ? $fam['mariage']      : null,
+                'commentaires'      => isset($fam['commentaires']) ? $fam['commentaires'] : array(),
+                'conjoint'          => $conjoint,
+                'conjoint_parents'  => $conjointParents,
+                'conjoint_siblings' => $conjointSiblings,
+                'enfants'           => $enfants,
+                'documents'         => isset($fam['documents']) ? $fam['documents'] : array(),
             );
         }
 

@@ -282,6 +282,21 @@ function renderNaissanceCol(person, onSelect) {
   return col;
 }
 
+// ── Colonne frères et sœurs ─────────────────────────────────────────────────
+
+function renderSiblingsCol(siblings, onSelect) {
+  const col = el('div', 'person-col' + (siblings && siblings.length ? '' : ' person-col--empty'));
+  if (!siblings || !siblings.length) return col;
+
+  const boxRow = el('div', 'box-row');
+  siblings.forEach(s => {
+    const box = renderPersonBox(s, onSelect);
+    if (box) boxRow.appendChild(box);
+  });
+  col.appendChild(boxRow);
+  return col;
+}
+
 // ── Colonne professions ────────────────────────────────────────────────────
 
 function renderProfessionsCol(person) {
@@ -806,15 +821,17 @@ function renderDocuments(documents) {
  *
  * @param {Object}   person      Données complètes de la personne sélectionnée
  * @param {Array}    parents     Résumés de ses parents
+ * @param {Array}    siblings    Résumés de ses frères et sœurs
  * @param {Object}   union       Union principale (ou null si solo)
  * @param {Array}    otherUnions Unions secondaires à afficher dans la colonne de la personne
  * @param {Function} onSelect    callback(id) pour la navigation
  */
-function renderCoupleCard(person, parents, union, otherUnions, onSelect, treeData) {
-  const conjoint        = union ? union.conjoint        : null;
-  const conjointParents = union ? (union.conjoint_parents || []) : [];
-  const mariage         = union ? union.mariage         : null;
-  const mariageNotes    = union ? (union.commentaires   || []) : [];
+function renderCoupleCard(person, parents, siblings, union, otherUnions, onSelect, treeData) {
+  const conjoint         = union ? union.conjoint          : null;
+  const conjointParents  = union ? (union.conjoint_parents   || []) : [];
+  const conjointSiblings = union ? (union.conjoint_siblings  || []) : [];
+  const mariage          = union ? union.mariage           : null;
+  const mariageNotes     = union ? (union.commentaires     || []) : [];
 
   // ── Disposition homme à gauche, femme à droite ──
   let left, right;
@@ -861,6 +878,15 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect, treeDat
     renderNaissanceCol(right, onSelect)
   );
   if (naissSection) card.appendChild(naissSection);
+
+  // ── 3bis. Frères et sœurs ──────────────────────────────────────────────────
+  const leftSiblings  = left  === person ? siblings : (left  === conjoint ? conjointSiblings : []);
+  const rightSiblings = right === person ? siblings : (right === conjoint ? conjointSiblings : []);
+  const siblingsSection = makeSection('Fratrie',
+    renderSiblingsCol(leftSiblings,  onSelect),
+    renderSiblingsCol(rightSiblings, onSelect)
+  );
+  if (siblingsSection) card.appendChild(siblingsSection);
 
   // ── 4. Mariage (pleine largeur) ───────────────────────────────────────────
   if (mariage || mariageNotes.length) {

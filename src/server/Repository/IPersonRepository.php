@@ -28,8 +28,9 @@ interface IPersonRepository
      * @return array|null  Structure :
      *   - person           : données complètes de l'individu
      *   - parents          : résumés des parents
+     *   - siblings         : résumés des frères et sœurs
      *   - unions[]         : mariage + conjoint (données complètes)
-     *                        + conjoint_parents + enfants (résumés)
+     *                        + conjoint_parents + conjoint_siblings + enfants (résumés)
      */
     public function getPerson($id);
 
