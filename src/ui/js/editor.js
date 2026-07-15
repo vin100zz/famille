@@ -804,6 +804,57 @@ const Editor = (function () {
     nomInp.focus();
   }
 
+  /**
+   * N'autorise que http(s)/mailto/tel, et préfixe par https:// si aucun schéma
+   * n'est précisé. Retourne null pour un schéma dangereux (javascript:, data:...).
+   */
+  function _sanitizeUrl(raw) {
+    const url = (raw || '').trim();
+    if (!url) return null;
+    if (/^(https?|mailto|tel):/i.test(url)) return url;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(url)) return null;
+    return 'https://' + url;
+  }
+
+  /** Popup "Insérer un lien" (même style que _openAddPersonPopup) : texte + URL. */
+  function _openInsertLinkPopup(defaultText, onConfirm) {
+    const overlay = el('div', 'ed-popup-overlay');
+    const popup = el('div', 'ed-popup');
+    popup.appendChild(txt('div', 'ed-popup__title', 'Insérer un lien'));
+
+    const textInp = document.createElement('input');
+    textInp.type = 'text'; textInp.className = 'ed-input'; textInp.placeholder = 'Texte du lien';
+    textInp.value = defaultText || '';
+    const urlInp = document.createElement('input');
+    urlInp.type = 'text'; urlInp.className = 'ed-input'; urlInp.placeholder = 'URL (https://...)';
+    popup.appendChild(textInp);
+    popup.appendChild(urlInp);
+
+    const errEl = txt('div', 'ed-popup__error', ''); errEl.hidden = true;
+    popup.appendChild(errEl);
+
+    const btnRow = el('div', 'ed-popup__btns');
+    const btnCreate = el('button', 'ed-btn ed-btn--save');
+    btnCreate.type = 'button'; btnCreate.textContent = 'Insérer';
+    const btnCancel = el('button', 'ed-btn ed-btn--cancel');
+    btnCancel.type = 'button'; btnCancel.textContent = 'Annuler';
+    btnCancel.addEventListener('click', () => document.body.removeChild(overlay));
+
+    btnCreate.addEventListener('click', () => {
+      const url = _sanitizeUrl(urlInp.value);
+      if (!url) { errEl.textContent = 'Saisir une URL valide (http, https, mailto ou tel).'; errEl.hidden = false; urlInp.focus(); return; }
+      const text = textInp.value.trim();
+      document.body.removeChild(overlay);
+      onConfirm(text, url);
+    });
+
+    btnRow.appendChild(btnCreate); btnRow.appendChild(btnCancel);
+    popup.appendChild(btnRow);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+    textInp.focus();
+  }
+
   // ── Section Documents ──────────────────────────────────────────────────────
 
   // Sans union, il n'existe pas de famille pour porter les documents :
@@ -1205,6 +1256,45 @@ const Editor = (function () {
       btn.addEventListener('mousedown', e => { e.preventDefault(); document.execCommand(cmd,false,null); });
       bar.appendChild(btn);
     });
+
+    // Lien : ouvre un popup (texte + URL) puis insère un <a target="_blank">
+    const linkBtn = el('button', 'ed-txt-btn'); linkBtn.type = 'button'; linkBtn.title = 'Insérer un lien';
+    linkBtn.innerHTML = '🔗';
+    linkBtn.addEventListener('mousedown', e => {
+      e.preventDefault();
+      // Capture la sélection avant que le popup ne vole le focus.
+      const sel = window.getSelection();
+      let savedRange = null;
+      if (sel && sel.rangeCount) {
+        const r = sel.getRangeAt(0);
+        if (edDiv.contains(r.commonAncestorContainer)) savedRange = r.cloneRange();
+      }
+      const defaultText = savedRange ? savedRange.toString() : '';
+      _openInsertLinkPopup(defaultText, (text, url) => {
+        edDiv.focus();
+        const sel2 = window.getSelection();
+        sel2.removeAllRanges();
+        if (savedRange) {
+          sel2.addRange(savedRange);
+        } else {
+          const r = document.createRange();
+          r.selectNodeContents(edDiv);
+          r.collapse(false);
+          sel2.addRange(r);
+        }
+        const range = sel2.getRangeAt(0);
+        range.deleteContents();
+        const a = document.createElement('a');
+        a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        a.textContent = text || url;
+        range.insertNode(a);
+        range.setStartAfter(a); range.setEndAfter(a);
+        sel2.removeAllRanges(); sel2.addRange(range);
+        block.fichier = _serializeRichText(edDiv);
+      });
+    });
+    bar.appendChild(linkBtn);
+
     // Alignement
     bar.appendChild(txt('span','ed-txt-sep',''));
     const alignBtns = {};
@@ -1359,6 +1449,15 @@ const Editor = (function () {
         else if (t === 'b' || t === 'strong') out += '<b>' + _serializeRichText(child) + '</b>';
         else if (t === 'i' || t === 'em')     out += '<i>' + _serializeRichText(child) + '</i>';
         else if (t === 'u')                   out += '<u>' + _serializeRichText(child) + '</u>';
+        else if (t === 'a') {
+          const href = _sanitizeUrl(child.getAttribute('href') || '');
+          if (href) {
+            const escaped = href.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+            out += '<a href="' + escaped + '" target="_blank" rel="noopener noreferrer">' + _serializeRichText(child) + '</a>';
+          } else {
+            out += _serializeRichText(child);
+          }
+        }
         else if (t === 'div' || t === 'p') {
           const inner = _serializeRichText(child);
           out += (out && !out.endsWith('<br/>') ? '<br/>' : '') + inner;
