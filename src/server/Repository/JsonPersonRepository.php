@@ -94,6 +94,27 @@ class JsonPersonRepository implements IPersonRepository
         return isset($this->personToUnions[$id]) ? $this->personToUnions[$id] : array();
     }
 
+    /** Résumés des frères et sœurs d'un individu (autres enfants de sa famille de naissance). */
+    private function getSiblingSummaries($id)
+    {
+        $this->ensureIndexes();
+        if (!isset($this->childToFamily[$id])) {
+            return array();
+        }
+        $fam = $this->data['familles'][$this->childToFamily[$id]];
+        $summaries = array();
+        foreach ((isset($fam['enfants']) ? $fam['enfants'] : array()) as $childId) {
+            if ($childId === $id) {
+                continue;
+            }
+            $s = $this->buildSummaryById($childId);
+            if ($s !== null) {
+                $summaries[] = $s;
+            }
+        }
+        return $summaries;
+    }
+
     // ── Interface publique ────────────────────────────────────────────────
 
     public function search($query, $limit = 50)
@@ -159,9 +180,10 @@ class JsonPersonRepository implements IPersonRepository
         }
 
         return array(
-            'person'  => $this->buildPersonData($id),
-            'parents' => $this->getParentSummaries($id),
-            'unions'  => $this->buildUnions($id),
+            'person'   => $this->buildPersonData($id),
+            'parents'  => $this->getParentSummaries($id),
+            'siblings' => $this->getSiblingSummaries($id),
+            'unions'   => $this->buildUnions($id),
         );
     }
 
@@ -243,8 +265,14 @@ class JsonPersonRepository implements IPersonRepository
      * Construit la liste des unions d'un individu à partir des familles où il
      * est mari ou épouse. mariage/commentaires/documents viennent directement
      * de la famille (source de vérité unique, plus de copie côté individu).
+     *
+     * @param bool $includeConjointOtherUnions  Inclut les autres unions du
+     *   conjoint (conjoint_other_unions), pour que la fiche affiche "Autres
+     *   mariages" quel que soit le membre du couple sélectionné. Passé à
+     *   false lors de l'appel récursif pour le conjoint afin d'éviter une
+     *   boucle infinie (le conjoint du conjoint, c'est la personne de départ).
      */
-    private function buildUnions($id)
+    private function buildUnions($id, $includeConjointOtherUnions = true)
     {
         $result = array();
         foreach ($this->getUnionFamilyIds($id) as $familleId) {
@@ -257,8 +285,18 @@ class JsonPersonRepository implements IPersonRepository
                 $conjointId = $fam['epouse'];
             }
 
-            $conjoint        = $conjointId ? $this->buildPersonData($conjointId)   : null;
-            $conjointParents = $conjointId ? $this->getParentSummaries($conjointId) : array();
+            $conjoint         = $conjointId ? $this->buildPersonData($conjointId)     : null;
+            $conjointParents  = $conjointId ? $this->getParentSummaries($conjointId)  : array();
+            $conjointSiblings = $conjointId ? $this->getSiblingSummaries($conjointId) : array();
+
+            $conjointOtherUnions = array();
+            if ($includeConjointOtherUnions && $conjointId) {
+                foreach ($this->buildUnions($conjointId, false) as $cu) {
+                    if ($cu['famille_id'] !== $familleId) {
+                        $conjointOtherUnions[] = $cu;
+                    }
+                }
+            }
 
             $enfants = array();
             if (!empty($fam['enfants'])) {
@@ -271,13 +309,15 @@ class JsonPersonRepository implements IPersonRepository
             }
 
             $result[] = array(
-                'famille_id'       => $familleId,
-                'mariage'          => isset($fam['mariage'])      ? $fam['mariage']      : null,
-                'commentaires'     => isset($fam['commentaires']) ? $fam['commentaires'] : array(),
-                'conjoint'         => $conjoint,
-                'conjoint_parents' => $conjointParents,
-                'enfants'          => $enfants,
-                'documents'        => isset($fam['documents']) ? $fam['documents'] : array(),
+                'famille_id'            => $familleId,
+                'mariage'               => isset($fam['mariage'])      ? $fam['mariage']      : null,
+                'commentaires'          => isset($fam['commentaires']) ? $fam['commentaires'] : array(),
+                'conjoint'              => $conjoint,
+                'conjoint_parents'      => $conjointParents,
+                'conjoint_siblings'     => $conjointSiblings,
+                'conjoint_other_unions' => $conjointOtherUnions,
+                'enfants'               => $enfants,
+                'documents'             => isset($fam['documents']) ? $fam['documents'] : array(),
             );
         }
 

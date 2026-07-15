@@ -282,6 +282,21 @@ function renderNaissanceCol(person, onSelect) {
   return col;
 }
 
+// ── Colonne frères et sœurs ─────────────────────────────────────────────────
+
+function renderSiblingsCol(siblings, onSelect) {
+  const col = el('div', 'person-col' + (siblings && siblings.length ? '' : ' person-col--empty'));
+  if (!siblings || !siblings.length) return col;
+
+  const boxRow = el('div', 'box-row');
+  siblings.forEach(s => {
+    const box = renderPersonBox(s, onSelect);
+    if (box) boxRow.appendChild(box);
+  });
+  col.appendChild(boxRow);
+  return col;
+}
+
 // ── Colonne professions ────────────────────────────────────────────────────
 
 function renderProfessionsCol(person) {
@@ -430,6 +445,40 @@ function personToSummary(p) {
     deces_year:     extractYear(p.deces     && p.deces.date),
     deces_date:     p.deces     && p.deces.date     || null,
   };
+}
+
+// ── Colonne "Autres mariages" ───────────────────────────────────────────────
+
+/** Construit le contenu (conjoint + enfants + commentaires) d'une liste d'unions secondaires. */
+function renderOtherUnionsCol(otherUnionsList, onSelect) {
+  const col = el('div', 'person-col' + (otherUnionsList && otherUnionsList.length ? '' : ' person-col--empty'));
+  if (!otherUnionsList || !otherUnionsList.length) return col;
+
+  otherUnionsList.forEach((u, i) => {
+    if (i > 0) col.appendChild(el('div', 'other-union-sep'));
+    const ev = renderEventBlock(u.mariage);
+    if (ev) col.appendChild(ev);
+    if (u.conjoint) {
+      col.appendChild(txt('div', 'section-sublabel', 'Conjoint'));
+      const box = renderPersonBox(personToSummary(u.conjoint), onSelect);
+      if (box) col.appendChild(box);
+    }
+    const uEnfants = u.enfants || [];
+    if (uEnfants.length) {
+      col.appendChild(txt('div', 'section-sublabel', 'Enfants (' + uEnfants.length + ')'));
+      const boxRow = el('div', 'box-row');
+      uEnfants.forEach(child => {
+        const box = renderPersonBox(child, onSelect);
+        if (box) boxRow.appendChild(box);
+      });
+      col.appendChild(boxRow);
+    }
+    if (u.commentaires && u.commentaires.length) {
+      const block = renderCollapsibleComments(u.commentaires);
+      if (block) col.appendChild(block);
+    }
+  });
+  return col;
 }
 
 // ── Arbre généalogique Sosa ────────────────────────────────────────────────
@@ -806,15 +855,17 @@ function renderDocuments(documents) {
  *
  * @param {Object}   person      Données complètes de la personne sélectionnée
  * @param {Array}    parents     Résumés de ses parents
+ * @param {Array}    siblings    Résumés de ses frères et sœurs
  * @param {Object}   union       Union principale (ou null si solo)
  * @param {Array}    otherUnions Unions secondaires à afficher dans la colonne de la personne
  * @param {Function} onSelect    callback(id) pour la navigation
  */
-function renderCoupleCard(person, parents, union, otherUnions, onSelect, treeData) {
-  const conjoint        = union ? union.conjoint        : null;
-  const conjointParents = union ? (union.conjoint_parents || []) : [];
-  const mariage         = union ? union.mariage         : null;
-  const mariageNotes    = union ? (union.commentaires   || []) : [];
+function renderCoupleCard(person, parents, siblings, union, otherUnions, onSelect, treeData) {
+  const conjoint         = union ? union.conjoint          : null;
+  const conjointParents  = union ? (union.conjoint_parents   || []) : [];
+  const conjointSiblings = union ? (union.conjoint_siblings  || []) : [];
+  const mariage          = union ? union.mariage           : null;
+  const mariageNotes     = union ? (union.commentaires     || []) : [];
 
   // ── Disposition homme à gauche, femme à droite ──
   let left, right;
@@ -862,6 +913,15 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect, treeDat
   );
   if (naissSection) card.appendChild(naissSection);
 
+  // ── 3bis. Frères et sœurs ──────────────────────────────────────────────────
+  const leftSiblings  = left  === person ? siblings : (left  === conjoint ? conjointSiblings : []);
+  const rightSiblings = right === person ? siblings : (right === conjoint ? conjointSiblings : []);
+  const siblingsSection = makeSection('Fratrie',
+    renderSiblingsCol(leftSiblings,  onSelect),
+    renderSiblingsCol(rightSiblings, onSelect)
+  );
+  if (siblingsSection) card.appendChild(siblingsSection);
+
   // ── 4. Mariage (pleine largeur) ───────────────────────────────────────────
   if (mariage || mariageNotes.length) {
     const row = el('div', 'couple-row--full');
@@ -875,44 +935,15 @@ function renderCoupleCard(person, parents, union, otherUnions, onSelect, treeDat
     card.appendChild(row);
   }
 
-  // ── 5. Autres mariages (dans la colonne de la personne) ───────────────────
-  if (otherUnions && otherUnions.length) {
-    const personIsLeft = (left === person);
-    const autreCol = el('div', 'person-col');
-    const emptyCol = el('div', 'person-col person-col--empty');
-
-    otherUnions.forEach((u, i) => {
-      if (i > 0) autreCol.appendChild(el('div', 'other-union-sep'));
-      const ev = renderEventBlock(u.mariage);
-      if (ev) autreCol.appendChild(ev);
-      if (u.conjoint) {
-        autreCol.appendChild(txt('div', 'section-sublabel', 'Conjoint'));
-        const box = renderPersonBox(personToSummary(u.conjoint), onSelect);
-        if (box) autreCol.appendChild(box);
-      }
-      const uEnfants = u.enfants || [];
-      if (uEnfants.length) {
-        autreCol.appendChild(txt('div', 'section-sublabel', 'Enfants (' + uEnfants.length + ')'));
-        const boxRow = el('div', 'box-row');
-        uEnfants.forEach(child => {
-          const box = renderPersonBox(child, onSelect);
-          if (box) boxRow.appendChild(box);
-        });
-        autreCol.appendChild(boxRow);
-      }
-      if (u.commentaires && u.commentaires.length) {
-        const block = renderCollapsibleComments(u.commentaires);
-        if (block) autreCol.appendChild(block);
-      }
-    });
-
-    const autresSection = makeSection(
-      'Autres mariages',
-      personIsLeft ? autreCol : emptyCol,
-      personIsLeft ? emptyCol : autreCol
-    );
-    if (autresSection) card.appendChild(autresSection);
-  }
+  // ── 5. Autres mariages (colonne de la personne ET du conjoint) ────────────
+  const conjointOtherUnions = union ? (union.conjoint_other_unions || []) : [];
+  const leftOtherUnions  = left  === person ? otherUnions : (left  === conjoint ? conjointOtherUnions : []);
+  const rightOtherUnions = right === person ? otherUnions : (right === conjoint ? conjointOtherUnions : []);
+  const autresSection = makeSection('Autres mariages',
+    renderOtherUnionsCol(leftOtherUnions,  onSelect),
+    renderOtherUnionsCol(rightOtherUnions, onSelect)
+  );
+  if (autresSection) card.appendChild(autresSection);
 
   // ── 6. Professions ────────────────────────────────────────────────────────
   const profSection = makeSection('Professions',
