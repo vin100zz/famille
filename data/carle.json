@@ -85084,26 +85084,96 @@
             "mariage": {
                 "date": "26 MAY 1721",
                 "lieu": {
-                    "brut": "Barles, 04, Alpes de Haute Provence, , ,",
                     "ville": "Barles",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Barles, 04"
                 }
             },
             "documents": [
                 {
                     "titre": {
+                        "annee": 1704,
+                        "label": "Mariage Jean DAVIN- Jeanne AUBERT ; enfants : Antoine et Joseph"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1718,
+                        "label": "Mort de Jeanne AUBERT"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1718,
+                        "label": "Le 17 octobre 1718, Jean DAVIN  \"veuf de Jeanne AUBERT\" épouse Anne AUGIER "
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Avant 1721, mort de Jean DAVIN"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
                         "annee": 1721,
-                        "label": "26 mai, Barles : Le mariage"
+                        "label": "26 mai, Barles :  mariage Anne AUGIER et Joseph AUBERT ; enfants : Suzanne [201 notre ancêtre] et François."
                     },
                     "contenu": [
                         [
                             {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/402N_1.jpg"
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/402M_3.jpg"
                             },
                             {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/402N_2.jpg"
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/402M_1.jpg"
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/402M_2.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "L'an que dessus et le 26 mai après la publication<br/>faite des trois bans de mariage les trois dimanches derniers<br/>d’entre Joseph AUBERT fils à feu François et de Suzanne RIPERT<br/>et Anne AUGIER veuve de Jean DAVIN d'autre part de ce lieu<br/>de Barles  et présentant aucun empêchement ils ont <br/>été épousés par mois curé soussignés selon la forme<br/>prévue de la Sainte Église  en présence de leurs sept<br/>plus proches parents, de Pierre ARNAUD et de Honnoré PAYAN<br/>témoin requis et a signé qui a scu avec moi curé"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1737,
+                        "label": "Mort de Anne AUGIER le 21 décembre à Barles"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/403D_1.jpg"
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/403D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "En marge : mort d'Anne RICHIER<br/> Et pourquoi Anne RICHIER AUGIER» ?"
                             }
                         ]
                     ]
@@ -102484,6 +102554,12 @@
                                 "type": "IMAGE",
                                 "fichier": "0b_au_dela_6e_paternel/1_carle/2_madeleine_fellmann_6g/8e_fellmann/135D.jpg"
                             }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Hodie Die 1ma mensis februarij anni millesimi\nseptingentesimi quinquagesimi 4ti mortua est \nAnna Maria WINDHOLTZ uxor Mathias DENIS,\neadem provisis sacris Eucharistiæ et extremæ\nunctionis munita et a me infra scripto in Cœmeterio\nhujus loci sepulta præsentibus Marito et\nHippolyto Henzinger qui mecum subsignare\nSignum + [?viri?] testis [illisible] Geisler\n[passage illisible]"
+                            }
                         ]
                     ],
                     "titre": {
@@ -114363,50 +114439,31 @@
             "epouse": "I7997",
             "enfants": [
                 "I1385"
-            ]
-        },
-        "F1820": {
-            "mari": "I7998",
-            "epouse": "I7999",
-            "enfants": [
-                "I1386"
             ],
             "documents": [
                 {
                     "titre": {
-                        "label": "Branche Claude DURAND : 10e génération"
+                        "annee": null,
+                        "label": "Vers 1637 :  Naissance de Pierre DURAND [d'après l'acte de décès]"
                     },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Sommaire :<br/>- [984/985] Pierre DURAND & Isabelle VIDAL<br/>- [986/987] Pierre MAZOYER & Marie GIRON"
-                            }
-                        ]
+                        []
                     ]
                 },
                 {
                     "titre": {
-                        "label": "Pierre DURAND & Isabelle VIDAL"
+                        "annee": null,
+                        "label": "Vers 1650 : Naissance de Isabelle VIDAL [d'après l'acte de décès]"
                     },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1637Naissance de Pierre DURAND [d'après l'acte de décès]"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1650Naissance de Isabelle VIDAL [d'après l'acte de décès]"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1681Mariage"
-                            }
-                        ]
+                        []
                     ]
                 },
                 {
+                    "titre": {
+                        "annee": 1681,
+                        "label": "Contrat de mariage"
+                    },
                     "contenu": [
                         [
                             {
@@ -114417,29 +114474,23 @@
                         [
                             {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_2.jpg"
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_2.JPG"
                             }
                         ],
                         [
                             {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_3.jpg"
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_3.JPG"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": "Contrat de mariage",
-                        "annee": 1681
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": "Transcription"
+                    },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Transcription"
-                            }
-                        ],
                         [
                             {
                                 "type": "IMAGE",
@@ -114452,12 +114503,13 @@
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_1t.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
                     "contenu": [
                         [
                             {
@@ -114471,12 +114523,13 @@
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_2t.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
                     "contenu": [
                         [
                             {
@@ -114490,12 +114543,13 @@
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_3t.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
                     "contenu": [
                         [
                             {
@@ -114509,12 +114563,13 @@
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_4t.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
                     "contenu": [
                         [
                             {
@@ -114528,12 +114583,27 @@
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_durand_5t.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": "Sybthese (ChatGPT)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/synthese.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1697,
+                        "label": "Mort de Pierre DURAND le 10 juillet à Asperjoc, Le Ranc."
+                    },
                     "contenu": [
                         [
                             {
@@ -114541,13 +114611,13 @@
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/984D.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": "Mort de Pierre DURAND le 10 juillet à Asperjoc, Le Ranc.",
-                        "annee": 1697
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": 1710,
+                        "label": "Mort de \"Elisabel\" VIDAL le 7 mai à Asperjoc, Le Ranc."
+                    },
                     "contenu": [
                         [
                             {
@@ -114555,23 +114625,23 @@
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/985D.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": "Mort de \"Elisabel\" VIDAL le 7 mai à Asperjoc, Le Ranc.",
-                        "annee": 1710
-                    }
-                },
+                    ]
+                }
+            ]
+        },
+        "F1820": {
+            "mari": "I7998",
+            "epouse": "I7999",
+            "enfants": [
+                "I1386"
+            ],
+            "documents": [
                 {
                     "titre": {
-                        "label": "Pierre MAZOYER & Marie GIRON"
+                        "label": "Vers 1661 : Naissance de Pierre DURAND [d'après l'acte de mariage ; son acte de décès, sans doute moins précis, lui donne \"75 ans\" soit une naissance en 1656]"
                     },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1661Naissance de Pierre DURAND [d'après l'acte de mariage ; son acte de décès, sans doute moins précis, lui donne \"75 ans\" soit une naissance en 1656]"
-                            }
-                        ]
+                        []
                     ]
                 },
                 {
@@ -114585,7 +114655,7 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...<br/>Marie Giron fille naturelle à<br/>Jacques et Anthoinette[Perryer]"
+                                "fichier": "Aide transcription GeneBase :<br/>le 3.me de feb. 1664. a esté baptizee<br/>Marie Giron fille naturelle a<br/>Jaques et Anthoinette   [Perryer]<br/>dioc[èse] de Mende habitans a<br/>Pesas son oncle son parrin Benoit<br/>Giron d'autre sa marraine<br/>Agnes  [Perryer] de la Pigine?<br/>presans au sus d me Benoit<br/>et Pierre Richard dud Pigine<br/>et par moy prestre soubsigne<br/>Baratier Ptre"
                             }
                         ]
                     ],
@@ -114639,6 +114709,94 @@
                         "label": "Contrat de mariage passé chez maître Benoît OLLIER, notaire à Montpezat-sous-Bauzon - 2E2696 photo 111",
                         "annee": 1678
                     }
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Transcription Genbase : Mariage\nLan mil six Cent septante Cinq et le dix septie Jour du mois de fevrier\nestably regnant qui doibvent par devant moy notaire royal soussigné et tesmoingts\nbas nommés Establis en leurs personnes pierre mazoyer fils de pierre et de louise\nMassabeu du lieu de pary de Guiser dune part et marie giron aussy\nfille legitime a feu françoise parore habitant au lieu de\nprat paroisse saint christoly de rone diocese de viviers dune\nlesquelles parties par ladvis de leurs parents et de mazoyer les parents\net de l'adjonction dudit pauge et plus de part et d'autre ont\nvoulu promit se prendre par la main d'un l'autre offrant les\nde gre et bonne vollonté ont promis et Jure sur les s[ain]ts evangiles\nespouser l'un l'autre en face de n[ot]re s[ain]te mere l'eglise le tout a la premiere\nrequis de l'autre sous legitime [?unions?] et Contrat d'hymene Mariage\nainsi que doibvent promis de Jurer Elle estably en la presence dudit\nadrien pauge frere dudit et pere de ladite fiancee lesquelz agreant\nledit mariage de leur gré et plein vouloir ont donne et constitue\nen dou[aire] a ladite marie giron fiancee par ladite stipulante et acceptante\nscavoir au paravant et present de ses biens tant presens que de nature\npaternels et maternels scavoir une robbe serge raze grise avec un Corps\npetit rouge de laine apprecie a douze livres quatre Cartes seigle a mesure de\nChanteyrac valant a dix huit livres et la somme de Cinq Cent livres\nde la Compris Cent livres pour les biens maternels de ladite fiancee\nen une passade soit public Constituez par lesdits pierre pere et fils audit\nfiancee mazoyer pere du fiance scavoir ladite robbe et d'habillement presen[t] et de\nreallment et de vivant par ledit mazoyer en sa Contenance devoit a ladite fiancee\nles quatre Cartes seigle [illisible], deux Cent livres Entre"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_2.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Et payera aussi prochain, et deduyt d'icelles ledit mazoyer a receu dudit\nsurd[it] pere la somme de trente trois livres et quelque blanc de change\nde quoy faisant toutte retirée de la bourse par ledit mazoyer en presence\nMoi notaire et tesmoings dont de la quitte et le restant de lad[ite] constitution\nqui est de trois cents trois aussi payante par de cinquante trois chaque le\npremier jour de juin prochain et ainsi au Range continuant jusques\nau parfait payement de ladite somme assignée de dessus. Et pour laquelle\nconstitution et icelle demeurante ladite fiancee de toute faveur de droit pour\naquite et quitte a sesdit pere et mere tous ses autres biens et\ndroits de nature paternelle et maternelle d'autres et divers Rangs que lui pourroient\nappartenir de present ou à l'advenir sauf droit d'augment, d'habits et bague\nau deuil, desquels biens des quittance s'est despouillée et en a investi ledit pere\nauquel avec toutes les clauses a ce acquises, Et ont aussy estably ez\nnoms parsonner ledit Raimon Mazoyer et Denise Issartal mari et femme\nensemble de Fraisse lesquels agreant le pnt mariage et luy faire plaisir\nont donné et donnerent par donation entre vifs pure et jamais irrevocable\naudit futur mari et marié sa fiancée pnt stipulant et acceptant savoir\nleur bien et membre savoir est le quart de la chose entiere de\nl'heritier de leur maison. Ledit bien estant generalement dont l'entier\npnt et advenir quitte et déchargé de tous dettes privil[èges] hipoteques et legitime\nde d'autres enfans sauf de l'acte d'iceux quitte neanmoins des\narrérages du passé de s'ils s'en font sont à la reserve de ladite\ndonatrice les especes du pnt mariage dument supportées, Desquels biens des\ndonateurs ledit mari se fera despouiller et en ont investi le dit de\npar le bais de la plume et les a mis ledit mari avec toutes les\nclauses a ce acquises et acceptant. Consentant que se pourra la possession\nrealité naturelle et corporelle s'en saisir par sa propre autorité de dire et faire\nde precaire et non d'autorité, ITEM a esté convenu que ladite future constituée\nalors fiancée demeurante d'accord davantage sur tout d'ensemble les biens\nde son mari et son futur mari tant d'eux que de tiers par ledit\nrespect de ladite fiancee a qui de droit, Car venant un desced\nau pnt mariage par le desced du futur mari et sans ses enfans de l'un de\nl'autre de icelle luy a donné ses habits et l'alimenter de ses dits biens\ndurant sa viduité et l'augment de dot la somme de cinquante\nlivres payables sans de donner de plainte et sans interest pour ce qu'aussy\nladite fiancée a donné dessus dits ses habits la somme de vingt cinq livres"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/contrat_mazoyer_3.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "passant comme dessus et sur plus de l'ordonnance et en la\npresence des dits témoins les d. parties ont fait et constitué leurs advocats\npour ce Generaux au Baillage de Vivarez Siege de Villeneuve de Berg\nMessires Mrs claude Artaud et Me Jean louis postulans en icelle\nabsans comme pnts par led. acte de leur constituer requerir et\nconsentir au deschargement et autorisation du sieur de Damas representant\nles parties sur lesquelles envers le Roy dont et la ve d. sa part qu'elle\npossede nestre aucunement aucung debet de [illisible] [illisible] levant et [illisible]\nde ce que ladite Vollaire pourroit desus au d. estre de ladite promesse\nd'en avoir acquit et sans que par ledit acte dont sera fait acte\nau gre du procureur saufs les Indemnités obligeans leurs biens et revenus\na ce requerir de ne offenser ainsi les d. parties et jure comme luy\nsemblé leur promesse et jure tenir gardé l'effect sous l'obligation\nhypotheque de leur dits biens et d'un quant son droict et droits [illisible]\net procurer de la veuve et l'affirme d'elle avoir esté fait et\nreitéré au montpezat dans une maison pnte au sieur [illisible]\nOllier et de Me Jean louis Ollier notre notaire royal resident au d. montpezat\nsoubsigné, ont les d. parties [illisible] procuré l'un de ceux de la [illisible] elle\nsaura escrire et tant de mande par ledit [illisible] ils ont\nsigné de nous notre royal requis [illisible] et son quat\nOllier  Vachier Ollier\n        Testimoint [?] Ollier nore"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Synthèse par ChatGPT"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Le 17 février 1675, un contrat de mariage est passé devant un notaire royal.<br/>Les futurs époux sont : Pierre Mazoyer, fils de Pierre Mazoyer et de Louise Massabeu, originaire du lieu de Pary de Guiser.<br/>Marie Giron, fille légitime de feu François Parore, habitant au lieu de Prat, paroisse de Saint-Christoly, dans le diocèse de Viviers.<br/><br/>Les deux futurs époux, avec l'accord de leurs proches, s'engagent solennellement à se marier à l'Église dès que l'un des deux le demandera.<br/>Dot apportée par la mariée<br/><br/>Pour établir sa fille, sa famille lui constitue une dot composée de : <br/>- une robe de serge grise avec un corsage rouge en laine, estimée à 12 livres ;<br/>- 4 cartes de seigle, évaluées à 18 livres ;<br/>- une somme totale de 500 livres, dont 100 livres proviennent des biens de sa mère.<br/><br/>Le père du marié verse immédiatement :<br/>- la robe ;<br/>- une partie du seigle ;<br/>- 200 livres, dont 33 livres sont payées comptant devant le notaire. Le reste de la dot, soit 303 livres, devra être payé par versements annuels de 53 livres, chaque 1er juin, jusqu'au règlement complet.<br/>En contrepartie, Marie Giron renonce à tous ses autres droits dans les successions de ses père et mère, présents ou futurs, à l'exception de certains droits traditionnels liés au veuvage (vêtements de deuil, augmentation de dot, etc.).<br/><br/>Donation des parents du marié :<br/>Raymond Mazoyer et Denise Issartal, mari et femme, demeurant à Fraisse, approuvent le mariage et font une donation irrévocable aux futurs époux.<br/>Ils leur donnent le quart de leur maison et de leurs biens héréditaires, libres de dettes et d'hypothèques (sous réserve des droits éventuels des autres héritiers).<br/><br/>Clauses en cas de décès :<br/>Il est convenu que si le mari meurt avant son épouse sans qu'ils aient eu d'enfants :<br/>la veuve conservera ses vêtements ;<br/>elle sera entretenue sur les biens de son mari pendant toute sa viduité ;<br/>elle recevra une augmentation de dot de 50 livres, sans contestation ni intérêts.<br/><br/>De son côté, la future épouse apporte également à la communauté ses vêtements, évalués à 25 livres.<br/><br/>Dispositions finales<br/><br/>Les parties désignent des procureurs chargés d'accomplir les formalités nécessaires devant la justice du bailliage du Vivarais, notamment pour obtenir les autorisations exigées.<br/>Le contrat est passé à Montpezat, dans la maison du notaire Jean-Louis Ollier, en présence des témoins. Les personnes qui savent écrire signent l'acte, les autres déclarent ne pas savoir signer.<br/><br/>En résumé, il s'agit d'un contrat de mariage très classique du XVII? siècle : il fixe les promesses de mariage, détaille la dot de la mariée, organise son paiement, prévoit une importante donation des parents du marié, règle les droits successoraux de chacun et protège la future épouse en cas de veuvage."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/robe.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "paternels et maternels scavoir une robbe serge raze grise avec un corsage\npetit rouge de laine apprecie a douze livres quatre Cartes seigle a mesure de"
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/36858c6f-1004-4606-8837-1931ada6d876.png"
+                            }
+                        ]
+                    ]
                 },
                 {
                     "contenu": [
