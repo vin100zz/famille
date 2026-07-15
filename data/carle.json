@@ -9113,7 +9113,11 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 1792
+            "sosa": 1792,
+            "sosas": [
+                1792,
+                1820
+            ]
         },
         "I740": {
             "nom": "OLLIVE",
@@ -9130,7 +9134,11 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 1793
+            "sosa": 1793,
+            "sosas": [
+                1793,
+                1821
+            ]
         },
         "I741": {
             "nom": "CASTELIN",
@@ -34326,7 +34334,11 @@
             "deces": {
                 "date": "BET 1593 AND 1628"
             },
-            "sosa": 7492
+            "sosa": 7492,
+            "sosas": [
+                7492,
+                7608
+            ]
         },
         "I3549": {
             "nom": "MICHEL",
@@ -34343,7 +34355,11 @@
             "deces": {
                 "date": "AFT 1628"
             },
-            "sosa": 7493
+            "sosa": 7493,
+            "sosas": [
+                7493,
+                7609
+            ]
         },
         "I3550": {
             "nom": "PELLON",
@@ -35717,7 +35733,13 @@
             "deces": {
                 "date": "AFT 1561"
             },
-            "sosa": 14968
+            "sosa": 14968,
+            "sosas": [
+                14968,
+                14978,
+                28818,
+                30418
+            ]
         },
         "I3830": {
             "nom": "DELEUIL",
@@ -35734,7 +35756,13 @@
             "deces": {
                 "date": "AFT 1561"
             },
-            "sosa": 14969
+            "sosa": 14969,
+            "sosas": [
+                14969,
+                14979,
+                28819,
+                30419
+            ]
         },
         "I3831": {
             "nom": "OLLIVE",
@@ -35746,7 +35774,11 @@
             "professions": [
                 "Ménager"
             ],
-            "sosa": 14970
+            "sosa": 14970,
+            "sosas": [
+                14970,
+                14972
+            ]
         },
         "I3832": {
             "nom": "GUSOLE",
@@ -35755,7 +35787,11 @@
             "naissance": {
                 "date": "BEF 1551"
             },
-            "sosa": 14971
+            "sosa": 14971,
+            "sosas": [
+                14971,
+                14973
+            ]
         },
         "I3849": {
             "nom": "MOUTET",
@@ -38391,7 +38427,11 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 3584
+            "sosa": 3584,
+            "sosas": [
+                3584,
+                3640
+            ]
         },
         "I4294": {
             "nom": "ARNAUD",
@@ -38665,7 +38705,11 @@
             "professions": [
                 "Ménager"
             ],
-            "sosa": 14408
+            "sosa": 14408,
+            "sosas": [
+                14408,
+                15208
+            ]
         },
         "I4326": {
             "nom": "SAMAT",
@@ -38682,7 +38726,11 @@
             "deces": {
                 "date": "AFT 1599"
             },
-            "sosa": 14409
+            "sosa": 14409,
+            "sosas": [
+                14409,
+                15209
+            ]
         },
         "I4327": {
             "nom": "DELESTRADE",
@@ -38699,7 +38747,11 @@
             "deces": {
                 "date": "AFT 1561"
             },
-            "sosa": 28816
+            "sosa": 28816,
+            "sosas": [
+                28816,
+                30416
+            ]
         },
         "I4328": {
             "nom": "PAUL",
@@ -38716,7 +38768,11 @@
             "deces": {
                 "date": "AFT 1561"
             },
-            "sosa": 28817
+            "sosa": 28817,
+            "sosas": [
+                28817,
+                30417
+            ]
         },
         "I4329": {
             "nom": "DELESTRADE",
@@ -38732,7 +38788,11 @@
             "deces": {
                 "date": "BEF 1563"
             },
-            "sosa": 57632
+            "sosa": 57632,
+            "sosas": [
+                57632,
+                60832
+            ]
         },
         "I4330": {
             "nom": "AURENGUE",
@@ -38748,7 +38808,11 @@
             "deces": {
                 "date": "BEF 1563"
             },
-            "sosa": 57633
+            "sosa": 57633,
+            "sosas": [
+                57633,
+                60833
+            ]
         },
         "I4331": {
             "nom": "AURENGUE",
@@ -38764,7 +38828,11 @@
             "deces": {
                 "date": "BEF 1528"
             },
-            "sosa": 115266
+            "sosa": 115266,
+            "sosas": [
+                115266,
+                121666
+            ]
         },
         "I4332": {
             "nom": "AMPHOUX",
@@ -39700,7 +39768,12 @@
             "deces": {
                 "date": "AFT 1575"
             },
-            "sosa": 14984
+            "sosa": 14984,
+            "sosas": [
+                14984,
+                15216,
+                58354
+            ]
         },
         "I4412": {
             "nom": "BLANC",
@@ -39717,7 +39790,12 @@
             "deces": {
                 "date": "AFT 1575"
             },
-            "sosa": 14985
+            "sosa": 14985,
+            "sosas": [
+                14985,
+                15217,
+                58355
+            ]
         },
         "I4413": {
             "nom": "CAMOIN",
@@ -39734,7 +39812,12 @@
             "deces": {
                 "date": "AFT 1521"
             },
-            "sosa": 29968
+            "sosa": 29968,
+            "sosas": [
+                29968,
+                30432,
+                116708
+            ]
         },
         "I4414": {
             "nom": "TAUREL",
@@ -39748,7 +39831,12 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 29969
+            "sosa": 29969,
+            "sosas": [
+                29969,
+                30433,
+                116709
+            ]
         },
         "I4416": {
             "nom": "MICHEL",
@@ -39801,7 +39889,16 @@
             "deces": {
                 "date": "BEF 1503"
             },
-            "sosa": 29189
+            "sosa": 29189,
+            "sosas": [
+                29189,
+                29971,
+                30435,
+                58337,
+                115465,
+                116705,
+                116711
+            ]
         },
         "I4421": {
             "nom": "TAUREL",
@@ -39810,7 +39907,16 @@
             "naissance": {
                 "date": "BEF 1460"
             },
-            "sosa": 58378
+            "sosa": 58378,
+            "sosas": [
+                58378,
+                59942,
+                60870,
+                116674,
+                230930,
+                233410,
+                233422
+            ]
         },
         "I4422": {
             "nom": "MICHEL",
@@ -39822,7 +39928,11 @@
             "deces": {
                 "date": "ABT 1475"
             },
-            "sosa": 57888
+            "sosa": 57888,
+            "sosas": [
+                57888,
+                233408
+            ]
         },
         "I4423": {
             "nom": "HUGON",
@@ -39831,7 +39941,11 @@
             "naissance": {
                 "date": "BEF 1424"
             },
-            "sosa": 57889
+            "sosa": 57889,
+            "sosas": [
+                57889,
+                233409
+            ]
         },
         "I4424": {
             "nom": "MICHEL",
@@ -39840,13 +39954,21 @@
             "naissance": {
                 "date": "ABT 1380"
             },
-            "sosa": 115776
+            "sosa": 115776,
+            "sosas": [
+                115776,
+                466816
+            ]
         },
         "I4425": {
             "nom": "RICHELME",
             "prenom": "Marthone",
             "sexe": "F",
-            "sosa": 115777
+            "sosa": 115777,
+            "sosas": [
+                115777,
+                466817
+            ]
         },
         "I4426": {
             "nom": "MICHEL",
@@ -40506,7 +40628,11 @@
             "commentaires": [
                 "Source : généalogie Lan de François Barby"
             ],
-            "sosa": 14986
+            "sosa": 14986,
+            "sosas": [
+                14986,
+                15218
+            ]
         },
         "I4489": {
             "nom": "CAMOIN",
@@ -43512,13 +43638,31 @@
             "deces": {
                 "date": "BEF 1475"
             },
-            "sosa": 116756
+            "sosa": 116756,
+            "sosas": [
+                116756,
+                119884,
+                121740,
+                233348,
+                461860,
+                466820,
+                466844
+            ]
         },
         "I4772": {
             "nom": "...",
             "prenom": "Alayone",
             "sexe": "F",
-            "sosa": 116757
+            "sosa": 116757,
+            "sosas": [
+                116757,
+                119885,
+                121741,
+                233349,
+                461861,
+                466821,
+                466845
+            ]
         },
         "I4773": {
             "nom": "TAUREL",
@@ -53594,7 +53738,11 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 7168
+            "sosa": 7168,
+            "sosas": [
+                7168,
+                7280
+            ]
         },
         "I6180": {
             "nom": "HORTOLAN",
@@ -53611,7 +53759,11 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 7169
+            "sosa": 7169,
+            "sosas": [
+                7169,
+                7281
+            ]
         },
         "I6181": {
             "nom": "CASTELIN",
@@ -53628,7 +53780,11 @@
             "deces": {
                 "date": "BEF 1605"
             },
-            "sosa": 14336
+            "sosa": 14336,
+            "sosas": [
+                14336,
+                14560
+            ]
         },
         "I6182": {
             "nom": "BLANCARD",
@@ -53640,7 +53796,11 @@
             "deces": {
                 "date": "BEF 1605"
             },
-            "sosa": 14337
+            "sosa": 14337,
+            "sosas": [
+                14337,
+                14561
+            ]
         },
         "I6183": {
             "nom": "...",
@@ -53649,7 +53809,11 @@
             "naissance": {
                 "date": "BEF 1580"
             },
-            "sosa": 3585
+            "sosa": 3585,
+            "sosas": [
+                3585,
+                3641
+            ]
         },
         "I6184": {
             "nom": "DURBEC",
@@ -53892,7 +54056,11 @@
             "deces": {
                 "date": "AFT 1562"
             },
-            "sosa": 14594
+            "sosa": 14594,
+            "sosas": [
+                14594,
+                29168
+            ]
         },
         "I6225": {
             "nom": "BLANC",
@@ -53909,7 +54077,15 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 29188
+            "sosa": 29188,
+            "sosas": [
+                29188,
+                29970,
+                30434,
+                58336,
+                115464,
+                116710
+            ]
         },
         "I6226": {
             "nom": "BLANC",
@@ -53929,7 +54105,16 @@
                     "brut": ", , , , , (Source : Morin)"
                 }
             },
-            "sosa": 58376
+            "sosa": 58376,
+            "sosas": [
+                58376,
+                59904,
+                59940,
+                60868,
+                116672,
+                230928,
+                233420
+            ]
         },
         "I6227": {
             "nom": "RICARD",
@@ -53943,7 +54128,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 58377
+            "sosa": 58377,
+            "sosas": [
+                58377,
+                59905,
+                59941,
+                60869,
+                116673,
+                230929,
+                233421
+            ]
         },
         "I6228": {
             "nom": "JAYNE",
@@ -53957,13 +54151,31 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 58379
+            "sosa": 58379,
+            "sosas": [
+                58379,
+                59943,
+                60871,
+                116675,
+                230931,
+                233411,
+                233423
+            ]
         },
         "I6229": {
             "nom": "JAYNE",
             "prenom": "Antoine",
             "sexe": "M",
-            "sosa": 116758
+            "sosa": 116758,
+            "sosas": [
+                116758,
+                119886,
+                121742,
+                233350,
+                461862,
+                466822,
+                466846
+            ]
         },
         "I6230": {
             "nom": "RAMPALIN",
@@ -53976,19 +54188,46 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 116759
+            "sosa": 116759,
+            "sosas": [
+                116759,
+                119887,
+                121743,
+                233351,
+                461863,
+                466823,
+                466847
+            ]
         },
         "I6231": {
             "nom": "JAYNE",
             "prenom": "Pierre",
             "sexe": "M",
-            "sosa": 233516
+            "sosa": 233516,
+            "sosas": [
+                233516,
+                239772,
+                243484,
+                466700,
+                923724,
+                933644,
+                933692
+            ]
         },
         "I6232": {
             "nom": "TAUREL",
             "prenom": "...",
             "sexe": "F",
-            "sosa": 233517
+            "sosa": 233517,
+            "sosas": [
+                233517,
+                239773,
+                243485,
+                466701,
+                923725,
+                933645,
+                933693
+            ]
         },
         "I6233": {
             "nom": "JAYNE",
@@ -53997,7 +54236,16 @@
             "commentaires": [
                 "Source : Bertie Paredes (02/05/2001)."
             ],
-            "sosa": 467032
+            "sosa": 467032,
+            "sosas": [
+                467032,
+                479544,
+                486968,
+                933400,
+                1847448,
+                1867288,
+                1867384
+            ]
         },
         "I6234": {
             "nom": "BLANC",
@@ -55182,7 +55430,16 @@
             "deces": {
                 "date": "BEF 1440"
             },
-            "sosa": 116752
+            "sosa": 116752,
+            "sosas": [
+                116752,
+                119808,
+                119880,
+                121736,
+                233344,
+                461856,
+                466840
+            ]
         },
         "I6429": {
             "nom": "DESCALIS",
@@ -55196,7 +55453,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 116753
+            "sosa": 116753,
+            "sosas": [
+                116753,
+                119809,
+                119881,
+                121737,
+                233345,
+                461857,
+                466841
+            ]
         },
         "I6430": {
             "nom": "BLANC",
@@ -55210,7 +55476,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 233504
+            "sosa": 233504,
+            "sosas": [
+                233504,
+                239616,
+                239760,
+                243472,
+                466688,
+                923712,
+                933680
+            ]
         },
         "I6431": {
             "nom": "ROSTAGNI",
@@ -55224,7 +55499,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 233505
+            "sosa": 233505,
+            "sosas": [
+                233505,
+                239617,
+                239761,
+                243473,
+                466689,
+                923713,
+                933681
+            ]
         },
         "I6432": {
             "nom": "BLANC",
@@ -55237,7 +55521,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 467008
+            "sosa": 467008,
+            "sosas": [
+                467008,
+                479232,
+                479520,
+                486944,
+                933376,
+                1847424,
+                1867360
+            ]
         },
         "I6433": {
             "nom": "GAILLARD",
@@ -55249,7 +55542,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 467009
+            "sosa": 467009,
+            "sosas": [
+                467009,
+                479233,
+                479521,
+                486945,
+                933377,
+                1847425,
+                1867361
+            ]
         },
         "I6434": {
             "nom": "BLANC",
@@ -55262,7 +55564,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 934016
+            "sosa": 934016,
+            "sosas": [
+                934016,
+                958464,
+                959040,
+                973888,
+                1866752,
+                3694848,
+                3734720
+            ]
         },
         "I6435": {
             "nom": "PAUL",
@@ -55275,7 +55586,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 934017
+            "sosa": 934017,
+            "sosas": [
+                934017,
+                958465,
+                959041,
+                973889,
+                1866753,
+                3694849,
+                3734721
+            ]
         },
         "I6436": {
             "nom": "BLANC",
@@ -55288,7 +55608,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 1868032
+            "sosa": 1868032,
+            "sosas": [
+                1868032,
+                1916928,
+                1918080,
+                1947776,
+                3733504,
+                7389696,
+                7469440
+            ]
         },
         "I6437": {
             "nom": "ALLAUDIO",
@@ -55301,7 +55630,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 1868033
+            "sosa": 1868033,
+            "sosas": [
+                1868033,
+                1916929,
+                1918081,
+                1947777,
+                3733505,
+                7389697,
+                7469441
+            ]
         },
         "I6438": {
             "nom": "BLANC",
@@ -55310,7 +55648,16 @@
             "commentaires": [
                 "Source : Pierre Ricard et Bertie Paredes, nos cousins...\n\tLe plus \"gradé\" de nos ancêtres porte le numéro \"Sosa\" 3 736 064 et vivait au XIIe siècle, en plein Moyen-Age ! On est étonné (et un peu sceptique) de trouver de tels renseignements remontant aussi loin dans le temps. Certes, il est nécessaire de faire preuve de prudence et d'utiliser fréquemment le conditionnel lorsqu'on décrit la vertigineuse succession de nos anciens. Néanmoins, il faut souligner que nous avons au moins deux sources sérieuses, de vrais \"rats d'archives\", capables de déchiffer les actes notariés (contrats de mariage, promesse ou reconnaissance de dot, testaments,...), seule, mais combien riche source, pour celui qui sait les lire, de cette époque lointaine... Notons aussi que la plupart du temps, les actes sont accompagnés de références précises allant jusqu'au numéro du folio du registre ! Et précisons que la cousine Bertie photographie systématiquement les actes cités. Il faudra un jour lui demander de nous passer quelques clichés... Signalons par ailleurs que ces travaux s'appuient sur des fichiers et études anciennes et contemporaines concernant de très vieilles familles marseillaises (Bertas en a étudié trois cents) et allaudiennes (\"De molin de Blanqui d'Alo\" par Jacques Blanc (!) in Allauch historique n°1). Et rendons enfin hommage au colossal travail effectué par François Barby qui, en quelques années, aux Archives départementales, a lu et répertorié plusieurs dizaines de milliers d'actes de notaires de Marseille, Allauch, Aubagne, Auriol, etc. Et maintenant, fort de ces précisions, vous pouvez dérouler la fabuleuse histoire de nos ancêtres Blanc...       (05/07/2001)"
             ],
-            "sosa": 3736064
+            "sosa": 3736064,
+            "sosas": [
+                3736064,
+                3833856,
+                3836160,
+                3895552,
+                7467008,
+                14779392,
+                14938880
+            ]
         },
         "I6439": {
             "nom": "COLLONGUE",
@@ -55319,7 +55666,11 @@
             "naissance": {
                 "date": "BEF 1515"
             },
-            "sosa": 14595
+            "sosa": 14595,
+            "sosas": [
+                14595,
+                29169
+            ]
         },
         "I6440": {
             "nom": "BLANC",
@@ -55395,12 +55746,30 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 467010
+            "sosa": 467010,
+            "sosas": [
+                467010,
+                479234,
+                479522,
+                486946,
+                933378,
+                1847426,
+                1867362
+            ]
         },
         "I6450": {
             "prenom": "Gassende",
             "sexe": "F",
-            "sosa": 467011
+            "sosa": 467011,
+            "sosas": [
+                467011,
+                479235,
+                479523,
+                486947,
+                933379,
+                1847427,
+                1867363
+            ]
         },
         "I6451": {
             "nom": "RICARD",
@@ -55413,7 +55782,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 116754
+            "sosa": 116754,
+            "sosas": [
+                116754,
+                119810,
+                119882,
+                121738,
+                233346,
+                461858,
+                466842
+            ]
         },
         "I6452": {
             "nom": "GERMONT",
@@ -55427,18 +55805,45 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 116755
+            "sosa": 116755,
+            "sosas": [
+                116755,
+                119811,
+                119883,
+                121739,
+                233347,
+                461859,
+                466843
+            ]
         },
         "I6453": {
             "nom": "GERMONT",
             "prenom": "Jacques",
             "sexe": "M",
-            "sosa": 233510
+            "sosa": 233510,
+            "sosas": [
+                233510,
+                239622,
+                239766,
+                243478,
+                466694,
+                923718,
+                933686
+            ]
         },
         "I6454": {
             "prenom": "Billonne",
             "sexe": "F",
-            "sosa": 233511
+            "sosa": 233511,
+            "sosas": [
+                233511,
+                239623,
+                239767,
+                243479,
+                466695,
+                923719,
+                933687
+            ]
         },
         "I6455": {
             "nom": "RICARD",
@@ -55451,7 +55856,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 233508
+            "sosa": 233508,
+            "sosas": [
+                233508,
+                239620,
+                239764,
+                243476,
+                466692,
+                923716,
+                933684
+            ]
         },
         "I6456": {
             "nom": "RICHELME",
@@ -55464,7 +55878,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 233509
+            "sosa": 233509,
+            "sosas": [
+                233509,
+                239621,
+                239765,
+                243477,
+                466693,
+                923717,
+                933685
+            ]
         },
         "I6457": {
             "nom": "RICARD",
@@ -55477,7 +55900,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 467016
+            "sosa": 467016,
+            "sosas": [
+                467016,
+                479240,
+                479528,
+                486952,
+                933384,
+                1847432,
+                1867368
+            ]
         },
         "I6458": {
             "nom": "RICARD",
@@ -55490,7 +55922,16 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 467017
+            "sosa": 467017,
+            "sosas": [
+                467017,
+                479241,
+                479529,
+                486953,
+                933385,
+                1847433,
+                1867369
+            ]
         },
         "I6459": {
             "nom": "RICARD",
@@ -55506,7 +55947,16 @@
             "commentaires": [
                 "Source 1 : Pierre Ricard.\nSource 2 : \"Ascendance Jean Ballard\", dont nous sommes ainsi \"cousins\" (PG n°121 - 2001).      (02/11/2001)"
             ],
-            "sosa": 934032
+            "sosa": 934032,
+            "sosas": [
+                934032,
+                958480,
+                959056,
+                973904,
+                1866768,
+                3694864,
+                3734736
+            ]
         },
         "I6460": {
             "nom": "RICARD",
@@ -55519,13 +55969,45 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 1868064
+            "sosa": 1868064,
+            "sosas": [
+                1868064,
+                1868068,
+                1916960,
+                1916964,
+                1918112,
+                1918116,
+                1947808,
+                1947812,
+                3733536,
+                3733540,
+                7389728,
+                7389732,
+                7469472,
+                7469476
+            ]
         },
         "I6461": {
             "nom": "GUIGUES",
             "prenom": "Marie",
             "sexe": "F",
-            "sosa": 1868065
+            "sosa": 1868065,
+            "sosas": [
+                1868065,
+                1868069,
+                1916961,
+                1916965,
+                1918113,
+                1918117,
+                1947809,
+                1947813,
+                3733537,
+                3733541,
+                7389729,
+                7389733,
+                7469473,
+                7469477
+            ]
         },
         "I6462": {
             "nom": "RICARD",
@@ -55541,13 +56023,38 @@
             "commentaires": [
                 "Source 1 : Pierre Ricard.\nSource 2 : \"Ascendance Jean Ballard\", dont nous sommes ainsi \"cousins\" (PG n°121 - 2001).      (02/11/2001)"
             ],
-            "sosa": 3736128
+            "sosa": 3736128,
+            "sosas": [
+                3736128,
+                3736136,
+                3833920,
+                3833928,
+                3836224,
+                3836232,
+                3895616,
+                3895624,
+                7467072,
+                7467080,
+                14779456,
+                14779464,
+                14938944,
+                14938952
+            ]
         },
         "I6463": {
             "nom": "RICHELME",
             "prenom": "Hugon",
             "sexe": "M",
-            "sosa": 467018
+            "sosa": 467018,
+            "sosas": [
+                467018,
+                479242,
+                479530,
+                486954,
+                933386,
+                1847434,
+                1867370
+            ]
         },
         "I6464": {
             "nom": "GAILLARD",
@@ -55559,7 +56066,16 @@
                     "brut": ", , , , , T 23/04/1430"
                 }
             },
-            "sosa": 467019
+            "sosa": 467019,
+            "sosas": [
+                467019,
+                479243,
+                479531,
+                486955,
+                933387,
+                1847435,
+                1867371
+            ]
         },
         "I6465": {
             "nom": "GAILLARD",
@@ -55568,7 +56084,16 @@
             "commentaires": [
                 "Source 1 : Pierre Ricard.\nSource 2 : \"Ascendance Jean Ballard\", dont nous sommes ainsi \"cousins\" (PG n°121 - 2001).   (02/11/2001)"
             ],
-            "sosa": 934038
+            "sosa": 934038,
+            "sosas": [
+                934038,
+                958486,
+                959062,
+                973910,
+                1866774,
+                3694870,
+                3734742
+            ]
         },
         "I6466": {
             "nom": "CAMOIN",
@@ -55580,7 +56105,12 @@
             "deces": {
                 "date": "AFT 1520"
             },
-            "sosa": 59936
+            "sosa": 59936,
+            "sosas": [
+                59936,
+                60864,
+                233416
+            ]
         },
         "I6467": {
             "nom": "CABRIER",
@@ -55589,7 +56119,12 @@
             "naissance": {
                 "date": "BEF 1454"
             },
-            "sosa": 59937
+            "sosa": 59937,
+            "sosas": [
+                59937,
+                60865,
+                233417
+            ]
         },
         "I6468": {
             "nom": "CAMOIN",
@@ -55605,7 +56140,12 @@
             "deces": {
                 "date": "BEF 1471"
             },
-            "sosa": 119872
+            "sosa": 119872,
+            "sosas": [
+                119872,
+                121728,
+                466832
+            ]
         },
         "I6469": {
             "nom": "NEGREL",
@@ -55618,18 +56158,33 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 119873
+            "sosa": 119873,
+            "sosas": [
+                119873,
+                121729,
+                466833
+            ]
         },
         "I6470": {
             "nom": "CABRIER",
             "prenom": "Bertrand",
             "sexe": "M",
-            "sosa": 119874
+            "sosa": 119874,
+            "sosas": [
+                119874,
+                121730,
+                466834
+            ]
         },
         "I6471": {
             "prenom": "Guillelme",
             "sexe": "F",
-            "sosa": 119875
+            "sosa": 119875,
+            "sosas": [
+                119875,
+                121731,
+                466835
+            ]
         },
         "I6472": {
             "nom": "TAUREL",
@@ -55643,7 +56198,12 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 59938
+            "sosa": 59938,
+            "sosas": [
+                59938,
+                60866,
+                233418
+            ]
         },
         "I6473": {
             "nom": "SIMON",
@@ -55657,13 +56217,23 @@
                     "dept_num": "83"
                 }
             },
-            "sosa": 59939
+            "sosa": 59939,
+            "sosas": [
+                59939,
+                60867,
+                233419
+            ]
         },
         "I6474": {
             "nom": "TAUREL",
             "prenom": "Laurent",
             "sexe": "M",
-            "sosa": 119876
+            "sosa": 119876,
+            "sosas": [
+                119876,
+                121732,
+                466836
+            ]
         },
         "I6475": {
             "nom": "MONIER",
@@ -55676,7 +56246,12 @@
                     "dept_num": "83"
                 }
             },
-            "sosa": 119877
+            "sosa": 119877,
+            "sosas": [
+                119877,
+                121733,
+                466837
+            ]
         },
         "I6476": {
             "nom": "MONIER",
@@ -55685,7 +56260,12 @@
             "commentaires": [
                 "Source : Pierre Ricard (d'après le \"fichier Lan\" de Barby).  (05/07/2001)"
             ],
-            "sosa": 239754
+            "sosa": 239754,
+            "sosas": [
+                239754,
+                243466,
+                933674
+            ]
         },
         "I6477": {
             "nom": "FOUQUE",
@@ -56441,13 +57021,31 @@
                     "dept_num": "13"
                 }
             },
-            "sosa": 233518
+            "sosa": 233518,
+            "sosas": [
+                233518,
+                239774,
+                243486,
+                466702,
+                923726,
+                933646,
+                933694
+            ]
         },
         "I6595": {
             "nom": "VINCENS",
             "prenom": "Sibille \"Olivier\"",
             "sexe": "F",
-            "sosa": 233519
+            "sosa": 233519,
+            "sosas": [
+                233519,
+                239775,
+                243487,
+                466703,
+                923727,
+                933647,
+                933695
+            ]
         },
         "I6596": {
             "nom": "ROMAN",
@@ -56539,7 +57137,11 @@
             "deces": {
                 "date": "BEF 1483"
             },
-            "sosa": 115267
+            "sosa": 115267,
+            "sosas": [
+                115267,
+                121667
+            ]
         },
         "I6622": {
             "nom": "AURENGUE",
@@ -56557,7 +57159,11 @@
             "professions": [
                 "Travailleur"
             ],
-            "sosa": 230532
+            "sosa": 230532,
+            "sosas": [
+                230532,
+                243332
+            ]
         },
         "I6623": {
             "nom": "BOISSET",
@@ -56566,7 +57172,11 @@
             "deces": {
                 "date": "BEF 1505"
             },
-            "sosa": 230533
+            "sosa": 230533,
+            "sosas": [
+                230533,
+                243333
+            ]
         },
         "I6624": {
             "nom": "AURENGUE",
@@ -56600,19 +57210,31 @@
             "commentaires": [
                 "Source et renseignements : François Barby (fichier Lan)    (24/08/2001)"
             ],
-            "sosa": 461064
+            "sosa": 461064,
+            "sosas": [
+                461064,
+                486664
+            ]
         },
         "I6627": {
             "nom": "BOISSET",
             "prenom": "Nicolas",
             "sexe": "M",
-            "sosa": 461066
+            "sosa": 461066,
+            "sosas": [
+                461066,
+                486666
+            ]
         },
         "I6629": {
             "nom": "SIBILLE",
             "prenom": "André",
             "sexe": "M",
-            "sosa": 230534
+            "sosa": 230534,
+            "sosas": [
+                230534,
+                243334
+            ]
         },
         "I6631": {
             "nom": "KHIVRIN",
@@ -58751,7 +59373,16 @@
             "commentaires": [
                 "Source 1 : Pierre Ricard.\nSource 2 : \"Ascendance Jean Ballard\", dont nous sommes ainsi \"cousins\" (PG n°121 - 2001).      (02/11/2001)"
             ],
-            "sosa": 934034
+            "sosa": 934034,
+            "sosas": [
+                934034,
+                958482,
+                959058,
+                973906,
+                1866770,
+                3694866,
+                3734738
+            ]
         },
         "I6990": {
             "nom": "CAMOIN",
