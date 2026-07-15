@@ -114655,7 +114655,13 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "Aide transcription GeneBase :<br/>le 3.me de feb. 1664. a esté baptizee<br/>Marie Giron fille naturelle a<br/>Jaques et Anthoinette   [Perryer]<br/>dioc[èse] de Mende habitans a<br/>Pesas son oncle son parrin Benoit<br/>Giron d'autre sa marraine<br/>Agnes  [Perryer] de la Pigine?<br/>presans au sus d me Benoit<br/>et Pierre Richard dud Pigine<br/>et par moy prestre soubsigne<br/>Baratier Ptre"
+                                "fichier": "Aide transcription GeneBase :<br/>le 3.me de feb. 1664. a esté baptizee<br/>Marie Giron fille naturelle a<br/>Jaques et Anthoinette   [Perryer]<br/>dioc[èse] de Mende habitans a<br/>Pesas son oncle son parrin Benoit<br/>Giron d'autre sa marraine<br/>Agnes  [Perryer] de la Laligier?<br/>presans au sus d me Benoit<br/>et Pierre Richard dud  Laligier?<br/>et par moy prestre soubsigne<br/>Baratier Ptre"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": ""
                             }
                         ]
                     ],
