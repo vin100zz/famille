@@ -15206,17 +15206,17 @@
             "naissance": {
                 "date": "06 JAN 1696",
                 "lieu": {
-                    "brut": "Seyne, 04, Alpes de Haute Provence, , ,",
                     "ville": "Seyne",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Seyne, 04"
                 }
             },
             "deces": {
                 "date": "03 NOV 1752",
                 "lieu": {
-                    "brut": "Seyne, 04, Alpes de Haute Provence, , ,",
                     "ville": "Seyne",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Seyne, 04"
                 }
             },
             "commentaires": [
@@ -15231,17 +15231,17 @@
             "naissance": {
                 "date": "01 NOV 1697",
                 "lieu": {
-                    "brut": "Montclar, 04, Alpes de Haute Provence, , ,",
                     "ville": "Montclar",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Montclar, 04"
                 }
             },
             "deces": {
                 "date": "05 APR 1764",
                 "lieu": {
-                    "brut": "Seyne, 04, Alpes de Haute Provence, , ,",
                     "ville": "Seyne",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Seyne, 04"
                 }
             },
             "sosa": 405
@@ -15368,17 +15368,17 @@
             "naissance": {
                 "date": "29 SEP 1706",
                 "lieu": {
-                    "brut": "Seyne, 04, Alpes de Haute Provence, , ,",
                     "ville": "Seyne",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Seyne, 04"
                 }
             },
             "deces": {
                 "date": "09 AUG 1764",
                 "lieu": {
-                    "brut": "Chardavon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Chardavon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Chardavon, 04"
                 }
             },
             "sosa": 406
@@ -15390,17 +15390,17 @@
             "naissance": {
                 "date": "13 JUN 1710",
                 "lieu": {
-                    "brut": "Chardavon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Chardavon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Chardavon, 04"
                 }
             },
             "deces": {
                 "date": "31 JAN 1787",
                 "lieu": {
-                    "brut": "Chardavon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Chardavon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Chardavon, 04"
                 }
             },
             "sosa": 407
@@ -15460,19 +15460,19 @@
             "naissance": {
                 "date": "BEF 1727",
                 "lieu": {
-                    "brut": "Marseille Aygalades?, 13, Bouches du Rhône, , ,",
-                    "adresse": "Aygalades?",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Aygalades?",
+                    "dept_num": "13",
+                    "brut": "Marseille, Aygalades?, 13"
                 }
             },
             "deces": {
                 "date": "BET 1778 AND 1816",
                 "lieu": {
-                    "brut": "Marseille Aygalades?, 13, Bouches du Rhône, , ,",
-                    "adresse": "Aygalades?",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Aygalades?",
+                    "dept_num": "13",
+                    "brut": "Marseille, Aygalades?, 13"
                 }
             },
             "professions": [
@@ -15490,10 +15490,10 @@
             "deces": {
                 "date": "BET 1778 AND 1816",
                 "lieu": {
-                    "brut": "Marseille Aygalades?, 13, Bouches du Rhône, , ,",
-                    "adresse": "Aygalades?",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Aygalades?",
+                    "dept_num": "13",
+                    "brut": "Marseille, Aygalades?, 13"
                 }
             },
             "sosa": 413
@@ -15565,10 +15565,10 @@
             "deces": {
                 "date": "01 JUL 1771",
                 "lieu": {
-                    "brut": "Marseille Aygalades, 13, Bouches du Rhône, , ,",
-                    "adresse": "Aygalades",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Aygalades",
+                    "dept_num": "13",
+                    "brut": "Marseille, Aygalades, 13"
                 }
             },
             "sosa": 415
@@ -15580,17 +15580,17 @@
             "naissance": {
                 "date": "06 NOV 1693",
                 "lieu": {
-                    "brut": "Banon, 04, Alpes de Haute Provence, , , Réserve",
                     "ville": "Banon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Banon, 04"
                 }
             },
             "deces": {
                 "date": "13 FEB 1729",
                 "lieu": {
-                    "brut": "Banon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Banon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Banon, 04"
                 }
             },
             "sosa": 416
@@ -15605,9 +15605,9 @@
             "deces": {
                 "date": "08 AUG 1762",
                 "lieu": {
-                    "brut": "Banon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Banon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Banon, 04"
                 }
             },
             "sosa": 417
@@ -15643,17 +15643,17 @@
             "naissance": {
                 "date": "04 MAR 1680",
                 "lieu": {
-                    "brut": "Banon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Banon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Banon, 04"
                 }
             },
             "deces": {
                 "date": "12 MAY 1749",
                 "lieu": {
-                    "brut": "Banon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Banon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Banon, 04"
                 }
             },
             "commentaires": [
@@ -15668,17 +15668,17 @@
             "naissance": {
                 "date": "29 NOV 1689",
                 "lieu": {
-                    "brut": "Banon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Banon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Banon, 04"
                 }
             },
             "deces": {
                 "date": "01 OCT 1767",
                 "lieu": {
-                    "brut": "Banon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Banon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Banon, 04"
                 }
             },
             "commentaires": [
@@ -15791,17 +15791,17 @@
             "naissance": {
                 "date": "1695",
                 "lieu": {
-                    "brut": "Belgentier 83, , , , ,",
                     "ville": "Belgentier",
-                    "dept_num": "83"
+                    "dept_num": "83",
+                    "brut": "Belgentier, 83"
                 }
             },
             "deces": {
                 "date": "03 JAN 1748",
                 "lieu": {
-                    "brut": "La Penne 13, , , , ,",
                     "ville": "La Penne",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "La Penne, 13"
                 }
             },
             "sosa": 424
@@ -15813,17 +15813,17 @@
             "naissance": {
                 "date": "ABT 1698",
                 "lieu": {
-                    "brut": "Belgentier, 83, , , ?,",
                     "ville": "Belgentier",
-                    "dept_num": "83"
+                    "dept_num": "83",
+                    "brut": "Belgentier, 83"
                 }
             },
             "deces": {
                 "date": "26 JUN 1758",
                 "lieu": {
-                    "brut": "La Penne 13, , , , ,",
                     "ville": "La Penne",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "La Penne, 13"
                 }
             },
             "sosa": 425
@@ -15835,10 +15835,10 @@
             "naissance": {
                 "date": "BEF 1709",
                 "lieu": {
-                    "brut": "Marseille st Loup 13 ?, , , , ,",
-                    "adresse": "st Loup ?",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "st Loup ?",
+                    "dept_num": "13",
+                    "brut": "Marseille, st Loup ?, 13"
                 }
             },
             "deces": {
@@ -15853,10 +15853,10 @@
             "naissance": {
                 "date": "BEF 1711",
                 "lieu": {
-                    "brut": "Marseille st Loup 13 ?, , , , ,",
-                    "adresse": "st Loup ?",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "st Loup ?",
+                    "dept_num": "13",
+                    "brut": "Marseille, st Loup ?, 13"
                 }
             },
             "deces": {
@@ -15898,10 +15898,10 @@
             "deces": {
                 "date": "02 FEB 1768",
                 "lieu": {
-                    "brut": "Marseille Montredon, 13, Bouches du Rhône, , ,",
-                    "adresse": "Montredon",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Montredon",
+                    "dept_num": "13",
+                    "brut": "Marseille, Montredon, 13"
                 }
             },
             "professions": [
@@ -15919,18 +15919,18 @@
             "deces": {
                 "date": "27 FEB 1765",
                 "lieu": {
-                    "brut": "Marseille Montredon, 13, Bouches du Rhône, , ,",
-                    "adresse": "Montredon",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Montredon",
+                    "dept_num": "13",
+                    "brut": "Marseille, Montredon, 13"
                 }
             },
             "sepulture": {
                 "lieu": {
-                    "brut": "église de Montredon, , , , ,",
-                    "adresse": "Église de Montredon",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Église de Montredon",
+                    "dept_num": "13",
+                    "brut": "Marseille, Église de Montredon, 13"
                 }
             },
             "sosa": 429
@@ -44831,19 +44831,19 @@
             "naissance": {
                 "date": "BET 1689 AND 1706",
                 "lieu": {
-                    "brut": "Marseille Aygalades?, 13, Bouches du Rhône, , ,",
-                    "adresse": "Aygalades?",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Aygalades?",
+                    "dept_num": "13",
+                    "brut": "Marseille, Aygalades?, 13"
                 }
             },
             "deces": {
                 "date": "24 APR 1777",
                 "lieu": {
-                    "brut": "Marseille Major, 13, Bouches du Rhône, , ,",
-                    "adresse": "Major",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Major",
+                    "dept_num": "13",
+                    "brut": "Marseille, Major, 13"
                 }
             },
             "sosa": 408
@@ -44855,10 +44855,10 @@
             "naissance": {
                 "date": "ABT 1702",
                 "lieu": {
-                    "brut": "Marseille Ste-Marthe, 13, , , ?,",
-                    "adresse": "Ste-Marthe",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Ste-Marthe",
+                    "dept_num": "13",
+                    "brut": "Marseille, Ste-Marthe, 13"
                 }
             },
             "deces": {
@@ -44873,17 +44873,17 @@
             "naissance": {
                 "date": "09 AUG 1706",
                 "lieu": {
-                    "brut": "Pertuis, 84, Vaucluse, , ,",
                     "ville": "Pertuis",
-                    "dept_num": "84"
+                    "dept_num": "84",
+                    "brut": "Pertuis, 84"
                 }
             },
             "deces": {
                 "date": "20 APR 1787",
                 "lieu": {
-                    "brut": "Meyrargues, 13, Bouches du Rhône, , ,",
                     "ville": "Meyrargues",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Meyrargues, 13"
                 }
             },
             "professions": [
@@ -44902,17 +44902,17 @@
             "naissance": {
                 "date": "ABT 1714",
                 "lieu": {
-                    "brut": "Le Thor, 84, , , ?,",
                     "ville": "Le Thor",
-                    "dept_num": "84"
+                    "dept_num": "84",
+                    "brut": "Le Thor, 84"
                 }
             },
             "deces": {
                 "date": "18 MAR 1748",
                 "lieu": {
-                    "brut": "Meyreuil, 13, Bouches du Rhône, , ,",
                     "ville": "Meyreuil",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Meyreuil, 13"
                 }
             },
             "sosa": 411
@@ -85833,9 +85833,9 @@
             "mariage": {
                 "date": "13 JAN 1729",
                 "lieu": {
-                    "brut": "Montclar, 04, Alpes de Haute Provence, , ,",
                     "ville": "Montclar",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Montclar, 04"
                 }
             },
             "documents": [
@@ -85860,47 +85860,138 @@
                 },
                 {
                     "titre": {
-                        "label": ""
+                        "label": "6 janvier, Seyne : Baptême de Balthazar SILVE ",
+                        "annee": 1696
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": ""
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/404N1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": ""
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/404N.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "Sommaire :<br/>- [404/405] Balthazar SILVE & Marie ALLEMAND<br/>- [406/407] Joseph BAILLE et Catherine HERMITTE"
+                                "fichier": "...est né et a été baptisé Balthazar SILVE fils d'Etienne et de Catherine VIAL, mariés..."
                             }
                         ]
                     ]
                 },
                 {
                     "titre": {
-                        "label": ""
+                        "annee": 1697,
+                        "label": " 1er novembre : baptême de Marie ALLEMAND"
                     },
                     "contenu": [
                         [
                             {
-                                "type": "TEXTE",
-                                "fichier": "6 janvier 1696, Seyne : Baptême de Balthazar SILVE ...est né et a été baptisé Balthazar SILVE fils d'Etienne et de Catherine VIAL, mariés... 1er novembre 1697 : baptême de Marie ALLEMAND p. 228 1er acte barré : ...premier novembre susdite année Marie ALLEMAND fille de Jean Antoine et de Catherine PITUELLE, légitimement mariés, est née le dix dud. mois et baptisée par moy... 2e acte : Le premier 9bre susdite année .. baptisé Marie ALLEMAND fille de Jean Antoine et de Catherine PIAULLE mariés..."
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/2.jpg"
                             },
                             {
                                 "type": "TEXTE",
-                                "fichier": "13 janvier 1729 : mariage de Balthazar SILVE & Marie ALLEMAND p. 471 ... à Balthazard SILVE fils d'Etienne et de Caterine VIELLE de la paroisse de Seine d'une part et à Marie ALEMAND à feu Jean Antoine de cettte parroisse assistés des leurs qui ont signé présents les soussignés."
-                            },
+                                "fichier": "p. 228",
+                                "align": "center"
+                            }
+                        ],
+                        [
                             {
                                 "type": "TEXTE",
-                                "fichier": "3 novembre 1752, Seyne : décès de Balthazard dit La Gineste SILVE. 5 avril 1764, Seyne : décès de Marie ALLEMAND (AREMAND) p. 438"
+                                "fichier": " p. 228 "
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/405N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "1er acte barré :<br/> ...premier novembre susdite année Marie <br/>ALLEMAND fille de Jean Antoine et de Catherine PIAULLE, légitimement <br/>mariés, est née le dix dud. mois et baptisée par moy... <br/><br/>2e acte :<br/> Le premier 9bre susdite année .. baptisé Marie ALLEMAND fille de Jean <br/>Antoine et de Catherine PIAULLE mariés..."
                             }
                         ]
                     ]
                 },
                 {
                     "titre": {
-                        "label": ""
+                        "label": "13 janvier, Montclar : mariage de Balthazar SILVE & Marie ALLEMAND",
+                        "annee": 1729
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/1.jpg"
+                            },
+                            {
                                 "type": "TEXTE",
-                                "fichier": "9 août 1764, Chardavon : mort de Joseph BAILLE ...est né et a été baptisé Balthazar SILVE fils d'Etienne et de Catherine VIAL, mariés..."
+                                "fichier": " p. 471",
+                                "align": "center"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/404M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Aide GeneBase pour la transcription :<br/>L'an mil sept centt vingt neuf et le treize janvier avons donné la benediction<br/>nuptiale a la messe apres trois publications faites n'ayant paru aucun<br/>empêchement a Balthazard Silve filz d'Estienne et de Caterine Vialle de la parroisse<br/>de Seyne d'une part et a Marie Alemand [?fille?] à feu Jean Antoine de cette parroisse assistés de leurs [?parents?] qui ont signé le pnt les soubsignes C Silve<br/>Joseph Milhe. Signé : Jean du Lauret<br/>Arnaud vicaire"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1752,
+                        "label": "3 novembre, Seyne : décès de Balthazard dit La Gineste SILVE."
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/404D1.jpg"
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/404D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1764,
+                        "label": "5 avril, Seyne : décès de Marie ALLEMAND (AREMAND)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/405D1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/405D.jpg"
                             }
                         ]
                     ]
@@ -85941,13 +86032,120 @@
             "mariage": {
                 "date": "16 FEB 1733",
                 "lieu": {
-                    "brut": "Seyne, 04, Alpes de Haute Provence, , ,",
                     "ville": "Seyne",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Seyne, 04"
                 }
             },
             "commentaires": [
                 "Joseph naît le 29 septembre 1706 à Seyne et Catherine est baptisée près de quatre ans plus tard, le 13 juin 1710, à l'église de \"la Succursale de Chardavon\", un des hameaux environnants. C'est à Seyne qu'ils se marient le 16 février 1733, âgés respectivement de 26 et 22 ans, en présence de André Baille, père de Joseph, et de Joseph Barles, beau-père de Catherine.\n\tNous leur connaissons neuf enfants, cinq filles et quatre garçons, tous baptisés à Chardavon entre 1734 (Louise) et 1756 (Victoire), dont Marie, notre ancêtre n°203, née le 9 août 1742.\n\tJoseph meurt le 9 août 1764 à Chardavon : son acte n'est pas très explicite, mais l'âge (\"57 ans environ\") correspond et nous savons par ailleurs qu'il est \"feu\" lors du mariage de Marie le 10 janvier 1765. Catherine lui survit plus de vingt ans, jusqu'au 31 janvier 1787, et son acte de sépulture nous interpelle... Il est en effet rédigé de manière tout à fait inhabituelle. Le vicaire agit \"en vertu de l'ordonnance rendue par messire le plus ancien remplissant le tribunal à la juridiction royale de Seyne\" et \"à nous signifiée par Conihil (?) huissier royal\" ; et, ainsi, \"avons inhumé au cimetière de la Succursale de Chardavon le cadavre de Catherine Hermitte veuve de Joseph Bayle aux formes ordinaires...\". Que peut signifier une telle procédure? On envisage mal qu'elle fasse suite à une exécution capitale : Catherine est âgée de 77 ans ! Se serait-elle suicidée et l'église aurait-elle besoin d'une ordonnance pour la mettre en terre ? Ou, tout simplement, étant seule et sans plus de famille (Marie est morte en 1772) ni de ressources, le vicaire a-t-il sollicité l'aide des pouvoirs publics pour couvrir les \"frais d'obsèques\" ? La question est posée : bravo pour celui qui y répondra...    (19/09/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1706,
+                        "label": "29 septembre, Seyne : Naissance de Joseph BAILLE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/406N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1710,
+                        "label": "13 juin, Seyne Chardavon : baptême de Catherine HERMITTE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/407N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1733,
+                        "label": "16 février, Seyne : mariage de Joseph BAILLE et Catherine HERMITTE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/406M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1764,
+                        "label": "9 août, Seyne Chardavon : mort de Joseph BAILLE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/406D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/406D1.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1787,
+                        "label": "31 janvier, Seyne Chardavon : mort de Catherine HERMITTE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/1_francois_payan/5_9e_silve/407D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "L'an mil sept cent quatre vingt sept et le trente un janvier<br/>en vertu d'ordonnance le jourd'hui rendue par mr le plus<br/>ancien remplissant le tribunal de la jurisdiction royale<br/>de cette ville de Seyne en absence et empêchement et a la<br/>requette et poursuite de mr le procureur du roy ou de mr<br/>le plus ancien en absence, a nous signifiée par conseil<br/>huissier royal avons inhumé au cimetière de la succursalle<br/>de Chardavon le cadavre de Catherine Hermitte veuve de<br/>Joseph Bayle aux formes ordinaires en présence des<br/>soussignés. J. Pierre Hermitte [?son?] neveu<br/><br/>pascal vic[aire]"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Commentaire de l'acte par ClaudeIA"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "C'est effectivement un acte tout à fait atypique — et son caractère inhabituel a une explication précise : il ne s'agit <b>pas d'un acte de sépulture ordinaire dressé par un curé</b>, mais d'un <b>« permis d'inhumer » délivré par la justice royale</b>, dans le cadre d'un refus de sépulture ecclésiastique.\n<br/><b>Le mécanisme juridique</b>\n<br/>Depuis la déclaration royale du 9 avril 1736 (article XIII), les personnes auxquelles le curé refusait la sépulture catholique — le plus souvent des protestants, mais aussi parfois des « relaps », des excommuniés ou des personnes mortes sans sacrements — pouvaient néanmoins être inhumées « en vertu d'une Ordonnance du Juge de Police des lieux, rendue sur les conclusions d'un Procureur, ou de celui des Hauts-Justiciers ». C'est exactement la formule que vous avez transcrite : ordonnance rendue par un juge (« le plus ancien remplissant le tribunal »), sur requête du procureur du roi, notifiée par un huissier royal. <a href=\"https://journals.openedition.org/chretienssocietes/4110\" target=\"_blank\" rel=\"noopener noreferrer\">OpenEdition</a>\n<br/>Cette procédure était d'ailleurs le canal officiel par lequel étaient délivrés les permis d'inhumer accordés aux protestants, qui devaient demander l'inhumation au curé de la paroisse, essuyer son refus, puis solliciter le permis auprès du juge. On trouve des formulations quasi identiques dans d'autres actes de ce type, par exemple à Saint-Maixent en 1773, où le curé refusant la sépulture, la famille requiert l'autorisation d'inhumer « ou bon lui semblera », soumise ensuite « au procureur du Roy ». <a href=\"https://www.ascfp.fr/sites/default/files/ascfp/documents/juridique/evolution_legislation.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Ascfp</a><a href=\"http://patrimoineetdecouvertedesdeuxsevres.blogspot.com/2013/01/cimetieres-protestants-etou-de-famille.html\" target=\"_blank\" rel=\"noopener noreferrer\">Blogger</a>\n<br/><b>Pourquoi janvier 1787, avant l'édit de tolérance ?</b>\n<br/>Ce qui rend votre acte intéressant, c'est sa date : le fameux Édit de tolérance qui reconnaît un état civil aux non-catholiques date de <b>novembre 1787</b>, soit dix mois plus tard. Votre acte relève donc encore de l'ancien régime juridique de 1736, qui était déjà en vigueur et appliqué localement — ce n'est qu'une confirmation que cette pratique existait bien avant l'édit de Versailles, celui-ci ne faisant qu'officialiser et généraliser un usage déjà réel.\n<br/><b>Ce que cela suggère sur la défunte</b>\n<br/>Tout concorde pour indiquer que <b>Catherine Hermitte, veuve de Joseph Bayle, s'est vu refuser la sépulture catholique par le curé</b> — très probablement parce qu'elle était protestante (ou considérée comme telle), ou parce qu'elle est morte sans les sacrements de l'Église. Quelques indices supplémentaires vont dans ce sens :\nL'inhumation a lieu au cimetière de la <b>succursale de Chardavon</b>, et non dans le cimetière paroissial principal — possiblement un lieu réservé à ce type de sépultures.L'acte est signé par un parent (le neveu) et par un « vicaire » qui semble n'intervenir que comme témoin/greffier de l'acte judiciaire, non comme officiant religieux — cohérent avec un enterrement sans les rites catholiques complets.\n<br/><b>Pour aller plus loin</b>\n<br/>Si vous avez accès au registre complet, il serait utile de vérifier :\nSi d'autres actes voisins portent la mention explicite « de la religion prétendue réformée » (R.P.R.) — formule fréquente pour désigner les protestants dans ce type d'acte.Si la famille Hermitte ou Bayle apparaît dans d'autres sources comme famille protestante ou « nouveaux convertis » de la région de Seyne — les hautes vallées des Basses-Alpes/Alpes-de-Haute-Provence, proches du Dauphiné, ont gardé de petites communautés réformées après la Révocation.\n<br/>C'est donc un document assez précieux généalogiquement : il documente indirectement une appartenance religieuse dissidente à une époque où celle-ci était rarement mentionnée aussi explicitement dans les registres."
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F522": {
@@ -85977,10 +86175,10 @@
             "mariage": {
                 "date": "23 FEB 1745",
                 "lieu": {
-                    "brut": "Marseille Major, 13, Bouches du Rhône, , ,",
-                    "adresse": "Major",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Major",
+                    "dept_num": "13",
+                    "brut": "Marseille, Major, 13"
                 }
             },
             "commentaires": [
@@ -85992,12 +86190,19 @@
                         [
                             {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/9_payan/51a_mouren_6e_et_plus/9e_mouren_gazelle/412M.jpg"
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/412M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "L'an mil sept cent quarante cinq et le vingt-troisième<br/>fevrier après trois publications faites dans cette eglise<br/>et une au quartier des Galades sans qu'il ait apparu aucun<br/>empêchement veu le mortuaire d'Honnoré Pinatel du 30 7bre<br/>1722 dans nos Registres le Reverend pere Hyacinthe des<br/>Carmes aux Galades soussigné a ce commis par nous curé<br/>soussigné par paroles de présent et selon la forme de la ste<br/>Mère l'Église a conjoint en mariage Pierre Mouren pastour fils<br/>de Jean present et d'Anne Mouren des Galades avec Anne<br/>Pinatel fille dudt feu Honnoré et de Rose Jourdan parante<br/>authorisante sa fille dudt quartier tous illitrés et nos<br/>paroissiens en présence de leurs plus proches parents<br/>et témoins scavoir Pierre Olive Joseph Maurel<br/>Jaques Gazelle et Mathieu Olivier tous cousins<br/>des parties tous illiterés f Hyacinthe Carme<br/>Goujon curé"
                             }
                         ]
                     ],
                     "titre": {
-                        "label": ""
+                        "label": "23 février, Marseille La Major : Pierre MOUREN épouse Anne PINATEL.",
+                        "annee": 1745
                     }
                 }
             ]
@@ -86010,6 +86215,22 @@
             ],
             "commentaires": [
                 "Rose meurt  le 1er juillet 1771, paroisse des Aygalades, \"âgée d'environ 65 ans\"  ; elle est \"fille de Joseph et épouse de Thomas Figuiere\" ; sur l'acte, son nom est écrit avec deux \"l\"."
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1771,
+                        "label": "1ere juillet, Marseille Les Aygalades :mort de Rose CAILLOL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/414D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F40": {
@@ -86024,13 +86245,71 @@
             "mariage": {
                 "date": "AFT 1720",
                 "lieu": {
-                    "brut": "Montsallier ?, 04, Alpes de Haute Provence, , ,",
                     "ville": "Montsallier ?",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Montsallier ?, 04"
                 }
             },
             "commentaires": [
                 "Un Jean Martin (de Venturon et Marguerite Lieutaud) naît à Banon le 6 novembre 1693. Ne possédant pas d'autre source confirmant la filiation de notre ancêtre, nous devons prendre ces renseignements avec réserve... Vers 1720, Jean épouse Anne Testanière. La famille Testaniere est originaire de Montsallier. Le mariage, pas trouvé à Banon, a dû être célébré dans la paroisse de la fiancée Malheureusement, une lacune existe dans les registres paroissiaux entre 1697 et 1732.... Françoise Journe, épouse d'Antoine Testanière, sans doute oncle de Anne, est marraine de leur premier enfant, Marguerite, née le 3 octobre 1721. Le couple est également \"de Montsaillier habitant à Banon\". Voir note à Elzias Testaniere (n°834).\n\tJean et Anne ont (au moins) quatre enfants qui vivront et, pour trois d'entre eux, fonderont famille : Marguerite, déjà citée, en 1721 ; Michel, notre ancêtre n°208, en 1724 ; Geneviève, en 1726 et Catherine en 1728. Jean meurt peu de temps après cette naissance (13 février 1729) laissant Anne avec au moins quatre enfants en bas âge... Celle-ci ne se remarie pas et lui survit pendant 32 ans avant de disparaitre le 7 août 1762 \"âgée d'environ 70 ans\". (12/02/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1693,
+                        "label": "Naissance  de Jean MARTIN le 6 novembre à Banon"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/416N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Avant 1721 : le mariage (Quatre enfants connus dont Michel, notre ancêtre)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/416_enfant.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1729,
+                        "label": "13 février, Banon : Mort de Jean MARTIN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/414N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1762,
+                        "label": "8 août, Banon : Mort de Anne TESTANIERE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/417D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F41": {
@@ -86042,11 +86321,136 @@
             "mariage": {
                 "date": "20 FEB 1726",
                 "lieu": {
-                    "brut": "Banon, 04, Alpes de Haute Provence, , ,",
                     "ville": "Banon",
-                    "dept_num": "04"
+                    "dept_num": "04",
+                    "brut": "Banon, 04"
                 }
-            }
+            },
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1680,
+                        "label": "4 mars, Banon : baptême de Jean GONDRAN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/418N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Aide à la transcription GeneBase<br/>Le quatre mars [de l'an dessus} a esté baptizé Jean<br/>Gondran âgé de quinze jours fils de Etienne<br/>et de Delphine Gondrane le parrain Jacques<br/>Tray [?Héman?] et la marraine Catherine Galiciane<br/>sa tante Aubert vicaire [?et?] Reynaud<br/>Gondran Isrial"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1689,
+                        "label": "29 novembre, Banon : baptême de Claude CARRETIER"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/419N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Novembre\nL'an que dessus et Le 29me a esté baptizée Claudette Carretier née le\nneuf du soir fille de Anthoine et de Margueritte son espouze\nparrain Marchaud Quettier et la marraine Claude [Sauuignonne?] \nFrapin vicaire Pierre Sauvin?"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1717,
+                        "label": "3 février, Banon, : premier mariage de Jean GONDRAN avec Marie Anne GONDRAN (ca 1690-1725) ; trois enfants connus."
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/418M1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Le troisième  février de l'année  mil sept cent dix sept après les trois publications<br/>faites du futur mariage ont éste épousés Jean Gondran fils à feu Denis et de\nvivante Delphine Gondran d'une part et Anne Marie  Gondran fille à<br/>feu Sébastien  et de Catherine Buegoire d'autre tous de Banon..."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1725,
+                        "label": "2 mars, Banon : Mort de Marie Anne GONDRAN"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1726,
+                        "label": "20 février, Banon : mariage de Jean GONDRAN avec Claudette CARRETIER (Un enfant connu : Delphine, notre ancêtre)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/418M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Aide à la transcription GeneBase\nLe vingtieme février de l'an sy dessus apres les trois publications faites du futur\nmariage ont éste épousés Jean Gondran Veuf et fils de feu Denis et de Jaume\nDelphine Gondran d'une part et honneste fille Claude Carretier fille a feu Anthoine\net de vivante Marguerite Savournin d'autre part tous du present lieu de Banon\nont ete faites les ceremonies et formes ordinaires deuement observées.\nfait par moy [?M Astoin?] vicaire en presence de plus proches parents & temoins soussignés\nJean Gondran"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1749,
+                        "label": "12 mai, Banon : mort de Jean GONDRAN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/418D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Aide à la transcription GeneBase<br/>Joseph Gondran [barré]\nJean Gondran veuf de Mariane Gondran et mari en\nsecondes noces de Claude Carretier âgé d'environ soixante dix ans est\nmort en la Communion de l'Église le douze et enterré le treize may 1749\ndans le cimetière de cette paroisse a signé des presens et et qui a su\navec moy.\nYousep Goundran\nAntoine Lombard   JJ Arnaud curé de Banon"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1767,
+                        "label": "1er octobre, Banon : mort de Claude CARRETIER"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/419D.jpg"
+                            }
+                        ]
+                    ]
+                }
+            ]
         },
         "F527": {
             "mari": "I1182",
@@ -86217,14 +86621,44 @@
             "mariage": {
                 "date": "20 OCT 1722",
                 "lieu": {
-                    "brut": "Marseille St Marcel 13, , , , ,",
-                    "adresse": "St-Marcel",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Marcel",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Marcel, 13"
                 }
             },
             "commentaires": [
                 "René jr a effectué des recherches à la mairie de Belgentier par une chaude journée d'août 1987. Il a consulté une intéressante \"table des actes\" sur laquelle figurent, en 1695, le baptême de deux \"Jean Auzende\", un en début d'année, l'autre à la fin et celui d'une \"Magdeleine Guerin\". Malheureusement, les actes correspondants des années 1685 à 1699 ont été perdus...\n\tJean naît en 1695 à Belgentier, paroisse dans laquelle ses parents sont installés. A une date à préciser, Il quitte son village pour gagner la région de Marseille. C'est dans le terroir de la grande ville, à l'église de Saint-Marcel, qu'il épouse le 20 octobre 1722 Madeleine Guerin, de son âge, qui a sans doute suivi ses parents dans cette paroisse. Jean signe l'acte. Nous ne connaissons que deux enfants du couple : Pierre, vers 1726 et Jean, notre ancêtre n°212, vers 1730, mais nous ne savons pas où ils sont nés. Peut être à \"La Penne terroir d'Aubagne\" où Pierre (et ses parents ?) déclare résider lorsqu'il se marie à l'église Saint-Martin à Marseille le 24 septembre 1747. Notons que si Madeleine, la mère, est présente à la cérémonie (et consentante), Jean, le père, est absent (il meurt trois mois plus tard) et que son consentement a été recueilli  \"par Messire Imbert curé de la paroisse (d'Aubagne)\". Même déclaration du lieu de résidence lors du mariage de Jean, le second fils, notre ancêtre, le 27 novembre 1759 à Saint-Ferréol ; les deux parents ont alors disparu et les dates précises de leur sépulture figurent sur l'acte....\n\tC'est à La Penne, en effet, sur les bords de l'Huveaune, que sont morts Jean, le 3 janvier 1748 (52 ans), hélas, les archives conservées aux AD commencent en 1750, et Madeleine, dix ans plus tard, le 26 juin 1758 (60 ans).  (13/10/2000)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1722,
+                        "label": "20 octobre, Marseille St-Marcel : le mariage [pas de registres conservés entre 1717 et 1727]"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/10_martin/53a_7e_et_plus/9e_auzende_guerin/424M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1758,
+                        "label": "26 juin, La Penne : sépulture de Madeleine GUÉRIN veuve de Jean AUZENDE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/10_martin/53a_7e_et_plus/9e_auzende_guerin/425D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F50": {
@@ -86239,6 +86673,22 @@
             },
             "commentaires": [
                 "Nous leur connaissons deux enfants, nés vers 1727 : Claire qui se marie en 1747 ( père : Claude Reboun, mère : Louise Gentet) et Françoise, notre ancêtre n°213, en 1759 ( père : Claude Rebon, mère : Louise Gentet). Dans l'acte de mariage de celle-ci, ils sont \"du quartier de Saint-Loup demeurant sur cette paroisse (Saint-Ferréol) depuis quinze ans au quartier Saint-Geniés\" et vivants tous les deux. Lorsque Françoise décède en 1807, ils sont appelés \"Claude Rebron\" et \"Louise Gaudet\".          (10/10/2000)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1717,
+                        "label": "8 juin, Marseille La Major : Le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/10_martin/53a_7e_et_plus/9e_auzende_guerin/426M.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F532": {
@@ -86270,9 +86720,9 @@
             "mariage": {
                 "date": "22 JAN 1717",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , ,",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Marseille, 13"
                 }
             },
             "commentaires": [
@@ -86292,6 +86742,40 @@
                         "label": "24 janvier 1717 : Sébastien BEGUET épouse Anne MISSEREAU.",
                         "annee": 1717
                     }
+                },
+                {
+                    "titre": {
+                        "annee": 1765,
+                        "label": "27 février, Marseille Montredon : mort de Anne «MISSAREL»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/10_martin/53a_7e_et_plus/9e_beguet_missereau/429D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "«Jean Meunier, marguillier en exercice»\n<br/>Le marguillier est une variante du procureur de fabrique,\ndésignant le responsable laïc élu par les paroissiens pour gérer les biens et\nrevenus de l'église paroissiale.\n"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1768,
+                        "label": "2 février, Marseille Montredon : mort de Sébastien BEGUET"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/10_martin/53a_7e_et_plus/9e_beguet_missereau/428D.jpg"
+                            }
+                        ]
+                    ]
                 }
             ]
         },
@@ -98135,10 +98619,10 @@
             "mariage": {
                 "date": "05 SEP 1724",
                 "lieu": {
-                    "brut": "Marseille Major, 13, Bouches du Rhône, , , CM 17/08/1724 Marseille",
-                    "adresse": "Major",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Major",
+                    "dept_num": "13",
+                    "brut": "Marseille, Major, 13"
                 }
             },
             "commentaires": [
@@ -98147,26 +98631,34 @@
             "documents": [
                 {
                     "titre": {
-                        "label": "9e génération"
+                        "label": "5 septembre 1724, Marseille La Major : Joseph MOUREN [408] épouse Marie GAZELLE",
+                        "annee": 1724
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/408MTa.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "Sommaire"
+                                "fichier": " L'an mil sept cent vingt quatre et le cinquième septembre trois \npublications faites en cette église et une dans les chapelles des \nquartiers des Eygalades et St-Marthe sans qu'il ait apparu aucun \nempêchement, ensuite de la commission donnée par nous vic. Sup. au R. \nPalacien Cordeau Supérieur du St Couvent des Eygalades, il a par parole \nde présent et selon les formes de la Ste Eglise conjoint en mariage \nJoseph Mouren souss(igné), fils de Louis présent au dit mariage et de \nMarguerite Pinatelle du quartier des Eygalades de cette paroisse avec \nMarie Gazelle ... de fille d'Antoine présent au dit mariage et de \nMadeleine Maure du dit quartier de Ste-Marthe aussi de cette paroisse, \ntémoins Joseph Cauvin boucher des Eigalades, Denis Pourelli tisseran(d) \ndu dit quartier Louis Pointevin compagnon du dit tisseran(d), Jean \nGazelle menager dudit quartier illitérés à la minute ...."
                             }
                         ]
                     ]
                 },
                 {
                     "titre": {
-                        "label": ""
+                        "annee": 1777,
+                        "label": "24 avril, Marseille Les Aygalades : mort de Joseph MOUREN"
                     },
                     "contenu": [
                         [
                             {
-                                "type": "TEXTE",
-                                "fichier": "5 septembre 1724, La Major : Joseph MOUREN [408] épouse Marie GAZELLE L'an mil sept cent vingt quatre et le cinquième septembre trois publications faites en cette église et une dans les chapelles des quartiers des Eygalades et St-Marthe sans qu'il ait apparu aucun empêchement, ensuite de la commission donnée par nous vic. Sup. au R. Palacien Cordeau Supérieur du St Couvent des Eygalades, il a par parole de présent et selon les formes de la Ste Eglise conjoint en mariage Joseph Mouren souss(igné), fils de Louis présent au dit mariage et de Marguerite Pinatelle du quartier des Eygalades de cette paroisse avec Marie Gazelle ... de fille d'Antoine présent au dit mariage et de Madeleine Maure du dit quartier de Ste-Marthe aussi de cette paroisse, témoins Joseph Cauvin boucher des Eigalades, Denis Pourelli tisseran(d) du dit quartier Louis Pointevin compagnon du dit tisseran(d), Jean Gazelle menager dudit quartier illitérés à la minute ...."
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/408D.jpg"
                             }
                         ]
                     ]
@@ -98185,11 +98677,84 @@
             "mariage": {
                 "date": "29 SEP 1733",
                 "lieu": {
-                    "brut": "Aix Madeleine, 13, Bouches du Rhône, , ,",
                     "ville": "Aix Madeleine",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Aix Madeleine, 13"
                 }
-            }
+            },
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1706,
+                        "label": "9 août, Pertuis (84) : naissance d'Elzéar BERLINGUE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/410N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1733,
+                        "label": "29 septembre, Aix-en-Provence Ste-Madeleine : le mariage (Cinq enfants dont Marie Madeleine notre ancêtre)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/410M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/410M_1.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1748,
+                        "label": "8 mars, Meyreuil (13) : Mort de Jeanne FELLON"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/411D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1749,
+                        "label": " 14 octobre 1749, Aix-en-Provence : remariage avec Anne PORTE  (Dix enfants)"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1787,
+                        "label": "21 avril, Meyrargues (13) : mort de Elzéar BERLINGUE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/9_payan/2_magdeleine_mouren/9e_mouren_gazelle/410D.jpg"
+                            }
+                        ]
+                    ]
+                }
+            ]
         },
         "F1269": {
             "mari": "I4930",
@@ -115219,13 +115784,27 @@
                 {
                     "titre": {
                         "annee": null,
-                        "label": "Sybthese (ChatGPT)"
+                        "label": "Synthese du début du contrat p. 1 à 3 (ChatGPT)"
                     },
                     "contenu": [
                         [
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/synthese.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Synthese de la fin du contrat p. 4 et 5 (ChatGPT)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": " Cette fin du contrat complète les clauses patrimoniales et fixe les garanties entre les époux. Voici une synthèse en français moderne.1. Versement de la dot<br/>Le futur époux (Durant) reconnaît avoir reçu de sa fiancée :la couverture,\nla huche (ou coffre),\ntrois draps,\nune robe qui sera livrée le mardi suivant,\nune autre robe pour la Saint-Jean-Baptiste suivante,\nainsi que le reste de la dot déjà détaillée précédemment.\n<br/>L'ensemble est évalué à <b>500 livres</b>, somme qu'il reconnaît recevoir comme <b>biens dotaux</b> de son épouse. Il s'engage à les restituer si le cas prévu par le droit se présente (par exemple dissolution du mariage selon les règles de l'époque).2. Renonciation aux droits successoraux<br/>En contrepartie de cette constitution de dot, la future épouse :quitte la maison de son père et de sa mère (Vidal et Pontalle),\nrenonce à réclamer à l'avenir ses droits de <b>légitime</b>, tant du côté paternel que maternel.\n<br/>Elle conserve toutefois une réserve importante :elle pourra toujours recevoir ce qui pourrait lui revenir par <b>substitution, donation ou legs futur</b>.\n<br/>Autrement dit, elle abandonne ses droits d'héritière réservataire immédiats, mais pas les libéralités que ses parents pourraient lui faire plus tard.3. Apport personnel de l'épouse<br/>La fiancée apporte également en propre : <b>deux brebis de race \"blazoudes\", qu'elle promet de remettre le jour des noces.</b>4. Donation entre époux en cas de décès <br/>Les futurs époux prévoient des donations réciproques :<b>si le mari meurt le premier</b>, sans qu'il y ait séparation du mariage, son épouse survivante recevra <b>30 livres</b> en augmentation de dot ;\n<b>si l'épouse meurt la première</b>, son mari survivant recevra <b>15 livres</b>.\n<br/>Cette différence de montant est fréquente dans les contrats de mariage de cette période.5. Procuration<br/>Pour assurer la validité juridique de ces donations, les parties nomment des procureurs devant la cour du bailliage du Vivarais, chargés :de faire enregistrer les actes,\nd'obtenir les autorisations nécessaires,\nde prêter les serments requis,\net de ratifier tout ce qui devra l'être.\n<br/>Ils déclarent agir librement, sans fraude ni contrainte.6. Engagement final : Toutes les parties :promettent d'exécuter fidèlement le contrat ;\nobligent tous leurs biens présents et à venir en garantie de leurs engagements ;\nacceptent la compétence des juridictions royales et de la sénéchaussée de Nîmes en cas de litige.\n7. Témoins et clôture<br/>L'acte est reçu :<b>au lieu du Ranc</b>, dans la maison des époux Durant,\nen présence de plusieurs témoins, notamment :\nle curé <b>Étienne Mourgues</b> d'Asperjoc,\nÉtienne Chastanier,\nMathieu Moynier,\nClaude Duranc,\nAndré Moynière,\nFrançois Masayre.\nLes parties étant illettrées, elles ne signent pas ; le notaire Ce que cette fin nous apprend sur la famille<br/>Cette dernière partie est particulièrement riche pour la généalogie :elle confirme les parents de la mariée (<b>Vidal</b> et <b>Pontalle</b>) ;\nelle montre que la mariée est <b>dotée en échange de sa renonciation à sa légitime</b> ;\nelle précise les biens composant la dot (linge, vêtements, bétail, valeur de 500 livres) ;\nelle nomme plusieurs témoins avec leur paroisse d'origine, ce qui peut fournir des pistes de parenté ou de voisinage.\n<br/>C'est donc une fin de contrat très classique pour le XVIIIᵉ siècle, mais particulièrement intéressante parce qu'elle détaille les apports de la mariée, sa renonciation aux droits successoraux et les donations mutuelles prévues entre les époux."
                             }
                         ]
                     ]
