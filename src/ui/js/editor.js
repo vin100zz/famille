@@ -816,17 +816,18 @@ const Editor = (function () {
     return 'https://' + url;
   }
 
-  /** Popup "Insérer un lien" (même style que _openAddPersonPopup) : texte + URL. */
-  function _openInsertLinkPopup(defaultText, onConfirm) {
+  /** Popup texte + URL (même style que _openAddPersonPopup), utilisé pour insérer ou modifier un lien. */
+  function _openLinkPopup(defaultText, defaultUrl, title, confirmLabel, onConfirm) {
     const overlay = el('div', 'ed-popup-overlay');
     const popup = el('div', 'ed-popup');
-    popup.appendChild(txt('div', 'ed-popup__title', 'Insérer un lien'));
+    popup.appendChild(txt('div', 'ed-popup__title', title));
 
     const textInp = document.createElement('input');
     textInp.type = 'text'; textInp.className = 'ed-input'; textInp.placeholder = 'Texte du lien';
     textInp.value = defaultText || '';
     const urlInp = document.createElement('input');
     urlInp.type = 'text'; urlInp.className = 'ed-input'; urlInp.placeholder = 'URL (https://...)';
+    urlInp.value = defaultUrl || '';
     popup.appendChild(textInp);
     popup.appendChild(urlInp);
 
@@ -835,7 +836,7 @@ const Editor = (function () {
 
     const btnRow = el('div', 'ed-popup__btns');
     const btnCreate = el('button', 'ed-btn ed-btn--save');
-    btnCreate.type = 'button'; btnCreate.textContent = 'Insérer';
+    btnCreate.type = 'button'; btnCreate.textContent = confirmLabel;
     const btnCancel = el('button', 'ed-btn ed-btn--cancel');
     btnCancel.type = 'button'; btnCancel.textContent = 'Annuler';
     btnCancel.addEventListener('click', () => document.body.removeChild(overlay));
@@ -853,6 +854,30 @@ const Editor = (function () {
     overlay.appendChild(popup);
     document.body.appendChild(overlay);
     textInp.focus();
+  }
+
+  function _openInsertLinkPopup(defaultText, onConfirm) {
+    _openLinkPopup(defaultText, '', 'Insérer un lien', 'Insérer', onConfirm);
+  }
+
+  function _openEditLinkPopup(defaultText, defaultUrl, onConfirm) {
+    _openLinkPopup(defaultText, defaultUrl, 'Modifier le lien', 'Modifier', onConfirm);
+  }
+
+  // ── Tooltip URL (survol d'un lien dans un bloc TEXTE) ───────────────────────
+  // Réutilise l'élément #ct-tooltip, singleton déjà présent dans la page (voir circular-tree.js).
+
+  function _showLinkTooltip(url, px, py) {
+    const tip = document.getElementById('ct-tooltip');
+    if (!tip) return;
+    tip.textContent = url;
+    tip.style.display = 'block';
+    tip.style.left = (px + 14) + 'px';
+    tip.style.top = (py + 18) + 'px';
+  }
+  function _hideLinkTooltip() {
+    const tip = document.getElementById('ct-tooltip');
+    if (tip) tip.style.display = 'none';
   }
 
   // ── Section Documents ──────────────────────────────────────────────────────
@@ -1242,6 +1267,19 @@ const Editor = (function () {
     edDiv.innerHTML = (block.fichier || '').replace(/\t/g, '').replace(/\n/g, '<br>').replace(/<br\/>/gi, '<br>');
     edDiv.addEventListener('input', () => { block.fichier = _serializeRichText(edDiv); });
     edDiv.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); _insertBr(edDiv); } });
+    // Collage : ne conserve que gras/italique/souligné/sauts de ligne, tout le
+    // reste de la mise en forme d'origine (police, taille, couleur…) est ignoré.
+    edDiv.addEventListener('paste', e => {
+      e.preventDefault();
+      const cd = e.clipboardData || window.clipboardData;
+      if (!cd) return;
+      const html = cd.getData('text/html');
+      const clean = html
+        ? _sanitizePastedHtml(html)
+        : _escapePastedText(cd.getData('text/plain') || '').replace(/\r\n|\r|\n/g, '<br>');
+      document.execCommand('insertHTML', false, _trimPastedHtml(clean));
+      block.fichier = _serializeRichText(edDiv);
+    });
     edDiv.addEventListener('mousedown', () => {
       const bwrap = edDiv.closest('[draggable]');
       if (bwrap) {
@@ -1249,6 +1287,32 @@ const Editor = (function () {
         const restore = () => { bwrap.setAttribute('draggable', 'true'); window.removeEventListener('mouseup', restore); };
         window.addEventListener('mouseup', restore);
       }
+    });
+
+    // Liens existants : infobulle avec l'URL au survol, popup d'édition au clic
+    // (par défaut un clic dans un contentEditable place juste le curseur, on ne
+    // peut donc pas modifier un lien déjà inséré sans cette prise en charge).
+    edDiv.addEventListener('mouseover', e => {
+      const a = e.target.closest('a');
+      if (a && edDiv.contains(a)) _showLinkTooltip(a.getAttribute('href') || '', e.clientX, e.clientY);
+    });
+    edDiv.addEventListener('mousemove', e => {
+      const a = e.target.closest('a');
+      if (a && edDiv.contains(a)) _showLinkTooltip(a.getAttribute('href') || '', e.clientX, e.clientY);
+    });
+    edDiv.addEventListener('mouseout', e => {
+      if (e.target.closest('a')) _hideLinkTooltip();
+    });
+    edDiv.addEventListener('click', e => {
+      const a = e.target.closest('a');
+      if (!a || !edDiv.contains(a)) return;
+      e.preventDefault();
+      _hideLinkTooltip();
+      _openEditLinkPopup(a.textContent, a.getAttribute('href') || '', (text, url) => {
+        a.href = url;
+        a.textContent = text || url;
+        block.fichier = _serializeRichText(edDiv);
+      });
     });
 
     [['<b>G</b>','bold','Gras'],['<i>I</i>','italic','Italique'],['<u>S</u>','underline','Souligné']].forEach(([lbl,cmd,title]) => {
@@ -1341,6 +1405,7 @@ const Editor = (function () {
 
     wrap.appendChild(bar);
     wrap.appendChild(edDiv);
+    if (block.width) edDiv.style.width = block.width + '%';
   }
 
   // ── Sauvegarde ─────────────────────────────────────────────────────────────
@@ -1445,6 +1510,48 @@ const Editor = (function () {
     if (!br.nextSibling) br.parentNode.insertBefore(document.createTextNode('\u00A0'), br.nextSibling);
     range.setStartAfter(br); range.setEndAfter(br);
     sel.removeAllRanges(); sel.addRange(range);
+  }
+
+  // ── Nettoyage du contenu collé (bloc TEXTE) ─────────────────────────────────
+  // Ne garde que gras / italique / souligné / sauts de ligne : tout le reste de
+  // la mise en forme du texte source (police, taille, couleur de fond, etc.)
+  // est supprimé, seul le contenu textuel est conservé.
+
+  const _PASTE_BLOCK_TAGS = new Set(['p', 'div', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'tr', 'blockquote']);
+
+  function _escapePastedText(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function _sanitizePastedNode(node) {
+    let out = '';
+    node.childNodes.forEach(child => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        out += _escapePastedText(child.textContent);
+      } else if (child.nodeType === Node.ELEMENT_NODE) {
+        const t = child.tagName.toLowerCase();
+        if (t === 'script' || t === 'style') return;
+        if (t === 'br') { out += '<br>'; return; }
+        const inner = _sanitizePastedNode(child);
+        if      (t === 'b' || t === 'strong')  out += '<b>' + inner + '</b>';
+        else if (t === 'i' || t === 'em')      out += '<i>' + inner + '</i>';
+        else if (t === 'u')                    out += '<u>' + inner + '</u>';
+        else if (_PASTE_BLOCK_TAGS.has(t))     out += (out ? '<br>' : '') + inner;
+        else                                   out += inner; // span, font, etc. : on jette la balise, on garde le texte
+      }
+    });
+    return out;
+  }
+
+  function _sanitizePastedHtml(html) {
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    return _sanitizePastedNode(container);
+  }
+
+  /** Supprime les <br> et espaces (y compris insécables) en début et fin de contenu collé. */
+  function _trimPastedHtml(str) {
+    return str.replace(/^(?:<br>|\s)+/i, '').replace(/(?:<br>|\s)+$/i, '');
   }
 
   function _serializeRichText(node) {
