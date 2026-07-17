@@ -52,6 +52,7 @@ const CircularTree = (function () {
   // Repérage persistant (depuis la recherche)
   let _highlightedSosa  = null; // numéro Sosa ciblé (pour le zoom/scroll/panneau)
   let _highlightedSosas = [];   // tous les numéros Sosa de cette personne (violet)
+  let _pendingHighlight = null; // highlight() demandé avant la fin du chargement de la carte sosa
 
   // ── Initialisation publique ───────────────────────────────────────────────
 
@@ -89,6 +90,7 @@ const CircularTree = (function () {
     window.addEventListener('resize', () => { _resize(); _draw(); _centerView(); });
     _draw();
     _initialized = true;
+    if (_pendingHighlight != null) highlight(_pendingHighlight);
   }
 
   function redraw() {
@@ -607,12 +609,19 @@ const CircularTree = (function () {
    * (implexe), tous ses quartiers sont surlignés en violet.
    */
   function highlight(sosaId) {
+    // init() charge encore la carte sosa (getSosaMap) : on rejoue la demande
+    // une fois prête plutôt que de l'ignorer silencieusement (le zoom/scroll
+    // ne s'appliquait alors jamais quand on ciblait une personne trop tôt,
+    // par ex. juste après un chargement direct sur une fiche).
+    if (!_initialized) { _pendingHighlight = sosaId; return; }
+    _pendingHighlight = null;
+
     _highlightedSosa = (sosaId != null) ? +sosaId : null;
     const entry = (_highlightedSosa != null) ? _map[_highlightedSosa] : null;
     _highlightedSosas = entry
       ? (Array.isArray(entry.sosas) && entry.sosas.length ? entry.sosas : [_highlightedSosa])
       : [];
-    if (!_initialized || !entry) return;
+    if (!entry) return;
     _zoomToShow(_highlightedSosa);
     _scrollToSosa(_highlightedSosa);
     _clearHi();
@@ -620,6 +629,7 @@ const CircularTree = (function () {
   }
 
   function clearHighlight() {
+    _pendingHighlight  = null;
     _highlightedSosa  = null;
     _highlightedSosas = [];
     if (_hctx) _hctx.clearRect(0, 0, _size, _size);
