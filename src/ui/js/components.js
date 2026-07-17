@@ -844,6 +844,8 @@ function renderDocuments(documents) {
           const wrap = el('div', 'doc-block--texte');
           wrap.innerHTML = (block.fichier || '').replace(/\t/g, '').replace(/\n/g, '<br/>');
           if (block.align && block.align !== 'left') wrap.style.textAlign = block.align;
+          // Largeur auto (ajustée au texte) par défaut ; largeur explicite si réglée dans l'éditeur.
+          if (block.width) wrap.style.width = block.width + '%';
           col.appendChild(wrap);
         }
       });

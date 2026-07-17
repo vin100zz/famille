@@ -1405,6 +1405,7 @@ const Editor = (function () {
 
     wrap.appendChild(bar);
     wrap.appendChild(edDiv);
+    if (block.width) edDiv.style.width = block.width + '%';
   }
 
   // ── Sauvegarde ─────────────────────────────────────────────────────────────

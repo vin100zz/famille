@@ -1168,14 +1168,15 @@ mark.hl {
 }
 
 .doc-block--texte {
-  width: 100%;
+  width: fit-content;   /* s'ajuste au texte par défaut ; largeur explicite possible via block.width */
+  max-width: 100%;
   font-size: 1.1rem;
   color: #1e293b;
   line-height: 1.75;
   background: #e3f8ff;
   border: 1px solid #b8e6f5;
   border-radius: 6px;
-  padding: 12px 16px;
+  padding: 12px 28px;
   box-shadow: 0 1px 4px rgba(0,0,0,.06);
   text-align: left;
 }
@@ -1886,7 +1887,7 @@ mark.hl {
 
 .ed-txt-content {
   min-height: 80px;
-  padding: 12px 16px;
+  padding: 12px 28px;
   /* Même apparence que .doc-block--texte en lecture */
   font-size: 1.1rem;
   line-height: 1.75;
