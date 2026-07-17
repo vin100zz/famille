@@ -719,6 +719,19 @@ class JsonPersonRepository implements IPersonRepository
             }
             $sosa = (int) $p['sosa'];
 
+            // Une personne peut occuper plusieurs numéros Sosa (implexe :
+            // même ancêtre atteint par plusieurs branches). Le champ 'sosas'
+            // liste alors tous ses numéros ; sinon on retombe sur 'sosa' seul.
+            $sosas = array($sosa);
+            if (isset($p['sosas']) && is_array($p['sosas'])) {
+                foreach ($p['sosas'] as $s) {
+                    $s = (int) $s;
+                    if (!in_array($s, $sosas, true)) {
+                        $sosas[] = $s;
+                    }
+                }
+            }
+
             // Naissance
             $naissance_date  = null;
             $naissance_ville = null;
@@ -753,7 +766,7 @@ class JsonPersonRepository implements IPersonRepository
                 }
             }
 
-            $map[$sosa] = array(
+            $entry = array(
                 'id'             => $id,
                 'nom'            => isset($p['nom'])    ? $p['nom']    : null,
                 'prenom'         => isset($p['prenom']) ? $p['prenom'] : null,
@@ -763,7 +776,12 @@ class JsonPersonRepository implements IPersonRepository
                 'deces_ville'    => $deces_ville,
                 'mariage_date'   => $mariage_date,
                 'mariage_ville'  => $mariage_ville,
+                'sosas'          => $sosas,
             );
+
+            foreach ($sosas as $s) {
+                $map[$s] = $entry;
+            }
         }
         return $map;
     }

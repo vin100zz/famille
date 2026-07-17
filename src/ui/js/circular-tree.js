@@ -49,7 +49,8 @@ const CircularTree = (function () {
   let _scrollStartY = 0;
 
   // Repérage persistant (depuis la recherche)
-  let _highlightedSosa = null;
+  let _highlightedSosa  = null; // numéro Sosa ciblé (pour le zoom/scroll/panneau)
+  let _highlightedSosas = [];   // tous les numéros Sosa de cette personne (violet)
 
   // ── Initialisation publique ───────────────────────────────────────────────
 
@@ -465,8 +466,12 @@ const CircularTree = (function () {
   }
 
   function _drawPersistentHighlight() {
-    if (_highlightedSosa == null || !_map[_highlightedSosa]) return;
-    const id = _highlightedSosa;
+    _highlightedSosas.forEach(id => {
+      if (_map[id]) _drawPersistentHighlightSegment(id);
+    });
+  }
+
+  function _drawPersistentHighlightSegment(id) {
     _hctx.save();
     _hctx.globalAlpha = 1;
     _hctx.fillStyle   = '#a855f7';   // violet
@@ -584,10 +589,18 @@ const CircularTree = (function () {
     _applyZoom(Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, neededZoom)));
   }
 
-  /** Repère durablement une personne (par son numéro Sosa) dans l'arbre, et scrolle vers elle. */
+  /**
+   * Repère durablement une personne (par un de ses numéros Sosa) dans l'arbre,
+   * et scrolle vers elle. Si la personne occupe plusieurs numéros Sosa
+   * (implexe), tous ses quartiers sont surlignés en violet.
+   */
   function highlight(sosaId) {
     _highlightedSosa = (sosaId != null) ? +sosaId : null;
-    if (!_initialized || !_map[_highlightedSosa]) return;
+    const entry = (_highlightedSosa != null) ? _map[_highlightedSosa] : null;
+    _highlightedSosas = entry
+      ? (Array.isArray(entry.sosas) && entry.sosas.length ? entry.sosas : [_highlightedSosa])
+      : [];
+    if (!_initialized || !entry) return;
     _zoomToShow(_highlightedSosa);
     _scrollToSosa(_highlightedSosa);
     _clearHi();
@@ -595,7 +608,8 @@ const CircularTree = (function () {
   }
 
   function clearHighlight() {
-    _highlightedSosa = null;
+    _highlightedSosa  = null;
+    _highlightedSosas = [];
     if (_hctx) _hctx.clearRect(0, 0, _size, _size);
     _hideHighlightPanel();
   }
