@@ -14,6 +14,7 @@ const CircularTree = (function () {
   const ZOOM_STEP = 0.75;
   const ZOOM_MIN  = 0.4;
   const ZOOM_MAX  = 8.0;
+  const ZOOM_DEFAULT  = 2.0; // niveau de zoom à l'ouverture, restauré par le bouton de reset
   const MIN_LABEL_ARC = 5; // largeur minimale (px) d'un segment pour afficher son numéro
 
   // ── État ─────────────────────────────────────────────────────────────────
@@ -28,7 +29,7 @@ const CircularTree = (function () {
   let _onSelect    = null;
   let _initialized = false;
 
-  let _zoomLevel   = 2.0;
+  let _zoomLevel   = ZOOM_DEFAULT;
   let _baseSize    = 800;
   let _container   = null;
   let _scrollEl    = null;
@@ -144,6 +145,16 @@ const CircularTree = (function () {
   function _zoomIn()  { _scheduleZoom(_zoomLevel + ZOOM_STEP); }
   function _zoomOut() { _scheduleZoom(_zoomLevel - ZOOM_STEP); }
 
+  /** Réinitialise le zoom et recentre la vue, comme à l'ouverture de la page. */
+  function _resetView() {
+    _pendingZoomVal = null;
+    if (_rafZoom) { cancelAnimationFrame(_rafZoom); _rafZoom = null; }
+    _zoomLevel = ZOOM_DEFAULT;
+    _resize();
+    _draw();
+    _centerView();
+  }
+
   function _onWheel(e) {
     e.preventDefault();
     const delta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
@@ -224,6 +235,7 @@ const CircularTree = (function () {
     };
     div.appendChild(mk('+', _zoomIn,  'Zoom avant'));
     div.appendChild(mk('−', _zoomOut, 'Zoom arrière'));
+    div.appendChild(mk('⌂', _resetView, 'Réinitialiser la vue'));
     document.body.appendChild(div);
     _zoomCtrl = div;
   }
