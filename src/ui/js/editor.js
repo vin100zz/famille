@@ -816,17 +816,18 @@ const Editor = (function () {
     return 'https://' + url;
   }
 
-  /** Popup "Insérer un lien" (même style que _openAddPersonPopup) : texte + URL. */
-  function _openInsertLinkPopup(defaultText, onConfirm) {
+  /** Popup texte + URL (même style que _openAddPersonPopup), utilisé pour insérer ou modifier un lien. */
+  function _openLinkPopup(defaultText, defaultUrl, title, confirmLabel, onConfirm) {
     const overlay = el('div', 'ed-popup-overlay');
     const popup = el('div', 'ed-popup');
-    popup.appendChild(txt('div', 'ed-popup__title', 'Insérer un lien'));
+    popup.appendChild(txt('div', 'ed-popup__title', title));
 
     const textInp = document.createElement('input');
     textInp.type = 'text'; textInp.className = 'ed-input'; textInp.placeholder = 'Texte du lien';
     textInp.value = defaultText || '';
     const urlInp = document.createElement('input');
     urlInp.type = 'text'; urlInp.className = 'ed-input'; urlInp.placeholder = 'URL (https://...)';
+    urlInp.value = defaultUrl || '';
     popup.appendChild(textInp);
     popup.appendChild(urlInp);
 
@@ -835,7 +836,7 @@ const Editor = (function () {
 
     const btnRow = el('div', 'ed-popup__btns');
     const btnCreate = el('button', 'ed-btn ed-btn--save');
-    btnCreate.type = 'button'; btnCreate.textContent = 'Insérer';
+    btnCreate.type = 'button'; btnCreate.textContent = confirmLabel;
     const btnCancel = el('button', 'ed-btn ed-btn--cancel');
     btnCancel.type = 'button'; btnCancel.textContent = 'Annuler';
     btnCancel.addEventListener('click', () => document.body.removeChild(overlay));
@@ -853,6 +854,30 @@ const Editor = (function () {
     overlay.appendChild(popup);
     document.body.appendChild(overlay);
     textInp.focus();
+  }
+
+  function _openInsertLinkPopup(defaultText, onConfirm) {
+    _openLinkPopup(defaultText, '', 'Insérer un lien', 'Insérer', onConfirm);
+  }
+
+  function _openEditLinkPopup(defaultText, defaultUrl, onConfirm) {
+    _openLinkPopup(defaultText, defaultUrl, 'Modifier le lien', 'Modifier', onConfirm);
+  }
+
+  // ── Tooltip URL (survol d'un lien dans un bloc TEXTE) ───────────────────────
+  // Réutilise l'élément #ct-tooltip, singleton déjà présent dans la page (voir circular-tree.js).
+
+  function _showLinkTooltip(url, px, py) {
+    const tip = document.getElementById('ct-tooltip');
+    if (!tip) return;
+    tip.textContent = url;
+    tip.style.display = 'block';
+    tip.style.left = (px + 14) + 'px';
+    tip.style.top = (py + 18) + 'px';
+  }
+  function _hideLinkTooltip() {
+    const tip = document.getElementById('ct-tooltip');
+    if (tip) tip.style.display = 'none';
   }
 
   // ── Section Documents ──────────────────────────────────────────────────────
@@ -1249,6 +1274,32 @@ const Editor = (function () {
         const restore = () => { bwrap.setAttribute('draggable', 'true'); window.removeEventListener('mouseup', restore); };
         window.addEventListener('mouseup', restore);
       }
+    });
+
+    // Liens existants : infobulle avec l'URL au survol, popup d'édition au clic
+    // (par défaut un clic dans un contentEditable place juste le curseur, on ne
+    // peut donc pas modifier un lien déjà inséré sans cette prise en charge).
+    edDiv.addEventListener('mouseover', e => {
+      const a = e.target.closest('a');
+      if (a && edDiv.contains(a)) _showLinkTooltip(a.getAttribute('href') || '', e.clientX, e.clientY);
+    });
+    edDiv.addEventListener('mousemove', e => {
+      const a = e.target.closest('a');
+      if (a && edDiv.contains(a)) _showLinkTooltip(a.getAttribute('href') || '', e.clientX, e.clientY);
+    });
+    edDiv.addEventListener('mouseout', e => {
+      if (e.target.closest('a')) _hideLinkTooltip();
+    });
+    edDiv.addEventListener('click', e => {
+      const a = e.target.closest('a');
+      if (!a || !edDiv.contains(a)) return;
+      e.preventDefault();
+      _hideLinkTooltip();
+      _openEditLinkPopup(a.textContent, a.getAttribute('href') || '', (text, url) => {
+        a.href = url;
+        a.textContent = text || url;
+        block.fichier = _serializeRichText(edDiv);
+      });
     });
 
     [['<b>G</b>','bold','Gras'],['<i>I</i>','italic','Italique'],['<u>S</u>','underline','Souligné']].forEach(([lbl,cmd,title]) => {
