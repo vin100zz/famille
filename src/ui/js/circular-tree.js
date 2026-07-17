@@ -14,6 +14,7 @@ const CircularTree = (function () {
   const ZOOM_STEP = 0.75;
   const ZOOM_MIN  = 0.4;
   const ZOOM_MAX  = 8.0;
+  const ZOOM_DEFAULT  = 2.0; // niveau de zoom à l'ouverture, restauré par le bouton de reset
   const MIN_LABEL_ARC = 5; // largeur minimale (px) d'un segment pour afficher son numéro
 
   // ── État ─────────────────────────────────────────────────────────────────
@@ -28,7 +29,7 @@ const CircularTree = (function () {
   let _onSelect    = null;
   let _initialized = false;
 
-  let _zoomLevel   = 2.0;
+  let _zoomLevel   = ZOOM_DEFAULT;
   let _baseSize    = 800;
   let _container   = null;
   let _scrollEl    = null;
@@ -48,6 +49,10 @@ const CircularTree = (function () {
   let _scrollStartX = 0;
   let _scrollStartY = 0;
 
+  // Repérage persistant (depuis la recherche)
+  let _highlightedSosa  = null; // numéro Sosa ciblé (pour le zoom/scroll/panneau)
+  let _highlightedSosas = [];   // tous les numéros Sosa de cette personne (violet)
+
   // ── Initialisation publique ───────────────────────────────────────────────
 
   async function init(container, onSelectFn) {
@@ -63,7 +68,7 @@ const CircularTree = (function () {
     // Hover
     _hi.addEventListener('mousemove', _onMove);
     _hi.addEventListener('mouseleave', () => {
-      if (!_dragActive) { _hctx.clearRect(0, 0, _size, _size); _hideTooltip(); }
+      if (!_dragActive) { _clearHi(); _hideTooltip(); }
     });
 
     // Drag / click
@@ -140,6 +145,16 @@ const CircularTree = (function () {
   function _zoomIn()  { _scheduleZoom(_zoomLevel + ZOOM_STEP); }
   function _zoomOut() { _scheduleZoom(_zoomLevel - ZOOM_STEP); }
 
+  /** Réinitialise le zoom et recentre la vue, comme à l'ouverture de la page. */
+  function _resetView() {
+    _pendingZoomVal = null;
+    if (_rafZoom) { cancelAnimationFrame(_rafZoom); _rafZoom = null; }
+    _zoomLevel = ZOOM_DEFAULT;
+    _resize();
+    _draw();
+    _centerView();
+  }
+
   function _onWheel(e) {
     e.preventDefault();
     const delta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
@@ -169,7 +184,7 @@ const CircularTree = (function () {
       _scrollEl.scrollLeft = _scrollStartX - dx;
       _scrollEl.scrollTop  = _scrollStartY - dy;
       _hi.style.cursor = 'grabbing';
-      _hctx.clearRect(0, 0, _size, _size);
+      _clearHi();
       _hideTooltip();
     }
   }
@@ -220,6 +235,7 @@ const CircularTree = (function () {
     };
     div.appendChild(mk('+', _zoomIn,  'Zoom avant'));
     div.appendChild(mk('−', _zoomOut, 'Zoom arrière'));
+    div.appendChild(mk('⌂', _resetView, 'Réinitialiser la vue'));
     document.body.appendChild(div);
     _zoomCtrl = div;
   }
@@ -241,6 +257,8 @@ const CircularTree = (function () {
     }
     [_cnv, _hi].forEach(c => { if (c) { c.width = _size; c.height = _size; } });
     _updateScrollArea();
+    // Changer width/height vide le contenu des canevas : on redessine le repère persistant.
+    if (_hctx) _drawPersistentHighlight();
   }
 
   // ── Dessin des noeuds ─────────────────────────────────────────────────────
@@ -393,7 +411,7 @@ const CircularTree = (function () {
     if (_dragActive) return;
     _hctx.clearRect(0, 0, _size, _size);
     const hit = _hitTest(evt);
-    if (!hit) { _hideTooltip(); _hi.style.cursor = 'default'; return; }
+    if (!hit) { _hideTooltip(); _hi.style.cursor = 'default'; _drawPersistentHighlight(); return; }
 
     const { id, layer, idx } = hit;
     _getAncestors(id).forEach(a  => _drawSegmentById(a,  'lightgreen', 0.85));
@@ -409,6 +427,7 @@ const CircularTree = (function () {
 
     _hi.style.cursor = 'pointer';
     _showTooltip(_tooltipHtml(id), evt.pageX, evt.pageY);
+    _drawPersistentHighlight();
   }
 
   function _onClick(evt) {
@@ -448,6 +467,187 @@ const CircularTree = (function () {
       });
     }
     return res;
+  }
+
+  // ── Repérage persistant (depuis un résultat de recherche) ─────────────────
+
+  /** Vide le canevas de survol puis y redessine le repère persistant s'il y en a un. */
+  function _clearHi() {
+    _hctx.clearRect(0, 0, _size, _size);
+    _drawPersistentHighlight();
+  }
+
+  function _drawPersistentHighlight() {
+    _highlightedSosas.forEach(id => {
+      if (_map[id]) _drawPersistentHighlightSegment(id);
+    });
+  }
+
+  function _drawPersistentHighlightSegment(id) {
+    _hctx.save();
+    _hctx.globalAlpha = 1;
+    _hctx.fillStyle   = '#a855f7';   // violet
+    _hctx.strokeStyle = '#4c1d95';   // bordure violet foncé
+    _hctx.lineWidth   = 4;
+    if (id === 1) {
+      _hctx.beginPath();
+      _hctx.arc(_mid, _mid, _rad, 0, 2 * Math.PI);
+      _hctx.fill(); _hctx.stroke();
+    } else {
+      const layer = Math.floor(Math.log2(id));
+      _drawSegment(_hctx, layer, id - Math.pow(2, layer), '#a855f7', 1.0);
+      // _drawSegment dessine avec un trait fin ; on repasse une bordure épaisse par-dessus.
+      const idx = id - Math.pow(2, layer);
+      const n   = Math.pow(2, layer);
+      const a0  = -2 * Math.PI * (idx + 1) / n;
+      const a1  = -2 * Math.PI * idx / n;
+      const r0  = layer * _rad, r1 = (layer + 1) * _rad;
+      _hctx.beginPath();
+      _hctx.arc(_mid, _mid, r0, a0, a1);
+      _hctx.lineTo(_mid + r1 * Math.cos(a1), _mid + r1 * Math.sin(a1));
+      _hctx.arc(_mid, _mid, r1, a1, a0, true);
+      _hctx.closePath();
+      _hctx.stroke();
+    }
+    _hctx.restore();
+
+    // Le remplissage violet, opaque, cache le nom/numéro dessiné sur le
+    // canevas des nœuds en dessous : on le redessine par-dessus, en blanc.
+    _drawHighlightLabel(id);
+  }
+
+  /** Redessine le nom (layers 0-2) ou le numéro Sosa (layers 3+) en blanc, par-dessus le violet. */
+  function _drawHighlightLabel(id) {
+    _hctx.save();
+    _hctx.fillStyle = '#fff';
+    _hctx.textAlign = 'center'; _hctx.textBaseline = 'middle';
+
+    if (id === 1) {
+      const p = _map[1];
+      if (p) {
+        const fn = _stripQuotes(p.prenom).split(' ')[0] || '';
+        const fs = Math.max(8, Math.min(13, Math.round(_rad * 0.35)));
+        _hctx.font = `bold ${fs}px Arial`;
+        _hctx.fillText(fn,          _mid, _mid - fs * 0.65);
+        _hctx.fillText(p.nom || '', _mid, _mid + fs * 0.65);
+      }
+    } else if (id === 2 || id === 3) {
+      const fs1 = Math.max(7, Math.min(11, Math.round(_rad * 0.3)));
+      _hctx.font = `bold ${fs1}px Arial`;
+      if (id === 2) _hctx.fillText(_shortName(2), _mid, _mid - _rad * 1.5 + 7);
+      else          _hctx.fillText(_shortName(3), _mid, _mid + _rad * 1.5 - 5);
+    } else if (id >= 4 && id <= 7) {
+      const fs2 = Math.max(7, Math.min(10, Math.round(_rad * 0.28)));
+      const dx = _rad / 3, dy = _rad;
+      const pos = {
+        4: [_mid + _rad * 1.5 + dx, _mid - _rad * 2.5 + dy,  Math.PI / 4],
+        5: [_mid - _rad * 1.5 - dx, _mid - _rad * 2.5 + dy, -Math.PI / 4],
+        6: [_mid - _rad * 1.5 - dx, _mid + _rad * 2.5 - dy,  Math.PI / 4],
+        7: [_mid + _rad * 1.5 + dx, _mid + _rad * 2.5 - dy, -Math.PI / 4],
+      }[id];
+      _hctx.translate(pos[0], pos[1]); _hctx.rotate(pos[2]);
+      _hctx.font = `bold ${fs2}px Arial`;
+      _hctx.fillText(_shortName(id), 0, 0);
+    } else {
+      const layer = Math.floor(Math.log2(id));
+      const n     = Math.pow(2, layer);
+      const i     = id - n;
+      const angle = (2 * i + 1) * Math.PI / n;
+      const r     = (layer + 0.5) * _rad;
+      _hctx.font = 'bold 9px Arial';
+      _hctx.fillText(String(id),
+        _mid + r * Math.cos(angle),
+        _mid - r * Math.sin(angle));
+    }
+    _hctx.restore();
+  }
+
+  /** Centre la vue (scroll) sur le segment correspondant à ce numéro Sosa. */
+  function _scrollToSosa(id) {
+    if (!_scrollEl) return;
+    let x, y;
+    if (id === 1) {
+      x = _mid; y = _mid;
+    } else {
+      const layer = Math.floor(Math.log2(id));
+      const idx   = id - Math.pow(2, layer);
+      const n     = Math.pow(2, layer);
+      const angle = (2 * idx + 1) * Math.PI / n;
+      const r     = (layer + 0.5) * _rad;
+      x = _mid + r * Math.cos(angle);
+      y = _mid - r * Math.sin(angle);
+    }
+    const sw = _scrollEl.clientWidth, sh = _scrollEl.clientHeight;
+    _scrollEl.scrollLeft = Math.max(0, x - sw / 2);
+    _scrollEl.scrollTop  = Math.max(0, y - sh / 2);
+  }
+
+  // Largeur d'arc (px) visée pour qu'un segment repéré soit confortablement lisible.
+  const HIGHLIGHT_TARGET_ARC = 46;
+
+  /**
+   * Ajuste le zoom pour que le segment de ce sosa fasse ~HIGHLIGHT_TARGET_ARC px
+   * de large. Au-delà d'une certaine génération, la largeur voulue dépasserait
+   * ZOOM_MAX (l'arbre entier deviendrait démesuré) : on plafonne alors au zoom
+   * maximal, qui reste le mieux qu'on puisse faire.
+   */
+  function _zoomToShow(id) {
+    if (id <= 1) return; // le cujus (centre) est toujours grand, rien à ajuster
+    const layer = Math.floor(Math.log2(id));
+    const n     = Math.pow(2, layer);
+    const neededRad  = HIGHLIGHT_TARGET_ARC * n / (2 * Math.PI * (layer + 0.5));
+    const neededSize = neededRad * 2 * (LAYERS + 2);
+    const neededZoom = neededSize / _baseSize;
+    _applyZoom(Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, neededZoom)));
+  }
+
+  /**
+   * Repère durablement une personne (par un de ses numéros Sosa) dans l'arbre,
+   * et scrolle vers elle. Si la personne occupe plusieurs numéros Sosa
+   * (implexe), tous ses quartiers sont surlignés en violet.
+   */
+  function highlight(sosaId) {
+    _highlightedSosa = (sosaId != null) ? +sosaId : null;
+    const entry = (_highlightedSosa != null) ? _map[_highlightedSosa] : null;
+    _highlightedSosas = entry
+      ? (Array.isArray(entry.sosas) && entry.sosas.length ? entry.sosas : [_highlightedSosa])
+      : [];
+    if (!_initialized || !entry) return;
+    _zoomToShow(_highlightedSosa);
+    _scrollToSosa(_highlightedSosa);
+    _clearHi();
+    _showHighlightPanel(_highlightedSosa);
+  }
+
+  function clearHighlight() {
+    _highlightedSosa  = null;
+    _highlightedSosas = [];
+    if (_hctx) _hctx.clearRect(0, 0, _size, _size);
+    _hideHighlightPanel();
+  }
+
+  // ── Fenêtre flottante (personne repérée) ──────────────────────────────────
+
+  let _highlightPanelBound = false;
+
+  function _showHighlightPanel(id) {
+    const panel   = document.getElementById('ct-highlight-panel');
+    const content = document.getElementById('ct-highlight-panel-content');
+    if (!panel || !content) return;
+
+    if (!_highlightPanelBound) {
+      _highlightPanelBound = true;
+      const closeBtn = document.getElementById('ct-highlight-panel-close');
+      if (closeBtn) closeBtn.addEventListener('click', clearHighlight);
+    }
+
+    content.innerHTML = _tooltipHtml(id);
+    panel.hidden = false;
+  }
+
+  function _hideHighlightPanel() {
+    const panel = document.getElementById('ct-highlight-panel');
+    if (panel) panel.hidden = true;
   }
 
   // ── Tooltip ───────────────────────────────────────────────────────────────
@@ -491,7 +691,7 @@ const CircularTree = (function () {
 
   // ── API publique ──────────────────────────────────────────────────────────
 
-  return { init, redraw, showControls };
+  return { init, redraw, showControls, highlight, clearHighlight };
 
 })();
 
