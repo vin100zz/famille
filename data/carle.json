@@ -16046,18 +16046,18 @@
             "naissance": {
                 "date": "06 OCT 1683",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "25 APR 1727",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Quartier de Botte",
-                    "adresse": "Quartier de Botte",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "adresse": "Quartier de Botte",
+                    "dept_num": "13",
+                    "brut": "Allauch, Quartier de Botte, 13"
                 }
             },
             "professions": [
@@ -16072,18 +16072,18 @@
             "naissance": {
                 "date": "17 APR 1687",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "deces": {
                 "date": "11 APR 1748",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 449
@@ -86805,13 +86805,22 @@
             "mariage": {
                 "date": "23 APR 1730",
                 "lieu": {
-                    "brut": "Marseille St Ferréol 13, , , , ,",
-                    "adresse": "St-Marcel",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Marcel",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Marcel, 13"
                 }
             },
             "documents": [
+                {
+                    "titre": {
+                        "annee": 1715,
+                        "label": "29 août, Marseille La Major, premier mariage de  Susanne BLAISE avec Pierre PIN"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
                 {
                     "contenu": [
                         [
@@ -86822,7 +86831,7 @@
                         ]
                     ],
                     "titre": {
-                        "label": "23 avril 1730 : Louis PELISSIER épouse Susanne BLAISE",
+                        "label": "23 avril 1730, Marseille St-Ferréol : Louis PELISSIER épouse Susanne BLAISE",
                         "annee": 1730
                     }
                 }
@@ -86942,10 +86951,10 @@
             "mariage": {
                 "date": "21 SEP 1713",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "commentaires": [
@@ -86953,83 +86962,130 @@
             ],
             "documents": [
                 {
+                    "titre": {
+                        "annee": 1683,
+                        "label": "Naissance de André CASTELIN"
+                    },
                     "contenu": [
                         [
                             {
-                                "type": "TEXTE",
-                                "fichier": "Dans les registres de St-Julien :"
-                            }
-                        ],
-                        [
-                            {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/registre_1703.jpg"
-                            },
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/registre_1703_detail.jpg"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Débuts du registre de St-Julien pour 1703"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/registre_1713.jpg"
-                            },
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/registre_1713_detail.jpg"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Débuts du registre de St-Julien pour 1713"
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/448N.jpg"
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "- Jeanne CAILLOL a été baptisée le 17 avril 1687 à St-Julien :"
-                            }
-                        ],
                         [
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/449N.jpg"
                             }
-                        ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
-                },
-                {
-                    "contenu": [
+                        ],
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "21 septembre 1713, St-Julien : le mariage."
+                                "fichier": "L'an mil six cens quatre vings et sept et le dix sep[tiè]me<br/>avril a été baptisée par moi vic[ai]re sousigné <u>Jeanne Caillol</u><br/>fille de François et de Thérèse Cailhol. Son parrain<br/>Jean Cailhol, sa mairr[ai]ne Jeanne Cailhol lesquels ont<br/>dit ne sçavoir écrire."
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/449N_detail.jpg"
+                            }
+                        ]
+                    ],
+                    "titre": {
+                        "label": "Jeanne CAILLOL est baptisée le 17 avril à Marseille St-Julien",
+                        "annee": 1687
+                    }
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Débuts du registre de St-Julien pour 1703 "
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/registre_1703.jpg"
                             }
                         ],
                         [
                             {
                                 "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/registre_1703_detail.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Débuts du registre de St-Julien pour 1713 "
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/registre_1713.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/registre_1713_detail.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/448M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "L'an mil sept cens treize et le 21 septembre <b>mariage<br/>a été célébré</b><br/>dans cette église parroissiale après les trois publications en l'attestation<br/>du vicaire <b>d'Allauch</b> en datte du 20 courant signée Ollive<br/>parrochus alaudiensis sans qu'il nous ait été découvert aucun<br/>empêchement ny formé aucune opposition en le consentement de leur<br/>père et mère et des parties entre <u>André Castelin</u> fils de<br/>Pierre et de<br/>Marthe Camoin de la paroisse d'Allauch d'une part et honnette<br/>fille <u>Jeanne Caillot</u> fille à feu François et de Thérèse<br/>Caillot<br/>de cette parroisse d'autre y présents Le sieur Jean Baptiste Davio<br/>le sieur Jean Baptiste Rey, marchand, Guilleaume Paul fils de Guilleaume<br/>ménager, Jean Caillot feu Antoine témoins requis et signés aussi<br/>led[it] André Castelin et non la fille pour ne sçavoir de ce enquis<br/>par moy vic[ai]re soussigné, André Castelin, Davio, Jean Caillot<br/>Paul signés à l'original."
                             }
                         ]
                     ],
                     "titre": {
-                        "label": ""
+                        "label": "21 septembre, Marseille St-Julien : le mariage.",
+                        "annee": 1713
                     }
+                },
+                {
+                    "titre": {
+                        "annee": 1727,
+                        "label": "25 avril, Allauch : Mort d'André CASTELIN mari de Jeanne «CAILLOL»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/448D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1748,
+                        "label": "11 avril, Allauch : Mort de Jeanne «CAYOL»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_castelin_caillol/449D.jpg"
+                            }
+                        ]
+                    ]
                 }
             ]
         },
