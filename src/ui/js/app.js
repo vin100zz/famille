@@ -233,6 +233,23 @@ function renderDropdown(results, total, query) {
         item.appendChild(sosaEl);
       }
 
+      // Repérer dans l'arbre circulaire (uniquement les personnes ayant un Sosa,
+      // seules celles-ci apparaissent dans l'éventail).
+      if (r.sosa != null) {
+        const targetBtn = el('button', 'result-target-btn');
+        targetBtn.type = 'button';
+        targetBtn.title = 'Repérer dans l’arbre circulaire';
+        targetBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>';
+        targetBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          hideDropdown();
+          searchInput.value = '';
+          goHome();
+          CircularTree.highlight(r.sosa);
+        });
+        item.appendChild(targetBtn);
+      }
+
       item.addEventListener('click', () => selectPerson(r.id));
       searchDrop.appendChild(item);
     });

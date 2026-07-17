@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Une famille marseillaise</title>
-  <link rel="stylesheet" href="src/ui/css/style.css?v=20">
+  <link rel="stylesheet" href="src/ui/css/style.css?v=25">
   <link rel="stylesheet" href="src/ui/leaflet/leaflet.css">
 </head>
 <body>
@@ -86,6 +86,12 @@
   <!-- Tooltip arbre -->
   <div id="ct-tooltip" class="ct-tooltip"></div>
 
+  <!-- Fenêtre flottante : détail de la personne repérée (violet) dans l'arbre -->
+  <div id="ct-highlight-panel" class="ct-highlight-panel" hidden role="dialog" aria-label="Personne repérée">
+    <button id="ct-highlight-panel-close" class="ct-highlight-panel__close" type="button" aria-label="Fermer">✕</button>
+    <div id="ct-highlight-panel-content" class="ct-highlight-panel__content"></div>
+  </div>
+
   <!-- Lightbox plein écran -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image en plein écran">
     <img id="lightbox-img" class="lightbox__img" src="" alt="">
@@ -94,11 +100,11 @@
 
   <script src="src/ui/leaflet/leaflet.js"></script>
   <script src="src/ui/js/api.js?v=4"></script>
-  <script src="src/ui/js/components.js?v=11"></script>
+  <script src="src/ui/js/components.js?v=12"></script>
   <script src="src/ui/js/editor.js?v=8"></script>
-  <script src="src/ui/js/circular-tree.js?v=2"></script>
+  <script src="src/ui/js/circular-tree.js?v=6"></script>
   <script src="src/ui/js/map-view.js?v=12"></script>
   <script src="src/ui/js/global-map.js?v=1"></script>
-  <script src="src/ui/js/app.js?v=10"></script>
+  <script src="src/ui/js/app.js?v=11"></script>
 </body>
 </html>
