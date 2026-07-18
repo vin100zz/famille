@@ -16403,18 +16403,18 @@
             "naissance": {
                 "date": "08 AUG 1696",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "deces": {
                 "date": "28 APR 1758",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "professions": [
@@ -16424,9 +16424,9 @@
             "residences": [
                 {
                     "lieu": {
-                        "brut": "Allauch, 13, Bouches du Rhône, , ,",
                         "ville": "Allauch",
-                        "dept_num": "13"
+                        "dept_num": "13",
+                        "brut": "Allauch, 13"
                     }
                 }
             ],
@@ -16439,19 +16439,19 @@
             "naissance": {
                 "date": "03 JUN 1696",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , , Les Olives",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "deces": {
                 "date": "24 JUL 1771",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Quartier de Pons",
-                    "adresse": "Quartier de Pons",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "adresse": "Quartier de Pons",
+                    "dept_num": "13",
+                    "brut": "Allauch, Quartier de Pons, 13"
                 }
             },
             "sosa": 451
@@ -87195,10 +87195,10 @@
             "mariage": {
                 "date": "27 MAY 1721",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "commentaires": [
@@ -87206,22 +87206,41 @@
             ],
             "documents": [
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
                     "contenu": [
                         [
                             {
-                                "type": "TEXTE",
-                                "fichier": "Le 27 mai 1721 à St-Julien : «J'ay épousé en face de notre Ste-Mère l'Église...» :"
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_clement_ricard/registre.jpg"
                             }
-                        ],
+                        ]
+                    ]
+                },
+                {
+                    "contenu": [
                         [
+                            {
+                                "type": "IMAGE",
+                                "fichier": ""
+                            },
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/12_castelin/1_pierre_castelin/9e/9e_clement_ricard/450M.jpg"
                             }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "L'an que dessus le vingt septième du mois de may<br/>après trois publications dans cette paroisse sans avoir découvert<br/>aucun empêchement ayant vu le certificat du prêtre desservant<br/>le quartier des Ollives portant qu'il a publié le même mariage<br/>sans avoir découvert aucun empêchement et que le père et la mère de<br/>Jean Clément que l'époux et le père et la mère de Jeanne<br/>Ricarde sont aussi <b>morts dans ce temps contagieux</b> en datte du<br/>26 may 1721 signé Alard prêtre après avoir<br/>demandé le consentement des parties et de leurs proches parents<br/><b>j'ay épousé du présent en face de nôtre Ste-Mère l'Église</b> <u>Jean<br/>Clément</u> fils de feu Guillaume et de feue Susanne Durbec<br/>du quartier des <b>Ollives</b>, terroir de Marseille d'une part et hon-<br/>nête femme <u>Jeanne Ricard</u> veuve de Jérôme Barthélémi, fille<br/>de feu Matthieu et de feue Madeleine Clément du même<br/>quartier d'autre, en présence de messires Urbain Borrely prêtre<br/>Jean Baptiste Ollive, ménager, messire Louis Natte, bourgeois, Pierre Durbec<br/>bourgeois, lesquels ont signé avec moy."
+                            }
                         ]
                     ],
                     "titre": {
-                        "label": ""
+                        "label": "Le 27 mai à St-Julien : «J'ay épousé en face de notre Ste-Mère l'Église...» :",
+                        "annee": 1721
                     }
                 }
             ]
