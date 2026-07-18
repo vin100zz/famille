@@ -21,6 +21,7 @@ function toggleGlobalMap(skipHistory) {
     globalMapScreen.hidden = false;
     globalMapBtn.hidden = true;   // pas d'intérêt à "voir la carte" quand on y est déjà
     _showHomeBtn(true);           // permet de revenir à l'accueil depuis la carte
+    CircularTree.clearHighlight();
     GlobalMap.open(globalMapScreen);
     if (!skipHistory) history.pushState({ map: true }, '', '#map');
   } else {
@@ -304,6 +305,7 @@ async function loadPerson(id) {
   mainEl.hidden    = false;
   _showHomeBtn(true);
   CircularTree.showControls(false);
+  CircularTree.clearHighlight();
   personView.innerHTML = '';
   personView.appendChild(txt('div', 'loading', 'Chargement…'));
 
