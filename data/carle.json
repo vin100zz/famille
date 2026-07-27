@@ -64421,11 +64421,11 @@
             "prenom": "Yvonne",
             "sexe": "F",
             "deces": {
-                "date": "02 JAN 1736",
+                "date": "28 JAN 1736",
                 "lieu": {
-                    "brut": "Rohan, 56",
                     "ville": "Rohan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Rohan, 56"
                 }
             }
         },
@@ -64437,17 +64437,17 @@
             "naissance": {
                 "date": "04 JUL 1665",
                 "lieu": {
-                    "brut": "Bréhan, 56",
                     "ville": "Bréhan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Bréhan, 56"
                 }
             },
             "deces": {
                 "date": "20 APR 1743",
                 "lieu": {
-                    "brut": "Rohan, 56",
                     "ville": "Rohan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Rohan, 56"
                 }
             }
         },
@@ -64459,17 +64459,17 @@
             "naissance": {
                 "date": "23 SEP 1663",
                 "lieu": {
-                    "brut": "Bréhan, 56",
                     "ville": "Bréhan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Bréhan, 56"
                 }
             },
             "deces": {
                 "date": "17 JAN 1708",
                 "lieu": {
-                    "brut": "Bréhan, 56",
                     "ville": "Bréhan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Bréhan, 56"
                 }
             }
         },
@@ -65301,16 +65301,16 @@
             "sexe": "F"
         },
         "I7898": {
-            "nom": "BUSCHER",
-            "prenom": "Gilles",
             "sexe": "M",
-            "sosa": 342
+            "sosa": 342,
+            "nom": "BUSCHET",
+            "prenom": "Gilles"
         },
         "I7899": {
-            "nom": "VAUGOYEAU",
-            "prenom": "Marie",
             "sexe": "F",
-            "sosa": 343
+            "sosa": 343,
+            "nom": "VOGOIAU",
+            "prenom": "Marie"
         },
         "I7900": {
             "nom": "SAULNIER",
@@ -65640,25 +65640,89 @@
             "nom": "JARNO",
             "prenom": "Armel",
             "sexe": "M",
-            "sosa": 704
+            "sosa": 704,
+            "naissance": {
+                "date": "10 jul 1622",
+                "lieu": {
+                    "ville": "Guillac",
+                    "dept_num": "56",
+                    "brut": "Guillac, 56"
+                }
+            },
+            "deces": {
+                "date": "08 aug 1684",
+                "lieu": {
+                    "ville": "Guillac",
+                    "dept_num": "56",
+                    "brut": "Guillac, 56"
+                }
+            }
         },
         "I7939": {
             "nom": "LECLERC",
             "prenom": "Perrine",
             "sexe": "F",
-            "sosa": 705
+            "sosa": 705,
+            "naissance": {
+                "date": "26 mar 1626",
+                "lieu": {
+                    "ville": "Guillac",
+                    "dept_num": "56",
+                    "brut": "Guillac, 56"
+                }
+            },
+            "deces": {
+                "date": "03 sep 1696",
+                "lieu": {
+                    "ville": "Guillac",
+                    "dept_num": "56",
+                    "brut": "Guillac, 56"
+                }
+            }
         },
         "I7940": {
             "nom": "LERAY",
             "prenom": "Pierre",
             "sexe": "M",
-            "sosa": 706
+            "sosa": 706,
+            "naissance": {
+                "date": "25 nov 1625",
+                "lieu": {
+                    "ville": "Guégon",
+                    "dept_num": "56",
+                    "brut": "Guégon, 56"
+                }
+            },
+            "deces": {
+                "date": "09 may 1692",
+                "lieu": {
+                    "ville": "Guégon",
+                    "dept_num": "56",
+                    "brut": "Guégon, 56"
+                }
+            }
         },
         "I7941": {
             "nom": "DANET",
             "prenom": "Guillemette",
             "sexe": "F",
-            "sosa": 707
+            "sosa": 707,
+            "naissance": {
+                "date": "30 may 1638",
+                "lieu": {
+                    "ville": "Guégon",
+                    "dept_num": "56",
+                    "brut": "Guégon, 56"
+                }
+            },
+            "deces": {
+                "date": "09 jun 1701",
+                "lieu": {
+                    "ville": "Guégon",
+                    "dept_num": "56",
+                    "brut": "Guégon, 56"
+                }
+            }
         },
         "I7942": {
             "nom": "LERAY",
@@ -65676,13 +65740,44 @@
             "nom": "JARNO",
             "prenom": "Jan",
             "sexe": "M",
-            "sosa": 352
+            "sosa": 352,
+            "naissance": {
+                "date": "28 nov 1667",
+                "lieu": {
+                    "ville": "Guillac",
+                    "dept_num": "56",
+                    "brut": "Guillac, 56"
+                }
+            },
+            "deces": {
+                "date": "30 sep 1732",
+                "lieu": {
+                    "ville": "St-Servant",
+                    "dept_num": "56",
+                    "brut": "St-Servant, 56"
+                }
+            }
         },
         "I7945": {
             "nom": "LE RAY",
             "prenom": "Janne",
             "sexe": "F",
-            "sosa": 353
+            "sosa": 353,
+            "naissance": {
+                "date": "12 feb 1656",
+                "lieu": {
+                    "ville": "Guégon",
+                    "dept_num": "56",
+                    "brut": "Guégon, 56"
+                }
+            },
+            "deces": {
+                "date": "23 oct 1733",
+                "lieu": {
+                    "ville": "St-Servant",
+                    "brut": "St-Servant"
+                }
+            }
         },
         "I7946": {
             "nom": "MANDART",
@@ -65818,13 +65913,29 @@
             "nom": "PORTALIER",
             "prenom": "Claude",
             "sexe": "M",
-            "sosa": 500
+            "sosa": 500,
+            "deces": {
+                "date": "25 dec 1752",
+                "lieu": {
+                    "ville": "Landos",
+                    "dept_num": "43",
+                    "brut": "Landos, 43"
+                }
+            }
         },
         "I7976": {
             "nom": "COMTE",
             "prenom": "Marie",
             "sexe": "F",
-            "sosa": 501
+            "sosa": 501,
+            "deces": {
+                "date": "18 jan 1786",
+                "lieu": {
+                    "ville": "Landos",
+                    "dept_num": "43",
+                    "brut": "Landos, 43"
+                }
+            }
         },
         "I7978": {
             "nom": "d'APCHIER",
@@ -65918,17 +66029,7 @@
             "nom": "FABRE",
             "sexe": "M",
             "sosa": 632,
-            "prenom": "Jean-Baptiste",
-            "residences": [
-                {
-                    "date": "bef 1715",
-                    "lieu": {
-                        "ville": "Pignans",
-                        "dept_num": "83",
-                        "brut": "Pignans, 83"
-                    }
-                }
-            ]
+            "prenom": "Jean-Baptiste"
         },
         "I7990": {
             "nom": "CHAMBEIRONE",
@@ -66207,6 +66308,154 @@
             "nom": "LOCHARD",
             "sexe": "M",
             "sosa": 1402
+        },
+        "I8041": {
+            "nom": "LOCHARD",
+            "prenom": "François",
+            "sexe": "M",
+            "sosa": 1402
+        },
+        "I8042": {
+            "nom": "COCONNIER",
+            "prenom": "Roberte",
+            "sexe": "F",
+            "sosa": 1403
+        },
+        "I8043": {
+            "nom": "PERRAULT",
+            "prenom": "Jean",
+            "sexe": "M",
+            "sosa": 1404
+        },
+        "I8044": {
+            "nom": "MARCHAND",
+            "prenom": "Louyse",
+            "sexe": "F",
+            "sosa": 1405
+        },
+        "I8045": {
+            "nom": "CHESNEAU",
+            "prenom": "Michel",
+            "sexe": "M",
+            "sosa": 1406
+        },
+        "I8046": {
+            "nom": "BELIER",
+            "prenom": "Estiennette",
+            "sexe": "F",
+            "sosa": 1407
+        },
+        "I8047": {
+            "nom": "JARNO",
+            "prenom": "Jean",
+            "sexe": "M",
+            "sosa": 1408
+        },
+        "I8048": {
+            "nom": "HOSSART",
+            "prenom": "Jeanne",
+            "sexe": "F",
+            "sosa": 1409
+        },
+        "I8049": {
+            "nom": "LECLERC",
+            "prenom": "Louis",
+            "sexe": "M",
+            "sosa": 1410
+        },
+        "I8050": {
+            "nom": "DANIEL",
+            "prenom": "Louise",
+            "sexe": "F",
+            "sosa": 1411
+        },
+        "I8051": {
+            "nom": "JARNO",
+            "prenom": "Armel",
+            "sexe": "M",
+            "sosa": 704
+        },
+        "I8052": {
+            "nom": "LE CLAIR",
+            "prenom": "Perrine",
+            "sexe": "F",
+            "sosa": 705
+        },
+        "I8053": {
+            "sexe": "M",
+            "sosa": 706
+        },
+        "I8054": {
+            "sexe": "F",
+            "sosa": 707
+        },
+        "I8055": {
+            "nom": "LERAY",
+            "prenom": "Pierre",
+            "sexe": "M",
+            "sosa": 1412
+        },
+        "I8056": {
+            "nom": "VIANET",
+            "prenom": "Marie",
+            "sexe": "F",
+            "sosa": 1413
+        },
+        "I8057": {
+            "nom": "DANET",
+            "prenom": "Julien",
+            "sexe": "M",
+            "sosa": 1414
+        },
+        "I8058": {
+            "nom": "LEQUER",
+            "prenom": "Jacquine",
+            "sexe": "F",
+            "sosa": 1415
+        },
+        "I8059": {
+            "sexe": "M",
+            "sosa": 342
+        },
+        "I8060": {
+            "sexe": "F",
+            "sosa": 343
+        },
+        "I8061": {
+            "nom": "MANDART",
+            "prenom": "Pierre",
+            "sexe": "M",
+            "sosa": 708
+        },
+        "I8062": {
+            "nom": "GUILLOUIR",
+            "prenom": "Janne",
+            "sexe": "F",
+            "sosa": 709
+        },
+        "I8063": {
+            "nom": "FABRE",
+            "prenom": "André",
+            "sexe": "M",
+            "sosa": 1264
+        },
+        "I8064": {
+            "nom": "CHABERT",
+            "prenom": "Marguerite",
+            "sexe": "F",
+            "sosa": 1265
+        },
+        "I8065": {
+            "nom": "CHABEYRONNE",
+            "prenom": "François",
+            "sexe": "M",
+            "sosa": 1266
+        },
+        "I8066": {
+            "nom": "CHAMBEYROUNE",
+            "prenom": "Isabeau",
+            "sexe": "F",
+            "sosa": 1267
         }
     },
     "familles": {
@@ -75235,6 +75484,22 @@
             },
             "commentaires": [
                 "Jeanne Berlu est la marraine de son petit-fils Jean Traversin. Elle est \"veuve de Antoine Jullien maître tailleur d'habits\". (03/02/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1757,
+                        "label": "9 août à Lyon paroisse St-Nizier : Naissance de leur petit-fils Jean TRAVERSAINT"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0_2_a_6/0_6e_generation/6e_traversaint_gueillet/38N_detail.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F184": {
@@ -112044,15 +112309,10 @@
             "documents": [
                 {
                     "titre": {
-                        "label": "Les ancêtres de Marie Houédé : 10e génération :"
+                        "label": "Vers 1656 : naissance de  Yvonne BOYPRE (acte de sépulture)"
                     },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Sommaire :"
-                            }
-                        ]
+                        []
                     ]
                 },
                 {
@@ -112066,7 +112326,7 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...présents au convoy Nicolas<br/>LE HOUDÉ, son fils, Marie PICHART..."
+                                "fichier": "L'an de grace mil sept cent trente six le vingt<br/>huit janvier, a esté inhumé par moy soussigné recteur<br/>le corps d'Yvonne Boybre apres avoir receu<br/>le st viatique le sacrement d'extreme-onction agée<br/>d'environ quatre vingt ans, decedée du jour precedent<br/>en sa maison a La Villeneuf, presents au convoy Nicolas<br/>Le Houdé son fils, Marie Pichard, Pierre Gaulton et<br/>plusieurs autres qui ont declarés ne scavoir signer<br/>Pasques plunier Pr"
                             }
                         ]
                     ],
@@ -112084,7 +112344,8 @@
                 "date": "26 FEB 1688",
                 "lieu": {
                     "ville": "Bréhan",
-                    "dept_num": "56"
+                    "dept_num": "56",
+                    "brut": "Bréhan, 56"
                 }
             },
             "enfants": [
@@ -112093,17 +112354,88 @@
             "documents": [
                 {
                     "titre": {
-                        "label": ""
+                        "annee": 1663,
+                        "label": "23 septembre, Bréhan : baptême de Louise DOLO"
                     },
                     "contenu": [
                         [
                             {
-                                "type": "TEXTE",
-                                "fichier": "1663 23 septembre, Bréhan : baptême de Louise DOLO ...de Pierre et de Françoise TAVEL... 1665 4 juillet, Bréhan : baptême de Guillaume PICHART 1688 26 février : le  mariage"
-                            },
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/10e/755N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "label": "4 juillet, Bréhan : baptême de Guillaume PICHART",
+                        "annee": 1665
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/10e/754N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1688,
+                        "label": "26 février : le  mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/10e/754M.jpg"
+                            }
+                        ],
+                        [
                             {
                                 "type": "TEXTE",
-                                "fichier": "1708 17 janvier, Bréhan : mort de Louise DOLO (45 ans) Louise DOLO âgée de quarante et quatre ans au village de Queuvré... 1743 20 avril, Rohan (St-Samson) : mort de Guillaume PICHART (78 ans) ...agé d'environ 80 ans..."
+                                "fichier": "Le vingt et sixiesme jour du mois de fevrier mil<br/>Six centz quatre vingts huit, apres les fiançailles<br/>et la publication des bans deument faites aux<br/>prosnes de mes grandes messes de mariage<br/>dentre Guillaume Pichart et Louise Dollo tout<br/>deux decrettez par la jurisdiction de Timadeuc, pareille<br/>publicaon d'entre Pierre Georget aagé de vingt Six<br/>ans et Ollive Meilleur decrettee par la jurisdiction<br/>de La Cheze tous de cette paroisse de Brehandloudeac,<br/>Scavoir la premiere publicaon le jour huictiesme de<br/>fevrier cinquiesme dimanche d'après les roys, et la<br/>la seconde et troiziesme publication les deux<br/>dimanches consecutifs sans aucune oppoon canonique<br/>ou civile venue à ma connoissance, Je soubsigne<br/>Recteur de Brehand Leurs ay administré la bénédiction<br/>nuptialle selon les formes prescrittes par la sainte<br/>Eglise, en presence de Jan Danet, Yvonne Meilleur,<br/>Françoise Ferten, et Janne Georgett, Pierre Garault,<br/>Allain Gaultier et Jan Pichart qui ne signent<br/>Pierre Guilloux<br/>p. r"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1708,
+                        "label": "17 janvier, Bréhan : mort de Louise DOLO (45 ans) "
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/10e/755D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Louise DOLO âgée de quarante et quatre ans au village de Queuvré..."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1743,
+                        "label": "20 avril, Rohan (St-Samson) : mort de Guillaume PICHART (78 ans)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/8_nouvel/47_marie_houede/10e/754D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "...agé d'environ 80 ans..."
                             }
                         ]
                     ]
@@ -114260,13 +114592,14 @@
             "documents": [
                 {
                     "titre": {
-                        "label": ""
+                        "annee": null,
+                        "label": "Leurs noms sont mentionnés dans l'acte de mariage de leur fille Marie BUSCHET avec Louis POITEVIN (1730 à Cherré)"
                     },
                     "contenu": [
                         [
                             {
-                                "type": "TEXTE",
-                                "fichier": "Pas de documents"
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/6_tesse/42_jean_tesse/8e/170M_detail_1.jpg"
                             }
                         ]
                     ]
@@ -114541,6 +114874,10 @@
                             {
                                 "type": "TEXTE",
                                 "fichier": "...Jehanne fille de François Lochard et Roberte Cognonnier [Coconnier].."
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Jehanne fille de Françoys Lochard et Roberte<br/>Cognonnier son espouse fut baptizee le dimanche<br/>vingte troiziesme jo de may ses parains Guillaume<br/>Cognonnier et Jehanne Bellanger femme de Isaac<br/>Besnard sa marainne baptizee p moy Francoys de<br/>Kaderly pbre curé Sethancre"
                             }
                         ]
                     ],
@@ -114611,7 +114948,7 @@
                         ]
                     ],
                     "titre": {
-                        "label": "Baptème de Etienne PERRAULT",
+                        "label": "10 mai, Marigné (49) : Baptème de Etienne PERRAULT",
                         "annee": 1615
                     }
                 },
@@ -114625,17 +114962,22 @@
                         ],
                         [
                             {
+                                "type": "TEXTE",
+                                "fichier": "...le mariage entre<br/>Estienne PERAULT fils de défunt<br/>Jean PERAULT et de défunte Louise<br/>LE MARCHAN paroissien de Marigné<br/>d'une part et Renée CHESNEAU fille<br/>de Michel CHESNEAU et d'Estiennette<br/>BELIER paroissienne de cete paroisse<br/>Témoins : Jean BERGER? et André PERIESE?, paroissiens de Marigné,<br/>le dit père de la mariée et Fi? THIBAULT?,<br/>de la paroisse."
+                            },
+                            {
                                 "type": "IMAGE",
                                 "fichier": "0b_au_dela_6e_paternel/6_tesse/43_renee_saulnier/10e/702M_1.jpg"
                             },
                             {
                                 "type": "TEXTE",
-                                "fichier": "...le mariage entre<br/>Estienne PERAULT fils de défunt<br/>Jean PERAULT et de défunte Louise<br/>LE MARCHAN paroissien de Marigné<br/>d'une part et Renée CHESNEAU fille<br/>de Michel CHESNEAU et d'Estiennette<br/>BELIER paroissienne de cete paroisse<br/>Témoins : Jean BERGER? et André PERIESE?, paroissiens de Marigné,<br/>le dit père de la mariée et Fi? THIBAULT?,<br/>de la paroisse."
+                                "fichier": "Signature d'Etienne Perrault",
+                                "align": "center"
                             }
                         ]
                     ],
                     "titre": {
-                        "label": "Mariage",
+                        "label": " 23 septembre, Cherré (49) : le mariage",
                         "annee": 1649
                     }
                 },
@@ -115513,44 +115855,113 @@
             "documents": [
                 {
                     "titre": {
-                        "label": "Les ancêtres de Renée SAULNIER : 11e génération"
+                        "label": "10 juillet, Guillac (56) : baptême de Armel JARNO",
+                        "annee": 1622
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/704N.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "Sommaire :<br/>- [1408/1409] Jan JARNO & Janne HOSSART\n- [1412/1413] Yves LERAY & Maryse VYANNEY"
+                                "fichier": "...fut baptisé...<br/>Armagillun JARNO ... Joannia filium et Joanna HOSSART ...<br/>le parrain fut Armagillum HOSSART et la marraine Armagilla<br/>BRUBAN<br/> \n\t\t\t\t Note : Armel est un prénom breton, adapté en latin en Armagilus, \nécrit aussi Armaël, Ermel ou Arzel pour les formes masculines ; Armelle,\n Armela (plus rarement Armaela), ou Arzela (plus rarement Arzaela) pour \nles formes féminines. (Wikipedia)"
                             }
                         ]
                     ]
                 },
                 {
                     "titre": {
-                        "label": ""
+                        "label": "26 mars, Guillac : baptême de Perrine LECLERC",
+                        "annee": 1626
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/705N.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "1592 Baptème de Jan JARNO le 25 juillet à Guillac (56) ... dudit Guillac Jan fils Johan Jarno et Janne Jagu sa femme... 8 mai 1598, Guillac : baptême de Janne HOSSART ...fut baptisée ...\n\t\t\t\t ... Janne HOSSART fille de Guillaume HOSSART et Benoyste BRUBAN..."
+                                "fichier": "En marge : Perrine LECLERC<br/>... fut baptisée<br/> ? LECLERC fille de Ludovini et Ludovina DANIEL"
                             }
                         ]
                     ]
                 },
                 {
                     "titre": {
-                        "label": "Le mariage : ?"
+                        "annee": 1640,
+                        "label": " Le mariage : 17 avril, Guillac"
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/704M.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "6 juillet 1652 : décès de Jan JARNO Jan JARNO... ... fut ensépulturé dans l'église du dit Guillac... Décès de Janne HOSSART : ?"
+                                "fichier": "Le 17 avril 1640...<br/>Armel JARNO et Perrine LECLERC..."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1684,
+                        "label": "8 août, Guillac : décès de Armel JARNO"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/704D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "...Armel JARNO<br/>...fut inhumé dans l'église de Glar..."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1696,
+                        "label": "3 septembre, Guillac : décès de Perrine LECLERC"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/705D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Perrine LE CLERC...<br/>fut inhumée en l'église de Glar.."
                             }
                         ]
                     ]
                 }
-            ]
+            ],
+            "mariage": {
+                "date": "17 apr 1640",
+                "lieu": {
+                    "ville": "Guillac",
+                    "dept_num": "56",
+                    "brut": "Guillac, 56"
+                }
+            }
         },
         "F1789": {
             "mari": "I7940",
@@ -115558,27 +115969,145 @@
             "documents": [
                 {
                     "titre": {
-                        "label": ""
+                        "label": "25 novembre, Guégon : naissance de Pierre LERAY",
+                        "annee": 1625
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/706N.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "10 juillet 1622, Guillac (56) : baptême de Armel JARNO ...fut baptisé... Armagillun JARNO ... Joannia filium et Joanna HOSSART ... le parrain fut Armagillum HOSSART et la marraine Armagilla BRUBAN Note : Armel est un prénom breton, adapté en latin en Armagilus, écrit aussi Armaël, Ermel ou Arzel pour les formes masculines ; Armelle, Armela (plus rarement Armaela), ou Arzela (plus rarement Arzaela) pour les formes féminines. (Wikipedia) 26 mars 1626, Guillac : baptême de Perrine LECLERC En marge : Perrine LECLERC ... fut baptisée ? LECLERC fille de Ludovini et Ludovina DANIEL"
+                                "fichier": "Pierre LERAY fils d'Yve et Marie VIANET ...<br/>a été baptisé par ...<br/>... de Guégon..."
                             }
                         ]
                     ]
                 },
                 {
                     "titre": {
-                        "label": "Le mariage : 17 avril 1640, Guillac",
-                        "annee": 1640
+                        "label": "30 mai 1638, Guégon (56) :  baptême de Guillemette DANET ",
+                        "annee": 1638
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/707N.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "Le 17 avril 1640...<br/>Armel JARNO et Perrine LECLERC...<br/>-----------------------------------------------------------8 août 1684, Guillac : décès de Armel JARNO<br/>...Armel JARNO<br/>...fut inhumé dans l'église du Glar...<br/>---------------------------------------------------3 septembre 1696, Guillac : décès de Perrine LECLERC<br/>Perrine LE CLERC...<br/>fut inhumée en l'église de Glar...<br/><br/>------------------------------------------------------------------------------------------------------[706/707] Pierre LERAY & Guillemette DANET<br/>Leur naissance<br/>25 novembre 1625, Guégon : naissance de Pierre LERAY<br/>Pierre LERAY fils d'Yve et Marie VIANET ...<br/>a été baptisé par ...<br/>... de Guégon...<br/><br/>---------------------------------------------------Pour le baptême de Guillemette DANET deux possibilités :<br/>30 mai 1656, Guégon (56):<br/>... baptisé dans l'église<br/>de Guégon Guillemette DANET fille Jullien et<br/>Anne LEQUER ? ...17 septembre 1640, Cruguel (56)<br/>Guillemette DANET fille de François DANET et<br/>Julienne DESTOUCHES ... baptisé à Cruguel<br/>...le dix septième jour<br/>de septembre an mil six cent quarante<br/><br/><br/>----------------------------------------------------------------Le mariage : ?<br/>Pierre LERAY et Guillemette DANET ont un enfant, Julienne le 27 février 1654 (Louis LERAY est le prêtre)<br/>----------------------------------------------------------------Leur décès<br/>9 mai 1692, Guégon : décès de Pierre LERAY<br/>Le 9e jour de may de l'an 1692 fut enterré le corps de<br/>Pierre LERAY du village des ?...<br/>...fut enterré en la dernière tombe du...<br/>----------------------------------------------------------------9 juin 1701, Guégon : décès de Guillemette DANET<br/>L'an de grâce mille sept cent un le neuvième jour du mois de<br/>juin fut enterré le corps de Guillemmette DANET du village<br/>Dessouches dans une des dernières tombes du...<br/><br/>Au-dessous : translation des ossements \"des fidèles trépassés de la paroisse\"<br/><br/>fin<br/>fin"
+                                "fichier": "Le trentiesme de may mil six cens<br/>cinquante et six a esté et receu d'estre baptizee en l'eglise<br/>de Guegon Guillemette Danet fille Jullien et<br/>Jeanne Lequer ses dits Conjoints de<br/>Coëtmur le parreing Ollivier Perrothin et<br/>Guillemette Le Bodou par Me François<br/>Nicol ainsi signé<br/><br/>François Nicol<br/>Le Bodou<br/>Perrothin"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Une autre Guillemette DANET nait à le  17 septembre 1640 mais à Cruguel (56) contrairement à tous les autres actes concernant la famille qui nous intéresse."
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/707Na.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Guillemette Danet fille de francois Danet et<br/>Jullienne Desvaux sa femme a esté baptizée a Cruguel<br/>par missire Ollivier Lequendeff le dix septiesme jour<br/>de Septembre mil six cents quarante fut<br/>parains [?jan?] [?Scheste?] et maraine damoyselle<br/>Guillemette de Le Vazin Dame de Kernillich<br/><br/>JULLIENNE [illisible]<br/>Guillemette LE VAZIN<br/>Le Guendeff<br/>Dourmil [?]"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/707N_1.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Le mariage : ?"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1651,
+                        "label": "24 décembre, Guégon : naissance de Perrine fille de Pierre et de Guillemette DANET ."
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/706_perrine.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "17 février 1654, Guégon : naissance d'une Julienne LERAY mais fille d'«André» LERAY et Guillemette DANET ; il peut s'agir d'une erreur du curé."
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/julienne_leray.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Jullienne Le Ray fille du legittime Mariage de<br/><b>André </b>Leray et Guiliuette Danet née de ce<br/>jour dix septieme fevrier 1654 a esté<br/>baptisée en léglize parochialle de Guégon par<br/>Moy soubsigné Messire Jullien Euerio [illisible]<br/>ont esté parain Yve Bonuiguand et<br/>Maraine Jullienne Kermingfoard de cette paroisse<br/>de Guegon<br/><br/>Jul: Euerio<br/>y bonuiguand<br/>Louis le Ray"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1692,
+                        "label": " 9 mai, Guégon : décès de Pierre LERAY"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/706D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1701,
+                        "label": "9 juin, Guégon : décès de Guillemette DANET"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/10e/707D.jpg"
                             }
                         ]
                     ]
@@ -115630,31 +116159,10 @@
             "documents": [
                 {
                     "titre": {
-                        "label": "Les ancêtres de Renée SAULNIER : 9e génération"
+                        "label": "12 février 1656, Guégon (56) : baptême de Janne LE RAY",
+                        "annee": 1656
                     },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "Sommaire :"
-                            }
-                        ]
-                    ]
-                }
-            ]
-        },
-        "F1792": {
-            "mari": "I7946",
-            "epouse": "I7947",
-            "documents": [
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "12 février 1656, Guégon (56) : baptême de Janne LE RAY"
-                            }
-                        ],
                         [
                             {
                                 "type": "IMAGE",
@@ -115667,19 +116175,14 @@
                                 "fichier": "Janne LE RAY fille de Pierre LE RAY et Guillemette<br/>DANET a été baptisé par moi Julien PERROTIN curé<br/>en l'église de Guégon...."
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": 1667,
+                        "label": "28 novembre, Guillac : baptême de Jan JARNO"
+                    },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "28 novembre 1667, Guillac : baptême de Jan JARNO"
-                            }
-                        ],
                         [
                             {
                                 "type": "IMAGE",
@@ -115692,19 +116195,23 @@
                                 "fichier": "Jan JARNO fils de Armel JARNO et de<br/>Perinne LE CLAIR sa femme fut baptisé..."
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": null,
+                        "label": "Le mariage : D'après Geneanet (famille RENAUD) le 11 juillet 1688 à Guégon mais pas d'actes de février à décembre 1688 dans les registres de cette paroisse."
+                    },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "30 septembre 1732, St-Servant : décès de Jan JARNO"
-                            }
-                        ],
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1732,
+                        "label": "30 septembre, St-Servant : décès de Jan JARNO"
+                    },
+                    "contenu": [
                         [
                             {
                                 "type": "IMAGE",
@@ -115717,19 +116224,14 @@
                                 "fichier": "L'an de grâce mil sept cent trente deux le trentième jour du mois de 7bre est décédé<br/>Jean JARNO du bourg de St-Gobrien agé  de moins de soixante six ans...<br/>a été inhumé dans le cimetière de St-Gobrien le premier jour d'octobre..."
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": "Leur décès :"
-                    }
+                    ]
                 },
                 {
+                    "titre": {
+                        "annee": 1733,
+                        "label": "23 octobre, St-Servant : décès de Janne LE RAY"
+                    },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "23 octobre 1733, St-Servant : décès de Janne LE RAY"
-                            }
-                        ],
                         [
                             {
                                 "type": "IMAGE",
@@ -115739,36 +116241,89 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...est décédée Janne LE RAY du bourg de ST-Gobrien agée<br/>d'environ quatre vigts ans...<br/>...son corps a été inhumé dans le cimetière<br/>de la chapelle de St-Gobrien<br/>Gobrien JARNO sait signer."
+                                "fichier": "...est décédée Janne LE RAY du bourg de ST-Gobrien agée<br/>d'environ quatre vigts ans...<br/>...son corps a été inhumé dans le cimetière<br/>de la chapelle de St-Gobrien<br/> Gobrien JARNO sait signer."
                             }
                         ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
-                },
+                    ]
+                }
+            ]
+        },
+        "F1792": {
+            "mari": "I7946",
+            "epouse": "I7947",
+            "documents": [
                 {
                     "titre": {
-                        "label": ""
+                        "label": "3 janvier 1658 : baptême de Loys MANDART",
+                        "annee": 1658
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/9e/354N.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "Leur naissance 3 janvier 1658 : baptême de Loys MANDART Loya MANDART fils Pierre et Janne GUILLOUET sa femme a été baptisé dans l'église de Guillac... Naissance de Françoise LEPRESTRE vers 1667 (acte de décès)"
+                                "fichier": "Loya MANDART fils Pierre et Janne GUILLOUET sa femme a été baptisé dans l'église de Guillac..."
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/9e/354N_detail.jpg"
+                            },
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/9e/354N_signature.jpg"
                             }
                         ]
                     ]
                 },
                 {
                     "titre": {
-                        "label": "Le mariage : ?"
+                        "label": "Naissance de Françoise LEPRESTRE vers 1667 (acte de sépulture)"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1730,
+                        "label": " 8 novembre, Guillac : décès de Loys MANDART"
                     },
                     "contenu": [
                         [
                             {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/9e/354D.jpg"
+                            }
+                        ],
+                        [
+                            {
                                 "type": "TEXTE",
-                                "fichier": "Leur décès : 8 novembre 1730, Guillac : décès de Loys MANDART Loüis MANDART agé d'environ soixante dix ans est mort dans le Seigneur et a été inhumé dans nostre église dans le droit de sépulcre... témoin : Gobrien JARNO son gendre 21 mars 1732, Guillac Françoise LEPRESTRE veuve de feu Loüis MANDART agée d'environ soixante cinq ans est morte dans le Seigneur et a été inhumée dans nostre église... dans le droit de sépulcre de trois livres. témoin : Gobrien JARNO son gendre"
+                                "fichier": "Loüis MANDART agé d'environ soixante dix ans est mort<br/>dans le Seigneur et a été inhumé dans nostre église dans <br/>le droit de sépulcre...<br/>témoin : Gobrien JARNO son gendre"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1732,
+                        "label": "21 mars 1732, Guillac : décès de Françoise LEPRESTRE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/7_jarno/44_joseph_jarno/9e/355D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Françoise LEPRESTRE veuve de feu Loüis MANDART<br/>agée d'environ soixante cinq ans est morte dans le Seigneur<br/>et a été inhumée dans nostre église...<br/>dans le droit de sépulcre de trois livres.<br/>\n témoin : Gobrien JARNO son gendre"
                             }
                         ]
                     ]
@@ -115781,15 +116336,11 @@
             "documents": [
                 {
                     "titre": {
-                        "label": ""
+                        "annee": null,
+                        "label": "Vers 1639 : naissance de Renée POCART (son acte de sépulture)"
                     },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "vers 1639 : naissance de Renée POCART (son acte de décès)"
-                            }
-                        ]
+                        []
                     ]
                 },
                 {
@@ -115823,7 +116374,7 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...Jullien BOCHET, son mary... [Il s'agit de Gilles vraisemblablement]"
+                                "fichier": "...Jullien BOCHET, son mary...  [Il s'agit de Gilles vraisemblablement]"
                             }
                         ]
                     ],
@@ -115843,7 +116394,7 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "...agé d'environ cinquante ans...[ce qui le ferait naître vers 1641]"
+                                "fichier": "...agé d'environ cinquante ans... [ce qui le ferait naître vers 1641]"
                             }
                         ]
                     ],
@@ -116709,7 +117260,10 @@
                         "annee": 1786
                     }
                 }
-            ]
+            ],
+            "mariage": {
+                "date": "bef 1740"
+            }
         },
         "F1809": {
             "mari": "I7978",
@@ -117412,35 +117966,48 @@
                 {
                     "titre": {
                         "annee": 1715,
-                        "label": "Le mariage le 28 octobre entre Jehan CHAMBEYRON et Gabrielle FABRIOLLE à Pignans"
+                        "label": "Le mariage le 28 octobre entre Jean Baptiste FABRE et Marguerite ChAMBEYRONNE à Pignans"
                     },
                     "contenu": [
                         [
                             {
                                 "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/4_traversain/2_rose_gueillet/9e/633M.jpg"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/4_traversain/2_rose_gueillet/9e/633MT.jpg"
-                            },
-                            {
-                                "type": "TEXTE",
-                                "fichier": "ChatGPT",
-                                "align": "center"
+                                "fichier": "0b_au_dela_6e_paternel/4_traversain/2_rose_gueillet/9e/632M.jpg"
                             }
                         ]
                     ]
                 }
-            ]
+            ],
+            "mariage": {
+                "date": "28 oct 1675",
+                "lieu": {
+                    "ville": "Pignans",
+                    "dept_num": "83",
+                    "brut": "Pignans, 83"
+                }
+            }
         },
         "F1816": {
             "mari": "I7991",
             "epouse": "I7992",
             "enfants": [
                 "I538"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Connus par la mention faite  dans l'acte de mariage de leur fille Claire avec Augustin FABRE (Toulon, 1715)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/4_traversain/2_rose_gueillet/9e/316M_detail3.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F1819": {
@@ -118137,9 +118704,113 @@
             ]
         },
         "F1842": {
-            "mari": "I8040",
+            "mari": "I8040"
+        },
+        "F1843": {
+            "mari": "I8041",
+            "epouse": "I8042",
             "enfants": [
                 "I7905"
+            ]
+        },
+        "F1844": {
+            "mari": "I8043",
+            "epouse": "I8044",
+            "enfants": [
+                "I7906"
+            ]
+        },
+        "F1845": {
+            "mari": "I8045",
+            "epouse": "I8046",
+            "enfants": [
+                "I7907"
+            ]
+        },
+        "F1846": {
+            "mari": "I8047",
+            "epouse": "I8048",
+            "enfants": [
+                "I7938"
+            ]
+        },
+        "F1847": {
+            "mari": "I8049",
+            "epouse": "I8050",
+            "enfants": [
+                "I7939"
+            ]
+        },
+        "F1848": {
+            "mari": "I8051",
+            "epouse": "I8052",
+            "enfants": [
+                "I7944"
+            ]
+        },
+        "F1849": {
+            "mari": "I8053",
+            "epouse": "I8054",
+            "enfants": [
+                "I7945"
+            ]
+        },
+        "F1850": {
+            "mari": "I8055",
+            "epouse": "I8056",
+            "enfants": [
+                "I7940"
+            ]
+        },
+        "F1851": {
+            "mari": "I8057",
+            "epouse": "I8058",
+            "enfants": [
+                "I7941"
+            ]
+        },
+        "F1852": {
+            "mari": "I8059",
+            "epouse": "I8060",
+            "enfants": [
+                "I710"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": ""
+                            }
+                        ]
+                    ]
+                }
+            ]
+        },
+        "F1853": {
+            "mari": "I8061",
+            "epouse": "I8062",
+            "enfants": [
+                "I7946"
+            ]
+        },
+        "F1854": {
+            "mari": "I8063",
+            "epouse": "I8064",
+            "enfants": [
+                "I7989"
+            ]
+        },
+        "F1855": {
+            "mari": "I8065",
+            "epouse": "I8066",
+            "enfants": [
+                "I7990"
             ]
         }
     }
