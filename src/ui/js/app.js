@@ -287,6 +287,12 @@ function hideDropdown() {
 async function selectPerson(id) {
   hideDropdown();
   searchInput.value = '';
+  if (_globalMapOpen) {
+    _globalMapOpen = false;
+    GlobalMap.close();
+    globalMapScreen.hidden = true;
+    globalMapBtn.hidden = false;
+  }
   history.pushState({ id }, '', '#' + encodeURIComponent(id));
   await loadPerson(id);
 }
