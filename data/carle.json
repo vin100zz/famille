@@ -8647,7 +8647,9 @@
             "naissance": {
                 "date": "08 nov 1650",
                 "lieu": {
-                    "ville": "Marseille La Major",
+                    "adresse": "La Major",
+                    "ville": "Marseille",
+                    "dept_num": "13",
                     "brut": "Marseille La Major"
                 }
             },
@@ -9753,7 +9755,9 @@
             "deces": {
                 "date": "22 jun 1708",
                 "lieu": {
-                    "ville": "Marseille St-Julien",
+                    "adresse": "St-Julien",
+                    "ville": "Marseille",
+                    "dept_num": "13",
                     "brut": "Marseille St-Julien"
                 }
             },
@@ -11814,7 +11818,8 @@
             "naissance": {
                 "date": "02 mar 1673",
                 "lieu": {
-                    "ville": "Marseille La Major",
+                    "adresse": "La Major",
+                    "ville": "Marseille",
                     "dept_num": "13",
                     "brut": "Marseille La Major, 13"
                 }
@@ -22188,7 +22193,9 @@
             "deces": {
                 "date": "11 mar 1735",
                 "lieu": {
-                    "ville": "Marseille Mazargues",
+                    "adresse": "Mazargues",
+                    "ville": "Marseille",
+                    "dept_num": "13",
                     "brut": "Marseille Mazargues"
                 }
             },
@@ -22213,7 +22220,9 @@
             "naissance": {
                 "date": "19 sep 1644",
                 "lieu": {
-                    "ville": "Marseille St-Martin",
+                    "adresse": "St-Martin",
+                    "ville": "Marseille",
+                    "dept_num": "13",
                     "brut": "Marseille St-Martin"
                 }
             },
@@ -23976,7 +23985,8 @@
             "naissance": {
                 "date": "27 nov 1643",
                 "lieu": {
-                    "ville": "Marseille St-Martin",
+                    "adresse": "St-Martin",
+                    "ville": "Marseille",
                     "dept_num": "13",
                     "brut": "Marseille St-Martin, 13"
                 }
@@ -66487,6 +66497,7 @@
                 "date": "08 nov 1616",
                 "lieu": {
                     "ville": "Daon",
+                    "dept_num": "53",
                     "brut": "Daon"
                 }
             }
@@ -94451,7 +94462,9 @@
             "mariage": {
                 "date": "20 oct 1668",
                 "lieu": {
-                    "ville": "Marseille St-Martin",
+                    "adresse": "St-Martin",
+                    "ville": "Marseille",
+                    "dept_num": "13",
                     "brut": "Marseille St-Martin"
                 }
             }
@@ -107251,7 +107264,8 @@
             "mariage": {
                 "date": "08 may 1661",
                 "lieu": {
-                    "ville": "Marseille St-Martin",
+                    "adresse": "St-Martin",
+                    "ville": "Marseille",
                     "dept_num": "13",
                     "brut": "Marseille St-Martin, 13"
                 }
@@ -123527,7 +123541,8 @@
             "mariage": {
                 "date": "21 oct 1635",
                 "lieu": {
-                    "ville": "Marseille St-Martin",
+                    "adresse": "St-Martin",
+                    "ville": "Marseille",
                     "dept_num": "13",
                     "brut": "Marseille St-Martin, 13"
                 }
