@@ -11262,17 +11262,17 @@
             "naissance": {
                 "date": "22 NOV 1624",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "31 MAR 1702",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "commentaires": [
@@ -11316,17 +11316,17 @@
             "naissance": {
                 "date": "15 FEB 1626",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "31 JAN 1699",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1837
@@ -11782,9 +11782,9 @@
             "deces": {
                 "date": "07 FEB 1719",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1844
@@ -11796,17 +11796,17 @@
             "naissance": {
                 "date": "08 AUG 1647",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "12 MAY 1732",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1845
@@ -11862,9 +11862,9 @@
             "deces": {
                 "date": "19 JUL 1692",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1847
@@ -29254,9 +29254,9 @@
             "naissance": {
                 "date": "12 OCT 1642",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
@@ -75025,13 +75025,14 @@
                     "contenu": [
                         [
                             {
-                                "type": "TEXTE",
-                                "fichier": "Registre 1685-1737  p.20/123",
-                                "align": "center"
-                            },
+                                "type": "IMAGE",
+                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/3_8e_stutz_heysel/130M.jpg"
+                            }
+                        ],
+                        [
                             {
                                 "type": "IMAGE",
-                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/3_8e_stutz_heysel/mariage_pere_stutz.jpg"
+                                "fichier": "0b_au_dela_6e_paternel/1_carle/1_ignace_carl_6g/3_8e_stutz_heysel/130M_detail.jpg"
                             }
                         ]
                     ]
@@ -75065,7 +75066,6 @@
         },
         "F151": {
             "mari": "I458",
-            "epouse": "",
             "enfants": [
                 "I457"
             ]
@@ -82405,11 +82405,134 @@
             "mariage": {
                 "date": "02 JUN 1646",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
-            }
+            },
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1624,
+                        "label": "22 novembre, Allauch : baptême de Pierre ARNAUD"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1836N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "... Pierre<br/>Arnaudus filius Spiritus et Margta Morine<br/>... "
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": ""
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1626,
+                        "label": "15 février, Allauch : baptême de Catherine CALVIN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1837N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "... baptisata<br/>fuit Catharina Calvina filia Joannis<br/>Franciscus et Magdalena Sacomane<br/>... "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1645,
+                        "label": "26 février, Allauch : Premier mariage de Catherine CALVIN avec Mathieu DURBEC. La mère de Catherine CAVIN est « Nicolae»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1837M1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "... Mathieu Durbec <br/>C fils d'Honorat et de Jeannette GUIDON<br/>... et Catharina Calvina filia<br/>Joannis Franciscus et Nicolae Socomane <br/>... "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Entre février 1645 et juin 1646 : mort de Mathieu DURBEC. "
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1646,
+                        "label": "2 juin, Allauch : mariage de Pierre ARNAUD avec Catherine CALVIN ; la mère de Catherine CALVIN est «Alyone?»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1836M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "... furent esposita<br/>parroissiali de AllauchPetrus<br/>Arnaud filium Spiritus deffunta<br/>Margta Maurine et Catharina<br/>Calvina filia Joannis Franciscus<br/>et Alyone Sacoman... "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1699,
+                        "label": "31 janvier, Allauch : mort de Catherine CALVIN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1837D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1702,
+                        "label": "31 mars, Allauch : mort de Pierre ARNAUD"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1836D.jpg"
+                            }
+                        ]
+                    ]
+                }
+            ]
         },
         "F366": {
             "mari": "I865",
@@ -82728,6 +82851,40 @@
             },
             "commentaires": [
                 "Naissance : estimation d'après mariage (au moins 16 et 18 ans).\nMariage : estimation d'après la naissance de Joseph (8 novembre 1657).\nDécès : Victor est \"feu\" lors du mariage de leur fille Marguerite le 16 septembre 1681, Barthélemie est \"survivante\" lors du mariage de leur fille Madeleine le 15 juillet 1687.   (25/08/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Les ascendants de Victor DURBEC jusqu'à la 11e génération"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "<a href=\"https://gw.geneanet.org/colombserge?lang=fr&amp;pz=nn+sosa+1&amp;nz=nn+sosa&amp;ocz=0&amp;m=A&amp;p=victor&amp;n=durbec&amp;oc=1&amp;sosab=10&amp;color=&amp;t=Z&amp;birth=on&amp;birth_place=on&amp;marr=on&amp;marr_date=on&amp;marr_place=on&amp;child=on&amp;death=on&amp;death_place=on&amp;death_age=on&amp;occu=on&amp;gen=on&amp;repeat=on&amp;v=11\" target=\"_blank\" rel=\"noopener noreferrer\">Source Geneanet</a>"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1645,
+                        "label": " 28 mai, Marseille :  Contrat de mariage de Victor DURBEC et Barthélémie JULIEN -  Sources: AD 13 Marseille - 364 E 222 f°669 "
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1678,
+                        "label": "Testament de Victor DURBEC  ; source: Deed - T/00766 - Testament 1678 - : - AD 13 - Marseille - 361 E 064 f°485 "
+                    },
+                    "contenu": [
+                        []
+                    ]
+                }
             ]
         },
         "F372": {
@@ -83005,9 +83162,9 @@
             "mariage": {
                 "date": "BEF 1674",
                 "lieu": {
-                    "brut": "Regusse ?, ?, , , ,",
                     "ville": "Regusse",
-                    "dept_num": "83"
+                    "dept_num": "83",
+                    "brut": "Regusse, 83"
                 }
             },
             "commentaires": [
@@ -83033,6 +83190,20 @@
                         "label": "13 avril 1648, Régusse : naissance de Maxime JEAN",
                         "annee": 1648
                     }
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "D'après Geneanet (Danielle CAIRE)  1671 : Contrat de mariage (avec Anne Berengier) - Régusse<br/>La source cite \"Aïeux varois\" (http://aieuxvarois.free.fr/) mais lacune entre 1639 et 1768."
+                            }
+                        ]
+                    ]
                 }
             ]
         },
@@ -83144,13 +83315,35 @@
             "mariage": {
                 "date": "02 DEC 1662",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "commentaires": [
                 "Naissance : estimation d'après  la date de leur mariage : au moins 18 et 16 ans. Les  parents de Jeanne sont de \"Castel Gombert\".\nDécès : Il sont vivants lors du mariage de leur fille Madeleine le 18 juillet 1697. Il sont \"du lieu de Château Gombert terroir de Marseille\"."
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1662,
+                        "label": "2 décembre, Allauch : le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1842N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Anno dmi 1662 die vero seconda <br/>december despousata furent per me <br/>Joannes DURBEC filius quondam<br/>Honorati et Joanna GUEYDONE <br/>avec Joanna JULIANNE filia Joanneset Margarita PINATELLE huis at parrochia de Castel Gombert\n ... mandatus et du consensus parentys et proximus ..."
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F378": {
@@ -83195,14 +83388,112 @@
             "mariage": {
                 "date": "30 APR 1667",
                 "lieu": {
-                    "brut": "Marseille Major, 13, Bouches du Rhône, , ,",
-                    "adresse": "Major",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Major",
+                    "dept_num": "13",
+                    "brut": "Marseille, Major, 13"
                 }
             },
             "commentaires": [
                 "Nous ne connaissons pas la date de naissance de Jean, mais d'après son acte de sépulture (environ 80 ans), nous pouvons la situer vers 1639. Catherine, elle, naît à Allauch le 8 août 1647. Ils se marient le 8 avril 1667 à La Major, paroisse dont Jean pourrait être originaire. Sur l'acte de mariage, le nom de Jean semble orthographié \"Sardo\", conformément à la prononciation provençale, à mi-chemin entre Sarde et Sardou... Le registre des mariage est surprenant. Un premier acte est dressé le 28 avril 1667, mais le sens en est resté obscur. Un deuxième acte, dressé le 30 avril, fait référence à un contrat de mariage et semble le véritable acte de mariage.\n\tNous connaissons trois enfants au couple, dont Benoit, notre ancêtre n°922.\n\tJean meurt le 7 février 1719 à Allauch où la famille a dû s'installer et Catherine lui survit jusqu'au 15 mai 1732 où elle s'éteint à l'âge respectable de 85 ans.  (22/09/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1647,
+                        "label": "Baptême de Catherine REYNARD"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1845N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1667,
+                        "label": "28 avril, Marseille La Major : 1er acte de mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1844M1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "ChatGPT<br/>L'an 1667 et le 28 avril ...<br/>... pour assister & [voir?] le mariage de Jean Sarde<br/>fils de Jean François et de Catherine Durbec de ...<br/>et honneste fille Catherine Reynard fille de<br/>Antoine & de feue Louise Camoin du lieu <br/>d'Allauch ayant son attestation de Mess. Curé. "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1667,
+                        "label": "30 Avril, Marseille La Major : 2e acte"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1844M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "... entre Jean Sardou fils de Jean<br/>François et de Cath Durbec et<br/>...Cath Reinard fille d'Antoine ...<br/>et de feue Louise Camoin d'Allauch<br/>... "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Analyse de ChatGPT"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "<b>28 avril 1667  :</b> acte relatif au consentement/contrat matrimonial ou à la procédure préparatoire<br/><br/><b>30 avril 1667 :</b> célébration du mariage après accomplissement des formalités"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1719,
+                        "label": "7 février, Allauch : mort de Jean SARDOU"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1844D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1732,
+                        "label": "12 mai, Allauch : mort de Catherine «AIMARD veuve de Jean SARDE»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1845D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F385": {
@@ -83326,6 +83617,45 @@
             },
             "commentaires": [
                 "Honorade naît vers 1642 si on tient compte de l'âge (50 ans) inscrit sur son acte de sépulture. Jean ne devrait pas être beaucoup plus jeune...\n\t Le mariage, non repéré, a peut être eu lieu dans la paroisse de Honorade (où?), vers 1672 et le couple se fixe à Allauch. Nous leur connaissons cinq enfants, nés à Allauch de 1673 à 1684, dont Clère, notre ancêtre n°923.\n\tJean rédige en 1691 à Allauch un testament qui nous apprend le nom de ses parents. Honorade meurt le 9 juillet 1692. Jean est toujours vivant lors du mariage de Clère le 20 juillet 1694.   (08/11/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1650,
+                        "label": "Naissance de Honorade MAUREL : pas de registres numérisés pour Simiane entre 1649 et 1668"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1672,
+                        "label": "22 novembre, Simiane-Collongue (13) : le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1846M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1692,
+                        "label": "19 juillet, Allauch : mort de Honorade MAUREL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1847D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F389": {
@@ -97498,13 +97828,43 @@
             "mariage": {
                 "date": "22 SEP 1665",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "commentaires": [
                 "Il est dit \"Hoste\". Elle : Naissance : estimation, d'après la date du mariage (au moins 16 ans) et l'âge de son mari.\nDécès de Jean Michel : son père teste en sa faveur (et d'autres) le 21 juillet 1685."
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1635,
+                        "label": "8 septembre, Allauch : baptême de Jean MICHEL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1854N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1641,
+                        "label": "5 janvier, Marseille St-Marcel : baptême de Madeleine RAMPAL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1854N.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F743": {
