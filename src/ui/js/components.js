@@ -88,6 +88,73 @@ const MONTHS_FR = {
   JUL:'juil.', AUG:'août', SEP:'sep.', OCT:'oct.', NOV:'nov.', DEC:'déc.'
 };
 
+const MONTHS_NUM = {
+  JAN:1, FEB:2, MAR:3, APR:4, MAY:5, JUN:6,
+  JUL:7, AUG:8, SEP:9, OCT:10, NOV:11, DEC:12
+};
+
+/**
+ * Extrait {year, month, day} de la première date rencontrée dans une chaîne
+ * GEDCOM ("19 NOV 1831", "ABT 1751", "BET 1740 AND 1750"…). Les qualificatifs
+ * sont ignorés — utile pour un calcul d'âge, pas pour l'affichage.
+ */
+function parseGedcomDate(dateStr) {
+  if (!dateStr) return null;
+  const s = String(dateStr).toUpperCase();
+  const m = s.match(/\b(?:(\d{1,2})\s+)?(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)?\s*(\d{4})\b/);
+  if (!m) return null;
+  return {
+    year:  parseInt(m[3], 10),
+    month: m[2] ? MONTHS_NUM[m[2]] : null,
+    day:   m[1] ? parseInt(m[1], 10) : null,
+  };
+}
+
+/**
+ * Âge à une date d'événement (décès, mariage…). Retourne { years, approx }
+ * ou null si l'une des deux années manque. `approx` est vrai si jour et/ou
+ * mois manquent d'un côté ou de l'autre (l'âge est alors calculé sur les
+ * années calendaires uniquement).
+ */
+function computeAge(birthDate, eventDate) {
+  const b = parseGedcomDate(birthDate);
+  const d = parseGedcomDate(eventDate);
+  if (!b || !d) return null;
+
+  const fullDates = !!(b.month && b.day && d.month && d.day);
+  let years = d.year - b.year;
+
+  if (fullDates && (d.month < b.month || (d.month === b.month && d.day < b.day))) {
+    years--;
+  } else if (!fullDates && b.month && d.month && d.month < b.month) {
+    years--;
+  }
+
+  if (years < 0) return null;
+  return { years, approx: !fullDates };
+}
+
+/**
+ * Construit un badge d'âge { text, title, variant } pour `person` à la date
+ * `eventDate`. `variant` ('M'/'F'/'U') sert à colorer le badge quand plusieurs
+ * badges d'âge cohabitent sur une même ligne (ex. mariage, les deux colonnes
+ * étant fusionnées). Retourne null si l'âge ne peut pas être calculé.
+ */
+function buildAgeBadge(person, eventDate, label, variant) {
+  if (!person) return null;
+  const age = computeAge(person.naissance && person.naissance.date, eventDate);
+  if (!age) return null;
+  const ageText = age.years === 0
+    ? '< 1 an'
+    : (age.approx ? '≈ ' : '') + age.years + ' an' + (age.years > 1 ? 's' : '');
+  const who = [person.prenom, person.nom].filter(Boolean).join(' ');
+  return {
+    text:    ageText,
+    title:   (who ? who + ' — ' : '') + label + (age.approx ? ' (approximatif)' : ''),
+    variant: variant,
+  };
+}
+
 function formatDate(dateStr) {
   if (!dateStr) return null;
   return String(dateStr)
@@ -223,12 +290,26 @@ function renderPersonBox(summary, onSelect) {
 
 // ── Bloc événement (date + lieu) ───────────────────────────────────────────
 
-function renderEventBlock(event) {
+function renderEventBlock(event, badges) {
   if (!event) return null;
   const wrap  = el('div', 'event-block');
   const date  = formatDate(event.date);
   const place = formatPlace(event.lieu);
-  if (date)  wrap.appendChild(txt('span', 'event-date', date));
+  const badgeList = (Array.isArray(badges) ? badges : (badges ? [badges] : [])).filter(Boolean);
+  if (date) {
+    if (badgeList.length) {
+      const row = el('div', 'event-date-row');
+      row.appendChild(txt('span', 'event-date', date));
+      badgeList.forEach(badge => {
+        const badgeEl = txt('span', 'age-badge' + (badge.variant ? ' age-badge--' + badge.variant : ''), badge.text);
+        if (badge.title) badgeEl.title = badge.title;
+        row.appendChild(badgeEl);
+      });
+      wrap.appendChild(row);
+    } else {
+      wrap.appendChild(txt('span', 'event-date', date));
+    }
+  }
   if (place) {
     const span = txt('span', 'event-place', place);
     if (event.lieu) {
@@ -348,7 +429,15 @@ function renderDecesCol(person) {
   if (!hasDeces && !hasSepulture) return col;
 
   if (hasDeces) {
-    const ev = renderEventBlock(person.deces);
+    const age = computeAge(person.naissance && person.naissance.date, person.deces.date);
+    const badge = age && {
+      text:  age.years === 0
+        ? '< 1 an'
+        : (age.approx ? '≈ ' : '') + age.years + ' an' + (age.years > 1 ? 's' : ''),
+      title:   age.approx ? 'Âge approximatif au décès' : 'Âge au décès',
+      variant: sexClass(person.sexe),
+    };
+    const ev = renderEventBlock(person.deces, badge);
     if (ev) col.appendChild(ev);
   }
 
@@ -938,7 +1027,11 @@ function renderCoupleCard(person, parents, siblings, union, otherUnions, onSelec
   if (mariage || mariageNotes.length) {
     const row = el('div', 'couple-row--full');
     row.appendChild(txt('div', 'section-bar section-bar--full', 'Mariage'));
-    const ev = renderEventBlock(mariage);
+    const mariageBadges = [
+      buildAgeBadge(left,  mariage && mariage.date, 'Âge au mariage', left  ? sexClass(left.sexe)  : null),
+      buildAgeBadge(right, mariage && mariage.date, 'Âge au mariage', right ? sexClass(right.sexe) : null),
+    ];
+    const ev = renderEventBlock(mariage, mariageBadges);
     if (ev) row.appendChild(ev);
     if (mariageNotes.length) {
       const block = renderCollapsibleComments(mariageNotes);

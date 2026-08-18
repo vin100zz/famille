@@ -697,10 +697,41 @@ mark.hl {
 
 .event-block { line-height: 1.5; }
 
+.event-date-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .event-date {
   display: block;
   font-weight: 600;
   font-size: .88rem;
+}
+
+.age-badge {
+  font-size: .68rem;
+  font-weight: 700;
+  color: #2563eb;
+  background: rgba(37,99,235,.08);
+  border: 1px solid rgba(37,99,235,.25);
+  border-radius: 20px;
+  padding: 1px 8px;
+  white-space: nowrap;
+}
+
+/* Variantes utilisées quand plusieurs badges d'âge cohabitent sur une même
+   ligne (mariage) : une couleur par époux, reprenant les teintes des
+   bandeaux d'en-tête --sex-M / --sex-F. */
+.age-badge--M {
+  color: #0e7490;
+  background: rgba(173,230,244,.35);
+  border-color: rgba(173,230,244,.9);
+}
+.age-badge--F {
+  color: #be185d;
+  background: rgba(255,193,246,.35);
+  border-color: rgba(255,193,246,.9);
 }
 
 .event-place {
