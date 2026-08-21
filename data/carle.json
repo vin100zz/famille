@@ -11969,10 +11969,10 @@
             "deces": {
                 "date": "06 NOV 1693",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , , Paroisse Saint-Julien",
-                    "adresse": "Paroisse St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Paroisse St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, Paroisse St-Julien, 13"
                 }
             },
             "commentaires": [
@@ -12005,10 +12005,10 @@
             "deces": {
                 "date": "08 SEP 1688",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , , Paroisse Saint-Julien",
-                    "adresse": "Paroisse St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Paroisse St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, Paroisse St-Julien, 13"
                 }
             },
             "commentaires": [
@@ -12104,10 +12104,10 @@
             "deces": {
                 "date": "10 SEP 1720",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , , Quartier de Saint-Julien",
-                    "adresse": "Quartier de St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Quartier de St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, Quartier de St-Julien, 13"
                 }
             },
             "commentaires": [
@@ -12149,10 +12149,10 @@
             "naissance": {
                 "date": "27 APR 1636",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "deces": {
@@ -12194,9 +12194,9 @@
             "deces": {
                 "date": "10 OCT 1713",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1869
@@ -12319,17 +12319,17 @@
             "naissance": {
                 "date": "BEF 1635",
                 "lieu": {
-                    "brut": "Allauch, 13, , , ?,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "31 MAR 1705",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , Réserve",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "professions": [
@@ -12368,9 +12368,9 @@
             "naissance": {
                 "date": "06 AUG 1635",
                 "lieu": {
-                    "brut": "Mimet, 13, Bouches du Rhône, , ,",
                     "ville": "Mimet",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Mimet, 13"
                 }
             },
             "deces": {
@@ -12524,9 +12524,9 @@
             "deces": {
                 "date": "17 NOV 1681",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , (Réserve)",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1872
@@ -12575,9 +12575,9 @@
             "deces": {
                 "date": "10 SEP 1662",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1873
@@ -12772,19 +12772,32 @@
             "deces": {
                 "date": "31 MAY 1683",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
-            "sosa": 1874
+            "sosa": 1874,
+            "naissance": {
+                "date": "1600",
+                "lieu": {
+                    "ville": "Marseille St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille St-Julien, 13"
+                }
+            }
         },
         "I959": {
             "nom": "JOUVE",
             "prenom": "Paulette",
             "sexe": "F",
             "deces": {
-                "date": "AFT 1652"
+                "date": "25 may 1672",
+                "lieu": {
+                    "ville": "Allauch",
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
+                }
             },
             "sosa": 1875
         },
@@ -12817,17 +12830,17 @@
             "naissance": {
                 "date": "18 OCT 1627",
                 "lieu": {
-                    "brut": "Peynier, 13, Bouches du Rhône, , ,",
                     "ville": "Peynier",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Peynier, 13"
                 }
             },
             "deces": {
                 "date": "21 JAN 1698",
                 "lieu": {
-                    "brut": "Peynier, 13, Bouches du Rhône, , ,",
                     "ville": "Peynier",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Peynier, 13"
                 }
             },
             "sosa": 1876
@@ -12842,9 +12855,9 @@
             "deces": {
                 "date": "18 JAN 1707",
                 "lieu": {
-                    "brut": "Peynier, 13, Bouches du Rhône, , ,",
                     "ville": "Peynier",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Peynier, 13"
                 }
             },
             "sosa": 1877
@@ -12877,9 +12890,9 @@
             "deces": {
                 "date": "17 FEB 1717",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1878
@@ -12894,9 +12907,9 @@
             "deces": {
                 "date": "28 MAY 1710",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1879
@@ -13020,9 +13033,9 @@
             "naissance": {
                 "date": "BEF 1636",
                 "lieu": {
-                    "brut": "Peypin, 13, , , ?,",
                     "ville": "Peypin",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Peypin, 13"
                 }
             },
             "deces": {
@@ -13037,9 +13050,9 @@
             "naissance": {
                 "date": "BEF 1638",
                 "lieu": {
-                    "brut": "Peypin, 13 ?, Bouches du Rhône, , ,",
                     "ville": "Peypin",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Peypin, 13"
                 }
             },
             "deces": {
@@ -13088,17 +13101,17 @@
             "naissance": {
                 "date": "27 DEC 1625",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "12 DEC 1713",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1886
@@ -13139,17 +13152,17 @@
             "naissance": {
                 "date": "17 NOV 1624",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "04 APR 1701",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1887
@@ -13551,19 +13564,19 @@
             "deces": {
                 "date": "03 JUN 1713",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "residences": [
                 {
                     "lieu": {
-                        "brut": "Saint-Julien, , , , ,",
-                        "adresse": "St-Julien",
                         "ville": "Marseille",
-                        "dept_num": "13"
+                        "adresse": "St-Julien",
+                        "dept_num": "13",
+                        "brut": "Marseille, St-Julien, 13"
                     }
                 }
             ],
@@ -13777,10 +13790,10 @@
             "naissance": {
                 "date": "20 MAY 1634",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "deces": {
@@ -14045,10 +14058,10 @@
             "deces": {
                 "date": "16 JAN 1713",
                 "lieu": {
-                    "brut": "Marseille Château Gombert, 13, Bouches du Rhône, , ,",
-                    "adresse": "Château Gombert",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Château Gombert",
+                    "dept_num": "13",
+                    "brut": "Marseille, Château Gombert, 13"
                 }
             },
             "sosa": 1900
@@ -14063,10 +14076,10 @@
             "deces": {
                 "date": "31 JUL 1707",
                 "lieu": {
-                    "brut": "Marseille Château Gombert, 13, Bouches du Rhône, , ,",
-                    "adresse": "Château Gombert",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Château Gombert",
+                    "dept_num": "13",
+                    "brut": "Marseille, Château Gombert, 13"
                 }
             },
             "sosa": 1901
@@ -29413,17 +29426,17 @@
             "naissance": {
                 "date": "17 DEC 1620",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "deces": {
                 "date": "09 OCT 1686",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "sosa": 1865
@@ -29456,7 +29469,15 @@
             "naissance": {
                 "date": "BEF 1639"
             },
-            "sosa": 1866
+            "sosa": 1866,
+            "deces": {
+                "date": "18 mar 1699",
+                "lieu": {
+                    "ville": "Allauch",
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
+                }
+            }
         },
         "I2827": {
             "nom": "MARTIN",
@@ -66734,7 +66755,14 @@
             "nom": "CARLES",
             "prenom": "Victor",
             "sexe": "M",
-            "sosa": 1858
+            "sosa": 1858,
+            "naissance": {
+                "date": "12 jun 1601",
+                "lieu": {
+                    "ville": "Marseille St-Martin",
+                    "brut": "Marseille St-Martin"
+                }
+            }
         },
         "I8075": {
             "nom": "BORREL",
@@ -67177,6 +67205,66 @@
             "prenom": "Anne",
             "sexe": "F",
             "sosa": 3667
+        },
+        "I8142": {
+            "nom": "CARLES",
+            "prenom": "Victor",
+            "sexe": "M",
+            "sosa": 3716
+        },
+        "I8143": {
+            "nom": "GAILLARD",
+            "prenom": "Marguerite",
+            "sexe": "F",
+            "sosa": 3717
+        },
+        "I8144": {
+            "nom": "CARLES",
+            "prenom": "Victor",
+            "sexe": "M",
+            "sosa": 3716
+        },
+        "I8145": {
+            "nom": "RICARD",
+            "prenom": "Pierre",
+            "sexe": "M",
+            "sosa": 3738
+        },
+        "I8146": {
+            "nom": "MAILLET",
+            "prenom": "Catherine",
+            "sexe": "F",
+            "sosa": 3739
+        },
+        "I8147": {
+            "nom": "MALLET",
+            "prenom": "Catherine",
+            "sexe": "F",
+            "sosa": 3739
+        },
+        "I8148": {
+            "nom": "GUIRAN",
+            "prenom": "Camille",
+            "sexe": "M",
+            "sosa": 3796
+        },
+        "I8149": {
+            "nom": "JULIEN",
+            "prenom": "Jeanne",
+            "sexe": "F",
+            "sosa": 3797
+        },
+        "I8150": {
+            "nom": "ROUBAUD",
+            "prenom": "Honoré",
+            "sexe": "M",
+            "sosa": 3798
+        },
+        "I8151": {
+            "nom": "BLANC",
+            "prenom": "Catherine",
+            "sexe": "F",
+            "sosa": 3799
         }
     },
     "familles": {
@@ -83790,7 +83878,41 @@
             ],
             "mariage": {
                 "date": "BET 1630 AND 1640"
-            }
+            },
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1639,
+                        "label": "Contrat de mariage"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1688,
+                        "label": "8 septembre, Marseille St-Julien : mort de «Marguerite MESTRESSE femme de François BOURREAU»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1860D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1695,
+                        "label": "Mort de François BOURRELY : lacune dans les registres numérisés de St_Julien 1688-1700"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                }
+            ]
         },
         "F393": {
             "mari": "I909",
@@ -83856,7 +83978,37 @@
             ],
             "mariage": {
                 "date": "BET 1655 AND 1660"
-            }
+            },
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1654,
+                        "label": "Un possible contrat de mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Nom époux : REY ANTOINE                    \nNom épouse :  VILLOLE CATHERINE              <br/>Année : 1654\nCote / Source : 358E-106\nNuméro de page : 1211    \n  "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1720,
+                        "label": "Pas trouvé de décès de Catherine VIEU à St-Julien"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": ""
+                            }
+                        ]
+                    ]
+                }
+            ]
         },
         "F397": {
             "mari": "I919",
@@ -83870,15 +84022,63 @@
                 "I928"
             ],
             "mariage": {
-                "date": "28 DEC 1659",
+                "date": "17 jan 1660",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , CM Allauch 408E67",
-                    "ville": "Allauch",
-                    "dept_num": "13"
+                    "ville": "Marseille La Major",
+                    "dept_num": "13",
+                    "brut": "Marseille La Major, 13"
                 }
             },
             "commentaires": [
                 "Toussaint nait en 1636 à St-Julien. Le 28 décembre 1659, par contrat de mariage signé à Allauch (408E67, à consulter...), il épouse Catherine (peut être de St-Marcel) dont le patronyme est tantôt \" Icard\" (acte de son mariage et celui de ses fils Jean Jacques et Barthélemi, baptême de Thérèse, Catherine, Barthélemi et Madeleine) tantôt \"Ricard\" (baptême de Jean Jacques et de Joseph) : c'est cette forme que nous avons retenue. L'acte de mariage n'a pas été retrouvé, ni à Allauch, ni à St-Julien.\n\tLeur premier enfant, Jean Jacques, notre ancêtre n° 934, nait le 4 avril 1661, à Allauch où ils ont dû aménager au début de l'année 1660. Le couple aura cinq autres enfants qui naîtront tous à Allauch.\n\tToussaint et Catherine sont vivants lors du mariage de leur fils Jean Jacques, le 22 septembre 1686 ; lors du décès de celui ci, le 7 mars 1710, Toussaint est \"feu\". Catherine, \"veuve de Toussaint Pinatel\", \"munie de tous les sacrements\",  meurt le 10 octobre 1713, \"âgée de 66 ans environ\". (13/10/2001).\n\n."
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1636,
+                        "label": "Naissance de Toussaint PINATEL : pas de registre numérisé à St-Julien pour 1636"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1659,
+                        "label": "Contrat de mariage : Allauch, notaires 28/12/1659 408E67 f°005"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1660,
+                        "label": "17 janvier, Marseille La Major : le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1868M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1713,
+                        "label": "Mort de Catherine RICARD"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1869D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F398": {
@@ -84097,13 +84297,66 @@
             "mariage": {
                 "date": "09 NOV 1653",
                 "lieu": {
-                    "brut": "Saint-Savournin, 13, Bouches du Rhône, , , CM Allauch 408E60",
                     "ville": "Saint-Savournin",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Saint-Savournin, 13"
                 }
             },
             "commentaires": [
                 "Jean Fouque (ou Foucou) est né vers 1635 si on tient compte de l'âge habituel (au moins 18 ans) au moment du mariage. Il est \"d'Allauch\" (acte de mariage). Françoise voit le jour le 6 août 1635 à Mimet. Leur mariage est célébré le 9 novembre 1653 à Saint-Savournin (CM Allauch du 10 octobre 1653, 408E60 à consulter).\n\t Nous ne leur connaissons aucun enfant né dans cette paroisse 1654/57), mais six à Allauch, dont Jean-Baptiste en 1658 (parrains grands-père paternel et grand-mère maternelle), Honoré en 1664, bien que le prénom de la mère indiqué sur l'acte de baptême soit \"Marguerite\" (voir note Honoré), et Catherine, notre ancêtre n°935, le 25 mars 1667.\n\tJean et Françoise sont \"laboureurs\" sur l'acte de naissance d'honoré, en 1873.\n\tJean et Françoise sont tous les deux vivants lors des mariages de leurs filles Catherine le 22 septembre 1686 et Louise le 25 janvier 1693. Le 30 octobre 1703, Jean \"Foucou\" teste à Allauch ; Françoise n'est pas \"feue\". L'acte de sépulture de Jean, le 31 mars 1705 (80 ans environ), bien que manquant de précision, est vraisemblable...  (20/08/2001)\n."
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1635,
+                        "label": "6 août, Mimet : Baptême de Françoise SAMAT"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1871N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1653,
+                        "label": "10 novembre, Allauch : [ou 10 octobre] : Contrat de mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1870M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1653,
+                        "label": "9 novembre, St-Savournin : le mariage  ; pas de registres numérisés à St-Savournin avant 1679."
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1705,
+                        "label": "31 mars, Allauch : mort de Jean FOUQUE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1870D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F405": {
@@ -84582,13 +84835,63 @@
             "mariage": {
                 "date": "03 OCT 1628",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "commentaires": [
                 "Honoré naît entre 1600 (mariage de ses parents en décembre 1599) et 1610 (18 ans au moins au mariage, sans doute  à Allauch où ses parents se sont mariés et mourront. Le 3 octobre 1628, il y épouse Anne Camoin, sensiblement du même âge que lui. Notons que son acte de sépulture la fait mourir  \"agée de 45 ans environ\"  ce qui la ferait naître vers 1617  et la marierait à 11 ans : en réalité, elle en avait au moins cinq de plus... Anne est elle aussi allaudienne. Nous connaissons huit enfants au couple : sept dont la date de baptême est précisément connue et André, notre ancêtre n°936, né vers 1629/32.\n\tAnne meurt à Allauch le 10 septembre 1662 après avoir dicté un testament la veille (!) et Honoré le 17 novembre 1681 : l'acte est à prendre avec réserve mais, d'une part, le décédé est \"âgé d'environ septante ans\" ce qui en gros correspond ; d'autre part, il s'inscrit bien entre deux dates connues : il est vivant lors du mariage de son fils André (1652) et feu lors de sa sépulture (1695). (24/06/2000)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1628,
+                        "label": "3 octobre, Allauch : le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1872M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Anno que supra ...<br/>octobris esposati... honoratis<br/>Blanqui filium Christophe et Claire<br/>Michel et Annav Camoina filia<br/>filia ... et Catharina<br/>...<br/> "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1662,
+                        "label": "10 septembre, Allauch : mort de Anne CAMOIN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1873D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1681,
+                        "label": "17 novembre, Allauch : mort de Honoré BLANC «jadis meunier»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1872D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F413": {
@@ -84782,10 +85085,109 @@
                 "I960"
             ],
             "mariage": {
-                "date": "BEF 1636"
+                "date": "1631"
             },
             "commentaires": [
                 "Il sont vivants tous deux  lors du mariage de leur fille Françoise, le 27 avril 1652. L'acte de décès de Louis Perrin, le 31 mai 1683, a été récupéré et intégré par Papa. Mais il est en très mauvais état aux archives et pratiquement illisible. (15/02/2003)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1600,
+                        "label": "St-Juilien : naissance de Louis Perrin (pas de registres numérisés)"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1624,
+                        "label": "17 avril, Allauch : 1er mariage de Louis PERRIN avec Anne MICHEL (qui meurt en 1630)"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1874M1.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "...esposati fuirent Ludovicus Perrine<br/>filius franciscus et Mrgta Jouberta <br/>et Anna Michel... "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1631,
+                        "label": "Contrat de mariage de Louis PERRIN et Paulette JOUVE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Contrat de mariage entre Louis PERRIN, fils de François PERRIN et Marguerite TOUBERT (ou JOUBERT, ou ROUBAUD),  et Paulette JOUVE, fille de Bertrand JOUVE et Alyone MICHEL, établi le 25 juillet 1631 à Allauch <br/>(Bouches-du-Rhône). Source : relevé collaboratif - contrats de mariage, Allauch, Bouches-du-Rhône - AD13, cote : 408E039, f°185. <br/>Sans doute mariés à Marseille, car le mariage n'apparaît pas dans les tables décennales 1599-1634 de la paroisse d'Allauch. "
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1672,
+                        "label": "25 mai, Allauch : Mort de Paule JOUVE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1875D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "... a été ensevelie Paule JOUVE, <br/>fame de <b>Maitre Louis PERRIN, lieutenant et juge de ce lieu</b> , âgée <br/>d'environ 65 ans, accompagnée de son dit mari et de ses beaux-fils"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1673,
+                        "label": "8 mai, Allauch : Troisième mariage de Louis PERRIN avec Madeleine TEISSIER"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1874M3.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "<b>L’an 1673 et huitième jour du mois de mai</b><br/>à cinq heures du matin par le consentement<br/>...<br/>épousés en face de notre Ste Mère l'Église Louis<br/>Perrin fils de François et Marguerite Joubert baille<br/>de ceci présent lui âgé d'environ septante et six ans<br/>et Magdaleine Teissier..."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1683,
+                        "label": "31 mai, Allauch : mort de Louis PERRIN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1874D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F425": {
@@ -84800,13 +85202,66 @@
             "mariage": {
                 "date": "11 APR 1655",
                 "lieu": {
-                    "brut": "Peynier, 13, Bouches du Rhône, , ,",
                     "ville": "Peynier",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Peynier, 13"
                 }
             },
             "commentaires": [
                 "Melchior Giraud naît vers 1628 et Anne Reynier vers 1637 (d'après les âges fournis par les actes de sépulture).\n\tMelchior et Anne se marient (acte aux AC ?) le 11 avril 1655 à Peynier dont lui est originaire. Nous leur connaissons quatre enfants : deux fils, Pierre (n°938) et Joseph (\"paysan\", \"du lieu de Peynier\" \"habitant en cette ville de Marseille\"), qui prennent femme à Allauch (1690) et à Marseille St-Ferréol (1699) ; et deux filles, Marguerite et Catherine, qui se marient dans leur paroisse de Peynier en 1683 et 1700.\n\tLes deux époux meurent à Peynier : Melchior le 21 janvier 1698 et Anne le 18 janvier 1707. (06/06/2002)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1627,
+                        "label": "10 octobre, Peynier (13) : baptême de Melchior GIRAUD"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1876N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1655,
+                        "label": "Le mariage : pas de registres numérisés pour 1655 à Peynier. Contrat de mariage  147EGG1"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "<a href=\"https://gw.geneanet.org/gaudinchris?lang=fr&amp;n=giraud&amp;p=melchior\" target=\"_blank\" rel=\"noopener noreferrer\">Source</a>"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1698,
+                        "label": "Mort de Melchior GIRAUD ; pas de registres numérisés pour 1698 à Peynier."
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1707,
+                        "label": "18 janvier, Peynier : Anne REYNIER «a rendu son âme à Dieu»."
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1877D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F428": {
@@ -84895,13 +85350,57 @@
             "mariage": {
                 "date": "19 FEB 1662",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , , CM",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "commentaires": [
                 "Barthélemi (\"Olive\" sur l'acte de sépulture) et Clère sont nés vers 1637/44 et 1645/46, compte tenu de l'âge minimum habituel au moment du mariage (18 et 16 ans) et de leur âge \"environ\" porté sur les actes de sépulture (80 et 65 ans). Leur mariage a fait l'objet d'un contrat en date du 19 février 1662 à Allauch. A consulter... Nous leur connaissons dix enfants dont Marguerite, notre ancêtre n°939, née vers 1662.  (04/10/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1662,
+                        "label": "Contrat de mariage mais pas de mariage à Allauch en 1662"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1878M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1710,
+                        "label": "28 mai, Allauch : mort de Clère AUDIBERT"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1879D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1717,
+                        "label": "17 février, Allauch : mort de Barthélémi OLIVE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1878D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F430": {
@@ -84915,10 +85414,10 @@
             "mariage": {
                 "date": "02 SEP 1653",
                 "lieu": {
-                    "brut": "Marseille St-Marcel, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Marcel",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Marcel",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Marcel, 13"
                 }
             },
             "commentaires": [
@@ -84938,19 +85437,6 @@
                         "label": "2 septembre 1653, St-Marcel : Nicolas SEBELIN épouse Jeanne ROUX",
                         "annee": 1653
                     }
-                },
-                {
-                    "titre": {
-                        "label": ""
-                    },
-                    "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "9 novembre 1653 : D'après le relevé des actes mariage entre Jean FOUQUE et Françoise SAMAT  mais pas de registres à St-Savournin avant 1654 (Archives 13)."
-                            }
-                        ]
-                    ]
                 }
             ]
         },
@@ -84994,13 +85480,33 @@
             "mariage": {
                 "date": "18 JAN 1654",
                 "lieu": {
-                    "brut": "Saint Savournin, 13, Bouches du Rhône, , , (CM Auriol)",
                     "ville": "Saint Savournin",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Saint Savournin, 13"
                 }
             },
             "commentaires": [
                 "Sébastien et Marguerite (qui sont aussi les ancêtres de Colette Chapoix) se sont mariés le 18 janvier 1654 à Saint-Savournin et ont conclu un contrat de mariage le même jour à Auriol. Sébastien est \"originaire de Peypin\". L'acte de mariage de leur fille Madeleine en date du 10 février 1679 accrédite cette information. Le premier mariage d'Anthoine indique que Marguerite Olive serait aussi originaire de la paroisse de Peypin.\n\tSébastien est déjà \"feu\" lors du premier mariage de son fils Antoine en date du 24 octobre 1678 (avec Madeleine Fouque). Lors du second, le 27 octobre 1693 (avec Marguerite Camoin), Marguerite est encore en vie, ainsi que lors du premier mariage de leur fils Esprit, le 17 novembre 1695.   (26/10/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": "Cf. notice : Qui est Colette CHAPOIX ?"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1654,
+                        "label": "Le mariage : pas de registre numérisé pour Sr-Savournin en 1654"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                }
             ]
         },
         "F438": {
@@ -85110,13 +85616,133 @@
             "mariage": {
                 "date": "16 FEB 1648",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "commentaires": [
                 "C'est un couple totalement allaudien dont nous connaissons tous les actes de la vie : Guillaume et Jeanne naissent à Allauch, ils s'y marient et y meurent... Les sept enfants que nous avons repérés, dont Marguerite, notre ancêtre n° 943, dernière Camoin de cette branche, voient tous le jour en ce même lieu. L'endroit leur a bien réussi : Jeanne meurt le 4 avril 1701, \"âgé de 80 ans\"  et Guillaume le 12 décembre 1713, à \"90 ans\". Même si les âges véritables sont de 76 et 88 ans, on peut saluer leur longévité, remarquable pour l'époque !\n\tLe 26 janvier 1692, âgé de 67 ans, Guillaume a rédigé un testament à Allauch en faveur \"de sa fille Marguerite, femme de Charles Sebelin (et non Gabriel comme inscrit sur le Relevé AG13), de son autre Marguerite (notre ancêtre n° 943), de son fils André, et des enfants de son fils défunt Antoine\". Ainsi, ces dispositions nous permettent elles de mieux situer la famille...      (26/06/2000)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1624,
+                        "label": "17 novembre, Allauch : baptême de Jeanne MICHEL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1887N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Anno dmi 1624 et die decima (septima)<br/> mensis novembris baptisa <br/>fui Jana MISCHELLA filia Lazare<br/> et Françoise BONIFAY patrimus fui <br/>Joannes Gerqfu ? matrina <br/>Magdelena amarissa per me."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1625,
+                        "label": "27 décembre, Allauch : baptême de Guillaume CAMOIN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1886N.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Anno dmi 1625 et die vigesima septima (décembre)<br/> baptistem p.m (per me)  Guillaumus CAMOIN<br/> filius Andreus et Anna TINESE,<br/> patrimus fu Petrus Cabriel, matrina vero Sebastienne Rastinier ? per me   / B.G"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1648,
+                        "label": "16 février : le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1886M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Anno 1648 die decima secta <br/>mensis februali despousati furmia en<br/> esglisia  parrosiale de Allaudio Guillaume <br/>CAMONIA filius Andreus et Anna Tinosa \nguina lo et Janna MISSOLLO filia <br/>deffudis Lazaris et Françoise BONIFA  B.G"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1701,
+                        "label": "Testament de Jeanne MICHEL - 408E139 F°220 du 15/3/1701 Allauch"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1701,
+                        "label": "4 avril, Allauch : mort d'une Jeanne MICHEL. Est-ce la bonne ?"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1887D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1887D1.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "<a href=\"https://gw.geneanet.org/bgempeler?lang=fr&amp;n=michel&amp;oc=4&amp;p=jeanne\" target=\"_blank\" rel=\"noopener noreferrer\">Sur Geneanet</a><br/>4 avril 1701 :<br/><b>Décès</b>  - Allauch, <br/>ce 4 avril 1701 a été ensevelie Jeanne MICHELLE, agée de 80 ans, femme de Guillaume CAMOIN<br/><br/>Sources: Archives en ligne - 1 E.C ou Registres paroissiaux - A.D 13 Bouches du Rhône - Internet<br/>Pas le même registre ? "
+                            }
+                        ],
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1713,
+                        "label": "12 décembre, Allauch : mort de Guillaume CAMOIN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1886D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F441": {
@@ -85161,13 +85787,27 @@
             "mariage": {
                 "date": "11 SEP 1646",
                 "lieu": {
-                    "brut": "Marseille Major, 13, Bouches du Rhône, , ,",
-                    "adresse": "Major",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Major",
+                    "dept_num": "13",
+                    "brut": "Marseille, Major, 13"
                 }
             },
             "documents": [
+                {
+                    "titre": {
+                        "annee": 1646,
+                        "label": "Première page du registre"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/registre.jpg"
+                            }
+                        ]
+                    ]
+                },
                 {
                     "contenu": [
                         [
@@ -85175,10 +85815,17 @@
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1888M.jpg"
                             }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Le XI 7bre <b>mariage</b> après les pub[lications]<br/>des bans <b>a été célébré en face de notre Sainte<br/>Mère l'Église</b> entre <u>Denis Sauvaire</u><br/>fils d'Antoine et de Marg[uri]tte<br/>Loube présents et honnête fille <u>Jeanne<br/>Courdella</u> [Cordeau] fille de Lucou et de Anne<br/>Pinatelle présents tous de cette ville<br/>en présence de François Vallatelle et ..<br/>Cazonovo, per moy "
+                            }
                         ]
                     ],
                     "titre": {
-                        "label": ""
+                        "label": "11 septembre, Marseille La Major : Denis SAUVAIRE épouse Jeanne CORDEAU ",
+                        "annee": 1646
                     }
                 }
             ]
@@ -87220,10 +87867,10 @@
             "mariage": {
                 "date": "02 JAN 1656",
                 "lieu": {
-                    "brut": "Marseille Major, 13, Bouches du Rhône, , ,",
-                    "adresse": "Major",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Major",
+                    "dept_num": "13",
+                    "brut": "Marseille, Major, 13"
                 }
             },
             "commentaires": [
@@ -87236,6 +87883,12 @@
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1890M.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "L'an 1656 et le second de janvier, <b>mariage a été<br/>célébré en face de l'Église</b> après trois publications et dispense du<br/>temps entre <u>Lazare Blanc</u> fils de feu Pierre et de Anne Bernarde<br/>de Marseille et honnête fille <u>Marg[ueri]te Barthomieu</u> (1) fille de<br/>Nicolas et de feu Marthe Roumane de Marseille iceux parents<br/>tous présents Antoine Prudan daureur et Jean Louis<br/>Fouquier benificie de l'Église de Marseille (2) témoins et de<br/>moy<br/><br/>(1) Pourtoumieue ?<br/>(2) bénéfice : charge spirituelle dotée d'un revenu, <br/>accordée par l'Église à un prêtre ou à un clerc tonsuré ( Larousse Lexis)"
                             }
                         ]
                     ],
@@ -87306,10 +87959,10 @@
             "mariage": {
                 "date": "BET 1672 AND 1673",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, , , ?,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "commentaires": [
@@ -87317,76 +87970,32 @@
             ],
             "documents": [
                 {
+                    "titre": {
+                        "annee": 1673,
+                        "label": " 29 juin :\tContrat de  Mariage (avec Honorade OLIVE) - Saint-Julien-f°25(?), Marseille Sources: - CM - 367E419 f°1206 Marseille 1673 -rubrique - CM - 383E113 f°833 Marseille 1673-acte"
+                    },
                     "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "- Jérôme ANGLES est enseveli le 3 juin 1713 à St-Julien ."
-                            }
-                        ],
+                        []
+                    ]
+                },
+                {
+                    "contenu": [
                         [
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1892D.jpg"
                             }
-                        ]
-                    ],
-                    "titre": {
-                        "label": ""
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "TEXTE",
-                                "fichier": "- Anne BENOIT est ensevelie le 11 mai 1710 (registre de St-Julien)"
-                            }
                         ],
                         [
                             {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1917D.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "Après 1658 Antoine OLLIVE épouse Anne BENOIT",
-                        "annee": 1658
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
                                 "type": "TEXTE",
-                                "fichier": "Première page du registre de 1646"
-                            }
-                        ],
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1888M.jpg"
+                                "fichier": "L'an susdit et le 4 juin a été <b>enseveli dans la tombe de ses ancêtres</b> <u>Jérôme Angles</u> fils de <br/>feu Jean âgé d'environ soixante ans décédé le jour précédent muni des sacrements<br/>accompagné de ses parents et des Frères Pénitents y présents mre Pierre Baudin prêtre<br/>François Clemens fils de Pierre et autres illitérés par moi vic[ai]re soussigné P. Baudin<br/>... François Clément signé"
                             }
                         ]
                     ],
                     "titre": {
-                        "label": "11 septembre 1646, La Major : Denis SAUVAIRE épouse Jeanne CORDEAU",
-                        "annee": 1646
-                    }
-                },
-                {
-                    "contenu": [
-                        [
-                            {
-                                "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1890M.jpg"
-                            }
-                        ]
-                    ],
-                    "titre": {
-                        "label": "2 janvier 1656, La Major : Lazare BLANC épouse Marguerite BERTHOMIEU",
-                        "annee": 1656
+                        "label": "Jérôme ANGLES est enseveli le 3 juin 1713 à Marseille St-Julien .",
+                        "annee": 1713
                     }
                 }
             ]
@@ -87501,14 +88110,34 @@
             "mariage": {
                 "date": "26 AUG 1656",
                 "lieu": {
-                    "brut": "Marseille St-Julien, 13, Bouches du Rhône, , ,",
-                    "adresse": "St-Julien",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "St-Julien",
+                    "dept_num": "13",
+                    "brut": "Marseille, St-Julien, 13"
                 }
             },
             "commentaires": [
                 "Ange naît le 20 mai 1634 à Saint-Julien. Sur l'acte de baptême, le nom de la mère et celui du parrain sont difficiles à déchiffer. Connaissant la filiation, avec de la bonne volonté, on peut deviner \"Destrade\" ou \"Strade\"... Un léger doute subsiste néanmoins sur l'attribution de l'acte, bien que la date soit cohérente avec un mariage en 1656 (22 ans).\n\tLe 26 août 1656, Ange (devenu Lange) épouse Françoise Bense (ou Bence, ou Besse, ou Benssu, ou Besesse...). Nous connaissons cinq enfants au couple (il doit y en avoir d'autres) dont Catherine (1659), première née qui, en tant que telle, reçoit ses grands-parents en baptême ; Jean et Nicolas, les jumeaux (ont-ils vécu ? A chercher...), et Thérèse, notre ancêtre n°947, qui mettra fin à la lignée Audibert en épousant André Angles...\n\tLange et Françoise disparaissent entre le 16 avril 1679 (baptême de Marthe)  et le 3 septembre 1700 (mariage de Thérèse).  (20/06/1999)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1634,
+                        "label": "Pas de registre numérisé pour les baptêmes avant 1665"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1656,
+                        "label": "Le mariage : pas de registre numérisé pour lesmariages avant 1674"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                }
             ]
         },
         "F469": {
@@ -87806,13 +88435,72 @@
             "mariage": {
                 "date": "31 AUG 1660",
                 "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , , CM (not. Gabriel Moyrenc)",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Marseille, 13"
                 }
             },
             "commentaires": [
                 "Le patronyme est écrit \"Jeulien\" dans l'acte de mariage de son fils Jean Pierre, \"Jullian\" dans les actes de baptême de ses filles et Julien (ou Jullien) dans son contrat de mariage et son acte de sépulture. Dans un souci de simplification, nous avons retenu  la forme dernière de l'évolution, \"Jullien\", relevée sur les actes de sa petite-fille Jeanne.\n\tPhilippe est né vers 1633 (\"environ 80 ans\" sur l'acte de sépulture), mais n'ayant pas trouvé son acte de baptême, nous ne savons pas de quelle paroisse il est originaire. \"Ménager de cette ville\" (Marseille), nous savons qu'il a épousé Jeanne Delestrade grâce au contrat de mariage rédigé le 31 août 1660 par Me Moyrenc notaire royal à Marseille, \"dans la maison d'habitation de Mathieu Delestrade, cartier de Cavaillon\", peut être un oncle de la mariée (non saisi). Jeanne amène \"audit Philippe Jullien\" une belle dot de \"cinq cents livres\" (à la même époque, la dot des filles de François Castelin s'élève à trois cents livres) Parmi les témoins,  son frère Jean Pierre Jullien, \"bourgeois\", ce qui dénote un milieu social élevé. Du reste, c'est le seul de la famille qui signe l'acte... Jeanne Delestrade, dont la famille paraît être originaire de Marseille \"intra-muros\" (ses parents ont aussi conclu leur contrat de mariage dans cette ville), est légèrement plus jeune ; son acte de sépulture indique 74 ans, soit une naissance vers 1633, mais ses parents ne se sont mariés qu'en 1634... Ils ont donc environ 25 à 27 ans lorsqu'ils se marient.\n\tNous leur connaissons cinq enfants : Jean Pierre né vers 1661/65, notre ancêtre n°950 et deux autres garçons, Jean et Michel, dont nous ne savons pas le lieu de naissance, et deux filles Isabeau et Marguerite, toutes deux baptisées à l'église de St-Julien, paroisse sur le territoire de laquelle le couple était vraisemblablement domicilié à cette époque. A noter que Marguerite naît le 22 octobre 1686, le même jour que leur premier petit-fils Jean !\n\tA la fin de leur vie, on les trouve à Château-Gombert où ils ont du déménager. C'est sur le territoire de cette paroisse que Jeanne, \"épouse de Philippe Jullien\", disparaît la première, le 1er août 1707 (74 ans). Philippe survit quelques années et meurt le 17 janvier 1713 (80 ans). Son acte de sépulture ne porte pas d'indication de filiation ni de son veuvage, mais il est sûr. Nous savons qu'il était encore vivant en 1707 et puis, le prénom \"Philippe\" est trop peu répandu pour craindre une confusion. (26/04/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1631,
+                        "label": "28 septembre, Marseille La Major : baptême de Philippe JULLIEN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1900N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1660,
+                        "label": " Contrat de mariage de  Philippe JULLIEN avec Jeanne DELESTRADE Marseille  Sources: - AG13 - 361 E 193 folio 413"
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1707,
+                        "label": "31 juillet, Marseille, Château-Gombert : mort de Jeanne «De L'ESTRADE»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1901D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1713,
+                        "label": "17 janvier,  Marseille, Château-Gombert : mort de Philippe JULLIEN"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1900D.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1900D1.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F480": {
@@ -97848,6 +98536,40 @@
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1854N.jpg"
                             }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Anno dim 1635 ...<br/>... baptisata fut<br/>Joannes Michel filium Christophe<br/>et Ludivina Barthomieu? ..."
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1642,
+                        "label": "12 octobre, Allauch : naissance d'un autre Jean MICHEL fils de Christophe et Ludivicus BARTHOMIEU mais qui ne vit que 8 mois"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1854N1.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "... baptisata fut<br/>Joannes Michel filium Christophe<br/>et Ludivina Barthomieu? ..."
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1854D1.jpg"
+                            },
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Anno ..supra sepultus<br/>fuitin cemeteria allaudio <br/>Joannes Michel fili<br/>Christophe et Ludivina<br/>Bartolomea atatis sua<br/>8 mensis...<br/><br/>Latin abîmé (<i>atatis sua</i> pour <i>aetatis suae</i> : à l'âge de) <br/>soit : «à l'âge de 8 mois»"
+                            }
                         ]
                     ]
                 },
@@ -97860,7 +98582,35 @@
                         [
                             {
                                 "type": "IMAGE",
-                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1854N.jpg"
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1855N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1665,
+                        "label": "22 septembre, Allauch : le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1854M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1680,
+                        "label": "9 octobre, Allauch : mort de Madeleine RAMPAL, épouse de «Jean MICHEL dit Garlaban»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/12_castelin/2_therese_bremond/11e/1855D.jpg"
                             }
                         ]
                     ]
@@ -97883,13 +98633,66 @@
             "mariage": {
                 "date": "19 NOV 1639",
                 "lieu": {
-                    "brut": "Allauch, 13, Bouches du Rhône, , ,",
                     "ville": "Allauch",
-                    "dept_num": "13"
+                    "dept_num": "13",
+                    "brut": "Allauch, 13"
                 }
             },
             "commentaires": [
                 "Jean naît vers 1621/1622 (compte tenu de son mariage en 1639, de l'âge de son épouse et des naissances encadrantes), sans doute à Allauch où ont été baptisés les cinq frères et soeurs que nous lui connaissons. Son acte de baptême est introuvable (lacunes). Le 19 novembre 1639, il épouse à Allauch Marthe Negrel, allaudienne de 19 ans. Nous connaissons huit enfants au couple dont Pierre, notre ancêtre n°932, né le 28 décembre 1655.\n\tMarthe meurt le 9 octobre 1686 à l'âge de 66 ans ; la mort de Jean n'a pas encore été trouvée... (16/02/2003)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1620,
+                        "label": "17 décembre, Allauch : baptême de Marthe NEGREL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1865N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1638,
+                        "label": "30 novembre, Allauch : source: Deed - CM/00758-00759 - CM 1638 - : - AD 13 -  Marseille - 391 E 429 f° 442 - "
+                    },
+                    "contenu": [
+                        []
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1639,
+                        "label": "19 novembre, Allauch : le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1864M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1686,
+                        "label": "9 octobre , Allauch : mort de Marthe NEGREL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1865D.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F744": {
@@ -97901,14 +98704,64 @@
             "mariage": {
                 "date": "07 OCT 1657",
                 "lieu": {
-                    "brut": "Marseille Major, 13, Bouches du Rhône, , ,",
-                    "adresse": "Major",
                     "ville": "Marseille",
-                    "dept_num": "13"
+                    "adresse": "Major",
+                    "dept_num": "13",
+                    "brut": "Marseille, Major, 13"
                 }
             },
             "commentaires": [
                 "Jean et Catherine se marient le 7 octobre 1657 à Marseille, paroisse de La Major. Nicolas semble avoir obtenu de son père un consentement au mariage (était-il mineur ?). L'acte a été dressé par maître Paquet (?), notaire royal de cette ville. Nous ne connaissons qu'un enfant au couple, Anne, notre ancêtre n°933, née vers 1662.  (11/07/2002)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1657,
+                        "label": "7 octobre, Marseille La Major : le mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1866M.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1699,
+                        "label": "18 mars, Allauch : mort de Jean NICOLAS «dit Toto»"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1866D.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1701,
+                        "label": "13 septembre, La Major : Catherine MARTIN (environ 65 ans) se remarie avec Esprit CAMOIN, «âgé de environ 60 ans» et veuf de Françoise PINATEL"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1867M2.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Mariage contorollé en date du jourchier signé Gironvelle et publié 3<br/>fois sans oppoon a esté Celebré Entre EspritCamoin paisant agé d'env. 60 ans<br/>ille veuf de Francoise Pinatel icelle enterrée dans L'Eglise St-Hiérome<br/>le 22e du mois d'avril dernier ainsy attesté comme aussy du consentement<br/>de sa mere par fres Louis Scarron sacristain de ladite église, fils à feu Francois<br/>et de Cathe Bremond dite Bourre ne paroissien dud. St-Hiérome  d'une<br/>part et Cathe Martin veuve de Jean Nicolas mort et enterre à Allauch<br/>en l'année 1699 et le 18 mars ainsy attesté par Mr Jouve vicaire dudit Allauch<br/>fille a feu Jacques et de feue Jeanne Royer nre paroissienne itte<br/>dud.St-Hiérome, ? en prence des parent et amis communs des<br/>parties, touts iltez et de Esprit Tuif, et Joseph Bousquier enfans de<br/>chœur, Joseph Guy serviteur de l’Eglise, et Philipe Ailhaud bedeau<br/>du St_sacrement temoins reguis souf. fors ce dernier qui na seu<br/>ecrire par nous qui subs. agee d'env. 58 ans."
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F883": {
@@ -108387,6 +109240,22 @@
             },
             "commentaires": [
                 "Leur existence nous est connue par le mariage de leur fille Jeanne le 30 octobre 1667 à La Major.  (13/03/2001)"
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1641,
+                        "label": "26 octobre, Marseille St-Martin : le mariage ; ici «Isabeau» ROUBAUDE"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/2_rose_sauvaire/9e_et_plus_sauvaire/sauvaire_11e/1898M.jpg"
+                            }
+                        ]
+                    ]
+                }
             ]
         },
         "F486": {
@@ -122637,7 +123506,7 @@
                 {
                     "titre": {
                         "annee": 1681,
-                        "label": "Contrat de mariage"
+                        "label": "Contrat de mariage Vals-les-Bains"
                     },
                     "contenu": [
                         [
@@ -122763,7 +123632,7 @@
                 {
                     "titre": {
                         "annee": null,
-                        "label": "Synthese du début du contrat p. 1 à 3 (ChatGPT)"
+                        "label": "Synthèse du début du contrat p. 1 à 3 (ChatGPT)"
                     },
                     "contenu": [
                         [
@@ -122783,7 +123652,7 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": " Cette fin du contrat complète les clauses patrimoniales et fixe les garanties entre les époux. Voici une synthèse en français moderne.1. Versement de la dot<br/>Le futur époux (Durant) reconnaît avoir reçu de sa fiancée :la couverture,\nla huche (ou coffre),\ntrois draps,\nune robe qui sera livrée le mardi suivant,\nune autre robe pour la Saint-Jean-Baptiste suivante,\nainsi que le reste de la dot déjà détaillée précédemment.\n<br/>L'ensemble est évalué à <b>500 livres</b>, somme qu'il reconnaît recevoir comme <b>biens dotaux</b> de son épouse. Il s'engage à les restituer si le cas prévu par le droit se présente (par exemple dissolution du mariage selon les règles de l'époque).2. Renonciation aux droits successoraux<br/>En contrepartie de cette constitution de dot, la future épouse :quitte la maison de son père et de sa mère (Vidal et Pontalle),\nrenonce à réclamer à l'avenir ses droits de <b>légitime</b>, tant du côté paternel que maternel.\n<br/>Elle conserve toutefois une réserve importante :elle pourra toujours recevoir ce qui pourrait lui revenir par <b>substitution, donation ou legs futur</b>.\n<br/>Autrement dit, elle abandonne ses droits d'héritière réservataire immédiats, mais pas les libéralités que ses parents pourraient lui faire plus tard.3. Apport personnel de l'épouse<br/>La fiancée apporte également en propre : <b>deux brebis de race \"blazoudes\", qu'elle promet de remettre le jour des noces.</b>4. Donation entre époux en cas de décès <br/>Les futurs époux prévoient des donations réciproques :<b>si le mari meurt le premier</b>, sans qu'il y ait séparation du mariage, son épouse survivante recevra <b>30 livres</b> en augmentation de dot ;\n<b>si l'épouse meurt la première</b>, son mari survivant recevra <b>15 livres</b>.\n<br/>Cette différence de montant est fréquente dans les contrats de mariage de cette période.5. Procuration<br/>Pour assurer la validité juridique de ces donations, les parties nomment des procureurs devant la cour du bailliage du Vivarais, chargés :de faire enregistrer les actes,\nd'obtenir les autorisations nécessaires,\nde prêter les serments requis,\net de ratifier tout ce qui devra l'être.\n<br/>Ils déclarent agir librement, sans fraude ni contrainte.6. Engagement final : Toutes les parties :promettent d'exécuter fidèlement le contrat ;\nobligent tous leurs biens présents et à venir en garantie de leurs engagements ;\nacceptent la compétence des juridictions royales et de la sénéchaussée de Nîmes en cas de litige.\n7. Témoins et clôture<br/>L'acte est reçu :<b>au lieu du Ranc</b>, dans la maison des époux Durant,\nen présence de plusieurs témoins, notamment :\nle curé <b>Étienne Mourgues</b> d'Asperjoc,\nÉtienne Chastanier,\nMathieu Moynier,\nClaude Duranc,\nAndré Moynière,\nFrançois Masayre.\nLes parties étant illettrées, elles ne signent pas ; le notaire Ce que cette fin nous apprend sur la famille<br/>Cette dernière partie est particulièrement riche pour la généalogie :elle confirme les parents de la mariée (<b>Vidal</b> et <b>Pontalle</b>) ;\nelle montre que la mariée est <b>dotée en échange de sa renonciation à sa légitime</b> ;\nelle précise les biens composant la dot (linge, vêtements, bétail, valeur de 500 livres) ;\nelle nomme plusieurs témoins avec leur paroisse d'origine, ce qui peut fournir des pistes de parenté ou de voisinage.\n<br/>C'est donc une fin de contrat très classique pour le XVIIIᵉ siècle, mais particulièrement intéressante parce qu'elle détaille les apports de la mariée, sa renonciation aux droits successoraux et les donations mutuelles prévues entre les époux."
+                                "fichier": " Cette fin du contrat complète les clauses patrimoniales et fixe les garanties entre les époux. Voici une synthèse en français moderne.1. Versement de la dot<br/>Le futur époux (Durant) reconnaît avoir reçu de sa fiancée :la couverture,<br/>la huche (ou coffre),<br/>trois draps,<br/>une robe qui sera livrée le mardi suivant,<br/>une autre robe pour la Saint-Jean-Baptiste suivante,<br/>ainsi que le reste de la dot déjà détaillée précédemment.<br/><br/>L'ensemble est évalué à <b>500 livres</b>, somme qu'il reconnaît recevoir comme <b>biens dotaux</b> de son épouse. Il s'engage à les restituer si le cas prévu par le droit se présente (par exemple dissolution du mariage selon les règles de l'époque).2. Renonciation aux droits successoraux<br/>En contrepartie de cette constitution de dot, la future épouse :quitte la maison de son père et de sa mère (Vidal et Pontalle), renonce à réclamer à l'avenir ses droits de <b>légitime</b>, tant du côté paternel que maternel.<br/><br/>Elle conserve toutefois une réserve importante :elle pourra toujours recevoir ce qui pourrait lui revenir par <b>substitution, donation ou legs futur</b>.<br/><br/>Autrement dit, elle abandonne ses droits d'héritière réservataire immédiats, mais pas les libéralités que ses parents pourraient lui faire plus tard.3. Apport personnel de l'épouse<br/>La fiancée apporte également en propre : <b>deux brebis de race \"blazoudes\", qu'elle promet de remettre le jour des noces.</b>4. Donation entre époux en cas de décès <br/>Les futurs époux prévoient des donations réciproques :<b>si le mari meurt le premier</b>, sans qu'il y ait séparation du mariage, son épouse survivante recevra <b>30 livres</b> en augmentation de dot ; <b>si l'épouse meurt la première</b>, son mari survivant recevra <b>15 livres</b>. Cette différence de montant est fréquente dans les contrats de mariage de cette période.<br/><br/><b> Procuration</b><br/>Pour assurer la validité juridique de ces donations, les parties nomment des procureurs devant la cour du bailliage du Vivarais, chargés :<br/>de faire enregistrer les actes,<br/>d'obtenir les autorisations nécessaires,<br/>de prêter les serments requis,<br/>et de ratifier tout ce qui devra l'être.<br/>Ils déclarent agir librement, sans fraude ni contrainte.<br/><br/><b>Engagement final </b>: Toutes les parties :promettent d'exécuter fidèlement le contrat ;<br/>obligent tous leurs biens présents et à venir en garantie de leurs engagements ;<br/>acceptent la compétence des juridictions royales et de la sénéchaussée de Nîmes en cas de litige.<br/><br/><b>Témoins et clôture</b><br/>L'acte est reçu :<b>au lieu du Ranc</b>, dans la maison des époux Durant, en présence de plusieurs témoins, notamment :<br/>le curé <b>Étienne Mourgues</b> d'Asperjoc,<br/>Étienne Chastanier,<br/>Mathieu Moynier,<br/>Claude Duranc,<br/>André Moynière,<br/>François Masayre.<br/>Les parties étant illettrées, elles ne signent pas.<br/><br/>C'est donc une fin de contrat très classique pour le XVIIIᵉ siècle, mais particulièrement intéressante parce qu'elle détaille les apports de la mariée, sa renonciation aux droits successoraux et les donations mutuelles prévues entre les époux."
                             }
                         ]
                     ]
@@ -122974,9 +123843,31 @@
                         [
                             {
                                 "type": "TEXTE",
-                                "fichier": "Le 17 février 1675, un contrat de mariage est passé devant un notaire royal.<br/>Les futurs époux sont : Pierre Mazoyer, fils de Pierre Mazoyer et de Louise Massabeu, originaire du lieu de Pary de Guiser.<br/>Marie Giron, fille légitime de feu François Parore, habitant au lieu de Prat, paroisse de Saint-Christoly, dans le diocèse de Viviers.<br/><br/>Les deux futurs époux, avec l'accord de leurs proches, s'engagent solennellement à se marier à l'Église dès que l'un des deux le demandera.<br/>Dot apportée par la mariée<br/><br/>Pour établir sa fille, sa famille lui constitue une dot composée de : <br/>- une robe de serge grise avec un corsage rouge en laine, estimée à 12 livres ;<br/>- 4 cartes de seigle, évaluées à 18 livres ;<br/>- une somme totale de 500 livres, dont 100 livres proviennent des biens de sa mère.<br/><br/>Le père du marié verse immédiatement :<br/>- la robe ;<br/>- une partie du seigle ;<br/>- 200 livres, dont 33 livres sont payées comptant devant le notaire. Le reste de la dot, soit 303 livres, devra être payé par versements annuels de 53 livres, chaque 1er juin, jusqu'au règlement complet.<br/>En contrepartie, Marie Giron renonce à tous ses autres droits dans les successions de ses père et mère, présents ou futurs, à l'exception de certains droits traditionnels liés au veuvage (vêtements de deuil, augmentation de dot, etc.).<br/><br/>Donation des parents du marié :<br/>Raymond Mazoyer et Denise Issartal, mari et femme, demeurant à Fraisse, approuvent le mariage et font une donation irrévocable aux futurs époux.<br/>Ils leur donnent le quart de leur maison et de leurs biens héréditaires, libres de dettes et d'hypothèques (sous réserve des droits éventuels des autres héritiers).<br/><br/>Clauses en cas de décès :<br/>Il est convenu que si le mari meurt avant son épouse sans qu'ils aient eu d'enfants :<br/>la veuve conservera ses vêtements ;<br/>elle sera entretenue sur les biens de son mari pendant toute sa viduité ;<br/>elle recevra une augmentation de dot de 50 livres, sans contestation ni intérêts.<br/><br/>De son côté, la future épouse apporte également à la communauté ses vêtements, évalués à 25 livres.<br/><br/>Dispositions finales<br/><br/>Les parties désignent des procureurs chargés d'accomplir les formalités nécessaires devant la justice du bailliage du Vivarais, notamment pour obtenir les autorisations exigées.<br/>Le contrat est passé à Montpezat, dans la maison du notaire Jean-Louis Ollier, en présence des témoins. Les personnes qui savent écrire signent l'acte, les autres déclarent ne pas savoir signer.<br/><br/>En résumé, il s'agit d'un contrat de mariage très classique du XVII? siècle : il fixe les promesses de mariage, détaille la dot de la mariée, organise son paiement, prévoit une importante donation des parents du marié, règle les droits successoraux de chacun et protège la future épouse en cas de veuvage."
+                                "fichier": "Le 17 février 1675, un contrat de mariage est passé devant un notaire royal.<br/>Les futurs époux sont : Pierre Mazoyer, fils de Pierre Mazoyer et de Louise Massabeu, originaire du lieu de Pary de Guiser.<br/>Marie Giron, fille légitime de feu François Parore, habitant au lieu de Prat, paroisse de Saint-Christoly, dans le diocèse de Viviers.<br/><br/>Les deux futurs époux, avec l'accord de leurs proches, s'engagent solennellement à se marier à l'Église dès que l'un des deux le demandera.<br/>Dot apportée par la mariée<br/><br/>Pour établir sa fille, sa famille lui constitue une dot composée de : <br/>- une robe de serge grise avec un corsage rouge en laine, estimée à 12 livres ;<br/>- 4 cartes de seigle, évaluées à 18 livres ;<br/>- une somme totale de 500 livres, dont 100 livres proviennent des biens de sa mère.<br/><br/>Le père du marié verse immédiatement :<br/>- la robe ;<br/>- une partie du seigle ;<br/>- 200 livres, dont 33 livres sont payées comptant devant le notaire. Le reste de la dot, soit 303 livres, devra être payé par versements annuels de 53 livres, chaque 1er juin, jusqu'au règlement complet.<br/>En contrepartie, Marie Giron renonce à tous ses autres droits dans les successions de ses père et mère, présents ou futurs, à l'exception de certains droits traditionnels liés au veuvage (vêtements de deuil, augmentation de dot, etc.).<br/><br/>Donation des parents du marié :<br/>Raymond Mazoyer et Denise Issartal, mari et femme, demeurant à Fraisse, approuvent le mariage et font une donation irrévocable aux futurs époux.<br/>Ils leur donnent le quart de leur maison et de leurs biens héréditaires, libres de dettes et d'hypothèques (sous réserve des droits éventuels des autres héritiers).<br/><br/>Clauses en cas de décès :<br/>Il est convenu que si le mari meurt avant son épouse sans qu'ils aient eu d'enfants :<br/>la veuve conservera ses vêtements ;<br/>elle sera entretenue sur les biens de son mari pendant toute sa viduité ;<br/>elle recevra une augmentation de dot de 50 livres, sans contestation ni intérêts.<br/><br/>De son côté, la future épouse apporte également à la communauté ses vêtements, évalués à 25 livres.<br/><br/>Dispositions finales<br/><br/>Les parties désignent des procureurs chargés d'accomplir les formalités nécessaires devant la justice du bailliage du Vivarais, notamment pour obtenir les autorisations exigées.<br/>Le contrat est passé à Montpezat, dans la maison du notaire Jean-Louis Ollier, en présence des témoins. Les personnes qui savent écrire signent l'acte, les autres déclarent ne pas savoir signer.<br/><br/>En résumé, il s'agit d'un contrat de mariage très classique du XVIIe siècle : il fixe les promesses de mariage, détaille la dot de la mariée, organise son paiement, prévoit une importante donation des parents du marié, règle les droits successoraux de chacun et protège la future épouse en cas de veuvage."
                             }
-                        ],
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/986_ contrat.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": null,
+                        "label": ""
+                    },
+                    "contenu": [
                         [
                             {
                                 "type": "IMAGE",
@@ -122984,8 +123875,11 @@
                             },
                             {
                                 "type": "TEXTE",
-                                "fichier": "paternels et maternels scavoir une robbe serge raze grise avec un corsage\npetit rouge de laine apprecie a douze livres quatre Cartes seigle a mesure de"
-                            },
+                                "fichier": "... paternels et maternels scavoir une robbe serge raze grise avec un corsage<br/>petit rouge de laine apprecie a douze livres quatre Cartes seigle a mesure de...",
+                                "align": "center"
+                            }
+                        ],
+                        [
                             {
                                 "type": "IMAGE",
                                 "fichier": "0c_au_dela_6e_maternel/14_nogier/durand/10e_durand/36858c6f-1004-4606-8837-1931ada6d876.png"
@@ -123938,7 +124832,50 @@
             "epouse": "I8075",
             "enfants": [
                 "I2098"
-            ]
+            ],
+            "documents": [
+                {
+                    "titre": {
+                        "annee": 1601,
+                        "label": "12 juin, Marseille st-Martin : baptême de Victor CARLES"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/registre_1601.jpg"
+                            }
+                        ],
+                        [
+                            {
+                                "type": "IMAGE",
+                                "fichier": "0c_au_dela_6e_maternel/13_delestrade/1_julien_delestrade/delestrade_11e/1858N.jpg"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "titre": {
+                        "annee": 1623,
+                        "label": "Contrat de mariage"
+                    },
+                    "contenu": [
+                        [
+                            {
+                                "type": "TEXTE",
+                                "fichier": "Nom époux :  CARLES VICTOR                <br/>Nom épouse :  BORREL CATHERINE                     <br/>Année : 1623<br/>Cote / Source : 381E-358                             <br/>Numéro de page : 818<br/>                         <br/>AD 13 381E-358 f° 818<br/><br/>Sources: François BARBY - - Plusieurs sites sur Geneanet :<br/>Reconstitution des familles marseillaises du XIVème au XVIème siècle, à partir des actes notariés. (canebiere)<br/>Généalogie Personnelle (barby)<br/>Reconstitution  de nombreuses familles du Pays d'Olmes élargi basée sur les actes notariés du XVI° et XVII°.(barby2) - Géneanet -"
+                            }
+                        ]
+                    ]
+                }
+            ],
+            "mariage": {
+                "date": "1623",
+                "lieu": {
+                    "ville": "Marseille",
+                    "brut": "Marseille"
+                }
+            }
         },
         "F1861": {
             "mari": "I8081",
@@ -124139,6 +125076,42 @@
             "epouse": "I8141",
             "enfants": [
                 "I7865"
+            ]
+        },
+        "F1889": {
+            "mari": "I8142",
+            "epouse": "I8143"
+        },
+        "F1890": {
+            "mari": "I8144",
+            "epouse": "I8143",
+            "enfants": [
+                "I8074"
+            ]
+        },
+        "F1891": {
+            "mari": "I8145",
+            "epouse": "I8146"
+        },
+        "F1892": {
+            "mari": "I8145",
+            "epouse": "I8147",
+            "enfants": [
+                "I922"
+            ]
+        },
+        "F1893": {
+            "mari": "I8148",
+            "epouse": "I8149",
+            "enfants": [
+                "I6089"
+            ]
+        },
+        "F1894": {
+            "mari": "I8150",
+            "epouse": "I8151",
+            "enfants": [
+                "I6090"
             ]
         }
     }
