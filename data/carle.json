@@ -29248,9 +29248,8 @@
                 }
             },
             "deces": {
-                "date": "AFT 1685"
-            },
-            "sosa": 1854
+                "date": "25 JUL 1643"
+            }
         },
         "I2808": {
             "nom": "RAMPAL",
@@ -41388,7 +41387,8 @@
             },
             "commentaires": [
                 "Décès : voir note des parents."
-            ]
+            ],
+            "sosa": 1854
         },
         "I4558": {
             "nom": "MICHEL",
@@ -98368,7 +98368,7 @@
             ]
         },
         "F735": {
-            "mari": "I2807",
+            "mari": "I4557",
             "epouse": "I2808",
             "enfants": [
                 "I4572",
