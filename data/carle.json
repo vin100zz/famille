@@ -38534,12 +38534,7 @@
                     "ville": "Allauch",
                     "dept_num": "13"
                 }
-            },
-            "sosa": 3584,
-            "sosas": [
-                3584,
-                3640
-            ]
+            }
         },
         "I4294": {
             "nom": "ARNAUD",
@@ -53910,19 +53905,6 @@
                 14561
             ]
         },
-        "I6183": {
-            "nom": "...",
-            "prenom": null,
-            "sexe": "F",
-            "naissance": {
-                "date": "BEF 1580"
-            },
-            "sosa": 3585,
-            "sosas": [
-                3585,
-                3641
-            ]
-        },
         "I6184": {
             "nom": "DURBEC",
             "prenom": "Catherine",
@@ -66718,8 +66700,7 @@
         "I8070": {
             "nom": "CHAUD",
             "prenom": "Anne",
-            "sexe": "F",
-            "sosa": 1721
+            "sexe": "F"
         },
         "I8071": {
             "nom": "ACHARD",
@@ -66797,14 +66778,6 @@
             "naissance": {
                 "date": "1675"
             }
-        },
-        "I8081": {
-            "sexe": "M",
-            "sosa": 976
-        },
-        "I8082": {
-            "sexe": "F",
-            "sosa": 977
         },
         "I8085": {
             "nom": "BONNEFOY",
@@ -66972,12 +66945,6 @@
             "sexe": "M",
             "sosa": 2782
         },
-        "I8107": {
-            "nom": "?",
-            "prenom": "Louise",
-            "sexe": "F",
-            "sosa": 2783
-        },
         "I8108": {
             "nom": "MARCHAND",
             "prenom": "Louise",
@@ -67068,12 +67035,6 @@
             "sexe": "M",
             "sosa": 3428
         },
-        "I8123": {
-            "nom": "SANAVIQUE?",
-            "prenom": "Madeleine",
-            "sexe": "F",
-            "sosa": 3429
-        },
         "I8124": {
             "nom": "GAVARY",
             "prenom": "Gaspard",
@@ -67097,12 +67058,6 @@
             "prenom": "Dominique",
             "sexe": "M",
             "sosa": 3444
-        },
-        "I8128": {
-            "nom": "Françoise",
-            "prenom": "ASSENTIERIS?",
-            "sexe": "F",
-            "sosa": 3445
         },
         "I8129": {
             "nom": "ASSENTIER?",
@@ -67150,13 +67105,21 @@
             "nom": "OLLIVE",
             "prenom": "Hugonne",
             "sexe": "F",
-            "sosa": 3585
+            "sosa": 3585,
+            "sosas": [
+                3585,
+                3641
+            ]
         },
         "I8137": {
             "nom": "CASTELIN",
             "prenom": "Barthomieu",
             "sexe": "M",
-            "sosa": 3584
+            "sosa": 3584,
+            "sosas": [
+                3584,
+                3640
+            ]
         },
         "I8138": {
             "nom": "CAILLOL",
@@ -67185,8 +67148,7 @@
         "I8142": {
             "nom": "CARLES",
             "prenom": "Victor",
-            "sexe": "M",
-            "sosa": 3716
+            "sexe": "M"
         },
         "I8143": {
             "nom": "GAILLARD",
@@ -67209,8 +67171,7 @@
         "I8146": {
             "nom": "MAILLET",
             "prenom": "Catherine",
-            "sexe": "F",
-            "sosa": 3739
+            "sexe": "F"
         },
         "I8147": {
             "nom": "MALLET",
@@ -94599,7 +94560,9 @@
                     "brut": "Barles ?, 04"
                 }
             },
-            "enfants": ["I8152"],
+            "enfants": [
+                "I8152"
+            ],
             "documents": [
                 {
                     "titre": {
@@ -124859,10 +124822,6 @@
                 }
             }
         },
-        "F1861": {
-            "mari": "I8081",
-            "epouse": "I8082"
-        },
         "F1863": {
             "mari": "I8088",
             "epouse": "I8089",
@@ -124903,10 +124862,6 @@
             "enfants": [
                 "I8031"
             ]
-        },
-        "F1869": {
-            "mari": "I8106",
-            "epouse": "I8107"
         },
         "F1870": {
             "mari": "I8106",
@@ -124992,10 +124947,6 @@
                 "I603"
             ]
         },
-        "F1879": {
-            "mari": "I8122",
-            "epouse": "I8123"
-        },
         "F1880": {
             "mari": "I8124",
             "epouse": "I8125",
@@ -125052,10 +125003,6 @@
             "enfants": [
                 "I7865"
             ]
-        },
-        "F1889": {
-            "mari": "I8142",
-            "epouse": "I8143"
         },
         "F1890": {
             "mari": "I8144",
