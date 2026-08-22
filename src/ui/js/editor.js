@@ -11,6 +11,8 @@ const Editor = (function () {
   let _person = null, _conjoint = null, _family = null;
   let _personParents = [];    // [{id, nom, prenom, sexe, sosa}]
   let _conjointParents = [];
+  let _personOtherUnions = [];    // [{famille_id, conjoint, mariage, enfants}]
+  let _conjointOtherUnions = [];
   let _onSaved = null, _container = null;
   let _newPersons = {}, _newFamilies = {}, _deleteFamilies = [];
   let _conjointFamilyTempId = null;
@@ -45,6 +47,8 @@ const Editor = (function () {
     };
     _personParents   = (ctx.parents        || []).map(p => ({id:p.id, nom:p.nom, prenom:p.prenom, sexe:p.sexe, sosa:p.sosa}));
     _conjointParents = (ctx.conjointParents || []).map(p => ({id:p.id, nom:p.nom, prenom:p.prenom, sexe:p.sexe, sosa:p.sosa}));
+    _personOtherUnions   = (ctx.personOtherUnions   || []).slice();
+    _conjointOtherUnions = (ctx.conjointOtherUnions || []).slice();
 
     _newPersons = {}; _newFamilies = {}; _deleteFamilies = [];
     _conjointFamilyTempId = null; _tempCtr = 0;
@@ -172,6 +176,14 @@ const Editor = (function () {
     mariRow.appendChild(txt('div', 'section-bar section-bar--full', 'Mariage'));
     mariRow.appendChild(_buildEventEditor(_family, 'mariage'));
     card.appendChild(mariRow);
+
+    // 3bis. Autres mariages
+    const leftOtherUnions  = left  === _person ? _personOtherUnions : (left  === _conjoint ? _conjointOtherUnions : []);
+    const rightOtherUnions = right === _person ? _personOtherUnions : (right === _conjoint ? _conjointOtherUnions : []);
+    appendSection('Autres mariages',
+      left  ? _buildOtherUnionsEditor(leftId,  leftOtherUnions)  : null,
+      right ? _buildOtherUnionsEditor(rightId, rightOtherUnions) : null
+    );
 
     // 4. Professions
     appendSection('Professions',
@@ -662,6 +674,35 @@ const Editor = (function () {
     return wrap;
   }
 
+  // ── Éditeur "Autres mariages" ───────────────────────────────────────────────
+
+  function _buildOtherUnionsEditor(anchorId, unionsArr) {
+    const wrap = el('div', 'ed-person-list');
+    const refresh = () => {
+      wrap.innerHTML = '';
+      unionsArr.forEach(u => {
+        const item = _buildPersonItem(u.conjoint || {}, () => {
+          const idx = unionsArr.indexOf(u);
+          if (idx === -1) return;
+          unionsArr.splice(idx, 1);
+          // Famille ajoutée cette session : on l'abandonne simplement.
+          // Famille déjà existante : marquée pour suppression à l'enregistrement.
+          const fid = u.famille_id;
+          if (fid && _newFamilies[fid]) delete _newFamilies[fid];
+          else if (fid) _deleteFamilies.push(fid);
+          refresh();
+        });
+        wrap.appendChild(item);
+      });
+      const btn = el('button', 'ed-add-btn');
+      btn.type = 'button'; btn.textContent = '+ Ajouter un autre mariage';
+      btn.addEventListener('click', () => _openAddPersonPopup('otherSpouse', anchorId, null, unionsArr, refresh));
+      wrap.appendChild(btn);
+    };
+    refresh();
+    return wrap;
+  }
+
   function _buildPersonItem(p, onRemove) {
     const item = el('div', 'ed-person-list__item');
     const sc = p.sexe === 'M' ? 'var(--sex-M)' : p.sexe === 'F' ? 'var(--sex-F)' : 'var(--gray)';
@@ -680,7 +721,8 @@ const Editor = (function () {
   function _openAddPersonPopup(role, targetPersonId, forcedSex, targetArr, onDone) {
     const overlay = el('div', 'ed-popup-overlay');
     const titles  = { parent: forcedSex === 'M' ? 'Ajouter le père' : 'Ajouter la mère',
-                      child: 'Ajouter un enfant', spouse: 'Ajouter un(e) conjoint(e)' };
+                      child: 'Ajouter un enfant', spouse: 'Ajouter un(e) conjoint(e)',
+                      otherSpouse: 'Ajouter un autre mariage' };
     const popup = el('div', 'ed-popup');
     popup.appendChild(txt('div', 'ed-popup__title', titles[role]));
 
@@ -693,6 +735,10 @@ const Editor = (function () {
 
     let selectedSex = forcedSex;
     if (!selectedSex && role === 'spouse') selectedSex = _person.sexe === 'M' ? 'F' : 'M';
+    if (!selectedSex && role === 'otherSpouse') {
+      const anchor = targetPersonId === _personId ? _person : (targetPersonId === _conjointId ? _conjoint : null);
+      selectedSex = anchor && anchor.sexe === 'M' ? 'F' : 'M';
+    }
 
     if (!forcedSex) {
       const sw = el('div', 'ed-radio-group');
@@ -810,6 +856,19 @@ const Editor = (function () {
         };
         _familleId             = ftid;
         _conjointFamilyTempId  = ftid;
+      } else if (role === 'otherSpouse') {
+        // Mariage additionnel : ne touche ni au conjoint ni à la famille en
+        // cours d'édition, se contente d'ajouter une nouvelle famille séparée
+        // reliant targetPersonId (personne ou conjoint) à `id`.
+        const anchor = targetPersonId === _personId ? _person : _conjoint;
+        const isM    = anchor.sexe === 'M';
+        const ftid   = _newTempId();
+        _newFamilies[ftid] = {
+          mari:    isM ? targetPersonId : id,
+          epouse:  isM ? id             : targetPersonId,
+          enfants: [],
+        };
+        targetArr.push({ famille_id: ftid, conjoint: personLike, mariage: null, enfants: [] });
       }
     }
 

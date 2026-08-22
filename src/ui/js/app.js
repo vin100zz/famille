@@ -406,6 +406,8 @@ async function renderPersonPage(data, seq) {
       union:           primary,
       parents:         data.parents || [],
       conjointParents: primary ? (primary.conjoint_parents || []) : [],
+      personOtherUnions:   others,
+      conjointOtherUnions: primary ? (primary.conjoint_other_unions || []) : [],
     }, () => loadPerson(data.person.id));
   });
   editBar.appendChild(editBtn);
