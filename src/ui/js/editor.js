@@ -26,6 +26,28 @@ const Editor = (function () {
       + (obj.sosa ? ' [' + obj.sosa + ']' : '');
   }
   function _name(id) { return _nameCache[id] || id; }
+
+  /**
+   * Abandonne une personne créée dans la session (id "__new__…") quand elle
+   * vient d'être retirée d'une liste (parent/enfant/autre mariage) et n'a
+   * jamais été enregistrée. Sans ça, elle reste dans _newPersons sans plus
+   * aucun lien et se retrouve créée en base comme individu flottant.
+   * Ne supprime rien si la personne est encore référencée ailleurs.
+   */
+  function _discardTempPerson(id) {
+    if (!id || !_newPersons[id]) return;
+    const stillUsed =
+      _conjointId === id ||
+      _personParents.some(p => p.id === id) ||
+      _conjointParents.some(p => p.id === id) ||
+      _family.enfants.includes(id) ||
+      _personOtherUnions.some(u => u.conjoint && u.conjoint.id === id) ||
+      _conjointOtherUnions.some(u => u.conjoint && u.conjoint.id === id) ||
+      Object.values(_newFamilies).some(f =>
+        f.mari === id || f.epouse === id || (f.enfants || []).includes(id));
+    if (!stillUsed) delete _newPersons[id];
+  }
+
   function _sosaFather(n) { return (n != null) ? n * 2     : null; }
   function _sosaMother(n) { return (n != null) ? n * 2 + 1 : null; }
   function _sosaSpouse(n) { return (n != null) ? (n % 2 === 0 ? n + 1 : n - 1) : null; }
@@ -646,6 +668,7 @@ const Editor = (function () {
         delete _newFamilies[ftid]; break;
       }
     }
+    _discardTempPerson(parent.id);
     _render();
   }
 
@@ -661,7 +684,7 @@ const Editor = (function () {
         item.appendChild(txt('span', 'ed-person-list__name', _name(id)));
         const del = el('button', 'ed-icon-btn ed-icon-btn--del');
         del.type = 'button'; del.title = 'Retirer'; del.textContent = '×';
-        del.addEventListener('click', () => { arr.splice(arr.indexOf(id), 1); refresh(); });
+        del.addEventListener('click', () => { arr.splice(arr.indexOf(id), 1); _discardTempPerson(id); refresh(); });
         item.appendChild(del);
         wrap.appendChild(item);
       });
@@ -685,11 +708,18 @@ const Editor = (function () {
           const idx = unionsArr.indexOf(u);
           if (idx === -1) return;
           unionsArr.splice(idx, 1);
-          // Famille ajoutée cette session : on l'abandonne simplement.
+          // Famille ajoutée cette session : on l'abandonne simplement (et on
+          // abandonne aussi le conjoint créé avec elle s'il n'est plus utilisé).
           // Famille déjà existante : marquée pour suppression à l'enregistrement.
           const fid = u.famille_id;
-          if (fid && _newFamilies[fid]) delete _newFamilies[fid];
-          else if (fid) _deleteFamilies.push(fid);
+          if (fid && _newFamilies[fid]) {
+            const f = _newFamilies[fid];
+            const otherId = f.mari === anchorId ? f.epouse : f.mari;
+            delete _newFamilies[fid];
+            _discardTempPerson(otherId);
+          } else if (fid) {
+            _deleteFamilies.push(fid);
+          }
           refresh();
         });
         wrap.appendChild(item);
