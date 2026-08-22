@@ -18,6 +18,7 @@ const Editor = (function () {
   let _conjointFamilyTempId = null;
   let _tempCtr = 0;
   const _nameCache = {};
+  const _childSosa = {};  // childId -> sosa connu (sert à vérifier qu'un conjoint mérite un Sosa)
 
   function _newTempId() { return '__new__' + (++_tempCtr); }
   function _cacheName(id, obj) {
@@ -52,6 +53,16 @@ const Editor = (function () {
   function _sosaMother(n) { return (n != null) ? n * 2 + 1 : null; }
   function _sosaSpouse(n) { return (n != null) ? (n % 2 === 0 ? n + 1 : n - 1) : null; }
 
+  /**
+   * Un conjoint ne mérite un Sosa que s'il est effectivement le parent d'au
+   * moins un enfant qui continue la lignée (a lui-même un Sosa) — sinon on
+   * se retrouve avec un deuxième conjoint "sosa-isé" sans descendance connue,
+   * en doublon avec le vrai ancêtre (cas Anne CHAUD / Anne ACHARD).
+   */
+  function _familyHasSosaChild(childIds) {
+    return (childIds || []).some(cid => _childSosa[cid] != null);
+  }
+
   // ── open ───────────────────────────────────────────────────────────────────
 
   function open(ctx, onSaved) {
@@ -74,6 +85,11 @@ const Editor = (function () {
 
     _newPersons = {}; _newFamilies = {}; _deleteFamilies = [];
     _conjointFamilyTempId = null; _tempCtr = 0;
+
+    Object.keys(_childSosa).forEach(k => delete _childSosa[k]);
+    ((ctx.union && ctx.union.enfants) || []).forEach(e => {
+      if (e.id != null) _childSosa[e.id] = e.sosa != null ? e.sosa : null;
+    });
 
     _cacheName(_personId, ctx.person);
     _cacheName(_conjointId, ctx.conjoint);
@@ -870,6 +886,7 @@ const Editor = (function () {
         _newFamilies[ftid] = fam;
       } else if (role === 'child') {
         targetArr.push(id);
+        _childSosa[id] = personLike.sosa != null ? personLike.sosa : null;
       } else if (role === 'spouse') {
         _conjointId = id;
         const ftid  = _newTempId();
@@ -949,7 +966,7 @@ const Editor = (function () {
         const parentOf = targetPersonId === _personId ? _person : _conjoint;
         const base = parentOf ? parentOf.sosa : null;
         sosa = selectedSex === 'M' ? _sosaFather(base) : _sosaMother(base);
-      } else if (role === 'spouse') {
+      } else if (role === 'spouse' && _familyHasSosaChild(_family.enfants)) {
         sosa = _sosaSpouse(_person.sosa);
       }
 
