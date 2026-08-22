@@ -15158,18 +15158,6 @@
             ],
             "sosa": 402
         },
-        "I1124": {
-            "nom": "DAUBERT",
-            "prenom": "Jeanne",
-            "sexe": "F",
-            "naissance": {
-                "date": "abt 1650"
-            },
-            "deces": {
-                "date": "bef 1695"
-            },
-            "sosa": 403
-        },
         "I1130": {
             "nom": "AUBERT",
             "prenom": "Marthe",
@@ -66818,18 +66806,6 @@
             "sexe": "F",
             "sosa": 977
         },
-        "I8083": {
-            "nom": "DAUBERT",
-            "prenom": "Estienne",
-            "sexe": "M",
-            "sosa": 806
-        },
-        "I8084": {
-            "nom": "LAPLANCHE",
-            "prenom": "Françoise",
-            "sexe": "F",
-            "sosa": 807
-        },
         "I8085": {
             "nom": "BONNEFOY",
             "prenom": "Vidale",
@@ -67265,6 +67241,15 @@
             "prenom": "Catherine",
             "sexe": "F",
             "sosa": 3799
+        },
+        "I8152": {
+            "nom": "AUGIER",
+            "prenom": "Anne",
+            "sexe": "F",
+            "deces": {
+                "date": "1737"
+            },
+            "sosa": 403
         }
     },
     "familles": {
@@ -89333,7 +89318,7 @@
         },
         "F13": {
             "mari": "I1123",
-            "epouse": "I1124",
+            "epouse": "I8152",
             "enfants": [
                 "I11",
                 "I1130",
@@ -94614,6 +94599,7 @@
                     "brut": "Barles ?, 04"
                 }
             },
+            "enfants": ["I8152"],
             "documents": [
                 {
                     "titre": {
@@ -94630,10 +94616,6 @@
                     ]
                 }
             ]
-        },
-        "F514": {
-            "mari": "I1786",
-            "epouse": "I1124"
         },
         "F664": {
             "mari": "I1786",
@@ -124880,13 +124862,6 @@
         "F1861": {
             "mari": "I8081",
             "epouse": "I8082"
-        },
-        "F1862": {
-            "mari": "I8083",
-            "epouse": "I8084",
-            "enfants": [
-                "I1124"
-            ]
         },
         "F1863": {
             "mari": "I8088",
