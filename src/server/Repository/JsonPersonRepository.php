@@ -173,6 +173,59 @@ class JsonPersonRepository implements IPersonRepository
         );
     }
 
+    public function findSimilarPersons($nom, $prenom = '', $sexe = null, $limit = 5)
+    {
+        $nomN = $this->normalize($nom);
+        if ($nomN === '') {
+            return array();
+        }
+        $prenomN = $this->normalize($prenom);
+
+        $candidates = array();
+        foreach ($this->data['individus'] as $id => $p) {
+            if ($sexe && isset($p['sexe']) && $p['sexe'] !== $sexe) {
+                continue;
+            }
+            $pNom = $this->normalize(isset($p['nom']) ? $p['nom'] : '');
+            if ($pNom === '') {
+                continue;
+            }
+
+            $nomScore = $this->strSimilarity($nomN, $pNom);
+            if ($nomScore < 0.72) {
+                continue;
+            }
+
+            $pPrenom     = $this->normalize(isset($p['prenom']) ? $p['prenom'] : '');
+            $prenomScore = ($prenomN !== '' && $pPrenom !== '') ? $this->strSimilarity($prenomN, $pPrenom) : 0;
+
+            $candidates[] = array(
+                'summary' => $this->buildSummary($id, $p),
+                'score'   => $nomScore * 2 + $prenomScore,
+            );
+        }
+
+        usort($candidates, function ($a, $b) {
+            if ($a['score'] === $b['score']) return 0;
+            return $a['score'] < $b['score'] ? 1 : -1;
+        });
+
+        return array_map(function ($c) { return $c['summary']; }, array_slice($candidates, 0, $limit));
+    }
+
+    /** Similarité normalisée [0..1] entre deux chaînes déjà normalisées (1 = identiques). */
+    private function strSimilarity($a, $b)
+    {
+        if ($a === $b) {
+            return 1.0;
+        }
+        $maxLen = max(strlen($a), strlen($b));
+        if ($maxLen === 0) {
+            return 0.0;
+        }
+        return 1 - (levenshtein($a, $b) / $maxLen);
+    }
+
     public function getPerson($id)
     {
         if (!isset($this->data['individus'][$id])) {

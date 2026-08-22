@@ -701,12 +701,64 @@ const Editor = (function () {
         const inp = document.createElement('input');
         inp.type = 'radio'; inp.name = 'popup_sexe'; inp.value = v;
         if (v === selectedSex) inp.checked = true;
-        inp.addEventListener('change', () => { if (inp.checked) selectedSex = v; });
+        inp.addEventListener('change', () => { if (inp.checked) { selectedSex = v; _checkSimilar(); } });
         lbl.appendChild(inp); lbl.appendChild(document.createTextNode(' ' + (v === 'M' ? 'Homme' : 'Femme')));
         sw.appendChild(lbl);
       });
       popup.appendChild(sw);
     }
+
+    // ── Avertissement "personne similaire déjà connue" ────────────────────────
+    const similarBox = el('div', 'ed-similar-box'); similarBox.hidden = true;
+    popup.appendChild(similarBox);
+
+    let similarTimer = null, similarSeq = 0;
+    function _checkSimilar() {
+      clearTimeout(similarTimer);
+      const nom = nomInp.value.trim();
+      if (nom.length < 2) { similarBox.hidden = true; similarBox.innerHTML = ''; return; }
+      similarTimer = setTimeout(async () => {
+        const seq = ++similarSeq;
+        let candidates;
+        try {
+          candidates = await api.findSimilarPersons(nom, prenomInp.value.trim(), selectedSex);
+        } catch (e) { return; }
+        if (seq !== similarSeq) return;
+        candidates = candidates.filter(c =>
+          c.id !== targetPersonId && c.id !== _personId && c.id !== _conjointId &&
+          !targetArr.some(t => (t.id || t) === c.id)
+        );
+        _renderSimilar(candidates);
+      }, 300);
+    }
+
+    function _renderSimilar(candidates) {
+      similarBox.innerHTML = '';
+      if (!candidates.length) { similarBox.hidden = true; return; }
+      similarBox.hidden = false;
+      similarBox.appendChild(txt('div', 'ed-similar-box__title', '⚠️ Cette personne existe peut-être déjà :'));
+      const list = el('div', 'ed-similar-list');
+      candidates.forEach(c => {
+        const item = el('div', 'ed-similar-item');
+        const info = el('div', 'ed-similar-item__info');
+        const name = [c.nom, c.prenom].filter(Boolean).join(' ') || '(inconnu)';
+        info.appendChild(txt('div', 'ed-similar-item__name', name + (c.sosa != null ? ' [' + c.sosa + ']' : '')));
+        const years = yearsLabel(c.naissance_date, c.deces_date);
+        if (years) info.appendChild(txt('div', 'ed-similar-item__years', years));
+        item.appendChild(info);
+        const reuseBtn = el('button', 'ed-similar-item__btn');
+        reuseBtn.type = 'button'; reuseBtn.textContent = 'Réutiliser';
+        reuseBtn.addEventListener('click', () => _handleReuse(c));
+        item.appendChild(reuseBtn);
+        list.appendChild(item);
+      });
+      similarBox.appendChild(list);
+      similarBox.appendChild(txt('div', 'ed-similar-box__hint',
+        'Sinon, clique sur « Créer » pour confirmer qu’il s’agit bien d’un nouvel ajout.'));
+    }
+
+    nomInp.addEventListener('input', _checkSimilar);
+    prenomInp.addEventListener('input', _checkSimilar);
 
     const errEl = txt('div', 'ed-popup__error', ''); errEl.hidden = true;
     popup.appendChild(errEl);
@@ -717,6 +769,82 @@ const Editor = (function () {
     const btnCancel = el('button', 'ed-btn ed-btn--cancel');
     btnCancel.type = 'button'; btnCancel.textContent = 'Annuler';
     btnCancel.addEventListener('click', () => document.body.removeChild(overlay));
+
+    // Rattache `id` (existant ou temporaire) au rôle courant (parent/enfant/conjoint)
+    // et crée/complète la famille correspondante. `personLike` fournit nom/prenom/
+    // sexe/sosa pour l'affichage local (liste des parents, cache de noms…).
+    function _attachAsRole(id, personLike) {
+      if (role === 'parent') {
+        targetArr.push({ id, nom: personLike.nom, prenom: personLike.prenom, sexe: personLike.sexe, sosa: personLike.sosa });
+        // Fix A : supprimer l'éventuelle famille de session pour cet enfant,
+        //         puis toujours recréer une famille même avec un seul parent.
+        for (const ftid in _newFamilies) {
+          const f = _newFamilies[ftid];
+          if (Array.isArray(f.enfants) && f.enfants.indexOf(targetPersonId) !== -1) {
+            delete _newFamilies[ftid];
+            break;
+          }
+        }
+        const father = targetArr.find(p => p.sexe === 'M');
+        const mother = targetArr.find(p => p.sexe === 'F');
+        const ftid = _newTempId();
+        const fam = { enfants: [targetPersonId] };
+        if (father) fam.mari   = father.id;
+        if (mother) fam.epouse = mother.id;
+        _newFamilies[ftid] = fam;
+      } else if (role === 'child') {
+        targetArr.push(id);
+      } else if (role === 'spouse') {
+        _conjointId = id;
+        const ftid  = _newTempId();
+        const isM   = (_person.sexe === 'M');
+        // Fix B : si une famille sans conjoint existe déjà (famille "parent seul"),
+        //         la supprimer pour éviter les doublons et récupérer ses enfants.
+        if (_familleId && !_newFamilies[_familleId]) {
+          _deleteFamilies.push(_familleId);
+        }
+        _newFamilies[ftid] = {
+          mari:    isM ? _personId : id,
+          epouse:  isM ? id        : _personId,
+          enfants: _family.enfants.slice(),
+        };
+        _familleId             = ftid;
+        _conjointFamilyTempId  = ftid;
+      }
+    }
+
+    function _finish() {
+      document.body.removeChild(overlay);
+      if (role === 'spouse') {
+        // Ajouter un conjoint change toute la colonne droite de la fiche
+        // (en-tête, sections...) : un re-rendu complet est nécessaire.
+        _render();
+      } else if (onDone) {
+        // Parent/enfant : rafraîchit uniquement la liste concernée, sans
+        // réinitialiser le reste de la vue (ex : Fiche synthétique dépliée).
+        onDone();
+      }
+    }
+
+    // Relie une personne déjà existante (trouvée par la recherche de similarité)
+    // au lieu d'en créer une nouvelle — c'est ce qui évite les doublons de Sosa.
+    async function _handleReuse(candidate) {
+      _cacheName(candidate.id, candidate);
+      if (role === 'spouse') {
+        let full;
+        try {
+          full = await api.getPerson(candidate.id);
+        } catch (e) {
+          errEl.textContent = 'Erreur : ' + e.message; errEl.hidden = false;
+          return;
+        }
+        _conjoint = full.person;
+        _attachAsRole(candidate.id, full.person);
+      } else {
+        _attachAsRole(candidate.id, candidate);
+      }
+      _finish();
+    }
 
     btnCreate.addEventListener('click', () => {
       const nom    = nomInp.value.trim()    || null;
@@ -743,58 +871,12 @@ const Editor = (function () {
       _newPersons[tempId] = savedP;
       _cacheName(tempId, savedP);
 
-      // newP est la copie utilisée localement (peut être mutée par le rendu)
-      const newP = Object.assign({}, savedP);
-
-      if (role === 'parent') {
-        targetArr.push({ id: tempId, nom, prenom, sexe: selectedSex, sosa });
-        // Fix A : supprimer l'éventuelle famille de session pour cet enfant,
-        //         puis toujours recréer une famille même avec un seul parent.
-        for (const ftid in _newFamilies) {
-          const f = _newFamilies[ftid];
-          if (Array.isArray(f.enfants) && f.enfants.indexOf(targetPersonId) !== -1) {
-            delete _newFamilies[ftid];
-            break;
-          }
-        }
-        const father = targetArr.find(p => p.sexe === 'M');
-        const mother = targetArr.find(p => p.sexe === 'F');
-        const ftid = _newTempId();
-        const fam = { enfants: [targetPersonId] };
-        if (father) fam.mari   = father.id;
-        if (mother) fam.epouse = mother.id;
-        _newFamilies[ftid] = fam;
-      } else if (role === 'child') {
-        targetArr.push(tempId);
-      } else if (role === 'spouse') {
-        _conjoint   = newP;
-        _conjointId = tempId;
-        const ftid  = _newTempId();
-        const isM   = (_person.sexe === 'M');
-        // Fix B : si une famille sans conjoint existe déjà (famille "parent seul"),
-        //         la supprimer pour éviter les doublons et récupérer ses enfants.
-        if (_familleId && !_newFamilies[_familleId]) {
-          _deleteFamilies.push(_familleId);
-        }
-        _newFamilies[ftid] = {
-          mari:    isM ? _personId : tempId,
-          epouse:  isM ? tempId    : _personId,
-          enfants: _family.enfants.slice(),
-        };
-        _familleId             = ftid;
-        _conjointFamilyTempId  = ftid;
-      }
-
-      document.body.removeChild(overlay);
       if (role === 'spouse') {
-        // Ajouter un conjoint change toute la colonne droite de la fiche
-        // (en-tête, sections...) : un re-rendu complet est nécessaire.
-        _render();
-      } else if (onDone) {
-        // Parent/enfant : rafraîchit uniquement la liste concernée, sans
-        // réinitialiser le reste de la vue (ex : Fiche synthétique dépliée).
-        onDone();
+        // newP est la copie utilisée localement (peut être mutée par le rendu)
+        _conjoint = Object.assign({}, savedP);
       }
+      _attachAsRole(tempId, savedP);
+      _finish();
     });
 
     btnRow.appendChild(btnCreate); btnRow.appendChild(btnCancel);

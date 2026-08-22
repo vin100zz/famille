@@ -13,6 +13,10 @@ class ApiClient {
     return this._get('person.php', { id });
   }
 
+  async findSimilarPersons(nom, prenom, sexe) {
+    return this._get('similar-persons.php', { nom, prenom: prenom || '', sexe: sexe || '' });
+  }
+
   async getSosaTree(sosa) {
     return this._get('sosa-tree.php', { sosa });
   }

@@ -22,6 +22,21 @@ interface IPersonRepository
     public function search($query, $limit = 50);
 
     /**
+     * Recherche les individus dont le nom se rapproche de $nom (tolère les
+     * fautes de frappe / variantes orthographiques via une distance de
+     * Levenshtein normalisée). Sert à avertir l'utilisateur avant la création
+     * d'une nouvelle personne, quand un individu très proche existe déjà.
+     *
+     * @param  string      $nom    Nom à comparer (le prénom seul ne déclenche rien)
+     * @param  string      $prenom Prénom à comparer (affiné le classement, pas un filtre)
+     * @param  string|null $sexe   'M'/'F' pour restreindre, null pour ne pas filtrer
+     * @param  int         $limit  Nombre maximum de résultats renvoyés
+     * @return array  [résumé, ...] triés par ressemblance décroissante
+     *                Résumé : id, nom, prenom, sexe, sosa, naissance_year, deces_year
+     */
+    public function findSimilarPersons($nom, $prenom = '', $sexe = null, $limit = 5);
+
+    /**
      * Retourne la fiche complète d'une personne avec ses liens familiaux.
      *
      * @param  string $id  Identifiant GEDCOM (ex. "@I2@")

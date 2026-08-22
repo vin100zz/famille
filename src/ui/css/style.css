@@ -2168,6 +2168,71 @@ mark.hl {
   margin-top: 6px;
 }
 
+/* ── Avertissement "personne similaire déjà connue" ──────────────────────── */
+
+.ed-similar-box {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 10px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ed-similar-box__title {
+  font-size: .8rem;
+  font-weight: 700;
+  color: #92400e;
+}
+
+.ed-similar-box__hint {
+  font-size: .74rem;
+  color: #92400e;
+  opacity: .85;
+}
+
+.ed-similar-list { display: flex; flex-direction: column; gap: 6px; }
+
+.ed-similar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #fde68a;
+  border-radius: 5px;
+  padding: 6px 8px;
+}
+
+.ed-similar-item__info { flex: 1; min-width: 0; }
+
+.ed-similar-item__name {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ed-similar-item__years {
+  font-size: .72rem;
+  color: var(--muted);
+}
+
+.ed-similar-item__btn {
+  flex-shrink: 0;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background: #f59e0b;
+  color: #fff;
+  font-size: .76rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ed-similar-item__btn:hover { background: #d97706; }
+
 /* ── Bloc IMAGE inline ────────────────────────────────────────────────────── */
 
 .ed-img-block {
