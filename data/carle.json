@@ -7954,11 +7954,6 @@
             ],
             "sosa": 3347
         },
-        "I623": {
-            "nom": "TESSÉ",
-            "prenom": "Urbain",
-            "sexe": "M"
-        },
         "I624": {
             "nom": "CARLÉ",
             "prenom": "Marie Anne",
@@ -25287,14 +25282,6 @@
                 "date": "21 FEB 1919"
             }
         },
-        "I2306": {
-            "nom": "AUDOUARD",
-            "prenom": "Anne",
-            "sexe": "F",
-            "deces": {
-                "date": "BEF 1853"
-            }
-        },
         "I2333": {
             "nom": "FELLMANN",
             "prenom": "Anne Marie",
@@ -29922,20 +29909,6 @@
             "professions": [
                 "Travailleur"
             ]
-        },
-        "I2886": {
-            "nom": "ANGLES",
-            "prenom": "Magdeleine",
-            "sexe": "M",
-            "naissance": {
-                "date": "17 JAN 1680",
-                "lieu": {
-                    "brut": "Marseille, 13, Bouches du Rhône, , , Paroisse Saint-Julien",
-                    "adresse": "Paroisse St-Julien",
-                    "ville": "Marseille",
-                    "dept_num": "13"
-                }
-            }
         },
         "I2890": {
             "nom": "CAILLOL",
@@ -40953,11 +40926,6 @@
             "prenom": "Jeanne",
             "sexe": "F"
         },
-        "I4508": {
-            "nom": "MICHEL",
-            "prenom": "Antoine",
-            "sexe": "M"
-        },
         "I4509": {
             "nom": "RICARD",
             "prenom": "Madeleine",
@@ -46129,10 +46097,6 @@
             "deces": {
                 "date": "BEF 1954"
             }
-        },
-        "I5056": {
-            "nom": "CEGARRA",
-            "prenom": "Xx"
         },
         "I5057": {
             "nom": "ROMERA",
@@ -59063,11 +59027,6 @@
                 "Sur le relevé, \"Cayetan\" est traduit par \"Gaetan\". Il parait être le premier garçon de la famille et, curieusement, le parrain est le grand-père maternel et la marraine la grand-mère paternelle. A moins que le grand-père paternel, Pierre Misserau, soit déjà mort, ce qui ne parait pas être le cas... Il est enseveli \"au petit St-Ginier\".   (25/10/2001)"
             ]
         },
-        "I6900": {
-            "nom": "MISSEREAU",
-            "prenom": "Gabriel Gili",
-            "sexe": "M"
-        },
         "I6901": {
             "nom": "MISSEREAU",
             "prenom": "Gabriel Gili",
@@ -61848,10 +61807,6 @@
                     "dept_num": "75"
                 }
             }
-        },
-        "I7568": {
-            "nom": "QUERO",
-            "prenom": "Sylvie"
         },
         "I7596": {
             "nom": "CARLÉ",
@@ -66837,27 +66792,6 @@
                 "date": "1634"
             }
         },
-        "I8091": {
-            "nom": "PROVOST",
-            "prenom": "Robert",
-            "sexe": "M"
-        },
-        "I8092": {
-            "nom": "PROVOST",
-            "prenom": "Daniel",
-            "sexe": "M",
-            "naissance": {
-                "date": "1650"
-            },
-            "deces": {
-                "date": "1720"
-            }
-        },
-        "I8093": {
-            "nom": "PROVOST",
-            "prenom": "Daniel",
-            "sexe": "M"
-        },
         "I8094": {
             "nom": "PROVOST",
             "prenom": "Renée",
@@ -67145,11 +67079,6 @@
             "sexe": "F",
             "sosa": 3667
         },
-        "I8142": {
-            "nom": "CARLES",
-            "prenom": "Victor",
-            "sexe": "M"
-        },
         "I8143": {
             "nom": "GAILLARD",
             "prenom": "Marguerite",
@@ -67167,11 +67096,6 @@
             "prenom": "Pierre",
             "sexe": "M",
             "sosa": 3738
-        },
-        "I8146": {
-            "nom": "MAILLET",
-            "prenom": "Catherine",
-            "sexe": "F"
         },
         "I8147": {
             "nom": "MALLET",
@@ -125010,10 +124934,6 @@
             "enfants": [
                 "I8074"
             ]
-        },
-        "F1891": {
-            "mari": "I8145",
-            "epouse": "I8146"
         },
         "F1892": {
             "mari": "I8145",
