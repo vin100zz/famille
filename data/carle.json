@@ -38506,7 +38506,12 @@
                     "ville": "Allauch",
                     "dept_num": "13"
                 }
-            }
+            },
+            "sosa": 3584,
+            "sosas": [
+                3584,
+                3640
+            ]
         },
         "I4294": {
             "nom": "ARNAUD",
@@ -66710,14 +66715,6 @@
                 "date": "1669"
             }
         },
-        "I8078": {
-            "nom": "ITIER",
-            "prenom": "Antoine",
-            "sexe": "M",
-            "naissance": {
-                "date": "1670"
-            }
-        },
         "I8079": {
             "nom": "ITIER",
             "prenom": "Catherine",
@@ -66999,18 +66996,6 @@
             "sexe": "F",
             "sosa": 3445
         },
-        "I8130": {
-            "nom": "CHAUD",
-            "prenom": "Antoine",
-            "sexe": "M",
-            "sosa": 3446
-        },
-        "I8131": {
-            "nom": "PASSEGRAIN?",
-            "prenom": "Catherine",
-            "sexe": "F",
-            "sosa": 3447
-        },
         "I8132": {
             "nom": "PELISSIER",
             "prenom": "Dominique",
@@ -67043,16 +67028,6 @@
             "sosas": [
                 3585,
                 3641
-            ]
-        },
-        "I8137": {
-            "nom": "CASTELIN",
-            "prenom": "Barthomieu",
-            "sexe": "M",
-            "sosa": 3584,
-            "sosas": [
-                3584,
-                3640
             ]
         },
         "I8138": {
@@ -113981,7 +113956,7 @@
             "enfants": [
                 "I8076",
                 "I8077",
-                "I8078",
+                "I3759",
                 "I8079",
                 "I8080"
             ],
@@ -124887,11 +124862,10 @@
         },
         "F1882": {
             "mari": "I8127",
-            "epouse": "I8129"
-        },
-        "F1883": {
-            "mari": "I8130",
-            "epouse": "I8131"
+            "epouse": "I8129",
+            "enfants": [
+                "I8072"
+            ]
         },
         "F1884": {
             "mari": "I8132",
@@ -124904,11 +124878,11 @@
             "mari": "I8134",
             "epouse": "I8135",
             "enfants": [
-                "I8070"
+                "I8071"
             ]
         },
         "F1886": {
-            "mari": "I8137",
+            "mari": "I4293",
             "epouse": "I8136",
             "enfants": [
                 "I739"
