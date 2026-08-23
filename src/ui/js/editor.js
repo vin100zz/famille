@@ -283,7 +283,11 @@ const Editor = (function () {
     const sc = person.sexe === 'M' ? 'M' : person.sexe === 'F' ? 'F' : 'U';
     const h = el('div', 'person-header person-header--' + sc + ' ed-header');
 
-    if (person.sosa != null) h.appendChild(txt('div', 'sosa-badge', person.sosa));
+    if (person.sosa != null) {
+      const badgeWrap = el('div', 'sosa-badge-wrap');
+      badgeWrap.appendChild(txt('div', 'sosa-badge', person.sosa));
+      h.appendChild(badgeWrap);
+    }
 
     const nomInp = document.createElement('input');
     nomInp.type = 'text'; nomInp.className = 'ed-header-inp ed-header-inp--nom';

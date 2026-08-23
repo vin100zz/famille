@@ -258,6 +258,9 @@ class JsonPersonRepository implements IPersonRepository
             'prenom'       => isset($p['prenom'])       ? $p['prenom']       : null,
             'sexe'         => isset($p['sexe'])         ? $p['sexe']         : null,
             'sosa'         => isset($p['sosa'])         ? (int) $p['sosa']   : null,
+            'sosas'        => (isset($p['sosas']) && is_array($p['sosas']) && count($p['sosas']) > 1)
+                ? array_values(array_map('intval', $p['sosas']))
+                : null,
             'naissance'    => isset($p['naissance'])    ? $p['naissance']    : null,
 
             'deces'        => isset($p['deces'])        ? $p['deces']        : null,

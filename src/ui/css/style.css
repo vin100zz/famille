@@ -610,10 +610,13 @@ mark.hl {
   margin-top: 6px;
 }
 
-.sosa-badge {
+.sosa-badge-wrap {
   position: absolute;
   top: 10px;
   right: 12px;
+}
+
+.sosa-badge {
   font-size: .65rem;
   font-weight: 700;
   letter-spacing: .04em;
@@ -623,8 +626,47 @@ mark.hl {
   border: 1px solid rgba(255,255,255,.2);
   border-radius: 20px;
   padding: 2px 8px;
-  pointer-events: none;
   white-space: nowrap;
+}
+
+.sosa-badge__plus {
+  margin-left: 2px;
+  font-weight: 900;
+  cursor: default;
+}
+
+.sosa-badge-tooltip {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 6px;
+  background: #1e293b;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 10px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  z-index: 50;
+  white-space: nowrap;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.sosa-badge-wrap:hover .sosa-badge-tooltip { display: block; }
+
+.sosa-badge-tooltip__title {
+  font-size: .68rem;
+  font-weight: 700;
+  opacity: .8;
+  margin-bottom: 4px;
+}
+
+.sosa-badge-tooltip__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: .78rem;
+  font-weight: 600;
 }
 
 .header-target-btn {

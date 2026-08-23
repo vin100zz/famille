@@ -331,7 +331,23 @@ function renderPersonHeader(person) {
   if (!person) return header;
 
   if (person.sosa != null) {
-    header.appendChild(txt('div', 'sosa-badge', person.sosa));
+    const multi = Array.isArray(person.sosas) && person.sosas.length > 1;
+
+    const badgeWrap = el('div', 'sosa-badge-wrap');
+    const badge = el('div', 'sosa-badge');
+    badge.appendChild(document.createTextNode(person.sosa));
+    if (multi) {
+      badge.appendChild(txt('span', 'sosa-badge__plus', '+'));
+
+      const tooltip = el('div', 'sosa-badge-tooltip');
+      tooltip.appendChild(txt('div', 'sosa-badge-tooltip__title', 'Sosa multiples (implexe)'));
+      const list = el('ul', 'sosa-badge-tooltip__list');
+      person.sosas.slice().sort((a, b) => a - b).forEach(s => list.appendChild(txt('li', null, s)));
+      tooltip.appendChild(list);
+      badgeWrap.appendChild(tooltip);
+    }
+    badgeWrap.appendChild(badge);
+    header.appendChild(badgeWrap);
 
     const targetBtn = el('button', 'header-target-btn');
     targetBtn.type = 'button';
