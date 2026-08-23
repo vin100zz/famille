@@ -269,7 +269,23 @@ function renderPersonBox(summary, onSelect) {
 
   if (summary.sosa != null) {
     box.classList.add('person-box--has-sosa');
-    box.appendChild(txt('span', 'person-box__sosa', summary.sosa));
+    const multi = Array.isArray(summary.sosas) && summary.sosas.length > 1;
+
+    const sosaWrap = el('span', 'person-box__sosa-wrap');
+    const sosaEl   = el('span', 'person-box__sosa');
+    sosaEl.appendChild(document.createTextNode(summary.sosa));
+    if (multi) {
+      sosaEl.appendChild(txt('span', 'sosa-badge__plus', '+'));
+
+      const tooltip = el('span', 'sosa-badge-tooltip');
+      tooltip.appendChild(txt('span', 'sosa-badge-tooltip__title', 'Sosa multiples (implexe)'));
+      const list = el('span', 'sosa-badge-tooltip__list');
+      summary.sosas.slice().sort((a, b) => a - b).forEach(s => list.appendChild(txt('span', null, s)));
+      tooltip.appendChild(list);
+      sosaWrap.appendChild(tooltip);
+    }
+    sosaWrap.appendChild(sosaEl);
+    box.appendChild(sosaWrap);
   }
 
   const nameEl = el('span', 'person-box__name');

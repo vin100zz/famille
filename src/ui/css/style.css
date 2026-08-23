@@ -651,7 +651,8 @@ mark.hl {
   text-transform: none;
   letter-spacing: normal;
 }
-.sosa-badge-wrap:hover .sosa-badge-tooltip { display: block; }
+.sosa-badge-wrap:hover .sosa-badge-tooltip,
+.person-box__sosa-wrap:hover .sosa-badge-tooltip { display: block; }
 
 .sosa-badge-tooltip__title {
   font-size: .68rem;
@@ -821,10 +822,14 @@ mark.hl {
 
 .person-box--has-sosa { padding-right: 48px; }
 
-.person-box__sosa {
+.person-box__sosa-wrap {
   position: absolute;
   top: 6px;
   right: 8px;
+}
+
+.person-box__sosa {
+  display: inline-block;
   font-size: .6rem;
   font-weight: 700;
   color: var(--muted);
@@ -843,6 +848,14 @@ mark.hl {
 .person-box[disabled] {
   cursor: default;
   pointer-events: none;
+}
+
+/* Le badge Sosa doit rester survolable (tooltip implexe) même quand la
+   boîte elle-même est désactivée (cas de la personne courante dans le
+   pedigree, dont le clic est désactivé mais pas le survol). */
+.person-box:disabled .person-box__sosa-wrap,
+.person-box[disabled] .person-box__sosa-wrap {
+  pointer-events: auto;
 }
 
 .person-box--M { background: #fff; color: var(--text); border-left-color: var(--sex-M); }
