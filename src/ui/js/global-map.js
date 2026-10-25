@@ -270,7 +270,8 @@ const GlobalMap = (function () {
         </div>
         <div class="gm-right">
           <select id="gm-basemap" class="gm-basemap-select">
-            <option value="osm" selected>OpenStreetMap</option>
+            <option value="esri-topo" selected>Esri Topo</option>
+            <option value="osm">OpenStreetMap</option>
             <option value="topo">Topographique</option>
             <option value="satellite">Satellite</option>
           </select>
@@ -310,12 +311,13 @@ const GlobalMap = (function () {
     _map = L.map('gm-map', { zoomControl: true }).setView([46.5, 2.5], 5);
     const BASEMAPS = {
       'osm':           { url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',                                                attr: '&copy; OpenStreetMap', maxZoom: 19 },
+      'esri-topo':     { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', attr: '&copy; Esri', maxZoom: 18 },
       'topo':          { url: 'https://tile.opentopomap.org/{z}/{x}/{y}.png',                                                     attr: '&copy; OpenStreetMap &copy; OpenTopoMap', maxZoom: 17 },
       'satellite':     { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',    attr: '&copy; Esri', maxZoom: 18 },
     };
 
     const basemapSel = containerEl.querySelector('#gm-basemap');
-    const bm0 = BASEMAPS['osm'];
+    const bm0 = BASEMAPS['esri-topo'];
     let _tileLayer = L.tileLayer(bm0.url, { attribution: bm0.attr, maxZoom: bm0.maxZoom }).addTo(_map);
     basemapSel.addEventListener('change', () => {
       const bm = BASEMAPS[basemapSel.value];

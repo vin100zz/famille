@@ -412,9 +412,9 @@ const PersonsMap = (function () {
     await new Promise(r => requestAnimationFrame(r));
     const map = L.map(container, { zoomControl: true }).setView([46.5, 2.5], 5);
 
-    const tileOSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19,
+    const tileModerne = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>',
+      maxZoom: 18,
     });
     const tileCassini = L.tileLayer.wms('https://data.geopf.fr/wms-r', {
       layers: 'BNF-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI',
@@ -424,7 +424,7 @@ const PersonsMap = (function () {
       attribution: '&copy; <a href="https://www.geoportail.gouv.fr">IGN-Géoportail / BnF</a>',
       maxZoom: 15,
     });
-    tileOSM.addTo(map);
+    tileModerne.addTo(map);
 
     // Bouton switch fond de carte (topleft, sous les +/-)
     const BasemapControl = L.Control.extend({
@@ -437,12 +437,12 @@ const PersonsMap = (function () {
         L.DomEvent.on(btn, 'click', () => {
           cassiniActive = !cassiniActive;
           if (cassiniActive) {
-            map.removeLayer(tileOSM);
+            map.removeLayer(tileModerne);
             tileCassini.addTo(map);
             btn.textContent = 'Moderne';
           } else {
             map.removeLayer(tileCassini);
-            tileOSM.addTo(map);
+            tileModerne.addTo(map);
             btn.textContent = 'Cassini';
           }
         });
