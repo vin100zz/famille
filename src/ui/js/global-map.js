@@ -270,10 +270,7 @@ const GlobalMap = (function () {
         </div>
         <div class="gm-right">
           <select id="gm-basemap" class="gm-basemap-select">
-            <option value="osm">OpenStreetMap</option>
-            <option value="carto-light">CartoDB Clair</option>
-            <option value="carto-voyager" selected>CartoDB Voyager</option>
-            <option value="carto-dark">CartoDB Sombre</option>
+            <option value="osm" selected>OpenStreetMap</option>
             <option value="topo">Topographique</option>
             <option value="satellite">Satellite</option>
           </select>
@@ -312,16 +309,13 @@ const GlobalMap = (function () {
     await new Promise(r => requestAnimationFrame(r));
     _map = L.map('gm-map', { zoomControl: true }).setView([46.5, 2.5], 5);
     const BASEMAPS = {
-      'osm':           { url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',                                                attr: '&copy; OpenStreetMap', maxZoom: 19 },
-      'carto-light':   { url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',                                   attr: '&copy; OpenStreetMap &copy; CartoDB', maxZoom: 19 },
-      'carto-voyager': { url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',                         attr: '&copy; OpenStreetMap &copy; CartoDB', maxZoom: 19 },
-      'carto-dark':    { url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',                                    attr: '&copy; OpenStreetMap &copy; CartoDB', maxZoom: 19 },
+      'osm':           { url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',                                                attr: '&copy; OpenStreetMap', maxZoom: 19 },
       'topo':          { url: 'https://tile.opentopomap.org/{z}/{x}/{y}.png',                                                     attr: '&copy; OpenStreetMap &copy; OpenTopoMap', maxZoom: 17 },
       'satellite':     { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',    attr: '&copy; Esri', maxZoom: 18 },
     };
 
     const basemapSel = containerEl.querySelector('#gm-basemap');
-    const bm0 = BASEMAPS['carto-voyager'];
+    const bm0 = BASEMAPS['osm'];
     let _tileLayer = L.tileLayer(bm0.url, { attribution: bm0.attr, maxZoom: bm0.maxZoom }).addTo(_map);
     basemapSel.addEventListener('change', () => {
       const bm = BASEMAPS[basemapSel.value];
